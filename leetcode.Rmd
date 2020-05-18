@@ -47,7 +47,9 @@ bibliography: refs/add.bib
 
 两个不太好记的
 
-- 快速排序：基准大法
+### 快速排序
+
+基准大法
 
 基准左边的都不大于它，基准右边的都不小于它
 左右两边一起搜索交换[jianzhu](https://www.jianshu.com/p/55ab254586bf)
@@ -82,14 +84,16 @@ def swap(arr, i, j):
     arr[i], arr[j] = arr[j], arr[i]
 ```
 
-### isinstance
+- isinstance
 
 >The isinstance() function checks if the object (first argument) is an instance or subclass of classinfo class (second argument).
 
 判断第一个参数变量是否是第二个参数的类型
 
 
-- 归并排序：分而治之
+### 归并排序
+
+分而治之
 
 ```python
 def mergeSort(arr):

@@ -145,7 +145,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#拓扑排序"><span class="toc-section-number">1.1</span> 拓扑排序</a></li>
 <li><a href="#大经典排序算法"><span class="toc-section-number">1.2</span> 10大经典排序算法</a></li>
 <li><a href="#时间复杂度"><span class="toc-section-number">1.3</span> 时间复杂度</a><ul>
-<li><a href="#isinstance"><span class="toc-section-number">1.3.1</span> isinstance</a></li>
+<li><a href="#快速排序"><span class="toc-section-number">1.3.1</span> 快速排序</a></li>
+<li><a href="#归并排序"><span class="toc-section-number">1.3.2</span> 归并排序</a></li>
 </ul></li>
 <li><a href="#二叉树问题"><span class="toc-section-number">1.4</span> 二叉树问题</a><ul>
 <li><a href="#相同的树"><span class="toc-section-number">1.4.1</span> 相同的树</a></li>
@@ -214,9 +215,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p><a href="https://mp.weixin.qq.com/s/Yp1hD2Bbmj3pRrLYjfwfEw">10大经典排序python实现</a></p>
 <p>两个不太好记的</p>
-<ul>
-<li>快速排序：基准大法</li>
-</ul>
+<div id="快速排序" class="section level3">
+<h3><span class="header-section-number">1.3.1</span> 快速排序</h3>
+<p>基准大法</p>
 <p>基准左边的都不大于它，基准右边的都不小于它
 左右两边一起搜索交换<a href="https://www.jianshu.com/p/55ab254586bf">jianzhu</a></p>
 <p>从左边开始找到一个比它大的数，从右边往左找到一个比它小的数，交换位置</p>
@@ -246,15 +247,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-21"><a href="#cb1-21"></a></span>
 <span id="cb1-22"><a href="#cb1-22"></a><span class="kw">def</span> swap(arr, i, j):</span>
 <span id="cb1-23"><a href="#cb1-23"></a>    arr[i], arr[j] <span class="op">=</span> arr[j], arr[i]</span></code></pre></div>
-<div id="isinstance" class="section level3">
-<h3><span class="header-section-number">1.3.1</span> isinstance</h3>
+<ul>
+<li>isinstance</li>
+</ul>
 <blockquote>
 <p>The isinstance() function checks if the object (first argument) is an instance or subclass of classinfo class (second argument).</p>
 </blockquote>
 <p>判断第一个参数变量是否是第二个参数的类型</p>
-<ul>
-<li>归并排序：分而治之</li>
-</ul>
+</div>
+<div id="归并排序" class="section level3">
+<h3><span class="header-section-number">1.3.2</span> 归并排序</h3>
+<p>分而治之</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">def</span> mergeSort(arr):</span>
 <span id="cb2-2"><a href="#cb2-2"></a>    <span class="im">import</span> math</span>
 <span id="cb2-3"><a href="#cb2-3"></a>    <span class="cf">if</span>(<span class="bu">len</span>(arr)<span class="op">&lt;</span><span class="dv">2</span>):</span>
