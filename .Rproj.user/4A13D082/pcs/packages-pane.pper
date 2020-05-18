@@ -1,0 +1,7 @@
+{
+    "installOptions": {
+        "installFromRepository": true,
+        "libraryPath": "C:/Users/gaowenxin95/Documents/R/win-library/3.6",
+        "installDependencies": true
+    }
+}

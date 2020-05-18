@@ -1,0 +1,437 @@
+---
+title: leetcode
+author: 高文欣
+date: "`r Sys.Date()`"
+output: 
+    bookdown::gitbook:
+        split_by: none
+        split_bib: TRUE
+        df_print: paged
+bibliography: refs/add.bib
+---
+
+
+# 数据结构与算法
+
+数据结构的基础知识
+
+>栈：后进先出（LIFO-last in first out）:最后插入的元素最先出来。
+队列：先进先出（FIFO-first in first out）:最先插入的元素最先出来。
+
+## 拓扑排序
+
+遍历一个有向无环图
+*入度*:指向该顶点的边
+*出度*:从该顶点发出的边
+
+最经典的例子:先修课
+
+拓扑排序，维持一个入度为0的队列即可。
+
+[拓扑排序](https://mp.weixin.qq.com/s?__biz=MzA3MjU5NjU2NA==&mid=2455502896&idx=1&sn=df6f2c86e0f1de823f79087ba9e8eb33&chksm=88b34d0bbfc4c41d863b4b6d78309e6ae01e766b1a7826b4c326246dd2489df9d684e8091ece&scene=21#wechat_redirect)
+
+
+## 10大经典排序算法
+
+## 时间复杂度
+
+稳定：如果a原本在b前面，而a=b，排序之后a仍然在b的前面。
+不稳定：如果a原本在b的前面，而a=b，排序之后 a 可能会出现在 b 的后面。
+时间复杂度：对排序数据的总的操作次数。反映当n变化时，操作次数呈现什么规律。
+空间复杂度：是指算法在计算机
+
+![时间复杂度与空间复杂度](figs/时间复杂度与空间复杂度.jpg)
+
+
+[10大经典排序python实现](https://mp.weixin.qq.com/s/Yp1hD2Bbmj3pRrLYjfwfEw)
+
+两个不太好记的
+
+- 快速排序：基准大法
+
+基准左边的都不大于它，基准右边的都不小于它
+左右两边一起搜索交换[jianzhu](https://www.jianshu.com/p/55ab254586bf)
+
+从左边开始找到一个比它大的数，从右边往左找到一个比它小的数，交换位置
+
+>冒泡排序的特点是每次都比较相邻的两个数字，每次位置互换，也只能换一个跨度。 快速排序之所比较快，因为相比冒泡排序，每次交换是跳跃式的。每次排序的时候设置一个基准点，将小于等于基准点的数全部放到基准点的左边，将大于等于基准点的数全部放到基准点的右边。这样在每次交换的时候就不会像冒泡排序一样每次只能在相邻的数之间进行交换，交换的距离就大的多了。因此总的比较和交换次数就少了，速度自然就提高了。当然在最坏的情况下，仍可能是相邻的两个数进行了交换。
+
+```python
+def quickSort(arr, left=None, right=None):
+    left = 0 if not isinstance(left,(int, float)) else left
+    right = len(arr)-1 if not isinstance(right,(int, float)) else right
+    if left < right:
+        partitionIndex = partition(arr, left, right)
+        quickSort(arr, left, partitionIndex-1)
+        quickSort(arr, partitionIndex+1, right)
+    return arr
+
+def partition(arr, left, right):
+    pivot = left
+    index = pivot+1
+    i = index
+    while  i <= right:
+        if arr[i] < arr[pivot]:
+            swap(arr, i, index)
+            index+=1
+        i+=1
+    swap(arr,pivot,index-1)#left往右，index往左，就是这里要理解
+    return index-1
+
+def swap(arr, i, j):
+    arr[i], arr[j] = arr[j], arr[i]
+```
+
+### isinstance
+
+>The isinstance() function checks if the object (first argument) is an instance or subclass of classinfo class (second argument).
+
+判断第一个参数变量是否是第二个参数的类型
+
+
+- 归并排序：分而治之
+
+```python
+def mergeSort(arr):
+    import math
+    if(len(arr)<2):
+        return arr
+    middle = math.floor(len(arr)/2)
+    left, right = arr[0:middle], arr[middle:]
+    return merge(mergeSort(left), mergeSort(right))
+
+def merge(left,right):
+    result = [] #定义一个空列表追加元素
+    while left and right:
+        if left[0] <= right[0]:
+            result.append(left.pop(0));
+        else:
+            result.append(right.pop(0));
+    while left:
+        result.append(left.pop(0));
+    while right:
+        result.append(right.pop(0));
+    return result
+```
+
+pop函数的用法
+
+```r
+a=['1','2','3']
+d=a.pop(0)
+d
+# 1
+```
+
+## 二叉树问题
+
+[知乎](https://zhuanlan.zhihu.com/p/63419145)
+
+### 相同的树
+
+解题思路：两个树的结构相同，节点相同则相同,或者都为空也相同
+递归
+假入有2棵树p,q
+
+```r
+class Solution(object):
+    def isSameTree(self, p, q):
+
+        if p is None and q is None:
+            return True
+        if p is not None and q is not None:
+            return p.val==q.val and self.isSameTree(p.left,q.left) and self.isSameTree(p.right,q.right)
+        return False
+```
+
+### 对称二叉树
+
+>首先判断头结点是否为空。然后**将根节点的左右两个节点假设成两个独立的树**，如果左右两个树都为空，返回True。然后看左子树的左结点和右子树的右结点、左子树的右结点和右子树的左结点是否相同，都相同返回True.
+
+```r
+class Solution(object):
+    def isSymmetric(self, root):
+
+        if root is None:
+            return True
+        return self.isSymmetricTree(root.left,root.right)
+    def isSymmetricTree(self,left,right):
+        if left is None and right is None:
+            return True
+        if left is None or right is None or left.val != right.val:
+            return False
+        return self.isSymmetricTree(left.left,right.right) and self.isSymmetricTree(left.right,right.left)
+```
+
+### 二叉树的最大深度
+
+二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
+
+```r
+class Solution(object):
+    def maxDepth(self, root):
+
+        if root is None:
+            return 0
+        else:
+            return max(self.maxDepth(root.left),self.maxDepth(root.right))+1
+```
+
+### 二叉树的最小深度
+
+最小深度是从根节点到最近叶子节点的最短路径上的节点数量。
+
+```r
+class Solution(object):
+    def minDepth(self, root):
+       
+        if root is None:
+            return 0
+        if root.left and root.right:
+            return min(self.minDepth(root.left),self.minDepth(root.right))+1
+        else:
+            return max(self.minDepth(root.left),self.minDepth(root.right))+1 #根节点只有一个节点的时候
+```
+
+### 二叉树的层次遍历
+
+给定一个二叉树，返回其节点值自底向上的层次遍历。（即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）
+
+定义两个数组，一个level的，一个level装节点的
+
+```r
+class Solution(object):
+    def levelOrderBottom(self, root):
+
+        if root is None: #根节点不为空
+            return []
+        
+        result,current = [],[root] #当前节点在root
+        
+        while current:
+            next_level,vals = [], []
+            for node in current:
+                vals.append(node.val)
+                if node.left:
+                    next_level.append(node.left)
+                if node.right:
+                    next_level.append(node.right)
+            current = next_level
+            result.append(vals)
+        return result[::-1] #从低向上
+```
+
+### python切片复习
+
+object[start_index:end_index:step]
+step为正就是从左往右取值
+step为负就是从右往左取值
+不包括end_index
+参考[csdn](https://www.jianshu.com/p/15715d6f4dad)
+
+```r
+a=['1','2','3']
+c=a[::-1]
+c
+#['3', '2', '1']
+```
+
+需要记住的几个 
+```r
+a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+>>>a[:] #从左往右
+>>> [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>>a[::]#从左往右
+>>> [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>>a[::-1]#从右往左
+>>> [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+```
+
+
+### 将有序数组转换为二叉搜索树
+
+
+**取有序数组的中间节点作为根节点，将数组分为左右两个部分，对左右两个子数组做相同的操作，递归的实现**。暴力取中间节点为root：递归实现
+
+```r
+class Solution(object):
+    def sortedArrayToBST(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: TreeNode
+        """
+        def to_bst(nums, start, end):
+            if start > end:
+                return None
+            mid = (start+end)//2 #中间数为根节点
+            node = TreeNode(nums[mid]) #中间数为根节点
+            node.left = to_bst(nums, start, mid-1) # 中间的数之前为左节点
+            node.right = to_bst(nums, mid+1,end) #中间的数右边为右节点
+            return node
+        return to_bst(nums, 0, len(nums) - 1)
+```
+
+### 平衡二叉树
+
+**一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值小于1。**
+
+```r
+class Solution(object):
+    def isBalanced(self, root):
+
+        if root == None:
+            return True
+        elif abs(self.height(root.left)-self.height(root.right))>1: #高度的绝对值之差大于1，不平衡
+            return False
+        else:
+            return self.isBalanced(root.left) and self.isBalanced(root.right)
+    
+    def height(self,root): #判断是否为平衡
+        if root == None:
+            return 0
+        else:
+            return max(self.height(root.left),self.height(root.right))+ 1
+```
+
+### 路径总和
+
+给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。
+
+**从上到下加起来，最后一个节点的值就等于sum-前面的和，且这个节点是叶子节点。**
+
+```r
+class Solution(object):
+    def hasPathSum(self, root, sum):
+       
+        if root is None:
+            return False
+        if root.left is None and root.right is None and root.val==sum:
+            return True
+        else:
+            return self.hasPathSum(root.left,sum-root.val) or self.hasPathSum(root.right,sum-root.val)
+```
+
+### 翻转二叉树
+
+镜面对换
+
+那就是交换左右节点喽
+
+```r
+class Solution(object):
+    def invertTree(self, root):
+
+        if root is not None:
+            root.left,root.right = self.invertTree(root.right),self.invertTree(root.left)
+        return root
+```
+
+### 二叉搜索树的最近公共祖先
+
+这个不太明白。。
+
+哦哦哦，这是确定了树，按照此题分析就好了，哈哈，看树的结构，左子树均小于根节点的值，右子树均大于根节点的值
+
+![公共祖先描述](figs/公共祖先.png)
+
+```r
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def lowestCommonAncestor(self, root, p, q):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+        """
+        pointer = root
+        while pointer:
+            if q.val < pointer.val and p.val < pointer.val:
+                pointer = pointer.left
+            elif q.val > pointer.val and p.val > pointer.val:
+                pointer = pointer.right
+            else:
+                return pointer
+```
+
+### 二叉树的所有路径
+
+![所有路径](figs/所有路径.png)
+
+```r
+class Solution(object):
+    def binaryTreePaths(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[str]
+        """
+        result = list()
+        if root == None:
+            return result
+
+        if root.left == None and root.right == None:
+            result.append(str(root.val))
+            return result # 保存根节点的值
+
+        left = self.binaryTreePaths(root.left)
+        for i in range(len(left)):
+            result.append(str(root.val) + '->' + left[i]) #遍历一遍左节点
+
+        right = self.binaryTreePaths(root.right) #遍历一遍右节点
+        for i in range(len(right)):
+            result.append(str(root.val) + '->' + right[i])
+
+        return result
+```
+
+### 左叶子之和
+
+![左叶子之和](figs/左叶子之和.png)
+
+也就是左子树的叶子节点的值与右子树左叶子叶子节点的值
+
+```r
+class Solution(object):
+    def sumOfLeftLeaves(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        result = 0
+        if not root:
+            return 0      
+        if root.left and not root.left.left and not root.left.right:
+            result += root.left.val
+        return result+self.sumOfLeftLeaves(root.left)+self.sumOfLeftLeaves(root.right) 
+```
+
+### 路径总和
+
+![路径总和](figs/路径总和.png)
+
+```r
+class Solution(object):
+    def pathSum(self, root, sum):
+        """
+        :type root: TreeNode
+        :type sum: int
+        :rtype: int
+        """
+        if not root:
+            return 0
+        return self.pathSumFrom(root, sum) + self.pathSum(root.left, sum) + self.pathSum(root.right, sum)
+
+    def pathSumFrom(self, node, sum):
+        if not node:
+            return 0
+        return (1 if node.val == sum else 0) + self.pathSumFrom(node.left, sum - node.val) + self.pathSumFrom(node.right, sum - node.val)
+```
+
+
