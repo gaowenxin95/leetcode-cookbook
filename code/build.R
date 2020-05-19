@@ -1,0 +1,2 @@
+rmarkdown::render("leetcode.Rmd")
+

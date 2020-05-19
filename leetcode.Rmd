@@ -253,27 +253,21 @@ a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 
 
-### 将有序数组转换为二叉搜索树
+### 将有序数组
+
+转换为二叉搜索树
 
 
 **取有序数组的中间节点作为根节点，将数组分为左右两个部分，对左右两个子数组做相同的操作，递归的实现**。暴力取中间节点为root：递归实现
 
 ```r
-class Solution(object):
-    def sortedArrayToBST(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: TreeNode
-        """
-        def to_bst(nums, start, end):
-            if start > end:
-                return None
-            mid = (start+end)//2 #中间数为根节点
-            node = TreeNode(nums[mid]) #中间数为根节点
-            node.left = to_bst(nums, start, mid-1) # 中间的数之前为左节点
-            node.right = to_bst(nums, mid+1,end) #中间的数右边为右节点
-            return node
-        return to_bst(nums, 0, len(nums) - 1)
+class Solution:
+    def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
+        if nums:
+            m = len(nums) // 2 中间节点为根节点
+            r = TreeNode(nums[m])
+            r.left, r.right = map(self.sortedArrayToBST, [nums[:m], nums[m+1:]])
+            return r
 ```
 
 ### 平衡二叉树
@@ -331,7 +325,9 @@ class Solution(object):
         return root
 ```
 
-### 二叉搜索树的最近公共祖先
+### 公共祖先
+
+二叉搜索树的最近公共祖先
 
 这个不太明白。。
 
@@ -436,6 +432,12 @@ class Solution(object):
         if not node:
             return 0
         return (1 if node.val == sum else 0) + self.pathSumFrom(node.left, sum - node.val) + self.pathSumFrom(node.right, sum - node.val)
+```
+
+## 动态规划问题
+
+```{r child='analysis/DP.Rmd'}
+
 ```
 
 

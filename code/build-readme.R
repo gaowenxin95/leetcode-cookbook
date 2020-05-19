@@ -1,0 +1,5 @@
+rmarkdown::render("README.Rmd")
+git2r::add(path = "*README*")
+git2r::add(path = "*readme*")
+git2r::commit(message = "update readme")
+git2r::push(name = 'origin', refspec = "refs/heads/master", cred = git2r::cred_token())

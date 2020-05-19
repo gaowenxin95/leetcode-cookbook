@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2020-05-18" />
+<meta name="date" content="2020-05-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -130,7 +130,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">leetcode</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2020-05-18</em></p>
+<p class="date"><em>2020-05-19</em></p>
 </div>
 <!--bookdown:title:end-->
 
@@ -155,14 +155,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#二叉树的最小深度"><span class="toc-section-number">1.4.4</span> 二叉树的最小深度</a></li>
 <li><a href="#二叉树的层次遍历"><span class="toc-section-number">1.4.5</span> 二叉树的层次遍历</a></li>
 <li><a href="#python切片复习"><span class="toc-section-number">1.4.6</span> python切片复习</a></li>
-<li><a href="#将有序数组转换为二叉搜索树"><span class="toc-section-number">1.4.7</span> 将有序数组转换为二叉搜索树</a></li>
+<li><a href="#将有序数组"><span class="toc-section-number">1.4.7</span> 将有序数组</a></li>
 <li><a href="#平衡二叉树"><span class="toc-section-number">1.4.8</span> 平衡二叉树</a></li>
 <li><a href="#路径总和"><span class="toc-section-number">1.4.9</span> 路径总和</a></li>
 <li><a href="#翻转二叉树"><span class="toc-section-number">1.4.10</span> 翻转二叉树</a></li>
-<li><a href="#二叉搜索树的最近公共祖先"><span class="toc-section-number">1.4.11</span> 二叉搜索树的最近公共祖先</a></li>
+<li><a href="#公共祖先"><span class="toc-section-number">1.4.11</span> 公共祖先</a></li>
 <li><a href="#二叉树的所有路径"><span class="toc-section-number">1.4.12</span> 二叉树的所有路径</a></li>
 <li><a href="#左叶子之和"><span class="toc-section-number">1.4.13</span> 左叶子之和</a></li>
 <li><a href="#路径总和-1"><span class="toc-section-number">1.4.14</span> 路径总和</a></li>
+</ul></li>
+<li><a href="#动态规划问题"><span class="toc-section-number">1.5</span> 动态规划问题</a><ul>
+<li><a href="#买卖股票的最佳时机"><span class="toc-section-number">1.5.1</span> 买卖股票的最佳时机</a></li>
+<li><a href="#爬楼梯问题"><span class="toc-section-number">1.5.2</span> 爬楼梯问题</a></li>
+<li><a href="#最大子序和问题"><span class="toc-section-number">1.5.3</span> 最大子序和问题</a></li>
+<li><a href="#偷钱问题"><span class="toc-section-number">1.5.4</span> 偷钱问题</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -389,24 +395,17 @@ step为负就是从右往左取值
 <span id="cb10-7"><a href="#cb10-7"></a><span class="op">&gt;</span><span class="er">&gt;&gt;</span>a[<span class="op">::-</span><span class="dv">1</span>]<span class="co">#从右往左</span></span>
 <span id="cb10-8"><a href="#cb10-8"></a><span class="op">&gt;</span><span class="er">&gt;&gt;</span><span class="st"> </span>[<span class="dv">9</span>, <span class="dv">8</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>]</span></code></pre></div>
 </div>
-<div id="将有序数组转换为二叉搜索树" class="section level3">
-<h3><span class="header-section-number">1.4.7</span> 将有序数组转换为二叉搜索树</h3>
+<div id="将有序数组" class="section level3">
+<h3><span class="header-section-number">1.4.7</span> 将有序数组</h3>
+<p>转换为二叉搜索树</p>
 <p><strong>取有序数组的中间节点作为根节点，将数组分为左右两个部分，对左右两个子数组做相同的操作，递归的实现</strong>。暴力取中间节点为root：递归实现</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="st">    </span>def <span class="kw">sortedArrayToBST</span>(self, nums)<span class="op">:</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="st">        &quot;&quot;&quot;</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="st">        :type nums: List[int]</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="st">        :rtype: TreeNode</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="st">        &quot;&quot;&quot;</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a>        def <span class="kw">to_bst</span>(nums, start, end)<span class="op">:</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="st">            </span><span class="cf">if</span> start <span class="op">&gt;</span><span class="st"> </span>end<span class="op">:</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="st">                </span>return None</span>
-<span id="cb11-10"><a href="#cb11-10"></a>            mid =<span class="st"> </span>(start<span class="op">+</span>end)<span class="op">/</span><span class="er">/</span><span class="dv">2</span> <span class="co">#中间数为根节点</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a>            node =<span class="st"> </span><span class="kw">TreeNode</span>(nums[mid]) <span class="co">#中间数为根节点</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a>            node.left =<span class="st"> </span><span class="kw">to_bst</span>(nums, start, mid<span class="dv">-1</span>) <span class="co"># 中间的数之前为左节点</span></span>
-<span id="cb11-13"><a href="#cb11-13"></a>            node.right =<span class="st"> </span><span class="kw">to_bst</span>(nums, mid<span class="op">+</span><span class="dv">1</span>,end) <span class="co">#中间的数右边为右节点</span></span>
-<span id="cb11-14"><a href="#cb11-14"></a>            return node</span>
-<span id="cb11-15"><a href="#cb11-15"></a>        return <span class="kw">to_bst</span>(nums, <span class="dv">0</span>, <span class="kw">len</span>(nums) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="st">    </span>def <span class="kw">sortedArrayToBST</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>TreeNode<span class="op">:</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="st">        </span><span class="cf">if</span> nums<span class="op">:</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="st">            </span>m =<span class="st"> </span><span class="kw">len</span>(nums) <span class="op">/</span><span class="er">/</span><span class="st"> </span><span class="dv">2</span> 中间节点为根节点</span>
+<span id="cb11-5"><a href="#cb11-5"></a>            r =<span class="st"> </span><span class="kw">TreeNode</span>(nums[m])</span>
+<span id="cb11-6"><a href="#cb11-6"></a>            r.left, r.right =<span class="st"> </span><span class="kw">map</span>(self.sortedArrayToBST, [nums[<span class="op">:</span>m], nums[m<span class="op">+</span><span class="dv">1</span><span class="op">:</span>]])</span>
+<span id="cb11-7"><a href="#cb11-7"></a>            return r</span></code></pre></div>
 </div>
 <div id="平衡二叉树" class="section level3">
 <h3><span class="header-section-number">1.4.8</span> 平衡二叉树</h3>
@@ -452,8 +451,9 @@ step为负就是从右往左取值
 <span id="cb14-5"><a href="#cb14-5"></a><span class="st">            </span>root.left,root.right =<span class="st"> </span><span class="kw">self.invertTree</span>(root.right),<span class="kw">self.invertTree</span>(root.left)</span>
 <span id="cb14-6"><a href="#cb14-6"></a>        return root</span></code></pre></div>
 </div>
-<div id="二叉搜索树的最近公共祖先" class="section level3">
-<h3><span class="header-section-number">1.4.11</span> 二叉搜索树的最近公共祖先</h3>
+<div id="公共祖先" class="section level3">
+<h3><span class="header-section-number">1.4.11</span> 公共祖先</h3>
+<p>二叉搜索树的最近公共祖先</p>
 <p>这个不太明白。。</p>
 <p>哦哦哦，这是确定了树，按照此题分析就好了，哈哈，看树的结构，左子树均小于根节点的值，右子树均大于根节点的值</p>
 <div class="figure">
@@ -555,6 +555,82 @@ step为负就是从右往左取值
 <span id="cb18-13"><a href="#cb18-13"></a><span class="st">        </span><span class="cf">if</span> not node<span class="op">:</span></span>
 <span id="cb18-14"><a href="#cb18-14"></a><span class="st">            </span>return <span class="dv">0</span></span>
 <span id="cb18-15"><a href="#cb18-15"></a>        <span class="kw">return</span> (<span class="dv">1</span> <span class="cf">if</span> node.val <span class="op">==</span><span class="st"> </span>sum <span class="cf">else</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="kw">self.pathSumFrom</span>(node.left, sum <span class="op">-</span><span class="st"> </span>node.val) <span class="op">+</span><span class="st"> </span><span class="kw">self.pathSumFrom</span>(node.right, sum <span class="op">-</span><span class="st"> </span>node.val)</span></code></pre></div>
+</div>
+</div>
+<div id="动态规划问题" class="section level2">
+<h2><span class="header-section-number">1.5</span> 动态规划问题</h2>
+<p>动态规划问题</p>
+<div id="买卖股票的最佳时机" class="section level3">
+<h3><span class="header-section-number">1.5.1</span> 买卖股票的最佳时机</h3>
+<p>买股票的的价格不能低于买股票的，这是一个约束条件</p>
+<p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
+<p>如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。</p>
+<p>注意：你不能在买入股票前卖出股票。</p>
+<p> 
+示例 1:</p>
+<p>输入: [7,1,5,3,6,4]
+输出: 5
+解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。
+注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="st">    </span>def <span class="kw">maxProfit</span>(self, prices<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="st">        </span>inf =<span class="st"> </span><span class="kw">int</span>(<span class="fl">1e9</span>)</span>
+<span id="cb19-4"><a href="#cb19-4"></a>        minprice =<span class="st"> </span>inf  <span class="co">#用一个值来维护历史最低价格</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>        maxprofit =<span class="st"> </span><span class="dv">0</span> <span class="co">#利润不能小于0</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>        <span class="cf">for</span> price <span class="cf">in</span> prices<span class="op">:</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="st">            </span>maxprofit =<span class="st"> </span><span class="kw">max</span>(price <span class="op">-</span><span class="st"> </span>minprice, maxprofit)</span>
+<span id="cb19-8"><a href="#cb19-8"></a>            minprice =<span class="st"> </span><span class="kw">min</span>(price, minprice)</span>
+<span id="cb19-9"><a href="#cb19-9"></a>        return maxprofit</span></code></pre></div>
+</div>
+<div id="爬楼梯问题" class="section level3">
+<h3><span class="header-section-number">1.5.2</span> 爬楼梯问题</h3>
+<p>斐波那契数列：只需要考虑最后到达最后一阶实现的几种情况</p>
+<p>题目一般有2种，可以爬2阶或者3阶，思路一样，递归+DP，但是要注意时间复杂度。。</p>
+</div>
+<div id="最大子序和问题" class="section level3">
+<h3><span class="header-section-number">1.5.3</span> 最大子序和问题</h3>
+<p>给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+<p>示例:</p>
+<p>输入: [-2,1,-3,4,-1,2,1,-5,4],
+输出: 6
+解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。</p>
+<p>动态规划的入门篇的题</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="st">    </span>def <span class="kw">maxSubArray</span>(self,nums<span class="op">:</span>List[int])-&gt;int<span class="op">:</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="st">        </span><span class="cf">if</span> <span class="kw">len</span>(nums)<span class="op">==</span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="st">            </span>return <span class="dv">0</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>        <span class="cf">if</span> <span class="kw">len</span>(nums)<span class="op">==</span><span class="dv">1</span><span class="op">:</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="st">            </span>range nums[<span class="dv">0</span>]</span>
+<span id="cb20-7"><a href="#cb20-7"></a></span>
+<span id="cb20-8"><a href="#cb20-8"></a>        res=nums[<span class="dv">0</span>]</span>
+<span id="cb20-9"><a href="#cb20-9"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>,<span class="kw">len</span>(nums))<span class="op">:</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a><span class="st">            </span>nums[i]=<span class="kw">max</span>(nums[i],nums[i]<span class="op">+</span>nums[<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb20-11"><a href="#cb20-11"></a></span>
+<span id="cb20-12"><a href="#cb20-12"></a>            res=<span class="kw">max</span>(res,num[i])</span>
+<span id="cb20-13"><a href="#cb20-13"></a>        return res</span></code></pre></div>
+</div>
+<div id="偷钱问题" class="section level3">
+<h3><span class="header-section-number">1.5.4</span> 偷钱问题</h3>
+<p>你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。</p>
+<p>给定一个代表每个房屋存放金额的非负整数数组，计算你在不触动警报装置的情况下，能够偷窃到的最高金额。</p>
+<p>示例 1:</p>
+<p>输入: [1,2,3,1]
+输出: 4
+解释: 偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。
+  偷窃到的最高金额 = 1 + 3 = 4 。</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="st">    </span>def <span class="kw">rob</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="st">       </span>prev =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a>       curr =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a>    </span>
+<span id="cb21-6"><a href="#cb21-6"></a>     <span class="co"># 每次循环，计算“偷到当前房子为止的最大金额”</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a>       <span class="cf">for</span> i <span class="cf">in</span> nums<span class="op">:</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="st">        </span><span class="co"># 循环开始时，curr 表示 dp[k-1]，prev 表示 dp[k-2]</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a><span class="st">        </span><span class="co"># dp[k] = max{ dp[k-1], dp[k-2] + i }</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a><span class="st">           </span>prev, curr =<span class="st"> </span>curr, <span class="kw">max</span>(curr, prev <span class="op">+</span><span class="st"> </span>i)</span>
+<span id="cb21-11"><a href="#cb21-11"></a>        <span class="co"># 循环结束时，curr 表示 dp[k]，prev 表示 dp[k-1]</span></span>
+<span id="cb21-12"><a href="#cb21-12"></a></span>
+<span id="cb21-13"><a href="#cb21-13"></a>       return curr</span></code></pre></div>
 </div>
 </div>
 </div>
