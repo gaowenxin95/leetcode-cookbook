@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2020-05-20" />
+<meta name="date" content="2020-05-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -130,7 +130,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">leetcode</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2020-05-20</em></p>
+<p class="date"><em>2020-05-21</em></p>
 </div>
 <!--bookdown:title:end-->
 
@@ -170,6 +170,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#最大子序和问题"><span class="toc-section-number">1.5.3</span> 最大子序和问题</a></li>
 <li><a href="#偷钱问题"><span class="toc-section-number">1.5.4</span> 偷钱问题</a></li>
 <li><a href="#比特位计数"><span class="toc-section-number">1.5.5</span> 比特位计数</a></li>
+<li><a href="#最短路径和问题"><span class="toc-section-number">1.5.6</span> 最短路径和问题</a></li>
+</ul></li>
+<li><a href="#前缀"><span class="toc-section-number">1.6</span> 前缀</a><ul>
+<li><a href="#k数之和"><span class="toc-section-number">1.6.1</span> K数之和</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -591,7 +595,9 @@ step为负就是从右往左取值
 </div>
 <div id="动态规划问题" class="section level2">
 <h2><span class="header-section-number">1.5</span> 动态规划问题</h2>
+<p>感觉一维考的多一些，至少看经验贴是这样</p>
 <p>动态规划问题</p>
+<p><strong>解题思路</strong>：状态定义，转移方程，初始条件，返回值</p>
 <div id="买卖股票的最佳时机" class="section level3">
 <h3><span class="header-section-number">1.5.1</span> 买卖股票的最佳时机</h3>
 <p>买股票的的价格不能低于买股票的，这是一个约束条件</p>
@@ -669,7 +675,7 @@ step为负就是从右往左取值
 <p>给定一个非负整数 num。对于 0 ≤ i ≤ num 范围中的每个数字 i ，计算其二进制数中的 1 的数目并将它们作为数组返回。</p>
 <p>示例 1:</p>
 <p>输入: 2
-输出: [0,1,1]
+输出: [0,1,1] ** 返回0，1，2三个数的二进制种的1的数目**
 示例 2:</p>
 <p>输入: 5
 输出: [0,1,1,2,1,2]</p>
@@ -689,6 +695,74 @@ step为负就是从右往左取值
 <span id="cb23-4"><a href="#cb23-4"></a>        <span class="cf">for</span> n <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">3</span>, num<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
 <span id="cb23-5"><a href="#cb23-5"></a><span class="st">            </span><span class="kw">ret.append</span>(ret[<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span><span class="dv">1</span>) <span class="cf">if</span> n <span class="op">&amp;</span><span class="st"> </span><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="cf">else</span> <span class="kw">ret.append</span>(ret[n<span class="op">/</span><span class="er">/</span><span class="dv">2</span>])</span>
 <span id="cb23-6"><a href="#cb23-6"></a>        return ret[<span class="dv">0</span><span class="op">:</span>num<span class="op">+</span><span class="dv">1</span>]</span></code></pre></div>
+</div>
+<div id="最短路径和问题" class="section level3">
+<h3><span class="header-section-number">1.5.6</span> 最短路径和问题</h3>
+<p>给定一个包含非负整数的 m x n 网格，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。</p>
+<p>说明：每次只能向下或者向右移动一步。</p>
+<p>示例:</p>
+<p>输入:
+[
+  [1,3,1],
+[1,5,1],
+[4,2,1]]
+输出: 7
+解释: 因为路径 1→3→1→1→1 的总和最小。</p>
+<p><img src="../figs/最短路径和的问题.png" alt="最短路径和的问题" />
+二维的动态规划</p>
+<p>i横向,j纵向</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="st">    </span>def <span class="kw">minPathSum</span>(self, grid<span class="op">:</span><span class="st"> </span>[[int]]) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="st">        </span><span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(grid))<span class="op">:</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(grid[<span class="dv">0</span>]))<span class="op">:</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="st">                </span><span class="cf">if</span> i <span class="op">==</span><span class="st"> </span>j <span class="op">==</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="st"> </span>continue</span>
+<span id="cb24-6"><a href="#cb24-6"></a>                elif i <span class="op">==</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="st">  </span>grid[i][j] =<span class="st"> </span>grid[i][j <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>grid[i][j]</span>
+<span id="cb24-7"><a href="#cb24-7"></a>                elif j <span class="op">==</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="st">  </span>grid[i][j] =<span class="st"> </span>grid[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>][j] <span class="op">+</span><span class="st"> </span>grid[i][j]</span>
+<span id="cb24-8"><a href="#cb24-8"></a>                <span class="cf">else</span><span class="op">:</span><span class="st"> </span>grid[i][j] =<span class="st"> </span><span class="kw">min</span>(grid[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>][j], grid[i][j <span class="op">-</span><span class="st"> </span><span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span>grid[i][j]</span>
+<span id="cb24-9"><a href="#cb24-9"></a>        return grid[<span class="op">-</span><span class="dv">1</span>][<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
+</div>
+</div>
+<div id="前缀" class="section level2">
+<h2><span class="header-section-number">1.6</span> 前缀</h2>
+<p>使用前缀数组的一大好处是可用 pre(b) - pre(a-1) 来表示 a-&gt;b 中这段中数组的和。这个 a-1 可以不用那么纠结。重点理解思想。</p>
+<p>比如 前5项的和 - 前3项的和 = 第4项~第5项的和。 (1+2+3+4+5) - (1+2+3) = 4+5</p>
+<p>或者说 pre(b) - pre(a) 等同于 a+1~b 的和。这样子更好理解一些。</p>
+<div id="k数之和" class="section level3">
+<h3><span class="header-section-number">1.6.1</span> K数之和</h3>
+<p>给定一个整数数组和一个整数 k，你需要找到该数组中和为 k 的连续的子数组的个数。</p>
+<p>示例 1 :</p>
+<p>输入:nums = [1,1,1], k = 2
+输出: 2 , [1,1] 与 [1,1] 为两种不同的情况。
+说明 :</p>
+<p>数组的长度为 [1, 20,000]。
+数组中元素的范围是 [-1000, 1000] ，且整数 k 的范围是 [-1e7, 1e7]。</p>
+<p>这个方法会超时，比较暴力，但是好想</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="st">    </span>def <span class="kw">subarraySum</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int], k<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="st">        </span>cnt, n =<span class="st">  </span><span class="dv">0</span>, <span class="kw">len</span>(nums)</span>
+<span id="cb25-4"><a href="#cb25-4"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(n)<span class="op">:</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(i, n)<span class="op">:</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a><span class="st">                </span><span class="cf">if</span> (<span class="kw">sum</span>(nums[i<span class="op">:</span>j <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]) <span class="op">==</span><span class="st"> </span>k)<span class="op">:</span><span class="st"> </span>cnt <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a>        return cnt</span></code></pre></div>
+<p><strong>前缀和的思想</strong></p>
+<p>num_times存储的是某一个前缀和出现的次数，但是由于我们在动态遍历 nums 并对 num_times 这个字典的值进行更新，所以每到一个新位置我们看到的都是到当前这个新位置为止，前面的某个前缀和出现的次数。比如我们到某一个位置 i 得到前缀和为 9，也就说从 0 位置到 i 位置的所有数字的和为 9， 如果目标 k 为 3，那么我们只需要找到当前状态下，前面出现了几次 6，就知道以 nums[i] 结尾的和为 3 的连续子数组的个数有多少个。建议大家动手在草纸上演算一下这个过程，看一下各个变量在这个过程中的变化，慢慢捋顺就好懂了(因为前缀和的做法第一次接触真的是非常不容易懂)</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="st">    </span>def <span class="kw">subarraySum</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int], k<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="st">        </span><span class="co"># num_times 存储某“前缀和”出现的次数，这里用collections.defaultdict来定义它</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="st">        </span><span class="co"># 如果某前缀不在此字典中，那么它对应的次数为0</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="st">        </span>num_times =<span class="st"> </span><span class="kw">collections.defaultdict</span>(int)</span>
+<span id="cb26-6"><a href="#cb26-6"></a>        num_times[<span class="dv">0</span>] =<span class="st"> </span><span class="dv">1</span>  <span class="co"># 先给定一个初始值，代表前缀和为0的出现了一次</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a>        cur_sum =<span class="st"> </span><span class="dv">0</span>  <span class="co"># 记录到当前位置的前缀和</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a>        res =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb26-9"><a href="#cb26-9"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(nums))<span class="op">:</span></span>
+<span id="cb26-10"><a href="#cb26-10"></a><span class="st">            </span>cur_sum <span class="op">+</span><span class="er">=</span><span class="st"> </span>nums[i]  <span class="co"># 计算当前前缀和</span></span>
+<span id="cb26-11"><a href="#cb26-11"></a>            <span class="cf">if</span> cur_sum <span class="op">-</span><span class="st"> </span>k <span class="cf">in</span> num_times<span class="op">:</span><span class="st">  </span><span class="co"># 如果前缀和减去目标值k所得到的值在字典中出现，即当前位置前缀和减去之前某一位的前缀和等于目标值</span></span>
+<span id="cb26-12"><a href="#cb26-12"></a><span class="st">                </span>res <span class="op">+</span><span class="er">=</span><span class="st"> </span>num_times[cur_sum <span class="op">-</span><span class="st"> </span>k]</span>
+<span id="cb26-13"><a href="#cb26-13"></a>            <span class="co"># 下面一句实际上对应两种情况，一种是某cur_sum之前出现过（直接在原来出现的次数上+1即可），</span></span>
+<span id="cb26-14"><a href="#cb26-14"></a>            <span class="co"># 另一种是某cur_sum没出现过（理论上应该设为1，但是因为此处用defaultdict存储，如果cur_sum这个key不存在将返回默认的int，也就是0）</span></span>
+<span id="cb26-15"><a href="#cb26-15"></a>            <span class="co"># 返回0加上1和直接将其置为1是一样的效果。所以这里统一用一句话包含上述两种情况</span></span>
+<span id="cb26-16"><a href="#cb26-16"></a>            num_times[cur_sum] <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb26-17"><a href="#cb26-17"></a>        return res</span></code></pre></div>
 </div>
 </div>
 </div>

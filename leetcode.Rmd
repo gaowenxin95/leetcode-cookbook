@@ -472,8 +472,13 @@ class Solution(object):
 
 ## 动态规划问题
 
+感觉一维考的多一些，至少看经验贴是这样
+
+
 ```{r child='analysis/DP.Rmd'}
 
 ```
 
+```{r child='analysis/k-num-sum.Rmd'}
 
+```
