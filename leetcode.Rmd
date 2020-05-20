@@ -84,11 +84,38 @@ def swap(arr, i, j):
     arr[i], arr[j] = arr[j], arr[i]
 ```
 
+- **这个方法更好理解，也简单一些**
+```r
+def quick_sort(data):    
+    """快速排序"""    
+    if len(data) >= 2:  # 递归入口及出口        
+        mid = data[len(data)//2]  # 选取基准值，也可以选取第一个或最后一个元素        
+        left, right = [], []  # 定义基准值左右两侧的列表        
+        data.remove(mid)  # 从原始数组中移除基准值        
+        for num in data:            
+            if num >= mid:                
+                right.append(num)            
+            else:                
+                left.append(num)        
+        return quick_sort(left) + [mid] + quick_sort(right)    
+    else:        
+        return data
+```
+
+快速排序的一次划分算法从两头交替搜索，直到low和high重合，因此其时间复杂度是O(n)；而整个快速排序算法的时间复杂度与划分的趟数有关。
+理想的情况是，每次划分所选择的中间数恰好将当前序列几乎等分，经过log2n趟划分，便可得到长度为1的子表。这样，整个算法的时间复杂度为O(nlog2n)。
+最坏的情况是，每次所选的中间数是当前序列中的最大或最小元素，这使得每次划分所得的子表中一个为空表，另一子表的长度为原表的长度-1。这样，长度为n的数据表的快速排序需要经过n趟划分，使得整个排序算法的时间复杂度为O(n2)。 
+为改善最坏情况下的时间性能，可采用其他方法选取中间数。通常采用“三者值取中”方法，即比较H->r[low].key、H->r[high].key与H->r[(10w+high)/2].key，取三者中关键字为中值的元素为中间数。 
+可以证明，快速排序的平均时间复杂度也是O(nlog2n)。因此，该排序方法被认为是目前最好的一种内部排序方法。 
+从空间性能上看，尽管快速排序只需要一个元素的辅助空间，但快速排序需要一个栈空间来实现递归。最好的情况下，即快速排序的每一趟排序都将元素序列均匀地分割成长度相近的两个子表，所需栈的最大深度为log2(n+1)；但最坏的情况下，栈的最大深度为n。这样，快速排序的空间复杂度为O(log2n))
+
 - isinstance
 
 >The isinstance() function checks if the object (first argument) is an instance or subclass of classinfo class (second argument).
 
 判断第一个参数变量是否是第二个参数的类型
+
+
 
 
 ### 归并排序
@@ -128,6 +155,13 @@ d
 ```
 
 ## 二叉树问题
+
+- root.val是该节点的值。
+- root则相当于指向该节点的指针。
+- root.left, root.right指向其左右节点的位置
+
+val=values
+left,right就是位置
 
 [知乎](https://zhuanlan.zhihu.com/p/63419145)
 
@@ -415,6 +449,8 @@ class Solution(object):
 ### 路径总和
 
 ![路径总和](figs/路径总和.png)
+
+利用递归，当root为None时，返回False，当root的值等于sum且root为叶节点时，返回true，如果不相等，往下递归，只要左子树和右子树有一条路径即可返回True
 
 ```r
 class Solution(object):
