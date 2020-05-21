@@ -171,9 +171,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#偷钱问题"><span class="toc-section-number">1.5.4</span> 偷钱问题</a></li>
 <li><a href="#比特位计数"><span class="toc-section-number">1.5.5</span> 比特位计数</a></li>
 <li><a href="#最短路径和问题"><span class="toc-section-number">1.5.6</span> 最短路径和问题</a></li>
+<li><a href="#回文字符串"><span class="toc-section-number">1.5.7</span> 回文字符串</a></li>
 </ul></li>
-<li><a href="#前缀"><span class="toc-section-number">1.6</span> 前缀</a><ul>
+<li><a href="#哈希表"><span class="toc-section-number">1.6</span> 哈希表</a><ul>
 <li><a href="#k数之和"><span class="toc-section-number">1.6.1</span> K数之和</a></li>
+</ul></li>
+<li><a href="#贪心算法"><span class="toc-section-number">1.7</span> 贪心算法</a><ul>
+<li><a href="#跳跃游戏"><span class="toc-section-number">1.7.1</span> 跳跃游戏</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -708,7 +712,7 @@ step为负就是从右往左取值
 [4,2,1]]
 输出: 7
 解释: 因为路径 1→3→1→1→1 的总和最小。</p>
-<p><img src="../figs/最短路径和的问题.png" alt="最短路径和的问题" />
+<p><img src="figs/最短路径和的问题.png" alt="最短路径和的问题" />
 二维的动态规划</p>
 <p>i横向,j纵向</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>class Solution<span class="op">:</span></span>
@@ -721,12 +725,47 @@ step为负就是从右往左取值
 <span id="cb24-8"><a href="#cb24-8"></a>                <span class="cf">else</span><span class="op">:</span><span class="st"> </span>grid[i][j] =<span class="st"> </span><span class="kw">min</span>(grid[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>][j], grid[i][j <span class="op">-</span><span class="st"> </span><span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span>grid[i][j]</span>
 <span id="cb24-9"><a href="#cb24-9"></a>        return grid[<span class="op">-</span><span class="dv">1</span>][<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
 </div>
+<div id="回文字符串" class="section level3">
+<h3><span class="header-section-number">1.5.7</span> 回文字符串</h3>
+<p>这个之前参加某个笔试遇到了</p>
+<p>给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。</p>
+<p>示例 1：</p>
+<p>输入: “babad”
+输出: “bab”
+注意: “aba” 也是一个有效答案。
+示例 2：</p>
+<p>输入: “cbbd”
+输出: “bb”</p>
+<p>解题思路
+<img src="figs/最长回文字符串.png" alt="最长回文字符串" /></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="st">    </span>def <span class="kw">longestPalindrome</span>(self, s<span class="op">:</span><span class="st"> </span>str) -&gt;<span class="st"> </span>str<span class="op">:</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="st">        </span><span class="co">#dp[i][j] = true,if s[i] = s[j]</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="st">        </span><span class="co">#dp[0][len(s)-1]</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="st">        </span>length =<span class="st"> </span><span class="kw">len</span>(s)</span>
+<span id="cb25-6"><a href="#cb25-6"></a>        dp =<span class="st"> </span>[[<span class="dv">0</span>] <span class="op">*</span><span class="st"> </span>length <span class="cf">for</span> _ <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(s))]</span>
+<span id="cb25-7"><a href="#cb25-7"></a>        res =<span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span> <span class="co">#长度为1时</span></span>
+<span id="cb25-8"><a href="#cb25-8"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>, length)<span class="op">:</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a><span class="st">             </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(length<span class="op">-</span>i)<span class="op">:</span></span>
+<span id="cb25-10"><a href="#cb25-10"></a><span class="st">                </span><span class="cf">if</span> s[j] <span class="op">==</span><span class="st"> </span>s[j<span class="op">+</span>i] <span class="kw">and</span> (j<span class="op">+</span><span class="dv">1</span> <span class="op">&gt;=</span><span class="st"> </span>j<span class="op">+</span>i<span class="dv">-1</span> or dp[j<span class="op">+</span><span class="dv">1</span>][j<span class="op">+</span>i<span class="dv">-1</span>])<span class="op">:</span></span>
+<span id="cb25-11"><a href="#cb25-11"></a><span class="st">                    </span>dp[j][j<span class="op">+</span>i] =<span class="st"> </span><span class="dv">1</span> </span>
+<span id="cb25-12"><a href="#cb25-12"></a>                    res =<span class="st"> </span>j, j<span class="op">+</span>i</span>
+<span id="cb25-13"><a href="#cb25-13"></a>        left, right =<span class="st"> </span>res</span>
+<span id="cb25-14"><a href="#cb25-14"></a>        return s[left<span class="op">:</span><span class="st"> </span>right<span class="op">+</span><span class="dv">1</span>]</span></code></pre></div>
+<p>动态规划问题解题思路</p>
+<div class="figure">
+<img src="figs/动态规划问题解题思路.png" alt="" />
+<p class="caption">动态规划问题解题思路</p>
 </div>
-<div id="前缀" class="section level2">
-<h2><span class="header-section-number">1.6</span> 前缀</h2>
+</div>
+</div>
+<div id="哈希表" class="section level2">
+<h2><span class="header-section-number">1.6</span> 哈希表</h2>
+<p>python中的字典的原理</p>
+<p><strong>前缀</strong></p>
 <p>使用前缀数组的一大好处是可用 pre(b) - pre(a-1) 来表示 a-&gt;b 中这段中数组的和。这个 a-1 可以不用那么纠结。重点理解思想。</p>
 <p>比如 前5项的和 - 前3项的和 = 第4项~第5项的和。 (1+2+3+4+5) - (1+2+3) = 4+5</p>
-<p>或者说 pre(b) - pre(a) 等同于 a+1~b 的和。这样子更好理解一些。</p>
+<p>这个前缀和数组 preSum 的含义也很好理解，preSum[i] 就是 nums[0..i-1] 的和。那么如果我们想求 nums[i..j] 的和，只需要一步操作 preSum[j+1]-preSum[i] 即可，而不需要重新去遍历数组了。</p>
 <div id="k数之和" class="section level3">
 <h3><span class="header-section-number">1.6.1</span> K数之和</h3>
 <p>给定一个整数数组和一个整数 k，你需要找到该数组中和为 k 的连续的子数组的个数。</p>
@@ -736,33 +775,66 @@ step为负就是从右往左取值
 说明 :</p>
 <p>数组的长度为 [1, 20,000]。
 数组中元素的范围是 [-1000, 1000] ，且整数 k 的范围是 [-1e7, 1e7]。</p>
-<p>这个方法会超时，比较暴力，但是好想</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="st">    </span>def <span class="kw">subarraySum</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int], k<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
-<span id="cb25-3"><a href="#cb25-3"></a><span class="st">        </span>cnt, n =<span class="st">  </span><span class="dv">0</span>, <span class="kw">len</span>(nums)</span>
-<span id="cb25-4"><a href="#cb25-4"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(n)<span class="op">:</span></span>
-<span id="cb25-5"><a href="#cb25-5"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(i, n)<span class="op">:</span></span>
-<span id="cb25-6"><a href="#cb25-6"></a><span class="st">                </span><span class="cf">if</span> (<span class="kw">sum</span>(nums[i<span class="op">:</span>j <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]) <span class="op">==</span><span class="st"> </span>k)<span class="op">:</span><span class="st"> </span>cnt <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb25-7"><a href="#cb25-7"></a>        return cnt</span></code></pre></div>
-<p><strong>前缀和的思想</strong></p>
-<p>num_times存储的是某一个前缀和出现的次数，但是由于我们在动态遍历 nums 并对 num_times 这个字典的值进行更新，所以每到一个新位置我们看到的都是到当前这个新位置为止，前面的某个前缀和出现的次数。比如我们到某一个位置 i 得到前缀和为 9，也就说从 0 位置到 i 位置的所有数字的和为 9， 如果目标 k 为 3，那么我们只需要找到当前状态下，前面出现了几次 6，就知道以 nums[i] 结尾的和为 3 的连续子数组的个数有多少个。建议大家动手在草纸上演算一下这个过程，看一下各个变量在这个过程中的变化，慢慢捋顺就好懂了(因为前缀和的做法第一次接触真的是非常不容易懂)</p>
+<p>这道题刚开始想到的思路是，先利用dp数组存放前i个数的和（前缀和），然后遍历这个数组，对于每个元素，求出dp[i]+k在dp[i:]的存在个数，即为以i+1开头的符合条件的子数组的个数，遍历结束把每个点的个数加在一起，即为答案。</p>
+<p>分析可知，这种方法除了开始生成dp遍历了一次数组，在后面使用了双层循环，时间复杂度O(N^2)，空间复杂度O(N)。</p>
+<p>这种方法可以通过，但是耗时太多，那么，如果对时间复杂度进行优化呢。</p>
+<p>==</p>
+<p>使用哈希表（Python中字典原理）即可。抛弃dp数组，<strong>只使用一个变量pre来保存当前位置的前缀和，使用一个字典dp，它的key是前缀和的值，对应的value表示这个前缀和出现的次数。</strong></p>
+<p>在元素累加的过程中得到sum[j]=nums[0]+nums[1]+···+nums[j]，并放入哈希表中。如果我们可以在哈希表中发现之前存在着sum[i]使得sum[j]-sum[i]=k，那么也就说明了有一个子序列之和为 k。时间复杂度终于被降到了<span class="math inline">\(O(n)\)</span>。</p>
+<p>首先添加dp[0] = 1，表示前缀和为0的情况出现了一次(这是为了考虑从i=0开始的答案)，之后遍历数组，计算前缀和pre，加入dp（要判断pre是否存在，不存在写入，存在dp[pre]+=1)，同时判断pre-k是否在dp字典中，如果在，ans+=dp[pre-k]，说明存在dp[pre-k]种答案。最后返回ans即可。</p>
+<p>。
+这种情况只遍历了一次数组，字典中找值的过程时间复杂度O(1)，所以总的时间复杂度O(N)，只用到了一个变量和字典，空间复杂度O(N)。</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>class Solution<span class="op">:</span></span>
 <span id="cb26-2"><a href="#cb26-2"></a><span class="st">    </span>def <span class="kw">subarraySum</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int], k<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
-<span id="cb26-3"><a href="#cb26-3"></a><span class="st">        </span><span class="co"># num_times 存储某“前缀和”出现的次数，这里用collections.defaultdict来定义它</span></span>
-<span id="cb26-4"><a href="#cb26-4"></a><span class="st">        </span><span class="co"># 如果某前缀不在此字典中，那么它对应的次数为0</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a><span class="st">        </span>num_times =<span class="st"> </span><span class="kw">collections.defaultdict</span>(int)</span>
-<span id="cb26-6"><a href="#cb26-6"></a>        num_times[<span class="dv">0</span>] =<span class="st"> </span><span class="dv">1</span>  <span class="co"># 先给定一个初始值，代表前缀和为0的出现了一次</span></span>
-<span id="cb26-7"><a href="#cb26-7"></a>        cur_sum =<span class="st"> </span><span class="dv">0</span>  <span class="co"># 记录到当前位置的前缀和</span></span>
-<span id="cb26-8"><a href="#cb26-8"></a>        res =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb26-9"><a href="#cb26-9"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(nums))<span class="op">:</span></span>
-<span id="cb26-10"><a href="#cb26-10"></a><span class="st">            </span>cur_sum <span class="op">+</span><span class="er">=</span><span class="st"> </span>nums[i]  <span class="co"># 计算当前前缀和</span></span>
-<span id="cb26-11"><a href="#cb26-11"></a>            <span class="cf">if</span> cur_sum <span class="op">-</span><span class="st"> </span>k <span class="cf">in</span> num_times<span class="op">:</span><span class="st">  </span><span class="co"># 如果前缀和减去目标值k所得到的值在字典中出现，即当前位置前缀和减去之前某一位的前缀和等于目标值</span></span>
-<span id="cb26-12"><a href="#cb26-12"></a><span class="st">                </span>res <span class="op">+</span><span class="er">=</span><span class="st"> </span>num_times[cur_sum <span class="op">-</span><span class="st"> </span>k]</span>
-<span id="cb26-13"><a href="#cb26-13"></a>            <span class="co"># 下面一句实际上对应两种情况，一种是某cur_sum之前出现过（直接在原来出现的次数上+1即可），</span></span>
-<span id="cb26-14"><a href="#cb26-14"></a>            <span class="co"># 另一种是某cur_sum没出现过（理论上应该设为1，但是因为此处用defaultdict存储，如果cur_sum这个key不存在将返回默认的int，也就是0）</span></span>
-<span id="cb26-15"><a href="#cb26-15"></a>            <span class="co"># 返回0加上1和直接将其置为1是一样的效果。所以这里统一用一句话包含上述两种情况</span></span>
-<span id="cb26-16"><a href="#cb26-16"></a>            num_times[cur_sum] <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb26-17"><a href="#cb26-17"></a>        return res</span></code></pre></div>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="st">        </span>n =<span class="st"> </span><span class="kw">len</span>(nums)</span>
+<span id="cb26-4"><a href="#cb26-4"></a>        pre =<span class="st"> </span><span class="dv">0</span> <span class="co">#前缀和</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a>        ans =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a>        dp =<span class="st"> </span><span class="kw">dict</span>() <span class="co">#存放 前缀和:出现次数，键值对，初始化一个0:1，为了考虑到从头开始到某点的子数组正好为答案。</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a>        dp[<span class="dv">0</span>] =<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(n)<span class="op">:</span></span>
+<span id="cb26-9"><a href="#cb26-9"></a><span class="st">            </span>pre <span class="op">+</span><span class="er">=</span><span class="st"> </span>nums[i] <span class="co">#计算前缀和</span></span>
+<span id="cb26-10"><a href="#cb26-10"></a>            <span class="cf">if</span> pre<span class="op">-</span>k <span class="cf">in</span> dp<span class="op">:</span><span class="st"> </span><span class="co">#如果pre-k这个前缀存在，那么答案加上它出现的次数</span></span>
+<span id="cb26-11"><a href="#cb26-11"></a><span class="st">                </span>ans <span class="op">+</span><span class="er">=</span><span class="st"> </span>dp[pre<span class="op">-</span>k]</span>
+<span id="cb26-12"><a href="#cb26-12"></a>            <span class="cf">if</span> pre <span class="cf">in</span> dp<span class="op">:</span><span class="st"> </span><span class="co">#更新dp[pre]</span></span>
+<span id="cb26-13"><a href="#cb26-13"></a><span class="st">                </span>dp[pre] <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb26-14"><a href="#cb26-14"></a>            <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb26-15"><a href="#cb26-15"></a><span class="st">                </span>dp[pre] =<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb26-16"><a href="#cb26-16"></a>        return ans</span></code></pre></div>
+</div>
+</div>
+<div id="贪心算法" class="section level2">
+<h2><span class="header-section-number">1.7</span> 贪心算法</h2>
+<div id="跳跃游戏" class="section level3">
+<h3><span class="header-section-number">1.7.1</span> 跳跃游戏</h3>
+<p>给定一个非负整数数组，你最初位于数组的第一个位置。</p>
+<p>数组中的每个元素代表你在该位置可以跳跃的最大长度。</p>
+<p>判断你是否能够到达最后一个位置。</p>
+<p>示例 1:</p>
+<p>输入: [2,3,1,1,4]
+输出: true
+解释: 我们可以先跳 1 步，从位置 0 到达 位置 1, 然后再从位置 1 跳 3 步到达最后一个位置。</p>
+<p>示例 2:</p>
+<p>输入: [3,2,1,0,4]
+输出: false
+解释: 无论怎样，你总会到达索引为 3 的位置。但该位置的最大跳跃长度是 0 ， 所以你永远不可能到达最后一个位置。</p>
+<ul>
+<li>如果所有元素都不为0， 那么一定可以跳到最后；</li>
+<li>从后往前开始想，如果这个节点能够达到，那么下一个节点只要大于等于1就行，如果这个节点不能达到那么那么期待下一个节点要大于等于能达到的距离</li>
+</ul>
+<p>可以用贪心的方法解决这个问题。</p>
+<div class="figure">
+<img src="figs/跳跃游戏.png" alt="" />
+<p class="caption">跳跃游戏</p>
+</div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="st">    </span>def <span class="kw">canJump</span>(self, nums) <span class="op">:</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="st">        </span>max_i =<span class="st"> </span><span class="dv">0</span>       <span class="co">#初始化当前能到达最远的位置</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a>        <span class="cf">for</span> i, jump <span class="cf">in</span> <span class="kw">enumerate</span>(nums)<span class="op">:</span><span class="st">   </span><span class="co">#i为当前位置，jump是当前位置的跳数</span></span>
+<span id="cb27-5"><a href="#cb27-5"></a><span class="st">            </span><span class="cf">if</span> max_i<span class="op">&gt;=</span>i and i<span class="op">+</span>jump<span class="op">&gt;</span>max_i<span class="op">:</span><span class="st">  </span><span class="co">#如果当前位置能到达，并且当前位置+跳数&gt;最远位置  </span></span>
+<span id="cb27-6"><a href="#cb27-6"></a><span class="st">                </span>max_i =<span class="st"> </span>i<span class="op">+</span>jump  <span class="co">#更新最远能到达位置</span></span>
+<span id="cb27-7"><a href="#cb27-7"></a>        return max_i<span class="op">&gt;=</span>i</span></code></pre></div>
+<p>时间复杂度：O(n)，其中 n 为数组的大小。只需要访问 nums 数组一遍，共n 个位置。</p>
+<p>空间复杂度：O(1)，不需要额外的空间开销。</p>
 </div>
 </div>
 </div>
@@ -778,6 +850,20 @@ step为负就是从右往左取值
   </div>
 <!--bookdown:config-->
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
