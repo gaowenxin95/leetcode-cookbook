@@ -1,0 +1,55 @@
+---
+title: python基础
+author: 高文欣
+date: "`r Sys.Date()`"
+output: 
+    bookdown::gitbook:
+        split_by: none
+        split_bib: TRUE
+        df_print: paged
+bibliography: refs/add.bib
+---
+
+# python基础复习
+
+## pop
+
+这几个要记住,哈哈
+
+还是切片那里的
+
+```r
+sentence=['All', 'good', 'things', 'come', 'to' ,'those', 'who', 'wait.']
+print("默认为 index=-1，删除最后一个列表值：",sentence.pop(-1),"\n")
+print("默认删除最后一个列表值： ",sentence.pop(),"\n")
+print("删除第一个元素：",sentence.pop(0),"\n")
+print("删除第三个元素：",sentence.pop(2),"\n")print("输出剩余元素：",sentence)
+
+```
+
+### python切片复习
+
+object[start_index:end_index:step]
+step为正就是从左往右取值
+step为负就是从右往左取值
+不包括end_index
+参考[csdn](https://www.jianshu.com/p/15715d6f4dad)
+
+```r
+a=['1','2','3']
+c=a[::-1]
+c
+#['3', '2', '1']
+```
+
+需要记住的几个 
+```r
+a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+>>>a[:] #从左往右
+>>> [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>>a[::]#从左往右
+>>> [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>>a[::-1]#从右往左
+>>> [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+```

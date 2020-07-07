@@ -1,0 +1,154 @@
+# 数据结构与算法
+
+数据结构的基础知识
+
+>栈：后进先出（LIFO-last in first out）:最后插入的元素最先出来。
+队列：先进先出（FIFO-first in first out）:最先插入的元素最先出来。
+
+## 拓扑排序
+
+遍历一个有向无环图
+*入度*:指向该顶点的边
+*出度*:从该顶点发出的边
+
+最经典的例子:先修课
+
+拓扑排序，维持一个入度为0的队列即可。
+
+[拓扑排序](https://mp.weixin.qq.com/s?__biz=MzA3MjU5NjU2NA==&mid=2455502896&idx=1&sn=df6f2c86e0f1de823f79087ba9e8eb33&chksm=88b34d0bbfc4c41d863b4b6d78309e6ae01e766b1a7826b4c326246dd2489df9d684e8091ece&scene=21#wechat_redirect)
+
+
+## 10大经典排序算法
+
+## 时间复杂度
+
+稳定：如果a原本在b前面，而a=b，排序之后a仍然在b的前面。
+不稳定：如果a原本在b的前面，而a=b，排序之后 a 可能会出现在 b 的后面。
+时间复杂度：对排序数据的总的操作次数。反映当n变化时，操作次数呈现什么规律。
+空间复杂度：是指算法在计算机
+
+![时间复杂度与空间复杂度](../figs/时间复杂度与空间复杂度.jpg)
+
+
+[10大经典排序python实现](https://mp.weixin.qq.com/s/Yp1hD2Bbmj3pRrLYjfwfEw)
+
+七个排序都会考
+
+
+### 快速排序
+
+基准大法
+
+基准左边的都不大于它，基准右边的都不小于它
+左右两边一起搜索交换[jianzhu](https://www.jianshu.com/p/55ab254586bf)
+
+从左边开始找到一个比它大的数，从右边往左找到一个比它小的数，交换位置
+
+>冒泡排序的特点是每次都比较相邻的两个数字，每次位置互换，也只能换一个跨度。 快速排序之所比较快，因为相比冒泡排序，每次交换是跳跃式的。每次排序的时候设置一个基准点，将小于等于基准点的数全部放到基准点的左边，将大于等于基准点的数全部放到基准点的右边。这样在每次交换的时候就不会像冒泡排序一样每次只能在相邻的数之间进行交换，交换的距离就大的多了。因此总的比较和交换次数就少了，速度自然就提高了。当然在最坏的情况下，仍可能是相邻的两个数进行了交换。
+
+```python
+def quickSort(arr, left=None, right=None):
+    left = 0 if not isinstance(left,(int, float)) else left
+    right = len(arr)-1 if not isinstance(right,(int, float)) else right
+    if left < right:
+        partitionIndex = partition(arr, left, right)
+        quickSort(arr, left, partitionIndex-1)
+        quickSort(arr, partitionIndex+1, right)
+    return arr
+
+def partition(arr, left, right):
+    pivot = left
+    index = pivot+1
+    i = index
+    while  i <= right:
+        if arr[i] < arr[pivot]:
+            swap(arr, i, index)
+            index+=1
+        i+=1
+    swap(arr,pivot,index-1)#left往右，index往左，就是这里要理解
+    return index-1
+
+def swap(arr, i, j):
+    arr[i], arr[j] = arr[j], arr[i]
+```
+
+- **这个方法更好理解，也简单一些**
+```r
+def quick_sort(data):    
+    """快速排序"""    
+    if len(data) >= 2:  # 递归入口及出口        
+        mid = data[len(data)//2]  # 选取基准值，也可以选取第一个或最后一个元素        
+        left, right = [], []  # 定义基准值左右两侧的列表        
+        data.remove(mid)  # 从原始数组中移除基准值        
+        for num in data:            
+            if num >= mid:                
+                right.append(num)            
+            else:                
+                left.append(num)        
+        return quick_sort(left) + [mid] + quick_sort(right)    
+    else:        
+        return data
+```
+
+快速排序的一次划分算法从两头交替搜索，直到low和high重合，因此其时间复杂度是O(n)；而整个快速排序算法的时间复杂度与划分的趟数有关。
+理想的情况是，每次划分所选择的中间数恰好将当前序列几乎等分，经过log2n趟划分，便可得到长度为1的子表。这样，整个算法的时间复杂度为O(nlog2n)。
+最坏的情况是，每次所选的中间数是当前序列中的最大或最小元素，这使得每次划分所得的子表中一个为空表，另一子表的长度为原表的长度-1。这样，长度为n的数据表的快速排序需要经过n趟划分，使得整个排序算法的时间复杂度为O(n2)。 
+为改善最坏情况下的时间性能，可采用其他方法选取中间数。通常采用“三者值取中”方法，即比较H->r[low].key、H->r[high].key与H->r[(10w+high)/2].key，取三者中关键字为中值的元素为中间数。 
+可以证明，快速排序的平均时间复杂度也是O(nlog2n)。因此，该排序方法被认为是目前最好的一种内部排序方法。 
+从空间性能上看，尽管快速排序只需要一个元素的辅助空间，但快速排序需要一个栈空间来实现递归。最好的情况下，即快速排序的每一趟排序都将元素序列均匀地分割成长度相近的两个子表，所需栈的最大深度为log2(n+1)；但最坏的情况下，栈的最大深度为n。这样，快速排序的空间复杂度为O(log2n))
+
+- isinstance
+
+>The isinstance() function checks if the object (first argument) is an instance or subclass of classinfo class (second argument).
+
+判断第一个参数变量是否是第二个参数的类型
+
+
+
+
+### 归并排序
+
+分而治之
+
+```python
+def mergeSort(arr):
+    import math
+    if(len(arr)<2):
+        return arr
+    middle = math.floor(len(arr)/2)
+    left, right = arr[0:middle], arr[middle:]
+    return merge(mergeSort(left), mergeSort(right))
+
+def merge(left,right):
+    result = [] #定义一个空列表追加元素
+    while left and right:
+        if left[0] <= right[0]:
+            result.append(left.pop(0));
+        else:
+            result.append(right.pop(0));
+    while left:
+        result.append(left.pop(0));
+    while right:
+        result.append(right.pop(0));
+    return result
+```
+
+
+## 计数排序
+
+## 桶排序
+
+## 基数排序
+
+## 希尔排序
+
+
+
+pop函数的用法
+
+```r
+a=['1','2','3']
+d=a.pop(0)
+d
+# 1
+```

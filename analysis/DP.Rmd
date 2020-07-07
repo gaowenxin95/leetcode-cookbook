@@ -1,42 +1,47 @@
-动态规划问题
+# 动态规划问题
+
+必考题
 
 **解题思路**：状态定义，转移方程，初始条件，返回值
 
-### 买卖股票的最佳时机
+## 动态规划问题解题思路
 
-买股票的的价格不能低于买股票的，这是一个约束条件
+[递归和迭代参考这个解释](https://baijiahao.baidu.com/s?id=1635388976060265522&wfr=spider&for=pc)
 
-给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
+[这个讲的太清楚了](https://www.zhihu.com/question/23995189)
 
-如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。
+一言以蔽之：大事化小，小事化了。　　
 
-注意：你不能在买入股票前卖出股票。
+将一个大问题转化成几个小问题；　　
+求解小问题；　　
+推出大问题的解。
 
- 
-示例 1:
+如何设计DP算法　　
+下面介绍比较通用的设计DP算法的步骤。　　
+首先，把我们面对的局面表示为x。这一步称为设计状态。　　
+对于状态x，记我们要求出的答案(e.g.最小费用)为f(x).我们的目标是求出f(T).找出f(x)与哪些局面有关（记为p），写出一个式子（称为状态转移方程），通过f(p)来推出f(x).[阮行止](https://www.zhihu.com/question/23995189/answer/613096905)
 
-输入: [7,1,5,3,6,4]
-输出: 5
-解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。
-     注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。
+目前见到的动态规划问题有两种
 
-```r
-class Solution:
-    def maxProfit(self, prices: List[int]) -> int:
-        inf = int(1e9)
-        minprice = inf  #用一个值来维护历史最低价格
-        maxprofit = 0 #利润不能小于0
-        for price in prices:
-            maxprofit = max(price - minprice, maxprofit)
-            minprice = min(price, minprice)
-        return maxprofit
-```
+- 选择一个解决方案，求最大/最小的函数值
+- 弄清做某事的**方案，数量**或者事件发生的**概率**
 
-### 爬楼梯问题
+每个阶段只有一个状态->递推；
+每个阶段的最优状态都是由上一个阶段的最优状态得到的->贪心；
+每个阶段的最优状态是由之前所有阶段的状态的组合得到的->搜索；
+每个阶段的最优状态可以从之前某个阶段的某个或某些状态直接得到而不管之前这个状态是如何得到的->动态规划。
 
-斐波那契数列：只需要考虑最后到达最后一阶实现的几种情况
+**[判断性继承思想](https://www.luogu.com.cn/blog/pks-LOVING/junior-dynamic-programming-dong-tai-gui-hua-chu-bu-ge-zhong-zi-xu-lie)**
 
-题目一般有2种，可以爬2阶或者3阶，思路一样，递归+DP，但是要注意时间复杂度。。
+
+还有一个很重要的，对比递归，大量重复子问题中间结果的保存，dp可以有效的节省存储空间。
+
+动态规划问题解题思路
+
+感觉这个图没啥用，但是总结了好多题
+
+![动态规划问题解题思路](../figs/动态规划问题解题思路.png)
+
 
 ### 最大子序和问题
 
@@ -49,7 +54,6 @@ class Solution:
 解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
 
 
-动态规划的入门篇的题
 
 ```r
 class Solution:
@@ -67,7 +71,7 @@ class Solution:
         return res
 ```
 
-### 偷钱问题
+## 打家劫舍问题
 
 你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
 
@@ -98,7 +102,83 @@ class Solution:
 
 ```
 
-### 比特位计数
+
+
+## 最短路径和问题
+
+给定一个包含非负整数的 m x n 网格，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。
+
+说明：每次只能向下或者向右移动一步。
+
+示例:
+
+输入:
+[
+  [1,3,1],
+  [1,5,1],
+  [4,2,1]
+]
+输出: 7
+解释: 因为路径 1→3→1→1→1 的总和最小。
+
+
+
+![最短路径和的问题](../figs/最短路径和的问题.png)
+二维的动态规划
+
+i横向,j纵向
+```r
+class Solution:
+    def minPathSum(self, grid: [[int]]) -> int:
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if i == j == 0: continue
+                elif i == 0:  grid[i][j] = grid[i][j - 1] + grid[i][j]
+                elif j == 0:  grid[i][j] = grid[i - 1][j] + grid[i][j]
+                else: grid[i][j] = min(grid[i - 1][j], grid[i][j - 1]) + grid[i][j]
+        return grid[-1][-1]
+```
+
+## 回文字符串
+
+这个之前参加蚂蚁笔试遇到了
+
+给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
+
+示例 1：
+
+输入: "babad"
+输出: "bab"
+注意: "aba" 也是一个有效答案。
+示例 2：
+
+输入: "cbbd"
+输出: "bb"
+
+解题思路
+
+![最长回文字符串](../figs/最长回文字符串.png)
+
+
+```r
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        #dp[i][j] = true,if s[i] = s[j]
+        #dp[0][len(s)-1]
+        length = len(s)
+        dp = [[0] * length for _ in range(len(s))]
+        res = 0, 0 #长度为1时
+        for i in range(1, length):
+             for j in range(length-i):
+                if s[j] == s[j+i] and (j+1 >= j+i-1 or dp[j+1][j+i-1]):
+                    dp[j][j+i] = 1 
+                    res = j, j+i
+        left, right = res
+        return s[left: right+1]
+
+```
+
+## 比特位计数
 
 给定一个非负整数 num。对于 0 ≤ i ≤ num 范围中的每个数字 i ，计算其二进制数中的 1 的数目并将它们作为数组返回。
 
@@ -136,80 +216,42 @@ class Solution:
         return ret[0:num+1]
 ```
 
-### 最短路径和问题
-
-给定一个包含非负整数的 m x n 网格，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。
-
-说明：每次只能向下或者向右移动一步。
-
-示例:
-
-输入:
-[
-  [1,3,1],
-  [1,5,1],
-  [4,2,1]
-]
-输出: 7
-解释: 因为路径 1→3→1→1→1 的总和最小。
 
 
 
-![最短路径和的问题](figs/最短路径和的问题.png)
-二维的动态规划
+## 买卖股票专题
 
-i横向,j纵向
-```r
-class Solution:
-    def minPathSum(self, grid: [[int]]) -> int:
-        for i in range(len(grid)):
-            for j in range(len(grid[0])):
-                if i == j == 0: continue
-                elif i == 0:  grid[i][j] = grid[i][j - 1] + grid[i][j]
-                elif j == 0:  grid[i][j] = grid[i - 1][j] + grid[i][j]
-                else: grid[i][j] = min(grid[i - 1][j], grid[i][j - 1]) + grid[i][j]
-        return grid[-1][-1]
-```
+买股票的的价格不能低于买股票的，这是一个约束条件
 
-### 回文字符串
+给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
 
-这个之前参加某个笔试遇到了
+如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。
 
-给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
+注意：你不能在买入股票前卖出股票。
 
-示例 1：
+ 
+示例 1:
 
-输入: "babad"
-输出: "bab"
-注意: "aba" 也是一个有效答案。
-示例 2：
-
-输入: "cbbd"
-输出: "bb"
-
-解题思路
-![最长回文字符串](figs/最长回文字符串.png)
-
+输入: [7,1,5,3,6,4]
+输出: 5
+解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。
+     注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。
 
 ```r
 class Solution:
-    def longestPalindrome(self, s: str) -> str:
-        #dp[i][j] = true,if s[i] = s[j]
-        #dp[0][len(s)-1]
-        length = len(s)
-        dp = [[0] * length for _ in range(len(s))]
-        res = 0, 0 #长度为1时
-        for i in range(1, length):
-             for j in range(length-i):
-                if s[j] == s[j+i] and (j+1 >= j+i-1 or dp[j+1][j+i-1]):
-                    dp[j][j+i] = 1 
-                    res = j, j+i
-        left, right = res
-        return s[left: right+1]
-
+    def maxProfit(self, prices: List[int]) -> int:
+        inf = int(1e9)
+        minprice = inf  #用一个值来维护历史最低价格
+        maxprofit = 0 #利润不能小于0
+        for price in prices:
+            maxprofit = max(price - minprice, maxprofit)
+            minprice = min(price, minprice)
+        return maxprofit
 ```
 
-动态规划问题解题思路
+### 爬楼梯问题
 
-![动态规划问题解题思路](figs/动态规划问题解题思路.png)
+斐波那契数列：只需要考虑最后到达最后一阶实现的几种情况
+
+题目一般有2种，可以爬2阶或者3阶，思路一样，递归+DP，但是要注意时间复杂度。。
 
