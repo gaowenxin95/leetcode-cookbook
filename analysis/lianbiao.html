@@ -368,23 +368,6 @@ summary {
 <div id="链表问题" class="section level1">
 <h1>链表问题</h1>
 <p>必考题</p>
-<div id="删除链表中的结点" class="section level2">
-<h2>删除链表中的结点</h2>
-<p>请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。</p>
-<p>示例 1:</p>
-<p>输入: head = [4,5,1,9], node = 5 输出: [4,1,9] 解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 1 -&gt; 9. 示例 2:</p>
-<p>输入: head = [4,5,1,9], node = 1 输出: [4,5,9] 解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 5 -&gt; 9.</p>
-<p><strong>node是待删除的结点，因此就让指向node的指针指向node的下一个结点就好了</strong></p>
-<pre class="r"><code>
-class Solution:
-    def deleteNode(self, node):
-        &quot;&quot;&quot;
-        :type node: ListNode
-        :rtype: void Do not return anything, modify node in-place instead.
-        &quot;&quot;&quot;
-        node.val=node.next.val
-        node.next=node.next.next</code></pre>
-</div>
 <div id="删除链表的倒数第n个节点" class="section level2">
 <h2>删除链表的倒数第N个节点</h2>
 <p>给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。</p>
@@ -521,8 +504,118 @@ p:None p = p.next
 
 </code></pre>
 </div>
+<div id="排序链表" class="section level2">
+<h2>排序链表</h2>
+<p>在<strong>O(n log n)</strong> 时间复杂度和<strong>常数级空间复杂度</strong>下，对链表进行排序。</p>
+<p>示例 1:</p>
+<p>输入: 4-&gt;2-&gt;1-&gt;3 输出: 1-&gt;2-&gt;3-&gt;4 示例 2:</p>
+<p>输入: -1-&gt;5-&gt;3-&gt;4-&gt;0 输出: -1-&gt;0-&gt;3-&gt;4-&gt;5</p>
+<p>因此这个题就是考归并排序的</p>
+<p>递归排序三部曲：</p>
+<ul>
+<li>1，快慢指针找中点；</li>
+<li>2，递归调用mergeSort，</li>
+<li>3，合并两个链表</li>
+</ul>
+<p>这个答案也能通过</p>
+<pre class="r"><code>
+
+class Solution:
+    def sortList(self, head: ListNode) -&gt; ListNode:
+        if not (head and head.next): return head
+        pre, slow, fast = None, head, head
+        while fast and fast.next: 
+            pre, slow, fast = slow, slow.next, fast.next.next
+        pre.next = None
+        return self.mergeTwoLists(*map(self.sortList, (head, slow)))
+    
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -&gt; ListNode:
+        if l1 and l2:
+            if l1.val &gt; l2.val: l1, l2 = l2, l1
+            l1.next = self.mergeTwoLists(l1.next, l2)
+        return l1 or l2
+</code></pre>
+<p><strong>bug</strong></p>
+<p>我这个事件复杂度为o(n)的为啥报错</p>
+<pre class="r"><code>class Solution:
+    def sortList(self, head: ListNode) -&gt; ListNode:
+        t = []
+        cur = head
+        while cur:
+            t.append(cur.val)
+            cur = cur.next
+
+        return t.sort()</code></pre>
+<p>至此，双指针的链表题都齐了</p>
+<p>下面开始单指针的</p>
+</div>
 <div id="回文链表" class="section level2">
 <h2>回文链表</h2>
+<p>请判断一个链表是否为回文链表。</p>
+<p>示例 1:</p>
+<p>输入: 1-&gt;2 输出: false 示例 2:</p>
+<p>输入: 1-&gt;2-&gt;2-&gt;1 输出: true</p>
+<pre class="r"><code># Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def isPalindrome(self, head: ListNode) -&gt; bool:
+        t = []
+        cur = head
+        while cur:
+            t.append(cur.val)
+            cur = cur.next
+
+        return t == t[::-1]</code></pre>
+</div>
+<div id="合并两个有序链表" class="section level2">
+<h2>合并两个有序链表</h2>
+<p>将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 示例：</p>
+<p>输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4 输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4</p>
+<p>思路</p>
+<ul>
+<li>判断两个链表是否存在，否则返回另一个</li>
+<li>比较两个链表结点的值</li>
+</ul>
+<pre class="r"><code># Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -&gt; ListNode:
+      if not l1:
+          return l2
+      if not l2:
+          return l1:
+      while l1 and l2:
+          if l1.val&lt;=l2.val:
+              l1.next=self.mergeTwoLists(l1.next,l2)
+              return l1
+          else: 
+              l2.next=self.mergeTwoLists(l1,l2.next)
+              return l2
+              </code></pre>
+</div>
+<div id="删除链表中的结点" class="section level2">
+<h2>删除链表中的结点</h2>
+<p>请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。</p>
+<p>示例 1:</p>
+<p>输入: head = [4,5,1,9], node = 5 输出: [4,1,9] 解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 1 -&gt; 9. 示例 2:</p>
+<p>输入: head = [4,5,1,9], node = 1 输出: [4,5,9] 解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 5 -&gt; 9.</p>
+<p><strong>node是待删除的结点，因此就让指向node的指针指向node的下一个结点就好了</strong></p>
+<pre class="r"><code>
+class Solution:
+    def deleteNode(self, node):
+        &quot;&quot;&quot;
+        :type node: ListNode
+        :rtype: void Do not return anything, modify node in-place instead.
+        &quot;&quot;&quot;
+        node.val=node.next.val
+        node.next=node.next.next</code></pre>
 </div>
 </div>
 
