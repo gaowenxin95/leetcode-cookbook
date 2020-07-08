@@ -53,6 +53,9 @@
 输出: 6
 解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
 
+dp[i]和dp[i-1]差一个nums[i]
+
+找出状态转移方程：$d p[i]=\max \{n u m s[i], d p[i-1]+n u m s[i]\}$
 
 
 ```r
@@ -70,6 +73,29 @@ class Solution:
             res=max(res,num[i])
         return res
 ```
+
+这一种写法比较直观
+```r
+
+from typing import List
+
+
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        size = len(nums)
+        if size == 0:
+            return 0
+        dp = [0 for _ in range(size)]
+
+        dp[0] = nums[0]
+        for i in range(1, size):
+            dp[i] = max(dp[i - 1] + nums[i], nums[i])
+        return max(dp)
+
+
+
+```
+
 
 ## 打家劫舍问题
 
@@ -139,7 +165,68 @@ class Solution:
         return grid[-1][-1]
 ```
 
-## 回文字符串
+## 爬楼梯问题
+
+斐波那契数列：只需要考虑最后到达最后一阶实现的几种情况
+
+题目一般有2种，可以爬2阶或者3阶，思路一样，递归+DP，但是要注意时间复杂度。。
+
+## 不同路径
+
+![](../figs/不同路径.png)
+解题思路:与爬楼梯的思路一致
+
+令 dp[i][j] 是到达 i, j 最多路径
+
+状态转移方程：dp[i][j] = dp[i-1][j] + dp[i][j-1]
+
+**注意，对于第一行 dp[0][j]，或者第一列 dp[i][0]，由于都是在边界，所以只能为 1**
+
+时间复杂度：O(m*n)
+
+空间复杂度：O(m∗n)
+```r
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        d = [[0]*n for _ in range(m)]
+        for i in range(m):
+            d[i][0] = 1 # 从（0,0）出发，边界上的点只能一直向右走或者向下走，所以到边界上的点只有一种走法
+        for j in range(n):
+            d[0][j] = 1
+        for i in range(1,m):
+            for j in range(1,n):
+                d[i][j] = d[i-1][j]+d[i][j-1]
+        return d[-1][-1]
+        
+```
+
+
+**优化**：因为我们每次只需要 dp[i-1][j],dp[i][j-1]
+
+因此可以考虑降空间复杂度，减少一个数组
+
+>当前点为上面点加左边点，那么计算第二行时可以直接在第一行计算，及当前点加左边点就ok了，当前点原来值表示上一行的上面点的值。所以实际一行数组重复计算就完事了。
+
+
+这个思路太强了，不好想~
+
+```r
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        cur = [1] * n 
+        for i in range(1, m):
+            for j in range(1, n):
+                cur[j] += cur[j-1] #等号右边分别是该位置上边的值和左边的值
+        return cur[-1]
+
+
+```
+
+
+
+
+
+## 最长回文子字符串
 
 这个之前参加蚂蚁笔试遇到了
 
@@ -157,25 +244,66 @@ class Solution:
 
 解题思路
 
-![最长回文字符串](../figs/最长回文字符串.png)
+对于一个子串而言，如果它是回文串，并且长度大于 22，那么将它首尾的两个字母去除之后，它仍然是个回文串。例如对于字符串 “ababa”，如果我们已经知道 “bab” 是回文串，那么“ababa” 一定是回文串，这是因为它的首尾两个字母都是 “a”。
 
+因此得到一个递推的关系是
+
+用 P(i,j) 表示字符串 s 的第 i到 j个字母组成的串（下文表示成 s[i:j]）是否为回文串：
+
+$$P(i, j)=\left\{\begin{array}{ll}\text { true, } & \text { 如果子串 } S_{i} \ldots S_{j} \text { 是回文串 } \\ \text { false }, & \text { 其它情况 }\end{array}\right.$$
+因此得到的状态转移方程是
+
+$P(i, j)=P(i+1, j-1) \wedge\left(S_{i}==S_{j}\right)$
+
+只有s[i+1:j-1]是回文串，并且s的第i和j个字母相同时s[i:j]才会是回文串。
+
+理解思路，然后手敲，目前的时间复杂度是$O(n^2)$
 
 ```r
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        #dp[i][j] = true,if s[i] = s[j]
-        #dp[0][len(s)-1]
-        length = len(s)
-        dp = [[0] * length for _ in range(len(s))]
-        res = 0, 0 #长度为1时
-        for i in range(1, length):
-             for j in range(length-i):
-                if s[j] == s[j+i] and (j+1 >= j+i-1 or dp[j+1][j+i-1]):
-                    dp[j][j+i] = 1 
-                    res = j, j+i
-        left, right = res
-        return s[left: right+1]
+        n = len(s)
+        dp = [[False] * n for _ in range(n)]
+        ans = ""
+        # 枚举子串的长度 l+1
+        for l in range(n):
+            # 枚举子串的起始位置 i，这样可以通过 j=i+l 得到子串的结束位置
+            for i in range(n):
+                j = i + l
+                if j >= len(s):
+                    break
+                if l == 0:
+                    dp[i][j] = True
+                elif l == 1:
+                    dp[i][j] = (s[i] == s[j])
+                else:
+                    dp[i][j] = (dp[i + 1][j - 1] and s[i] == s[j])
+                if dp[i][j] and l + 1 > len(ans):
+                    ans = s[i:j+1]
+        return ans
 
+
+```
+
+还有一个自底向上,还没看懂
+
+```r
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        length = len(s)
+#dp用来做动态规划存储的
+        dp = [[0] * length for _ in range(length)]
+        left, right = 0, 0 #长度为1时
+        for i in range(1, length):
+#因为最大长度为length，所以j+i<=length，第二遍不需要遍历到length
+             for j in range(length-i):
+#如j+1 >= j+i-1是用来初始化0或者1的回文的，s[j] == s[j+i]  是楼主说的条件1 s[i] = s[j]，dp[j+1][j+i-1] 是楼主说的条件2 s[i+1:j-1] 是一个回文串
+                if s[j] == s[j+i] and (j+1 >= j+i-1 or dp[j+1][j+i-1]):
+# 因为同时满足条件1和条件2，所以更长的字符也是回文
+                    dp[j][j+i] = 1 
+#记录左区间和右区间，用来返回的时候截取回文
+                    left, right = j, j+i
+        return s[left: right+1]
 ```
 
 ## 比特位计数
@@ -249,9 +377,48 @@ class Solution:
         return maxprofit
 ```
 
-### 爬楼梯问题
 
-斐波那契数列：只需要考虑最后到达最后一阶实现的几种情况
 
-题目一般有2种，可以爬2阶或者3阶，思路一样，递归+DP，但是要注意时间复杂度。。
+
+### 完全平方数
+
+这题没想起来怎么转，知道想起找零钱的那个题。
+
+给定正整数 n，找到若干个完全平方数（比如 1, 4, 9, 16, ...）使得它们的和等于n。你需要让组成和的完全平方数的个数最少。
+
+示例 1:
+
+输入: n = 12
+输出: 3 
+解释: 12 = 4 + 4 + 4.
+示例 2:
+
+输入: n = 13
+输出: 2
+解释: 13 = 4 + 9.
+
+感觉有点像coin那个题
+
+dp[i]表示i最少可以由几个平方数构成。
+
+初试化$dp=[0,1,2,⋯,n]$，长度为n+1，最多次数就是全由1构成。
+
+遍历dp，对于i，遍历区间[2,n+1)：
+
+遍历所有平方数小于i的数j，遍历区间$[1,int(\sqrt{i})+1)$：
+$dp[i]=min(dp[i],dp[i-j*j]+1)$。始终保存所有可能情况中的最小值。
+返回dp[n]
+
+因此时间复杂度是：O(n\sqrt{n})
+空间复杂度：O(n)
+
+```r
+class Solution:
+    def numSquares(self, n: int) -> int:
+        dp=[i for i in range(n+1)]
+        for i in range(2,n+1):
+            for j in range(1,int(i**(0.5))+1):
+                dp[i]=min(dp[i],dp[i-j*j]+1)
+        return dp[-1]
+```
 
