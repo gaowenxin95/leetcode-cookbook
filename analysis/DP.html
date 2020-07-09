@@ -474,6 +474,23 @@ class Solution:
 <h2>爬楼梯问题</h2>
 <p>斐波那契数列：只需要考虑最后到达最后一阶实现的几种情况</p>
 <p>题目一般有2种，可以爬2阶或者3阶，思路一样，递归+DP，但是要注意时间复杂度。。</p>
+<p>或者爬1阶，2阶</p>
+<p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。</p>
+<p>每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
+<p>注意：给定 n 是一个正整数。</p>
+<p>示例 1：</p>
+<p>输入： 2 输出： 2 解释： 有两种方法可以爬到楼顶。 1. 1 阶 + 1 阶 2. 2 阶 示例 2：</p>
+<p>输入： 3 输出： 3 解释： 有三种方法可以爬到楼顶。 1. 1 阶 + 1 阶 + 1 阶 2. 1 阶 + 2 阶 3. 2 阶 + 1 阶</p>
+<pre class="r"><code>class Solution:
+    def climbStairs(self, n: int) -&gt; int:
+        res = [0] * 46
+        res[0] = 1
+        res[1] = 2
+        
+        for i in range(2,n):
+            res[i] = res[i-1] + res[i-2]
+        return res[n-1]</code></pre>
+<p>画个图发现就是二叉树的遍历</p>
 </div>
 <div id="不同路径" class="section level2">
 <h2>不同路径</h2>
@@ -567,6 +584,47 @@ class Solution:
                     left, right = j, j+i
         return s[left: right+1]</code></pre>
 </div>
+<div id="最大乘积和" class="section level2">
+<h2>最大乘积和</h2>
+<p>这个题一开始我想的很简单，就类似与最大上升子序和来做了，结果。。。==</p>
+<p>给你一个整数数组 nums ，请你找出数组中乘积最大的连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积。</p>
+<p> </p>
+<p>示例 1:</p>
+<p>输入: [2,3,-2,4] 输出: 6 解释: 子数组 [2,3] 有最大乘积 6。 示例 2:</p>
+<p>输入: [-2,0,-1] 输出: 0 解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。</p>
+<p>解题思路</p>
+<p>首先假设存在某个最大乘积，然后对数组遍历，在经过每个元素的时候，有以下四种情况：</p>
+<p><strong>如果该元素为正数：</strong></p>
+<ul>
+<li>如果到上一个元素为止的最大乘积也是正数，那么直接乘上就好了，同样的最大乘积也会变得更大</li>
+<li>如果到上一个元素为止的最大乘积是负数，那么最大乘积就会变成该元素本身，且连续性被断掉</li>
+</ul>
+<p><strong>如果该元素为负数：</strong></p>
+<ul>
+<li>如果到上一个元素为止的最大乘积也是负数，那么直接乘上就好了，同样的最大乘积也会变得更大</li>
+<li>如果到上一个元素为止的最大乘积是正数，那么最大乘积就会不变，且连续性被断掉</li>
+</ul>
+<p>以上四种情况中说到的最大乘积都是临时最大乘积，每遍历新的元素都需要进行比较来确定真正的最大乘积。</p>
+<p><strong>如果细心的话就可以发现，如果要得到乘以当前元素以后的最大乘积，需要记录最大乘积，也要记录最小乘积，因为最小值可能翻身变最大值。</strong></p>
+<p>对对对对。。。需要用两个记录两个值。。</p>
+<p>负负为正 负正为负</p>
+<p>但是看成是动态规划问题挺不好想的，只能多看几遍了</p>
+<p>时间复杂度是O(n)</p>
+<pre class="r"><code>class Solution:
+    def maxProduct(self, nums: List[int]) -&gt; int:
+        if not nums: return 
+        res = nums[0]
+        pre_max = nums[0]
+        pre_min = nums[0]
+        for num in nums[1:]:
+            cur_max = max(pre_max * num, pre_min * num, num)#pre_max:之前的最大值
+            cur_min = min(pre_max * num, pre_min * num, num)#pre_min:之前的最小值，num:当前值
+            res = max(res, cur_max)
+            pre_max = cur_max
+            pre_min = cur_min
+        return res
+</code></pre>
+</div>
 <div id="比特位计数" class="section level2">
 <h2>比特位计数</h2>
 <p>给定一个非负整数 num。对于 0 ≤ i ≤ num 范围中的每个数字 i ，计算其二进制数中的 1 的数目并将它们作为数组返回。</p>
@@ -620,6 +678,29 @@ class Solution:
                 dp[i]=min(dp[i],dp[i-j*j]+1)
         return dp[-1]</code></pre>
 </div>
+</div>
+<div id="最长上升子序列" class="section level2">
+<h2>最长上升子序列</h2>
+<p>给定一个无序的整数数组，找到其中最长上升子序列的长度。</p>
+<p>示例:</p>
+<p>输入: [10,9,2,5,3,7,101,18] 输出: 4 解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。 说明:</p>
+<p>可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。 你算法的时间复杂度应该为 O(n2) 。 <strong>进阶: 你能将算法的时间复杂度降低到 O(n log n) 吗?</strong></p>
+<p>解题思路：枚举</p>
+<p>给个时间复杂度为<span class="math inline">\(O(n^2)\)</span></p>
+<pre class="r"><code>class Solution:
+    def lengthOfLIS(self, nums: List[int]) -&gt; int:
+        n = len(nums)
+        if n == 0: return 0
+        dp = [1] * n
+        ans = 1
+        for i in range(n):
+            for j in range(i):
+                if nums[i] &gt; nums[j]:
+                    dp[i] = max(dp[i], dp[j] + 1)
+                    ans = max(ans, dp[i])
+        return  ans
+
+。</code></pre>
 </div>
 </div>
 
