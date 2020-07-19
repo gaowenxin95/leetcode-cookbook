@@ -8,4 +8,9 @@
 
 - [排序](https://gaowenxin95.github.io/leetcode-cookbook/analysis/sort.Rmd)
 
-持续更新
+- [字符串](https://gaowenxin95.github.io/leetcode-cookbook/analysis/String.html)
+
+- [数组](https://gaowenxin95.github.io/leetcode-cookbook/analysis/array.html)
+
+
+持续更新。。。
