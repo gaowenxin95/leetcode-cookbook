@@ -431,7 +431,8 @@ max(min(数字, 2**31 - 1), -2**31) 用来防止结果越界
 <p>输入: [“flower”,“flow”,“flight”] 输出: “fl” 示例 2:</p>
 <p>输入: [“dog”,“racecar”,“car”] 输出: &quot;&quot; 解释: 输入不存在公共前缀。 说明:</p>
 <p>所有输入只包含小写字母 a-z 。</p>
-<pre class="r"><code>
+<pre class="r"><code> ascii 码思路，字母是可以比较大小的
+ 
 #  1、利用python的max()和min()，在Python里字符串是可以比较的，按照ascII值排，举例abb， aba，abac，最大为abb，最小为aba。所以只需要比较最大最小的公共前缀就是整个数组的公共前缀
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -&gt; str:
@@ -444,10 +445,13 @@ class Solution:
         return s1
 
 
+解题思路：
+使用 zip 根据字符串下标合并成数组，
+判断合并后数组里元素是否都相同
+复杂度分析：
+时间复杂度 O(N)O(N) ，NN 表示数组中最短字符串长度
+空间复杂度 O(1)O(1) ，使用的变量为自然数个
 
-
-
-方法2
 
 class Solution(object):
     def longestCommonPrefix(self, strs):
