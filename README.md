@@ -8,7 +8,7 @@
 
 - [排序](https://gaowenxin95.github.io/leetcode-cookbook/analysis/sort.Rmd)
 
-- [字符串](https://gaowenxin95.github.io/leetcode-cookbook/analysis/String.html)
+- [字符串](https://gaowenxin95.github.io/leetcode-cookbook/analysis/string.html)
 
 - [数组](https://gaowenxin95.github.io/leetcode-cookbook/analysis/array.html)
 
