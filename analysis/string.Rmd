@@ -1,0 +1,145 @@
+---
+title: "String"
+author: "wenxin Gao"
+date: "2020/7/19"
+output: html_document
+---
+
+# String专题
+
+
+## 回文串
+
+见DP专题
+
+
+## 无重复字符的最长子串
+
+给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+
+示例 1:
+
+输入: "abcabcbb"
+输出: 3 
+解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+示例 2:
+
+输入: "bbbbb"
+输出: 1
+解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+示例 3:
+
+输入: "pwwkew"
+输出: 3
+解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
+     请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
+
+**分析**：切割大法好
+
+```r
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        L = []
+        lenth = 0
+        for i in s:
+            #如果字符不在列表中，追加该字符并计算列表长度
+            if i not in L:
+                L.append(i)
+            #如果字符在列表中，从字符所在位置切分列表
+            else:
+                idx = L.index(i)
+                L = L[idx+1:]
+                #切分之后将字符追加入列表
+                L.append(i)
+            current = len(L)
+            lenth = max(current,lenth)
+        return lenth
+```
+
+
+## 字符串转换整数atoi
+
+
+使用正则表达式：
+
+
+```r
+
+^：匹配字符串开头
+[\+\-]：代表一个+字符或-字符
+?：前面一个字符可有可无
+\d：一个数字
++：前面一个字符的一个或多个
+\D：一个非数字字符
+*：前面一个字符的0个或多个
+max(min(数字, 2**31 - 1), -2**31) 用来防止结果越界
+
+```
+
+为什么可以使用正则表达式？如果整数过大溢出怎么办？
+
+题目中描述： 假设我们的环境只能存储 32 位大小的有符号整数
+
+首先，这个假设对于 Python 不成立，Python 不存在 32 位的 int 类型。其次，即使搜索到的字符串转32位整数可能导致溢出，我们也可以直接通过字符串判断是否存在溢出的情况（比如 try 函数 或 判断字符串长度 + 字符串比较），
+
+
+```r
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        return max(min(int(*re.findall('^[\+\-]?\d+', s.lstrip())), 2**31 - 1), -2**31)
+
+```
+
+正则真的好方便啊啊啊啊~
+
+
+## 最长公共前缀
+
+编写一个函数来查找字符串数组中的最长公共前缀。
+
+如果不存在公共前缀，返回空字符串 ""。
+
+示例 1:
+
+输入: ["flower","flow","flight"]
+输出: "fl"
+示例 2:
+
+输入: ["dog","racecar","car"]
+输出: ""
+解释: 输入不存在公共前缀。
+说明:
+
+所有输入只包含小写字母 a-z 。
+
+
+```r
+
+#  1、利用python的max()和min()，在Python里字符串是可以比较的，按照ascII值排，举例abb， aba，abac，最大为abb，最小为aba。所以只需要比较最大最小的公共前缀就是整个数组的公共前缀
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if not strs: return ""
+        s1=min(strs)
+        s2=max(strs)
+        for k,v in enumerate(s1):
+            if v !=s2[k]:
+                return s2[:k]
+        return s1
+
+
+
+
+
+方法2
+
+class Solution(object):
+    def longestCommonPrefix(self, strs):
+        ans = ''
+        for i in zip(*strs):
+            if len(set(i)) == 1:
+                ans += i[0]
+            else:
+                break
+        return ans
+```
+
