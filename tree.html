@@ -374,6 +374,17 @@ summary {
 <li>root.left, root.right指向其左右节点的位置</li>
 </ul>
 <p>val=values left,right就是位置</p>
+<p>二叉树节点的定义</p>
+<pre class="r"><code>
+# Definition for a binary tree node.
+class TreeNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+</code></pre>
+<p>还是得结合二叉树主要解决了什么实际的问题</p>
+<p>树为啥这么好用</p>
 <p><a href="https://zhuanlan.zhihu.com/p/63419145">知乎</a></p>
 <div id="相同的树问题" class="section level3">
 <h3>相同的树问题</h3>
@@ -631,8 +642,123 @@ class Solution(object):
     def pathSumFrom(self, node, sum):
         if not node:
             return 0
-        return (1 if node.val == sum else 0) + self.pathSumFrom(node.left, sum - node.val) + self.pathSumFrom(node.right, sum - node.val)</code></pre>
+        return (1 if node.val == sum else 0) + self.pathSumFrom(node.left, sum - node.val) + self.pathSumFrom(node.right, sum - node.val)
+        
+        </code></pre>
 </div>
+</div>
+<div id="二叉树的遍历" class="section level2">
+<h2>二叉树的遍历</h2>
+<p>二叉树这里还是可以多使用一点递归的方法</p>
+</div>
+<div id="前序遍历" class="section level2">
+<h2>前序遍历</h2>
+<pre class="r"><code>class Solution(object):
+    def __init__(self):
+        self.res = []
+    def preorderTraversal(self, root):
+        &quot;&quot;&quot;
+        :type root: TreeNode
+        :rtype: List[int]
+        &quot;&quot;&quot;
+        if root == None:
+            return []
+        self.res.append(root.val)#每次遍历到根结点就把它加到队列中
+        self.preorderTraversal(root.left)#当有左节点的时候就处理左节点
+        self.preorderTraversal(root.right)#当同级没有左节点的时候再处理右节点
+        return self.res</code></pre>
+</div>
+<div id="中序遍历" class="section level2">
+<h2>中序遍历</h2>
+<p>给定一个二叉树，返回它的中序 遍历。</p>
+<p>示例:</p>
+<p>输入: [1,null,2,3] 1<br />
+2 / 3</p>
+<p>输出: [1,3,2]</p>
+<pre class="r"><code># Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -&gt; List[int]:
+        if root == None: 如果节点不存在
+            return []
+        left = self.inorderTraversal(root.left)
+        right = self.inorderTraversal(root.right)
+        return left + [root.val] + right #输出的时候把顺序变一下子
+</code></pre>
+</div>
+<div id="二叉树的层次遍历-1" class="section level2">
+<h2>二叉树的层次遍历</h2>
+<p>给定一个二叉树，返回其按层次遍历的节点值。 （即逐层地，从左到右访问所有节点）。</p>
+<p>例如: 给定二叉树: [3,9,20,null,null,15,7],</p>
+<pre><code>3</code></pre>
+<p>/<br />
+9 20 /<br />
+15 7 返回其层次遍历结果： [ [3], [9,20], [15,7]]</p>
+<pre class="r"><code>
+class Solution:
+    def levelOrder(self, root: TreeNode) -&gt; List[List[int]]:
+        if root == None:
+            return []
+        layer = [root]  #定义当前层
+        res = [] #保存结果的数组
+        while len(layer): 
+            this_res = [] #当前层的结果
+            next_l = [] #下一层的结果
+            for n in layer:
+                this_res.append(n.val)
+                if n.left: # 左右孩子都在下一层
+                    next_l.append(n.left)
+                if n.right:
+                    next_l.append(n.right)
+            res.append(this_res)
+            layer = next_l
+        return res
+</code></pre>
+</div>
+<div id="前序中序后序遍历的另一种写法" class="section level2">
+<h2>前序中序后序遍历的另一种写法</h2>
+<pre class="r"><code>class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+class Solution:
+    #前序
+    def preorder(self,root,ans=[]):
+        if root!=None:
+            ans.append(root.val)
+        if root.left:
+            self.preorder(root.left,ans)
+        if root.right:
+            self.preorder(root.right,ans)
+        return ans
+    
+    #中序
+    def inorder(self,root,ans=[]):
+        # if root.left==None and root.right==None:
+        #     ans.append(root.val)
+        #     return
+        if root.left:
+            self.inorder(root.left,ans)
+        ans.append(root.val)
+        if root.right:
+            self.inorder(root.right,ans)
+        return ans
+    
+    #后序
+    def postorder(self,root,ans=[]):
+        if root.left:
+            self.postorder(root.left,ans)
+        if root.right:
+            self.postorder(root.right,ans)
+        ans.append(root.val)
+        return ans
+        </code></pre>
 </div>
 <div id="堆排序" class="section level2">
 <h2>堆排序</h2>
