@@ -42,8 +42,182 @@ class Solution(object):
         return True
 ```
 
+## 两个数组的交集
+
+```r
+# 给定两个数组，编写一个函数来计算它们的交集。
+# 输入: nums1 = [1,2,2,1], nums2 = [2,2]
+# 输出: [2,2]
+
+nums1 = [1,2,2,1]
+nums2 = [2,2]
+res=[]
+def jiaoji(nums1,nums2):
+   for k in nums2:
+       if k in nums1:
+           res.append(k)
+           nums1.remove(k)
+   return res
+
+print(jiaoji(nums1,nums2))
+
+```
+
+## 最长公共前缀
+
+```r
+# 编写一个函数来查找字符串数组中的最长公共前缀。如果不存在公共前缀，则返回""
+
+# 输入: ["flower","flow","flight"]
+# 输出: "fl"
+
+sg=["flower","flow","flight"]
+
+
+def longqian(sg):
+    ans = ""
+    for s in zip(*sg):
+        if len(set(s))==1: # zip这个函数太好用了
+            ans+=s[0]
+        else:
+            break
+    return ans
+
+print(longqian(sg))
+
+```
+
+## 旋转数组
+
+```r
+
+# 给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。
+# 示例 1:
+#
+# 输入: [1,2,3,4,5,6,7] 和 k = 3
+# 输出: [5,6,7,1,2,3,4]
+
+arr=[1,2,3,4,5,6,7]
+def xz(nums,k):
+    return nums[k:]+nums[:k]
+
+print(xz(arr,3))
+
+```
+
+##  移除元素
+
+
+```r
+# 给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。
+#
+# 不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。
+#
+# 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
+#
+#  
+#
+# 示例 1:
+#
+# 给定 nums = [3,2,2,3], val = 3,
+#
+# 函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。
+#
+# 你不需要考虑数组中超出新长度后面的元素。
+# 示例 2:
+#
+# 给定 nums = [0,1,2,2,3,0,4,2], val = 2,
+#
+# 函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。
+#
+# 注意这五个元素可为任意顺序。
+#
+# 你不需要考虑数组中超出新长度后面的元素。
+
+nums = [0,1,2,2,3,0,4,2]
+
+def removeElement(nums, val) :
+    for i in range(len(nums)-1,-1,-1):
+        if val == nums[i]:
+            nums.pop(i)
+    return len(nums)
+
+print(removeElement(nums,3))
+
+```
+
+## 加一
+
+
+```r
+# 给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。
+#
+# 最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。
+#
+# 你可以假设除了整数 0 之外，这个整数不会以零开头。
+#
+# 示例 1:
+#
+# 输入: [1,2,3]
+# 输出: [1,2,4]
+# 解释: 输入数组表示数字 123。
+# 示例 2:
+#
+# 输入: [4,3,2,1]
+# 输出: [4,3,2,2]
+# 解释: 输入数组表示数字 4321。
+
+# 解题思路是转化为数字加完了再转化为数组
+
+s=[4,3,2,1]
+def jiayi(s):
+    nus=[v*10**index for index,v in enumerate(s[::-1])]
+    newv=sum(nus)+1
+    return [int(x) for x in str(newv)]
+
+
+print(jiayi(s))
+
+```
+
+## 两数之和
+
+```r
+# 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
+# 你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。
+#
+# 示例:
+#
+# 给定 nums = [2, 7, 11, 15], target = 9
+# 因为 nums[0] + nums[1] = 2 + 7 = 9
+# 所以返回 [0, 1]
+
+# 老规矩上字典
+nums = [2, 7, 11, 15]
+target = 9
+
+
+def twoSum(nums, target) :
+    d = {}
+    for k, v in enumerate(nums):
+        if target - v in d:
+            return [d[target - v], k]
+        d[v] = k
+print(twoSum(nums,target))
+
+
+numRows=4
+
+res=["" for _ in range(numRows)]
+
+
+print('res'+'1') #字符串想拼接直接相加就好了
+
+```
 
 ## 三数之和
+
+
 
 给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有满足条件且不重复的三元组。
 
@@ -60,4 +234,58 @@ class Solution(object):
   [-1, 0, 1],
   [-1, -1, 2]
 ]
+
+
+这个题，哎只能想到贼暴力的解法，看了大佬们的解法，只能惊叹！！牛逼的太多了
+
+排序 + 双指针
+本题的难点在于如何去除重复解。
+算法流程：
+1. 特判，对于数组长度 $n,$ 如果数组为 $n u l l$ 或者数组长度小于 $3,$ 返回 []$.$
+2. 对数组进行排序。
+3. 遍历排序后数组：
+。若 $n u m s[i]>0:$ 因为已经排序好, 所以后面不可能有三个数加和等于 0，直接返回结果。 对于重复元素：跳过, 避免出现重复解 令左指针 $L=i+1,$ 右指针 $R=n-1,$ 当 $L<R$ 时, 执行循环:
+- 当 $\operatorname{nums}[i]+\operatorname{nums}[L]+\operatorname{nums}[R]==0$, 执行循环，判断左界和右界是否和下一位置重
+复, 去除重复解。并同时将 $L, R$ 移到下一位置，寻找新的解 若和大于 $0,$ 说明 $n u m s[R]$ 太大, $\quad R$ 左移
+- 若和小于 $0,$ 说明 $n u m s[L]$ 太小， $L$ 右移
+复杂度分析
+・时间复杂度： $O\left(n^{2}\right),$ 数组排序 $O(N \log N),$ 遍历数组 $O(n),$ 双指针遍历 $O(n),$ 总体 $O(N \log N)+O(n) * O(n), O\left(n^{2}\right)$
+空间复杂度：O(1)
+
+```r
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        
+        n=len(nums)
+        res=[]
+        if(not nums or n<3):
+            return []
+        nums.sort()
+        res=[]
+        for i in range(n):
+            if(nums[i]>0):
+                return res
+            if(i>0 and nums[i]==nums[i-1]):
+                continue
+            L=i+1
+            R=n-1
+            while(L<R):
+                if(nums[i]+nums[L]+nums[R]==0):
+                    res.append([nums[i],nums[L],nums[R]])
+                    while(L<R and nums[L]==nums[L+1]):
+                        L=L+1
+                    while(L<R and nums[R]==nums[R-1]):
+                        R=R-1
+                    L=L+1
+                    R=R-1
+                elif(nums[i]+nums[L]+nums[R]>0):
+                    R=R-1
+                else:
+                    L=L+1
+        return res
+
+
+
+
+```
 
