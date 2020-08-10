@@ -371,6 +371,7 @@ summary {
 
 <div id="剑指offer题解" class="section level1">
 <h1>剑指offer题解</h1>
+<p>安装牛客网的顺序的来的~</p>
 <div id="二维数组中的查找" class="section level2">
 <h2>二维数组中的查找</h2>
 <p><strong>题目描述</strong> 在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p>
@@ -448,6 +449,64 @@ class Solution:
         root.right = self.buildTree(preorder[idx+1:], inorder[idx+1:])
         return root
 </code></pre>
+</div>
+<div id="两个栈实现队列" class="section level2">
+<h2>两个栈实现队列</h2>
+<p>栈：先进后厨 队列：先进先出</p>
+<p><strong>题目描述</strong></p>
+<p>用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。</p>
+<p>找个主要如果用牛客的话需要自己先定义两个空队列</p>
+<pre class="r"><code># -*- coding:utf-8 -*-
+class Solution:
+    def __init__(self):
+        self.stack1 = []
+        self.stack2 = []
+
+    def push(self, node):
+        # write code here
+        self.stack1.append(node)
+    def pop(self):
+        # return xx
+        if len(self.stack2) == 0: # 第二个是空队列哦
+            while len(self.stack1) !=0:
+                self.stack2.append(self.stack1[len(self.stack1)-1]) # 先进先出
+                self.stack1.pop()
+        pop = self.stack2[len(self.stack1)-1]
+        self.stack2.pop()
+        return pop</code></pre>
+</div>
+<div id="旋转数组中最小的数" class="section level2">
+<h2>旋转数组中最小的数</h2>
+<p><strong>题目描述</strong></p>
+<p>把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。 输入一个非递减排序的数组的一个旋转，输出旋转数组的最小元素。 例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。 NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。</p>
+<p>思路：第一感觉，一个min函数不就完事了，但是这么写没有意义，面试官会说你把min的底层写出来~</p>
+<p>呵呵 了</p>
+<p>因此肯定考排序这里的，比如二分法查找~</p>
+<p>保证rotateArray[left]为全场最小，当rotateArray[left]&lt;rotateArray[right]时，证明进入了有序数组，直接输出</p>
+<pre class="r"><code># -*- coding:utf-8 -*-
+class Solution:
+    def minNumberInRotateArray(self, rotateArray,):
+        # write code here
+        if len(rotateArray) == 0:
+            return 0
+        # 二分法查找,快排
+        left = 0
+        right = len(rotateArray)-1
+        while left&lt;right: #从左向右开始遍历
+            if rotateArray[left]&lt;rotateArray[right]:
+                return rotateArray[left]
+            mid = left + (right -left)//2
+            # 左边 有序取另一半
+            
+            if rotateArray[left]&lt;rotateArray[mid]:
+                left = mid +1
+            # 右边有序右边取最小
+            elif rotateArray[mid]&lt;rotateArray[right]:
+                right = mid
+             #前面两个相等的时候，left进一继续
+            else :
+                left+=1
+        return rotateArray[left]</code></pre>
 </div>
 </div>
 
