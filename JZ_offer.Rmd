@@ -1,0 +1,114 @@
+---
+title: "剑指offer"
+author: "wenxin Gao"
+date: "2020/8/10"
+output: html_document
+---
+
+# 剑指offer题解
+
+## 二维数组中的查找
+
+**题目描述**
+在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。
+
+
+思路：最先想到的遍历一遍数组，判断target是否在数组中即可
+
+```r
+
+class Solution:
+    # array 二维列表
+    def Find(self, target, array):
+        # write code here
+        for arr in array:
+            if target in arr:
+                return True
+        return False
+```
+
+## 替换空格
+
+**题目描述**
+请实现一个函数，将一个字符串中的每个空格替换成“%20”。例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。
+
+思路:
+
+最先能想到replace，哈哈~直接替换
+
+```r
+# -*- coding:utf-8 -*-
+import re
+class Solution:
+    # s 源字符串
+    def replaceSpace(self, s):
+        # write code here
+        return s.replace(' ','%20')
+```
+
+
+## 从头到尾打印链表
+
+**题目描述**
+
+输入一个链表，按链表从尾到头的顺序返回一个ArrayList。
+
+从尾到头的顺序，第一个感觉是reverse，但是感觉这么写会被打~
+
+还是一样的问题：有几天
+
+```r
+
+# -*- coding:utf-8 -*-
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    # 返回从尾部到头部的列表值序列，例如[1,2,3]
+    def printListFromTailToHead(self, listNode):
+        # write code here
+        res = []
+        while listNode:
+            
+            res.append(listNode.val)
+            listNode = listNode.next
+        return res[::-1]
+
+```
+
+## 重建二叉树
+
+**题目描述**
+
+输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。
+
+
+
+**思路**:递归加迭代
+
+```r
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        if len(inorder) == 0:
+            return None
+        
+        # 根节点
+        root = TreeNode(preorder[0])
+        # 获取根节点在 inorder 中的索引
+        idx = inorder.index(preorder[0])
+        # 左子树
+        root.left = self.buildTree(preorder[1:idx+1], inorder[:idx])
+        # 右子树
+        root.right = self.buildTree(preorder[idx+1:], inorder[idx+1:])
+        return root
+
+
+```
+
+
+
+
+
+
