@@ -428,21 +428,25 @@ class Solution:
 <p><strong>题目描述</strong></p>
 <p>输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。</p>
 <p><strong>思路</strong>:递归加迭代</p>
+<p>知识点：</p>
+<p>前序遍历列表：第一个元素永远是 【根节点 (root)】 中序遍历列表：根节点 (root)【左边】的所有元素都在根节点的【左分支】，【右边】的所有元素都在根节点的【右分支】</p>
+<p>算法思路：</p>
+<p>通过【前序遍历列表】确定【根节点 (root)】 将【中序遍历列表】的节点分割成【左分支节点】和【右分支节点】 递归寻找【左分支节点】中的【根节点 (left child)】和 【右分支节点】中的【根节点 (right child)】</p>
+<p>就是在考察前序中序后序树的遍历顺序:前序第一个是根节点，找到根节点在中序中的位置，可以划分左右子树，然后递归即可</p>
 <pre class="r"><code>class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -&gt; TreeNode:
         if len(inorder) == 0:
             return None
         
         # 根节点
-        root = TreeNode(preorder[0])
+        root = TreeNode(preorder[0]) #前序遍历找根节点~
         # 获取根节点在 inorder 中的索引
-        idx = inorder.index(preorder[0])
+        idx = inorder.index(preorder[0]) # 找到根节点的索引
         # 左子树
-        root.left = self.buildTree(preorder[1:idx+1], inorder[:idx])
+        root.left = self.buildTree(preorder[1:idx+1], inorder[:idx]) # 
         # 右子树
         root.right = self.buildTree(preorder[idx+1:], inorder[idx+1:])
         return root
-
 </code></pre>
 </div>
 </div>
