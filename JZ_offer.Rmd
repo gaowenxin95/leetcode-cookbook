@@ -88,6 +88,19 @@ class Solution:
 
 **思路**:递归加迭代
 
+知识点：
+
+前序遍历列表：第一个元素永远是 【根节点 (root)】
+中序遍历列表：根节点 (root)【左边】的所有元素都在根节点的【左分支】，【右边】的所有元素都在根节点的【右分支】
+
+算法思路：
+
+通过【前序遍历列表】确定【根节点 (root)】
+将【中序遍历列表】的节点分割成【左分支节点】和【右分支节点】
+递归寻找【左分支节点】中的【根节点 (left child)】和 【右分支节点】中的【根节点 (right child)】
+
+就是在考察顺序
+
 ```r
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
@@ -95,15 +108,14 @@ class Solution:
             return None
         
         # 根节点
-        root = TreeNode(preorder[0])
+        root = TreeNode(preorder[0]) #前序遍历找根节点~
         # 获取根节点在 inorder 中的索引
-        idx = inorder.index(preorder[0])
+        idx = inorder.index(preorder[0]) # 找到根节点的索引
         # 左子树
-        root.left = self.buildTree(preorder[1:idx+1], inorder[:idx])
+        root.left = self.buildTree(preorder[1:idx+1], inorder[:idx]) # 
         # 右子树
         root.right = self.buildTree(preorder[idx+1:], inorder[idx+1:])
         return root
-
 
 ```
 
