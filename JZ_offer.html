@@ -627,6 +627,62 @@ class Solution:
             for i in range(exponent-1):
                 base *= temp
             return base</code></pre>
+<p>今天贝壳找房得笔试挂了，因此多来三个题平复下心情~</p>
+<p>算法虐我千百遍我待算法如初恋~</p>
+</div>
+<div id="调整数组顺序使其位于整熟前面" class="section level2">
+<h2>调整数组顺序使其位于整熟前面</h2>
+<p><strong>题目描述</strong></p>
+<p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。</p>
+<p>给一个常规得解法</p>
+<pre class="r"><code>class Solution:
+    def reOrderArray(self, array):
+        # write code here
+        j=[]
+        o=[]
+        for i in array:
+            if i%2==0:
+                o.append(i)
+            else:
+                j.append(i)
+        return j+o
+        </code></pre>
+</div>
+<div id="链表的倒数第k个节点" class="section level2">
+<h2>链表的倒数第k个节点</h2>
+<p>题目描述 输入一个链表，输出该链表中倒数第k个结点。</p>
+<p>用一个最直观的方法，时间复杂度为o（k)</p>
+<pre class="r"><code>
+class Solution:
+    def FindKthToTail(self, head, k):
+        # write code here
+        #哎，你就把链表当一个list去遍历呗,只是向下移动的方式是不一样的
+        res=[]
+        while head:
+            res.append(head)
+            head=head.next
+        if k&gt;len(res) or k&lt;1:
+            return 
+        return res[-k]
+        </code></pre>
+</div>
+<div id="反转链表" class="section level2">
+<h2>反转链表</h2>
+<p><strong>题目描述</strong> 输入一个链表，反转链表后，输出新链表的表头。</p>
+<p>自己画个图就非常的明白了</p>
+<pre class="r"><code>class Solution:
+    # 返回ListNode
+    def ReverseList(self, pHead):
+        # write code here
+        
+        p = None
+        while pHead:
+            curr=pHead
+            pHead=pHead.next
+            curr.next=p
+            p=curr
+        return p</code></pre>
+<p>突然发现，今天笔试题不会的原因是因为，比较重要的5个快排没有学透！！</p>
 </div>
 </div>
 
