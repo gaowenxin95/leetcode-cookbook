@@ -715,7 +715,7 @@ class Solution:
 5 7 9 11 镜像二叉树 8 /<br />
 10 6 /   /<br />
 11 9 7 5</p>
-<p>思路：交换左右子树</p>
+<p>思路：观察镜像的特点即可</p>
 <pre class="r"><code># -*- coding:utf-8 -*-
 class TreeNode:
      def __init__(self, x):
@@ -737,6 +737,18 @@ class Solution:
 <div id="顺时针打印矩阵" class="section level2">
 <h2>顺时针打印矩阵</h2>
 <p><strong>题目描述</strong> 输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字，例如，如果输入如下4 X 4矩阵： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 则依次打印出数字1,2,3,4,8,12,16,15,14,13,9,5,6,7,11,10.</p>
+<p>可以考虑画个图，完事就会想到：每次只取第一行数据，然后再把矩阵逆时针旋转90度</p>
+<pre class="r"><code>
+class Solution:
+    #每次只取第一行数据，然后再把矩阵逆时针旋转90度
+    # matrix类型为二维列表，需要返回列表
+    def printMatrix(self, matrix):
+        # write code here
+        res = []
+        while matrix:
+            res += matrix.pop(0)
+            matrix = list(zip(*matrix))[::-1] #这个转置矩阵的好骚啊！
+        return res</code></pre>
 </div>
 </div>
 
