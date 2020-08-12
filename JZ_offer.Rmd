@@ -438,5 +438,84 @@ class Solution:
         return p
 ```
 
-突然发现，今天笔试题不会的原因是因为，比较重要的5个快排没有学透！！
+突然发现，今天笔试题不会的原因是因为，比较重要的5个排序没有学透！！
 
+
+## 合并两个有序链表
+
+**题目描述**
+输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
+
+```r
+
+class Solution:
+    # 返回合并后列表
+    def Merge(self, pHead1, pHead2):
+        # write code here
+        if not pHead1:
+            return pHead2
+        if not pHead2:
+            return pHead1
+        if pHead1.val<pHead2.val:
+            pHead1.next = self.Merge(pHead1.next,pHead2)
+            return pHead1
+        else:
+            pHead2.next = self.Merge(pHead1,pHead2.next)
+            return pHead2
+```
+
+## 树的子结构
+
+**题目描述**
+
+输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）
+
+
+
+
+
+## 二叉树的镜像
+
+题目描述
+操作给定的二叉树，将其变换为源二叉树的镜像。
+输入描述:
+二叉树的镜像定义：源二叉树 
+    	    8
+    	   /  \
+    	  6   10
+    	 / \  / \
+    	5  7 9 11
+    	镜像二叉树
+    	    8
+    	   /  \
+    	  10   6
+    	 / \  / \
+    	11 9 7  5
+    	
+    	
+思路：交换左右子树
+
+```r
+# -*- coding:utf-8 -*-
+class TreeNode:
+     def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+ 
+class Solution:
+    # 返回镜像树的根节点
+    def Mirror(self, root):
+        # write code here
+        if not root:
+            return 
+        root.left,root.right =root.right,root.left
+        self.Mirror(root.left)
+        self.Mirror(root.right)
+        return root
+```
+
+## 顺时针打印矩阵
+
+**题目描述**
+输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字，例如，如果输入如下4 X 4矩阵： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 则依次打印出数字1,2,3,4,8,12,16,15,14,13,9,5,6,7,11,10.
