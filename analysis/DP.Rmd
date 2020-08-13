@@ -314,6 +314,30 @@ class Solution:
         return s[left: right+1]
 ```
 
+解法三
+
+```r
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        res = ''
+        temp = {}
+        if len(s) > 0:
+            res = s[0]
+        for i in range(len(s)):
+            if s[i] not in temp:
+                temp[s[i]] = []
+                temp[s[i]].append(i)
+            else:
+                temp[s[i]].append(i)
+                for j in temp[s[i]]:
+                    string = s[j:i+1]
+                    reverse = string[::-1]
+                    if string == reverse and len(string) > len(res):
+                        res = string
+                        break
+        return res
+```
+
 ## 最大乘积和
 
 这个题一开始我想的很简单，就类似与最大上升子序和来做了，结果。。。==
