@@ -948,6 +948,105 @@ class Solution:
             return False
         return helper(nums)</code></pre>
 </div>
+<div id="从上到下打印二叉树" class="section level2">
+<h2>从上到下打印二叉树</h2>
+<p><strong>题目描述</strong> 从上往下打印出二叉树的每个节点，同层节点从左至右打印。</p>
+<p>思路：二叉树的层次遍历,一层一层遍历完继续下一层</p>
+<pre class="r"><code># -*- coding:utf-8 -*-
+# class TreeNode:
+def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+class Solution:
+    # 返回从上到下每个节点值列表，例：[1,2,3]
+    def PrintFromTopToBottom(self, root):
+        # write code here
+        #
+        if not root:
+            return &#39;&#39;
+        
+        que=[root] #根节点保存在队列中
+        res=[] #用一个list保存输出值
+        while que:
+            if que[0].left:
+                que.append(que[0].left)
+            if que[0].right:
+                que.append(que[0].right)
+            res.append(que[0].val)
+            que.pop(0) #遍历完一个根和左右就删掉
+        return res
+        </code></pre>
+</div>
+<div id="二叉树的后续遍历" class="section level2">
+<h2>二叉树的后续遍历</h2>
+<p><strong>题目描述</strong> 输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则返回true,否则返回false。假设输入的数组的任意两个数字都互不相同。</p>
+<ul>
+<li>后序遍历的序列中，最后一个数字是树的根节点 ，</li>
+<li>数组中前面的数字可以分为两部分：第一部分是左子树节点的值，都比根节点的值小；</li>
+<li>第二部分 是右子树节点的值，都比根节点的值大，</li>
+<li>后面用递归分别判断前后两部分 是否符合以上原则。</li>
+</ul>
+<pre class="r"><code># -*- coding:utf-8 -*-
+class Solution:
+    def VerifySquenceOfBST(self, sequence):
+        # write code here
+        
+        if sequence==None or len(sequence)==0:
+            return False
+        length=len(sequence)
+        root=sequence[length-1]
+        # 在二叉搜索树中 左子树节点小于根节点
+        for i in range(length):
+            if sequence[i]&gt;root:
+                break
+        # 二叉搜索树中右子树的节点都大于根节点
+        for j in range(i,length):
+            if sequence[j]&lt;root:
+                return False
+        # 判断左子树是否为二叉树
+        left=True
+        if i&gt;0:
+            left=self.VerifySquenceOfBST(sequence[0:i])
+        # 判断 右子树是否为二叉树
+        right=True
+        if i&lt;length-1:
+            right=self.VerifySquenceOfBST(sequence[i:-1])
+        return left and right</code></pre>
+</div>
+<div id="二叉树中和为某一路径值" class="section level2">
+<h2>二叉树中和为某一路径值</h2>
+<p><strong>题目描述</strong></p>
+<p>输入一颗二叉树的根节点和一个整数，按字典序打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。</p>
+<pre class="r"><code>思路是递归：递归方法是返回当前路径下匹配目标值的路径。
+目标值 = 目标值 - 当前节点值
+共有几种情况：
+0，当节点为空，return
+1，当目标值小于0，return
+2，当目标值为0 并且 节点下无其他节点
+节点下无其他节点说明是叶子节点，并且路径值的和满足了目标值，添加到结果中  并且return
+3，当目标值大于0，继续递归</code></pre>
+<pre class="r"><code>class Solution:
+    # 返回二维列表，内部每个列表表示找到的路径
+    def FindPath(self, root, expectNumber):
+        # write code here
+        path = []
+        res = []
+        def dfs(root, sum):
+            if not root:
+                return
+            path.append(root.val)
+            sum -= root.val
+            if sum == 0 and not root.left and not root.right:
+                res.append(path[:])
+            dfs(root.left, sum)
+            dfs(root.right, sum)
+            path.pop()
+            
+        dfs(root, expectNumber)
+        return res</code></pre>
+<p><strong>仔细去想上面三个题的思路</strong></p>
+</div>
 </div>
 
 
