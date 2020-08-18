@@ -1047,6 +1047,114 @@ class Solution:
         return res</code></pre>
 <p><strong>仔细去想上面三个题的思路</strong></p>
 </div>
+<div id="复杂链表的复制" class="section level2">
+<h2>复杂链表的复制</h2>
+<p><strong>题目描述</strong> 输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针random指向一个随机节点），请对此链表进行深拷贝，并返回拷贝后的头结点。（注意，输出结果中请不要返回参数中的节点引用，否则判题程序会直接返回空）</p>
+<p>思路：</p>
+<pre class="r"><code>class Solution:
+    # 返回 RandomListNode
+    def Clone(self, pHead):
+        # write code here
+        if not pHead:
+            return None
+        newp = RandomListNode(pHead.label)
+        newp.random = pHead.random
+        newp.next = self.Clone(pHead.next)
+        return newp</code></pre>
+<p>或者下面这一句也是可以的</p>
+<pre class="r"><code>return copy.deepcopy(pHead)</code></pre>
+</div>
+<div id="反转单词顺序" class="section level2">
+<h2>反转单词顺序</h2>
+<p><strong>题目描述</strong></p>
+<p>牛客最近来了一个新员工Fish，每天早晨总是会拿着一本英文杂志，写些句子在本子上。同事Cat对Fish写的内容颇感兴趣，有一天他向Fish借来翻看，但却读不懂它的意思。例如，“student. a am I”。后来才意识到，这家伙原来把句子单词的顺序翻转了，正确的句子应该是“I am a student.”。Cat对一一的翻转这些单词顺序可不在行，你能帮助他么？</p>
+<p>能~</p>
+<p>字符串的倒序，注意输出的结果表示</p>
+<pre class="r"><code>class Solution:
+    def ReverseSentence(self, s):
+        # write code here
+        if not s:
+            return &#39;&#39;
+        st=s.split(&#39; &#39;)
+        res=st[::-1]
+        return &#39; &#39;.join(res)</code></pre>
+</div>
+<div id="左旋字符串" class="section level2">
+<h2>左旋字符串</h2>
+<p><strong>题目描述</strong> 汇编语言中有一种移位指令叫做循环左移（ROL），现在有个简单的任务，就是用字符串模拟这个指令的运算结果。对于一个给定的字符序列S，请你把其循环左移K位后的序列输出。例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”。是不是很简单？OK，搞定它！</p>
+<pre class="r"><code>class Solution:
+    def LeftRotateString(self, s, n):
+        # write code here
+        l=len(s)
+        return s[n:]+s[:n]
+        </code></pre>
+</div>
+<div id="把数组排成最小整数" class="section level2">
+<h2>把数组排成最小整数</h2>
+<p><strong>题目描述</strong> 输入一个正整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。例如输入数组{3，32，321}，则打印出这三个数字能排成的最小数字为321323。</p>
+<p>把数组变成字符串，完事就是常规的冒泡排序就能解决。。冒泡排序的应用</p>
+<pre class="r"><code># -*- coding:utf-8 -*-
+class Solution:
+    def PrintMinNumber(self, numbers):
+    # write code here
+        n = len(numbers)
+        for i in range(n):
+            for j in range(i+1, n):
+                if int(str(numbers[i]) + str(numbers[j]) &gt; str(numbers[j]) + str(numbers[i])):
+                    numbers[j], numbers[i] = numbers[i], numbers[j]
+        return &#39;&#39;.join([str(i) for i in numbers])</code></pre>
+</div>
+<div id="丑数" class="section level2">
+<h2>丑数</h2>
+<p><strong>题目描述</strong> 把只包含质因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是，因为它包含质因子7。 习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。</p>
+<p><strong>思路：</strong>丑数 = 已有的丑数 * (2,3,5) 得到三个新的丑数，但是新的丑数位置不一定正确，切可能会有重复</p>
+<p>所以我们每次只新增一个最小值，然后用三个指针记录当前2，3，5质因子形成的最大丑数位置，这样的话就会形成递增的丑数队列，而且遍历的次数也很容易就知道，即n-1,因为1是第一个丑数，n-1次遍历后，我们就可以得到一个含有n个丑数的有序数组，返回最后一个即可。</p>
+<pre class="r"><code># -*- coding:utf-8 -*-
+class Solution:
+    def GetUglyNumber_Solution(self, index):
+    # write code here
+        if index &lt;= 0:
+            return 0
+        uglyList = [1]
+        p2 = 0 # p2指向小于newUgly且最大的乘以2后可能成为下一个丑数的丑数
+        p3 = 0 # p3指向小于newUgly且最大的乘以3后可能成为下一个丑数的丑数
+        p5 = 0 # p5指向小于newUgly且最大的乘以5后可能成为下一个丑数的丑数
+        for i in range(index-1):
+            newUgly = min(uglyList[p2]*2, uglyList[p3]*3, uglyList[p5]*5)
+            uglyList.append(newUgly)
+            if (newUgly % 2 == 0):
+                p2 += 1
+            if (newUgly % 3 == 0):
+                p3 += 1
+            if (newUgly % 5 == 0):
+                p5 += 1
+        return uglyList[-1]</code></pre>
+</div>
+<div id="第一个只出现一次的字符串" class="section level2">
+<h2>第一个只出现一次的字符串</h2>
+<p><strong>题目描述</strong> 在一个字符串(0&lt;=字符串长度&lt;=10000，全部由字母组成)中找到第一个只出现一次的字符,并返回它的位置, 如果没有则返回 -1（需要区分大小写）.（从0开始计数）</p>
+<p>简单解法，count计数法</p>
+<pre class="r"><code># -*- coding:utf-8 -*-
+class Solution:
+    def FirstNotRepeatingChar(self, s):
+        # write code here
+        if not s:
+            return -1
+        for i in range(len(s)):
+            if s.count(s[i]) == 1:
+                return i
+        return -1</code></pre>
+<p>或者直接字典</p>
+<pre class="r"><code># -*- coding:utf-8 -*-
+class Solution:
+    def FirstNotRepeatingChar(self, s):
+        # write code here
+        if len(s) == 0:
+            return -1
+        for index, value in enumerate(s):
+            if s.count(value) == 1:
+                return index</code></pre>
+</div>
 </div>
 
 
