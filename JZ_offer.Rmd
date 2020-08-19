@@ -1,8 +1,9 @@
 ---
-title: "剑指offer"
-author: "wenxin Gao"
-date: "2020/8/10"
-output: html_document
+title : 剑指offer
+author: 高文欣
+date: "`r Sys.Date()`"
+output: bookdown::gitbook
+bibliography: refs/add.bib
 ---
 
 # 剑指offer题解
@@ -583,7 +584,7 @@ class Solution:
 
 '''
 
-# 感觉例子看的有点晕糊，栈的存储原则是后进先出
+- 感觉例子看的有点晕糊，栈的存储原则是后进先出
 
 
 ```r
