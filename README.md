@@ -14,6 +14,6 @@
 
 - [必会10大排序算法](https://github.com/gaowenxin95/leetcode-cookbook/blob/master/analysis/sort.py)
 
-- [剑指offer题解](https://gaowenxin95.github.io/leetcode-cookbook/JZ_offer.html)
+- [剑指offer题解](https://gaowenxin95.github.io/leetcode-cookbook/剑指offer题解.html)
 
 持续更新。。。
