@@ -695,6 +695,37 @@ class Solution:
 
 ## 有效的括号
 
+题目描述：
+
+给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
+
+有效字符串需满足：
+
+左括号必须用相同类型的右括号闭合。
+左括号必须以正确的顺序闭合。
+注意空字符串可被认为是有效字符串。
+
+示例 1:
+
+输入: "()"
+输出: true
+示例 2:
+
+输入: "()[]{}"
+输出: true
+示例 3:
+
+输入: "(]"
+输出: false
+示例 4:
+
+输入: "([)]"
+输出: false
+示例 5:
+
+输入: "{[]}"
+输出: true
+
 知识点：栈
 
 **解题思路**
@@ -709,27 +740,26 @@ class Solution:
 代码中我们使用了哈希表来判断是否能够形成括号，从而决定进行入栈操作还是出栈操作。[leetcode](https://leetcode-cn.com/problems/valid-parentheses/solution/zhu-bu-fen-xi-tu-jie-zhan-zhan-shi-zui-biao-zhun-d/)
 
 
-- 使用栈，左括号代表入栈，右括号代表出栈
+- 使用栈，是左括号代表入栈，是右括号代表出栈
 - 如果要出栈，出栈的元素要与当前元素匹配
 - 最终栈要为空
 
 
 ```r
-class Solution(object):
-    def isValid(self, s):
-        if len(s) % 2 == 1:  # 奇数长度
-            return False
-        
-        d = {'(': ')', '{': '}', '[': ']'}
-        stack = []
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack=[]                            #设置一个列表，把该列表当做栈来使用即可。
+        dic={')':'(','}':'{',']':'['}       #使用字典存储括号,并且右括号为key,左括号为value
         for char in s:
-            if char in d:  # 左括号入栈
+            if char in dic.values():        #左括号就入栈
                 stack.append(char)
-            else:
-                if not stack or d[stack.pop()] != char:  # 没入栈就出栈或出栈元素不匹配当前元素
+            elif char in dic.keys():        #有右括号的话就进行比较，
+                if stack==[] or dic[char] != stack.pop():
                     return False
+            else:
+                return False                #不再字典中的输入直接输出错误
 
-        return True if not stack else False
+        return stack==[]
 
 ```
 
@@ -1005,6 +1035,8 @@ class Solution:
 
 把数组变成字符串，完事就是常规的冒泡排序就能解决。。冒泡排序的应用
 
+str和int之间的转换，这个需要知道一下
+
 
 ```r
 # -*- coding:utf-8 -*-
@@ -1088,5 +1120,154 @@ class Solution:
             if s.count(value) == 1:
                 return index
 ```
+
+
+## 数组中的逆序对
+
+**题目描述**
+
+在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组,求出这个数组中的逆序对的总数P。并将P对1000000007取模的结果输出。 即输出P%1000000007
+
+输入描述:
+题目保证输入的数组中没有的相同的数字
+
+数据范围：
+
+对于%50的数据,size<=10^4
+
+对于%75的数据,size<=10^5
+
+对于%100的数据,size<=2*10^5
+
+示例1
+输入1,2,3,4,5,6,7,0
+
+输出7
+
+思路1：先将原序列排序，然后从排完序的数组中取出最小的，它在原数组中的位置表示有多少比它大的数在它前面，每取出一个在原数组中删除该元素，保证后面取出的元素在原数组中是最小的，这样其位置才能表示有多少比它大的数在它前面，即逆序对数。
+
+
+```r
+
+# -*- coding:utf-8 -*-
+class Solution:
+    def InversePairs(self, data):
+        # write code here
+        cnt = 0
+        copy = data[:]
+        copy.sort()
+        for i in copy:
+            cnt += data.index(i)
+            data.remove(i)
+        return cnt%1000000007
+```
+
+思路2：归并排序
+冒泡排序太暴力了
+
+待我默写出来
+
+
+## 两个链表的第一个公共节点
+
+**题目描述**
+
+输入两个链表，找出它们的第一个公共结点。（注意因为传入数据是链表，所以错误测试数据的提示是用其他方式显示的，保证传入数据是正确的）
+
+思路1
+如果能从后面遍历两个链表，找到最后一个相同的节点，输出即可。可以利用两个栈来实现。
+
+
+```r
+#         self.next = None
+class Solution:
+    def FindFirstCommonNode(self, pHead1, pHead2):
+        # write code here
+        if pHead1== None or pHead2 == None:
+            return None
+        stack1 = []
+        stack2 = []
+        p1 = pHead1
+        while p1 is not None:   # 依次将两个链表的所有节点分别压入两个栈中
+            stack1.append(p1)
+            p1 = p1.next
+        p2 = pHead2
+        while p2 is not None:
+            stack2.append(p2)
+            p2 = p2.next
+        res = None
+        while len(stack1) > 0 and len(stack2) > 0:
+        # 从后往前遍历，直到找到两个链表相同的最后一个节点，如果相同的话。
+            v1 = stack1.pop()
+            v2 = stack2.pop()
+            if v1 == v2:
+                res = v1
+            else:
+                break
+        return res
+
+```
+
+下面这个思路好骚啊~[csdn](https://blog.csdn.net/ggdhs/article/details/90319403)
+
+感觉有点不懂
+
+![](figs/lbggjd.png)
+
+```r
+# -*- coding:utf-8 -*-
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+class Solution:
+    def FindFirstCommonNode(self, pHead1, pHead2):
+        # write code here
+        if pHead1== None or pHead2 == None:
+            return None
+        p1 = pHead1
+        p2 = pHead2
+        while(p1!=p2):  
+            p1 = pHead2 if p1 is None else p1.next
+            # 由于若pHead2是pHead1的最后一个节点，，因此不能以p1.next==None作为判断条件。
+            # 否则就会死循环。
+            p2 = pHead1 if p2 is None else p2.next
+        return p1
+```
+
+
+## 数字在升序数组中出现的次数
+
+
+**题目描述**
+
+统计一个数字在升序数组中出现的次数。
+
+怎么写都能通过吧
+
+```r
+# -*- coding:utf-8 -*-
+class Solution:
+    def GetNumberOfK(self, data, k):
+        # write code here
+        count = 0
+        for i in range(len(data)):
+            if(data[i] == k):
+                count += 1
+        return count
+        # 或者就直接用python的count函数
+        # return data.count(k)
+```
+
+
+## 平衡二叉树
+
+
+**题目描述**
+输入一棵二叉树，判断该二叉树是否是平衡二叉树。
+
+在这里，我们只需要考虑其平衡性，不需要考虑其是不是排序二叉树
+
+首先啊得了解啥是平衡二叉树
 
 
