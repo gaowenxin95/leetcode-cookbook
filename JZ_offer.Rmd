@@ -1381,3 +1381,241 @@ class Solution:
             return result
         return []
 ```
+
+## 减绳子
+
+**题目描述**
+
+给你一根长度为n的绳子，请把绳子剪成整数长的m段（m、n都是整数，n>1并且m>1，m<=n），每段绳子的长度记为k[1],...,k[m]。请问k[1]x...xk[m]可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。
+
+```r
+# -*- coding:utf-8 -*-
+#动态规划
+class Solution:
+    def cutRope(self, number):
+         # write code here
+        if number < 2:
+            return 0
+        if number == 2:
+            return 1
+        if number == 3:
+            return 2       
+         #申请辅助空间
+        products = [0]*(number+1)
+         #定义前几个初始变量的值
+        products[0] = 0
+        products[1] = 1
+        products[2] = 2
+        products[3] = 3 #可以考虑先把可能出现的情况列出来
+         #进行动态规划,也就是从下向上的进行求解
+        for i in range(4, number+1):
+            max_ = 0
+            for j in range(1, i/2+1): #可以用数学方法先找下范围，长方形面积问题把
+                max_ = max(products[j]*products[i-j], max_) #剪出长度为j的绳子所得到饿最大的乘积，与当前最大的乘积做比较
+            products[i] = max_
+            max_ = products[number]
+        return max_
+```
+
+## 机器人的移动范围
+
+**题目描述**
+地上有一个m行和n列的方格。一个机器人从坐标0,0的格子开始移动，每一次只能向左，右，上，下四个方向移动一格，但是不能进入行坐标和列坐标的数位之和大于k的格子。 例如，当k为18时，机器人能够进入方格（35,37），因为3+5+3+7 = 18。但是，它不能进入方格（35,38），因为3+5+3+8 = 19。请问该机器人能够达到多少个格子？
+
+需要分别计算个位和十位上面的数字
+个位：取余
+十位：取商
+
+就正常的遍历每个格子就是正常的解法
+
+```r
+# -*- coding:utf-8 -*-
+class Solution:
+    def calSum(self, temp):
+        sum = 0 #两数的和
+        while(temp != 0):
+            sum += temp % 10 # 取到个位数
+            temp = temp / 10  #取到十位数
+        return sum
+      
+    def movingCount(self, threshold, rows, cols):
+        # write code here
+        num = 0
+        for i in range(rows):
+            for j in range(cols):
+                if(self.calSum(i) + self.calSum(j) <= threshold):
+                    num = num + 1
+                elif(rows==1 or cols==1):
+                    return num
+        return num
+```
+
+
+## 矩阵中的路径
+
+**题目描述**
+请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一个格子开始，每一步可以在矩阵中向左，向右，向上，向下移动一个格子。如果一条路径经过了矩阵中的某一个格子，则该路径不能再进入该格子。 例如 $\left[\begin{array}{llll}a & b & c & e \\ s & f & c & s \\ a & d & e & e\end{array}\right]$
+   矩阵中包含一条字符串"bcced"的路径，但是矩阵中不包含"abcb"路径，因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入该格子。
+   
+不太会
+
+```r
+# -*- coding:utf-8 -*-
+class Solution:
+    def hasPath(self, matrix, rows, cols, path):
+        # write code here
+        for i in range(rows):
+            for j in range (cols):
+                if matrix[i*cols+j]==path[0]:
+                    if self.findpath(i,j,path[1:],list(matrix),rows,cols):
+                        return True
+        return False
+    def findpath(self,i,j,path,matrix,rows,cols):
+        if i<0 or j<0 or i>rows or j>cols:
+            return False
+        if not path:
+            return True
+        matrix[i*cols+j]='0'
+        if i+1<rows and matrix[(i+1)*cols+j]==path[0]:
+            if self.findpath(i+1, j, path[1:], matrix, rows, cols):
+                return True
+        if j+1<cols and matrix[i*cols+j+1]==path[0]:
+            if self.findpath(i, j+1, path[1:], matrix, rows, cols):
+                return True
+        if i-1>=0 and matrix[(i-1)*cols+j]==path[0]:
+            if self.findpath(i-1, j, path[1:], matrix, rows, cols):
+                return True
+        if j-1>=0 and matrix[i*cols+j-1]==path[0]:
+            if self.findpath(i, j-1, path[1:], matrix, rows, cols):
+                return True
+        else:
+            return False
+```
+
+## 滑动窗口
+
+```r
+题目描述
+给定一个数组和滑动窗口的大小，找出所有滑动窗口里数值的最大值。例如，如果输入数组{2,3,4,2,6,2,5,1}及滑动窗口的大小3，那么一共存在6个滑动窗口，他们的最大值分别为{4,4,6,6,6,5}； 针对数组{2,3,4,2,6,2,5,1}的滑动窗口有以下6个： {[2,3,4],2,6,2,5,1}， {2,[3,4,2],6,2,5,1}， {2,3,[4,2,6],2,5,1}， {2,3,4,[2,6,2],5,1}， {2,3,4,2,[6,2,5],1}， {2,3,4,2,6,[2,5,1]}。
+窗口大于数组长度的时候，返回空
+```
+
+想起了卷积核滑窗有木有
+
+```r
+# -*- coding:utf-8 -*-
+class Solution:
+    def maxInWindows(self, num, size):
+        if size==0:
+            return []
+        if size>len(num):
+            return []
+        else:
+            result=[]
+            for i in range(len(num)-size+1):
+                result.append(max(num[i:i+size]))
+            return result
+```
+
+## 孩子们的游戏
+
+
+**题目描述**
+每年六一儿童节,牛客都会准备一些小礼物去看望孤儿院的小朋友,今年亦是如此。HF作为牛客的资深元老,自然也准备了一些小游戏。其中,有个游戏是这样的:首先,让小朋友们围成一个大圈。然后,他随机指定一个数m,让编号为0的小朋友开始报数。每次喊到m-1的那个小朋友要出列唱首歌,然后可以在礼品箱中任意的挑选礼物,并且不再回到圈中,从他的下一个小朋友开始,继续0...m-1报数....这样下去....直到剩下最后一个小朋友,可以不用表演,并且拿到牛客名贵的“名侦探柯南”典藏版(名额有限哦!!^_^)。请你试着想下,哪个小朋友会得到这份礼品呢？(注：小朋友的编号是从0到n-1)
+
+思路1：建一个标志数组来判断某人是否还在圈内，设置变量k，k > n-1时，赋k=0，表示n-1号报完数就该0号报数，最后检测标志数组为true的人。
+
+**思路2：**用数学归纳法推导出递推公式，设有n个人（编号0~(n-1))，从0开始报数，报到(m-1)的退出，剩下的人继续从0开始报数。令f[i]表示i个人时最后胜利者的编号，则有递推公式：
+f[1]=0;
+f[i]=(f[i-1]+m)%i; (i>1)
+通过递推公式即可求得f[n]。
+
+```r
+def LastRemaining_Solution(self, n, m):
+    # write code here
+    if n == 0:
+        return -1
+    s = 0
+    for i in range(2, n+1):
+        s = (s+m) % i
+    return s
+```
+
+## 扑克牌的顺子
+
+**题目描述**
+
+LL今天心情特别好,因为他去买了一副扑克牌,发现里面居然有2个大王,2个小王(一副牌原本是54张^_^)...他随机从中抽出了5张牌,想测测自己的手气,看看能不能抽到顺子,如果抽到的话,他决定去买体育彩票,嘿嘿！！“红心A,黑桃3,小王,大王,方片5”,“Oh My God!”不是顺子.....LL不高兴了,他想了想,决定大\小 王可以看成任何数字,并且A看作1,J为11,Q为12,K为13。上面的5张牌就可以变成“1,2,3,4,5”(大小王分别看作2和4),“So Lucky!”。LL决定去买体育彩票啦。 现在,要求你使用这幅牌模拟上面的过程,然后告诉我们LL的运气如何， 如果牌能组成顺子就输出true，否则就输出false。为了方便起见,你可以认为大小王是0。
+
+
+**思路：**看是否连续就是看中间缺少的部分能否用大小王，即0来填充，因此只需要比较0的个数和中间缺少的个数就行了，如果中间缺少的比0的数目多，即大小王的个数不足以将缺少的填充，那么就不连续了
+
+```r
+# -*- coding:utf-8 -*-
+class Solution:
+    def IsContinuous(self, numbers):
+        # write code here
+        if numbers == []:
+            return False
+        numbers.sort()
+        cnt_0 = 0
+        cnt = 0
+        for i in range(len(numbers)-2,-1, -1):
+            if numbers[i] == 0:
+                cnt_0 += 1
+            else:
+                if numbers[i+1] == numbers[i]:
+                    return False
+                else:
+                    cnt += (numbers[i+1] - numbers[i] -1)
+        if cnt > cnt_0:
+            return False
+        else:
+            return True
+```
+
+## 将字符串转化为整数
+
+```r
+# -*- coding:utf-8 -*-
+class Solution:
+    def StrToInt(self, s):
+        # write code here
+        if not s or len(s) < 1:
+            return 0
+        numdict = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}
+        result = 0
+        nums = []
+        for char in s:
+            if char == '+' or char == '-':
+                continue
+            elif char in numdict:
+                nums.append(numdict[char])
+            else:
+                return 0
+        # 由list得到数值，这个写法要会
+        for i in nums:
+            result = result*10 + i
+        return -1*result if s[0] == '-' else result
+```
+
+
+## 数组中第一个重复数字
+
+
+题目描述
+在一个长度为n的数组里的所有数字都在0到n-1的范围内。 数组中某些数字是重复的，但不知道有几个数字是重复的。也不知道每个数字重复几次。请找出数组中任意一个重复的数字。 例如，如果输入长度为7的数组{2,3,1,0,2,5,3}，那么对应的输出是第一个重复的数字2。
+
+```r
+class Solution:
+    # 这里要特别注意~找到任意重复的一个值并赋值到duplication[0]
+    # 函数返回True/False
+    def duplicate(self, numbers, duplication):
+        for i in numbers:
+            if i not in duplication:
+                duplication.append(i)
+            else:
+                duplication[0]=i
+                return True
+        return False
+```
