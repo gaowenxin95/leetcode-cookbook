@@ -1492,7 +1492,7 @@ class Solution:
             return False
 ```
 
-## 滑动窗口
+## 滑动窗口的最大值
 
 ```r
 题目描述
@@ -1550,28 +1550,25 @@ LL今天心情特别好,因为他去买了一副扑克牌,发现里面居然有2
 
 **思路：**看是否连续就是看中间缺少的部分能否用大小王，即0来填充，因此只需要比较0的个数和中间缺少的个数就行了，如果中间缺少的比0的数目多，即大小王的个数不足以将缺少的填充，那么就不连续了
 
+首先你得读懂题
+
+- 除0外，最大值与最小值之差小于等于4
+- 除0外，不能在包含其它重复的牌
+
 ```r
 # -*- coding:utf-8 -*-
 class Solution:
     def IsContinuous(self, numbers):
         # write code here
-        if numbers == []:
+        if not numbers:
             return False
-        numbers.sort()
-        cnt_0 = 0
-        cnt = 0
-        for i in range(len(numbers)-2,-1, -1):
-            if numbers[i] == 0:
-                cnt_0 += 1
-            else:
-                if numbers[i+1] == numbers[i]:
-                    return False
-                else:
-                    cnt += (numbers[i+1] - numbers[i] -1)
-        if cnt > cnt_0:
-            return False
-        else:
+        res = []
+        for i in numbers:
+            if i > 0:
+                res.append(i)
+        if max(res) - min(res) <= 4 and len(res) == len(set(res)):
             return True
+        return False
 ```
 
 ## 将字符串转化为整数
@@ -1626,3 +1623,163 @@ class Solution:
                 return True
         return False
 ```
+
+## 构建乘积数组
+
+**题目描述**
+
+给定一个数组A[0,1,...,n-1],请构建一个数组B[0,1,...,n-1],其中B中的元素B[i]=A[0]*A[1]*...*A[i-1]*A[i+1]*...*A[n-1]。不能使用除法。（注意：规定B[0] = A[1] * A[2] * ... * A[n-1]，B[n-1] = A[0] * A[1] * ... * A[n-2];）
+对于A长度为1的情况，B无意义，故而无法构建，因此该情况不会存在。
+
+
+
+
+```r
+
+class Solution:
+    def multiply(self, A):
+        # write code here
+        length = len(A)
+        B = []
+        if(length == 0):
+            return B
+        for i in range(length):
+            temp = A[i]
+            A[i] = 1
+            Bi = 1
+            for j in A:
+                Bi *= j
+            B.append(Bi)
+            A[i] = temp
+        return B
+```
+
+## 字符串中第一个不重复得字符串
+
+**题目描述**
+
+请实现一个函数用来找出字符流中第一个只出现一次的字符。例如，当从字符流中只读出前两个字符"go"时，第一个只出现一次的字符是"g"。当从该字符流中读出前六个字符“google"时，第一个只出现一次的字符是"l"。
+
+
+找个辅助栈
+
+```r
+class Solution:
+    # 返回对应char
+    def __init__(self):
+        self.s=''
+    def FirstAppearingOnce(self):
+        # write code here
+        res=[]
+        for i in self.s:
+            if i in res:
+                res.remove(i)
+            else:
+                res.append(i)
+        return res[0] if res else "#"
+    def Insert(self, char):
+        # write code here
+        self.s+=char
+```
+
+## 数流中得中位数
+
+**题目描述**
+
+如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。我们使用Insert()方法读取数据流，使用GetMedian()方法获取当前读取数据的中位数。
+
+```r
+# -*- coding:utf-8 -*-
+class Solution:
+    def __init__(self):
+        self.data = []
+    def Insert(self, num):
+        self.data.append(num)
+        self.data.sort()
+    def GetMedian(self,data):
+        length = len(self.data)
+        if length%2==0:
+            return (self.data[length//2]+self.data[length//2-1])/2.0
+        else:
+            return self.data[length//2]
+```
+
+
+有一部分二叉树的题，我就先不放了，因为我确实没摸索好二叉树的题咋写才能通过
+
+下面就是复习两边，掌握 核心的idea即可
+
+
+## 求n个骰子各点数和出现的概率
+
+
+题目描述：
+
+把n个骰子扔在地上，所有骰子朝上一面的点数之和为s。输入n，打印出s的所有可能的值的出现概率。
+
+思路：定义两个数组。数组的长度为6*n,即可能出现的最大和。数组每个元素的值代表出现的次数，比如probability[5]表示点数和为5出现的次数。在一轮循环中，一个数组记录之前一次所有出现的情况，一个数组记录这一次的所有出现的情况。例如这一次出现和为n的次数，应该等于另一个数组里记录的n-1,n-2, n-3, n-4, n-5, n-6的和。
+
+
+
+
+
+
+
+
+
+思路2：
+
+分析：动态规划就是分阶段考虑问题，给出变量，找出相邻阶段间的关系。具体定义给忘了。
+
+1.现在变量有：骰子个数，点数和。当有k个骰子，点数和为n时，出现次数记为f(k,n)。那与k-1个骰子阶段之间的关系是怎样的？
+
+2.当我有k-1个骰子时，再增加一个骰子，这个骰子的点数只可能为1、2、3、4、5或6。那k个骰子得到点数和为n的情况有：
+
+(k-1,n-1)：第k个骰子投了点数1
+
+(k-1,n-2)：第k个骰子投了点数2
+
+(k-1,n-3)：第k个骰子投了点数3
+
+....
+
+(k-1,n-6)：第k个骰子投了点数6
+
+在k-1个骰子的基础上，再增加一个骰子出现点数和为n的结果只有这6种情况！
+
+所以：f(k,n)=f(k-1,n-1)+f(k-1,n-2)+f(k-1,n-3)+f(k-1,n-4)+f(k-1,n-5)+f(k-1,n-6)
+
+3.有1个骰子，f(1,1)=f(1,2)=f(1,3)=f(1,4)=f(1,5)=f(1,6)=1。
+
+
+```r
+class Solution:
+    def twoSum(self, n):
+    	#构建dp数组
+    	dp = [[0] * (6*n+1) for i in range(n+1)]
+    	# dp = [ [0 for _ in range(6*n+1)] for _ in range(n+1)]
+    	#初始化操作
+    	for i in range(1,7):
+    		dp[1][i] = 1
+    	#建立动态规划
+    	#建立两层for循环，第一层表示骰子的数量，第二层表示和的数量
+    	#第三层表示每个骰子可以取的点数
+    	for i in range(2, n + 1):
+
+    		for j in range(i, 6*i + 1):
+
+    			for cur in range(1, 7):
+
+    				if j > cur:
+    					dp[i][j] += dp[i - 1][j - cur]
+    	#然后计算概率
+    	# sum_num = math.pow(6,n)
+    	result = []
+    	for i in range(n, 6 * n + 1):
+    		result.append(dp[n][i]*1.0/6**n)
+    	return result
+```
+
+
+
+

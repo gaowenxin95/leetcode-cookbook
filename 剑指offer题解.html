@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2020-08-20" />
+<meta name="date" content="2020-08-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -177,11 +177,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.45" data-path=""><a href="#减绳子"><i class="fa fa-check"></i><b>1.45</b> 减绳子</a></li>
 <li class="chapter" data-level="1.46" data-path=""><a href="#机器人的移动范围"><i class="fa fa-check"></i><b>1.46</b> 机器人的移动范围</a></li>
 <li class="chapter" data-level="1.47" data-path=""><a href="#矩阵中的路径"><i class="fa fa-check"></i><b>1.47</b> 矩阵中的路径</a></li>
-<li class="chapter" data-level="1.48" data-path=""><a href="#滑动窗口"><i class="fa fa-check"></i><b>1.48</b> 滑动窗口</a></li>
+<li class="chapter" data-level="1.48" data-path=""><a href="#滑动窗口的最大值"><i class="fa fa-check"></i><b>1.48</b> 滑动窗口的最大值</a></li>
 <li class="chapter" data-level="1.49" data-path=""><a href="#孩子们的游戏"><i class="fa fa-check"></i><b>1.49</b> 孩子们的游戏</a></li>
 <li class="chapter" data-level="1.50" data-path=""><a href="#扑克牌的顺子"><i class="fa fa-check"></i><b>1.50</b> 扑克牌的顺子</a></li>
 <li class="chapter" data-level="1.51" data-path=""><a href="#将字符串转化为整数"><i class="fa fa-check"></i><b>1.51</b> 将字符串转化为整数</a></li>
 <li class="chapter" data-level="1.52" data-path=""><a href="#数组中第一个重复数字"><i class="fa fa-check"></i><b>1.52</b> 数组中第一个重复数字</a></li>
+<li class="chapter" data-level="1.53" data-path=""><a href="#构建乘积数组"><i class="fa fa-check"></i><b>1.53</b> 构建乘积数组</a></li>
+<li class="chapter" data-level="1.54" data-path=""><a href="#字符串中第一个不重复得字符串"><i class="fa fa-check"></i><b>1.54</b> 字符串中第一个不重复得字符串</a></li>
+<li class="chapter" data-level="1.55" data-path=""><a href="#数流中得中位数"><i class="fa fa-check"></i><b>1.55</b> 数流中得中位数</a></li>
+<li class="chapter" data-level="1.56" data-path=""><a href="#求n个骰子各点数和出现的概率"><i class="fa fa-check"></i><b>1.56</b> 求n个骰子各点数和出现的概率</a></li>
 </ul></li>
 </ul>
 
@@ -203,7 +207,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">剑指offer</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2020-08-20</em></p>
+<p class="date"><em>2020-08-25</em></p>
 </div>
 <div id="剑指offer题解" class="section level1">
 <h1><span class="header-section-number">1</span> 剑指offer题解</h1>
@@ -1360,8 +1364,8 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb52-29"><a href="#cb52-29"></a>        <span class="cf">else</span><span class="op">:</span></span>
 <span id="cb52-30"><a href="#cb52-30"></a><span class="st">            </span>return False</span></code></pre></div>
 </div>
-<div id="滑动窗口" class="section level2">
-<h2><span class="header-section-number">1.48</span> 滑动窗口</h2>
+<div id="滑动窗口的最大值" class="section level2">
+<h2><span class="header-section-number">1.48</span> 滑动窗口的最大值</h2>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>题目描述</span>
 <span id="cb53-2"><a href="#cb53-2"></a>给定一个数组和滑动窗口的大小，找出所有滑动窗口里数值的最大值。例如，如果输入数组{<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>}及滑动窗口的大小3，那么一共存在6个滑动窗口，他们的最大值分别为{<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">5</span>}； 针对数组{<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>}的滑动窗口有以下6个： {[<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>}， {<span class="dv">2</span>,[<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>],<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>}， {<span class="dv">2</span>,<span class="dv">3</span>,[<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">6</span>],<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>}， {<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,[<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">2</span>],<span class="dv">5</span>,<span class="dv">1</span>}， {<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>,[<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>],<span class="dv">1</span>}， {<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">6</span>,[<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>]}。</span>
 <span id="cb53-3"><a href="#cb53-3"></a>窗口大于数组长度的时候，返回空</span></code></pre></div>
@@ -1402,27 +1406,24 @@ f[i]=(f[i-1]+m)%i; (i&gt;1)
 <p><strong>题目描述</strong></p>
 <p>LL今天心情特别好,因为他去买了一副扑克牌,发现里面居然有2个大王,2个小王(一副牌原本是54张^_^)…他随机从中抽出了5张牌,想测测自己的手气,看看能不能抽到顺子,如果抽到的话,他决定去买体育彩票,嘿嘿！！“红心A,黑桃3,小王,大王,方片5”,“Oh My God!”不是顺子…..LL不高兴了,他想了想,决定大王可以看成任何数字,并且A看作1,J为11,Q为12,K为13。上面的5张牌就可以变成“1,2,3,4,5”(大小王分别看作2和4),“So Lucky!”。LL决定去买体育彩票啦。 现在,要求你使用这幅牌模拟上面的过程,然后告诉我们LL的运气如何， 如果牌能组成顺子就输出true，否则就输出false。为了方便起见,你可以认为大小王是0。</p>
 <p><strong>思路：</strong>看是否连续就是看中间缺少的部分能否用大小王，即0来填充，因此只需要比较0的个数和中间缺少的个数就行了，如果中间缺少的比0的数目多，即大小王的个数不足以将缺少的填充，那么就不连续了</p>
+<p>首先你得读懂题</p>
+<ul>
+<li>除0外，最大值与最小值之差小于等于4</li>
+<li>除0外，不能在包含其它重复的牌</li>
+</ul>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
 <span id="cb56-2"><a href="#cb56-2"></a>class Solution<span class="op">:</span></span>
 <span id="cb56-3"><a href="#cb56-3"></a><span class="st">    </span>def <span class="kw">IsContinuous</span>(self, numbers)<span class="op">:</span></span>
 <span id="cb56-4"><a href="#cb56-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb56-5"><a href="#cb56-5"></a><span class="st">        </span><span class="cf">if</span> numbers <span class="op">==</span><span class="st"> </span>[]<span class="op">:</span></span>
+<span id="cb56-5"><a href="#cb56-5"></a><span class="st">        </span><span class="cf">if</span> not numbers<span class="op">:</span></span>
 <span id="cb56-6"><a href="#cb56-6"></a><span class="st">            </span>return False</span>
-<span id="cb56-7"><a href="#cb56-7"></a>        <span class="kw">numbers.sort</span>()</span>
-<span id="cb56-8"><a href="#cb56-8"></a>        cnt_<span class="dv">0</span> =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb56-9"><a href="#cb56-9"></a>        cnt =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb56-10"><a href="#cb56-10"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(numbers)<span class="op">-</span><span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>, <span class="dv">-1</span>)<span class="op">:</span></span>
-<span id="cb56-11"><a href="#cb56-11"></a><span class="st">            </span><span class="cf">if</span> numbers[i] <span class="op">==</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
-<span id="cb56-12"><a href="#cb56-12"></a><span class="st">                </span>cnt_<span class="dv">0</span> <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb56-13"><a href="#cb56-13"></a>            <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb56-14"><a href="#cb56-14"></a><span class="st">                </span><span class="cf">if</span> numbers[i<span class="op">+</span><span class="dv">1</span>] <span class="op">==</span><span class="st"> </span>numbers[i]<span class="op">:</span></span>
-<span id="cb56-15"><a href="#cb56-15"></a><span class="st">                    </span>return False</span>
-<span id="cb56-16"><a href="#cb56-16"></a>                <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb56-17"><a href="#cb56-17"></a><span class="st">                    </span>cnt <span class="op">+</span><span class="er">=</span><span class="st"> </span>(numbers[i<span class="op">+</span><span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>numbers[i] <span class="dv">-1</span>)</span>
-<span id="cb56-18"><a href="#cb56-18"></a>        <span class="cf">if</span> cnt <span class="op">&gt;</span><span class="st"> </span>cnt_<span class="dv">0</span><span class="op">:</span></span>
-<span id="cb56-19"><a href="#cb56-19"></a><span class="st">            </span>return False</span>
-<span id="cb56-20"><a href="#cb56-20"></a>        <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb56-21"><a href="#cb56-21"></a><span class="st">            </span>return True</span></code></pre></div>
+<span id="cb56-7"><a href="#cb56-7"></a>        res =<span class="st"> </span>[]</span>
+<span id="cb56-8"><a href="#cb56-8"></a>        <span class="cf">for</span> i <span class="cf">in</span> numbers<span class="op">:</span></span>
+<span id="cb56-9"><a href="#cb56-9"></a><span class="st">            </span><span class="cf">if</span> i <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb56-10"><a href="#cb56-10"></a><span class="st">                </span><span class="kw">res.append</span>(i)</span>
+<span id="cb56-11"><a href="#cb56-11"></a>        <span class="cf">if</span> <span class="kw">max</span>(res) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(res) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">4</span> and <span class="kw">len</span>(res) <span class="op">==</span><span class="st"> </span><span class="kw">len</span>(<span class="kw">set</span>(res))<span class="op">:</span></span>
+<span id="cb56-12"><a href="#cb56-12"></a><span class="st">            </span>return True</span>
+<span id="cb56-13"><a href="#cb56-13"></a>        return False</span></code></pre></div>
 </div>
 <div id="将字符串转化为整数" class="section level2">
 <h2><span class="header-section-number">1.51</span> 将字符串转化为整数</h2>
@@ -1468,6 +1469,114 @@ f[i]=(f[i-1]+m)%i; (i&gt;1)
 <span id="cb58-9"><a href="#cb58-9"></a><span class="st">                </span>duplication[<span class="dv">0</span>]=i</span>
 <span id="cb58-10"><a href="#cb58-10"></a>                return True</span>
 <span id="cb58-11"><a href="#cb58-11"></a>        return False</span></code></pre></div>
+</div>
+<div id="构建乘积数组" class="section level2">
+<h2><span class="header-section-number">1.53</span> 构建乘积数组</h2>
+<p><strong>题目描述</strong></p>
+<p>给定一个数组A[0,1,…,n-1],请构建一个数组B[0,1,…,n-1],其中B中的元素B[i]=A[0]<em>A[1]</em>…<em>A[i-1]</em>A[i+1]<em>…</em>A[n-1]。不能使用除法。（注意：规定B[0] = A[1] * A[2] * … * A[n-1]，B[n-1] = A[0] * A[1] * … * A[n-2];）
+对于A长度为1的情况，B无意义，故而无法构建，因此该情况不会存在。</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a></span>
+<span id="cb59-2"><a href="#cb59-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb59-3"><a href="#cb59-3"></a><span class="st">    </span>def <span class="kw">multiply</span>(self, A)<span class="op">:</span></span>
+<span id="cb59-4"><a href="#cb59-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb59-5"><a href="#cb59-5"></a><span class="st">        </span>length =<span class="st"> </span><span class="kw">len</span>(A)</span>
+<span id="cb59-6"><a href="#cb59-6"></a>        B =<span class="st"> </span>[]</span>
+<span id="cb59-7"><a href="#cb59-7"></a>        <span class="cf">if</span>(length <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)<span class="op">:</span></span>
+<span id="cb59-8"><a href="#cb59-8"></a><span class="st">            </span>return B</span>
+<span id="cb59-9"><a href="#cb59-9"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(length)<span class="op">:</span></span>
+<span id="cb59-10"><a href="#cb59-10"></a><span class="st">            </span>temp =<span class="st"> </span>A[i]</span>
+<span id="cb59-11"><a href="#cb59-11"></a>            A[i] =<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb59-12"><a href="#cb59-12"></a>            Bi =<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb59-13"><a href="#cb59-13"></a>            <span class="cf">for</span> j <span class="cf">in</span> A<span class="op">:</span></span>
+<span id="cb59-14"><a href="#cb59-14"></a><span class="st">                </span>Bi <span class="op">*</span><span class="er">=</span><span class="st"> </span>j</span>
+<span id="cb59-15"><a href="#cb59-15"></a>            <span class="kw">B.append</span>(Bi)</span>
+<span id="cb59-16"><a href="#cb59-16"></a>            A[i] =<span class="st"> </span>temp</span>
+<span id="cb59-17"><a href="#cb59-17"></a>        return B</span></code></pre></div>
+</div>
+<div id="字符串中第一个不重复得字符串" class="section level2">
+<h2><span class="header-section-number">1.54</span> 字符串中第一个不重复得字符串</h2>
+<p><strong>题目描述</strong></p>
+<p>请实现一个函数用来找出字符流中第一个只出现一次的字符。例如，当从字符流中只读出前两个字符“go”时，第一个只出现一次的字符是“g”。当从该字符流中读出前六个字符“google”时，第一个只出现一次的字符是“l”。</p>
+<p>找个辅助栈</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb60-2"><a href="#cb60-2"></a><span class="st">    </span><span class="co"># 返回对应char</span></span>
+<span id="cb60-3"><a href="#cb60-3"></a><span class="st">    </span>def <span class="kw">__init__</span>(self)<span class="op">:</span></span>
+<span id="cb60-4"><a href="#cb60-4"></a><span class="st">        </span>self.s=<span class="st">&#39;&#39;</span></span>
+<span id="cb60-5"><a href="#cb60-5"></a>    def <span class="kw">FirstAppearingOnce</span>(self)<span class="op">:</span></span>
+<span id="cb60-6"><a href="#cb60-6"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb60-7"><a href="#cb60-7"></a><span class="st">        </span>res=[]</span>
+<span id="cb60-8"><a href="#cb60-8"></a>        <span class="cf">for</span> i <span class="cf">in</span> self.s<span class="op">:</span></span>
+<span id="cb60-9"><a href="#cb60-9"></a><span class="st">            </span><span class="cf">if</span> i <span class="cf">in</span> res<span class="op">:</span></span>
+<span id="cb60-10"><a href="#cb60-10"></a><span class="st">                </span><span class="kw">res.remove</span>(i)</span>
+<span id="cb60-11"><a href="#cb60-11"></a>            <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb60-12"><a href="#cb60-12"></a><span class="st">                </span><span class="kw">res.append</span>(i)</span>
+<span id="cb60-13"><a href="#cb60-13"></a>        return res[<span class="dv">0</span>] <span class="cf">if</span> res <span class="cf">else</span> <span class="st">&quot;#&quot;</span></span>
+<span id="cb60-14"><a href="#cb60-14"></a>    def <span class="kw">Insert</span>(self, char)<span class="op">:</span></span>
+<span id="cb60-15"><a href="#cb60-15"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb60-16"><a href="#cb60-16"></a><span class="st">        </span>self.s<span class="op">+</span><span class="er">=</span>char</span></code></pre></div>
+</div>
+<div id="数流中得中位数" class="section level2">
+<h2><span class="header-section-number">1.55</span> 数流中得中位数</h2>
+<p><strong>题目描述</strong></p>
+<p>如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。我们使用Insert()方法读取数据流，使用GetMedian()方法获取当前读取数据的中位数。</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb61-2"><a href="#cb61-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb61-3"><a href="#cb61-3"></a><span class="st">    </span>def <span class="kw">__init__</span>(self)<span class="op">:</span></span>
+<span id="cb61-4"><a href="#cb61-4"></a><span class="st">        </span>self.data =<span class="st"> </span>[]</span>
+<span id="cb61-5"><a href="#cb61-5"></a>    def <span class="kw">Insert</span>(self, num)<span class="op">:</span></span>
+<span id="cb61-6"><a href="#cb61-6"></a><span class="st">        </span><span class="kw">self.data.append</span>(num)</span>
+<span id="cb61-7"><a href="#cb61-7"></a>        <span class="kw">self.data.sort</span>()</span>
+<span id="cb61-8"><a href="#cb61-8"></a>    def <span class="kw">GetMedian</span>(self,data)<span class="op">:</span></span>
+<span id="cb61-9"><a href="#cb61-9"></a><span class="st">        </span>length =<span class="st"> </span><span class="kw">len</span>(self.data)</span>
+<span id="cb61-10"><a href="#cb61-10"></a>        <span class="cf">if</span> length%<span class="dv">2</span><span class="op">==</span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb61-11"><a href="#cb61-11"></a><span class="st">            </span><span class="kw">return</span> (self.data[length<span class="op">/</span><span class="er">/</span><span class="dv">2</span>]<span class="op">+</span>self.data[length<span class="op">/</span><span class="er">/</span><span class="dv">2-1</span>])<span class="op">/</span><span class="fl">2.0</span></span>
+<span id="cb61-12"><a href="#cb61-12"></a>        <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb61-13"><a href="#cb61-13"></a><span class="st">            </span>return self.data[length<span class="op">/</span><span class="er">/</span><span class="dv">2</span>]</span></code></pre></div>
+<p>有一部分二叉树的题，我就先不放了，因为我确实没摸索好二叉树的题咋写才能通过</p>
+<p>下面就是复习两边，掌握 核心的idea即可</p>
+</div>
+<div id="求n个骰子各点数和出现的概率" class="section level2">
+<h2><span class="header-section-number">1.56</span> 求n个骰子各点数和出现的概率</h2>
+<p>题目描述：</p>
+<p>把n个骰子扔在地上，所有骰子朝上一面的点数之和为s。输入n，打印出s的所有可能的值的出现概率。</p>
+<p>思路：定义两个数组。数组的长度为6*n,即可能出现的最大和。数组每个元素的值代表出现的次数，比如probability[5]表示点数和为5出现的次数。在一轮循环中，一个数组记录之前一次所有出现的情况，一个数组记录这一次的所有出现的情况。例如这一次出现和为n的次数，应该等于另一个数组里记录的n-1,n-2, n-3, n-4, n-5, n-6的和。</p>
+<p>思路2：</p>
+<p>分析：动态规划就是分阶段考虑问题，给出变量，找出相邻阶段间的关系。具体定义给忘了。</p>
+<p>1.现在变量有：骰子个数，点数和。当有k个骰子，点数和为n时，出现次数记为f(k,n)。那与k-1个骰子阶段之间的关系是怎样的？</p>
+<p>2.当我有k-1个骰子时，再增加一个骰子，这个骰子的点数只可能为1、2、3、4、5或6。那k个骰子得到点数和为n的情况有：</p>
+<p>(k-1,n-1)：第k个骰子投了点数1</p>
+<p>(k-1,n-2)：第k个骰子投了点数2</p>
+<p>(k-1,n-3)：第k个骰子投了点数3</p>
+<p>….</p>
+<p>(k-1,n-6)：第k个骰子投了点数6</p>
+<p>在k-1个骰子的基础上，再增加一个骰子出现点数和为n的结果只有这6种情况！</p>
+<p>所以：f(k,n)=f(k-1,n-1)+f(k-1,n-2)+f(k-1,n-3)+f(k-1,n-4)+f(k-1,n-5)+f(k-1,n-6)</p>
+<p>3.有1个骰子，f(1,1)=f(1,2)=f(1,3)=f(1,4)=f(1,5)=f(1,6)=1。</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a><span class="st">    </span>def <span class="kw">twoSum</span>(self, n)<span class="op">:</span></span>
+<span id="cb62-3"><a href="#cb62-3"></a><span class="st">        </span><span class="co">#构建dp数组</span></span>
+<span id="cb62-4"><a href="#cb62-4"></a><span class="st">        </span>dp =<span class="st"> </span>[[<span class="dv">0</span>] <span class="op">*</span><span class="st"> </span>(<span class="dv">6</span><span class="op">*</span>n<span class="op">+</span><span class="dv">1</span>) <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(n<span class="op">+</span><span class="dv">1</span>)]</span>
+<span id="cb62-5"><a href="#cb62-5"></a>        <span class="co"># dp = [ [0 for _ in range(6*n+1)] for _ in range(n+1)]</span></span>
+<span id="cb62-6"><a href="#cb62-6"></a>        <span class="co">#初始化操作</span></span>
+<span id="cb62-7"><a href="#cb62-7"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>,<span class="dv">7</span>)<span class="op">:</span></span>
+<span id="cb62-8"><a href="#cb62-8"></a><span class="st">            </span>dp[<span class="dv">1</span>][i] =<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb62-9"><a href="#cb62-9"></a>        <span class="co">#建立动态规划</span></span>
+<span id="cb62-10"><a href="#cb62-10"></a>        <span class="co">#建立两层for循环，第一层表示骰子的数量，第二层表示和的数量</span></span>
+<span id="cb62-11"><a href="#cb62-11"></a>        <span class="co">#第三层表示每个骰子可以取的点数</span></span>
+<span id="cb62-12"><a href="#cb62-12"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">2</span>, n <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb62-13"><a href="#cb62-13"></a></span>
+<span id="cb62-14"><a href="#cb62-14"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(i, <span class="dv">6</span><span class="op">*</span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb62-15"><a href="#cb62-15"></a></span>
+<span id="cb62-16"><a href="#cb62-16"></a><span class="st">                </span><span class="cf">for</span> cur <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>, <span class="dv">7</span>)<span class="op">:</span></span>
+<span id="cb62-17"><a href="#cb62-17"></a></span>
+<span id="cb62-18"><a href="#cb62-18"></a><span class="st">                    </span><span class="cf">if</span> j <span class="op">&gt;</span><span class="st"> </span>cur<span class="op">:</span></span>
+<span id="cb62-19"><a href="#cb62-19"></a><span class="st">                        </span>dp[i][j] <span class="op">+</span><span class="er">=</span><span class="st"> </span>dp[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>][j <span class="op">-</span><span class="st"> </span>cur]</span>
+<span id="cb62-20"><a href="#cb62-20"></a>        <span class="co">#然后计算概率</span></span>
+<span id="cb62-21"><a href="#cb62-21"></a>        <span class="co"># sum_num = math.pow(6,n)</span></span>
+<span id="cb62-22"><a href="#cb62-22"></a>        result =<span class="st"> </span>[]</span>
+<span id="cb62-23"><a href="#cb62-23"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(n, <span class="dv">6</span> <span class="op">*</span><span class="st"> </span>n <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb62-24"><a href="#cb62-24"></a><span class="st">            </span><span class="kw">result.append</span>(dp[n][i]<span class="op">*</span><span class="fl">1.0</span><span class="op">/</span><span class="dv">6</span><span class="op">**</span>n)</span>
+<span id="cb62-25"><a href="#cb62-25"></a>        return result</span></code></pre></div>
 </div>
 </div>
             </section>
