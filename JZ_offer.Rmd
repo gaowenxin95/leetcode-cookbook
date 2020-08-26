@@ -691,6 +691,19 @@ class Solution:
 
 先给一个能调包做的
 
+itertools.permutations 通俗地讲，就是返回可迭代对象的所有数学全排列方式。
+
+```r
+# -*- coding:utf-8 -*-
+import itertools
+class Solution:
+    def Permutation(self, ss):
+        if not ss:
+            return []
+        arr = sorted(set(list(map(''.join,itertools.permutations(ss)))))
+        return arr
+```
+
 
 **b站笔试题**
 

@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2020-08-25" />
+<meta name="date" content="2020-08-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -207,7 +207,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">剑指offer</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2020-08-25</em></p>
+<p class="date"><em>2020-08-26</em></p>
 </div>
 <div id="剑指offer题解" class="section level1">
 <h1><span class="header-section-number">1</span> 剑指offer题解</h1>
@@ -744,6 +744,15 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 输入描述:
 输入一个字符串,长度不超过9(可能有字符重复),字符只包括大小写字母。</p>
 <p>先给一个能调包做的</p>
+<p>itertools.permutations 通俗地讲，就是返回可迭代对象的所有数学全排列方式。</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>import itertools</span>
+<span id="cb26-3"><a href="#cb26-3"></a>class Solution<span class="op">:</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="st">    </span>def <span class="kw">Permutation</span>(self, ss)<span class="op">:</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="st">        </span><span class="cf">if</span> not ss<span class="op">:</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="st">            </span>return []</span>
+<span id="cb26-7"><a href="#cb26-7"></a>        arr =<span class="st"> </span><span class="kw">sorted</span>(<span class="kw">set</span>(<span class="kw">list</span>(<span class="kw">map</span>(<span class="st">&#39;&#39;</span>.join,<span class="kw">itertools.permutations</span>(ss)))))</span>
+<span id="cb26-8"><a href="#cb26-8"></a>        return arr</span></code></pre></div>
 <p><strong>b站笔试题</strong></p>
 </div>
 <div id="有效的括号" class="section level2">
@@ -782,28 +791,28 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <li>如果要出栈，出栈的元素要与当前元素匹配</li>
 <li>最终栈要为空</li>
 </ul>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a><span class="st">    </span>def <span class="kw">isValid</span>(self, s<span class="op">:</span><span class="st"> </span>str) -&gt;<span class="st"> </span>bool<span class="op">:</span></span>
-<span id="cb26-3"><a href="#cb26-3"></a><span class="st">        </span>stack=[]                            <span class="co">#设置一个列表，把该列表当做栈来使用即可。</span></span>
-<span id="cb26-4"><a href="#cb26-4"></a>        dic={<span class="st">&#39;)&#39;</span><span class="op">:</span><span class="st">&#39;(&#39;</span>,<span class="st">&#39;}&#39;</span><span class="op">:</span><span class="st">&#39;{&#39;</span>,<span class="st">&#39;]&#39;</span><span class="op">:</span><span class="st">&#39;[&#39;</span>}       <span class="co">#使用字典存储括号,并且右括号为key,左括号为value</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a>        <span class="cf">for</span> char <span class="cf">in</span> s<span class="op">:</span></span>
-<span id="cb26-6"><a href="#cb26-6"></a><span class="st">            </span><span class="cf">if</span> char <span class="cf">in</span> <span class="kw">dic.values</span>()<span class="op">:</span><span class="st">        </span><span class="co">#左括号就入栈</span></span>
-<span id="cb26-7"><a href="#cb26-7"></a><span class="st">                </span><span class="kw">stack.append</span>(char)</span>
-<span id="cb26-8"><a href="#cb26-8"></a>            elif char <span class="cf">in</span> <span class="kw">dic.keys</span>()<span class="op">:</span><span class="st">        </span><span class="co">#有右括号的话就进行比较，</span></span>
-<span id="cb26-9"><a href="#cb26-9"></a><span class="st">                </span><span class="cf">if</span> stack<span class="op">==</span>[] or dic[char] <span class="op">!=</span><span class="st"> </span><span class="kw">stack.pop</span>()<span class="op">:</span></span>
-<span id="cb26-10"><a href="#cb26-10"></a><span class="st">                    </span>return False</span>
-<span id="cb26-11"><a href="#cb26-11"></a>            <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb26-12"><a href="#cb26-12"></a><span class="st">                </span>return False                <span class="co">#不再字典中的输入直接输出错误</span></span>
-<span id="cb26-13"><a href="#cb26-13"></a></span>
-<span id="cb26-14"><a href="#cb26-14"></a>        return stack<span class="op">==</span>[]</span></code></pre></div>
-<p>一个比较骚的题解</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="st">    </span>def <span class="kw">isValid</span>(self, s)<span class="op">:</span></span>
-<span id="cb27-3"><a href="#cb27-3"></a><span class="st">        </span><span class="cf">while</span> <span class="st">&#39;{}&#39;</span> <span class="cf">in</span> s or <span class="st">&#39;()&#39;</span> <span class="cf">in</span> s or <span class="st">&#39;[]&#39;</span> <span class="cf">in</span> s<span class="op">:</span></span>
-<span id="cb27-4"><a href="#cb27-4"></a><span class="st">            </span>s =<span class="st"> </span><span class="kw">s.replace</span>(<span class="st">&#39;{}&#39;</span>, <span class="st">&#39;&#39;</span>)</span>
-<span id="cb27-5"><a href="#cb27-5"></a>            s =<span class="st"> </span><span class="kw">s.replace</span>(<span class="st">&#39;[]&#39;</span>, <span class="st">&#39;&#39;</span>)</span>
-<span id="cb27-6"><a href="#cb27-6"></a>            s =<span class="st"> </span><span class="kw">s.replace</span>(<span class="st">&#39;()&#39;</span>, <span class="st">&#39;&#39;</span>)</span>
-<span id="cb27-7"><a href="#cb27-7"></a>        return s <span class="op">==</span><span class="st"> &#39;&#39;</span></span></code></pre></div>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="st">    </span>def <span class="kw">isValid</span>(self, s<span class="op">:</span><span class="st"> </span>str) -&gt;<span class="st"> </span>bool<span class="op">:</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="st">        </span>stack=[]                            <span class="co">#设置一个列表，把该列表当做栈来使用即可。</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a>        dic={<span class="st">&#39;)&#39;</span><span class="op">:</span><span class="st">&#39;(&#39;</span>,<span class="st">&#39;}&#39;</span><span class="op">:</span><span class="st">&#39;{&#39;</span>,<span class="st">&#39;]&#39;</span><span class="op">:</span><span class="st">&#39;[&#39;</span>}       <span class="co">#使用字典存储括号,并且右括号为key,左括号为value</span></span>
+<span id="cb27-5"><a href="#cb27-5"></a>        <span class="cf">for</span> char <span class="cf">in</span> s<span class="op">:</span></span>
+<span id="cb27-6"><a href="#cb27-6"></a><span class="st">            </span><span class="cf">if</span> char <span class="cf">in</span> <span class="kw">dic.values</span>()<span class="op">:</span><span class="st">        </span><span class="co">#左括号就入栈</span></span>
+<span id="cb27-7"><a href="#cb27-7"></a><span class="st">                </span><span class="kw">stack.append</span>(char)</span>
+<span id="cb27-8"><a href="#cb27-8"></a>            elif char <span class="cf">in</span> <span class="kw">dic.keys</span>()<span class="op">:</span><span class="st">        </span><span class="co">#有右括号的话就进行比较，</span></span>
+<span id="cb27-9"><a href="#cb27-9"></a><span class="st">                </span><span class="cf">if</span> stack<span class="op">==</span>[] or dic[char] <span class="op">!=</span><span class="st"> </span><span class="kw">stack.pop</span>()<span class="op">:</span></span>
+<span id="cb27-10"><a href="#cb27-10"></a><span class="st">                    </span>return False</span>
+<span id="cb27-11"><a href="#cb27-11"></a>            <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb27-12"><a href="#cb27-12"></a><span class="st">                </span>return False                <span class="co">#不再字典中的输入直接输出错误</span></span>
+<span id="cb27-13"><a href="#cb27-13"></a></span>
+<span id="cb27-14"><a href="#cb27-14"></a>        return stack<span class="op">==</span>[]</span></code></pre></div>
+<p>一个比较骚的题解</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="st">    </span>def <span class="kw">isValid</span>(self, s)<span class="op">:</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="st">        </span><span class="cf">while</span> <span class="st">&#39;{}&#39;</span> <span class="cf">in</span> s or <span class="st">&#39;()&#39;</span> <span class="cf">in</span> s or <span class="st">&#39;[]&#39;</span> <span class="cf">in</span> s<span class="op">:</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a><span class="st">            </span>s =<span class="st"> </span><span class="kw">s.replace</span>(<span class="st">&#39;{}&#39;</span>, <span class="st">&#39;&#39;</span>)</span>
+<span id="cb28-5"><a href="#cb28-5"></a>            s =<span class="st"> </span><span class="kw">s.replace</span>(<span class="st">&#39;[]&#39;</span>, <span class="st">&#39;&#39;</span>)</span>
+<span id="cb28-6"><a href="#cb28-6"></a>            s =<span class="st"> </span><span class="kw">s.replace</span>(<span class="st">&#39;()&#39;</span>, <span class="st">&#39;&#39;</span>)</span>
+<span id="cb28-7"><a href="#cb28-7"></a>        return s <span class="op">==</span><span class="st"> &#39;&#39;</span></span></code></pre></div>
 </div>
 <div id="找零" class="section level2">
 <h2><span class="header-section-number">1.27</span> 找零</h2>
@@ -811,18 +820,18 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 来源：牛客网</p>
 <p>Z国的货币系统包含面值1元、4元、16元、64元共计4种硬币，以及面值1024元的纸币。现在小Y使用1024元的纸币购买了一件价值为N (0 &lt; N 1024)N(0&lt;N≤1024)的商品，请问最少他会收到多少硬币？</p>
 <p>也就是买柠檬水找钱的问题</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>def <span class="kw">zl</span>(n)<span class="op">:</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a><span class="st">    </span>coins=[<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">16</span>,<span class="dv">64</span>]</span>
-<span id="cb28-3"><a href="#cb28-3"></a>    </span>
-<span id="cb28-4"><a href="#cb28-4"></a>    s=<span class="dv">1024</span><span class="op">-</span>n<span class="op">+</span><span class="dv">1</span></span>
-<span id="cb28-5"><a href="#cb28-5"></a>    dp=[<span class="dv">1024</span>]<span class="op">*</span>(s)</span>
-<span id="cb28-6"><a href="#cb28-6"></a>    dp[<span class="dv">0</span>]=<span class="dv">0</span></span>
-<span id="cb28-7"><a href="#cb28-7"></a>    <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>,s)<span class="op">:</span></span>
-<span id="cb28-8"><a href="#cb28-8"></a><span class="st">        </span><span class="cf">for</span> c <span class="cf">in</span> coins<span class="op">:</span></span>
-<span id="cb28-9"><a href="#cb28-9"></a><span class="st">            </span><span class="cf">if</span> i<span class="op">-</span>c<span class="op">&gt;=</span><span class="dv">0</span><span class="op">:</span></span>
-<span id="cb28-10"><a href="#cb28-10"></a><span class="st">                </span>dp[i]=<span class="kw">min</span>(dp[i<span class="op">-</span>c]<span class="op">+</span><span class="dv">1</span>,dp[i])</span>
-<span id="cb28-11"><a href="#cb28-11"></a>                </span>
-<span id="cb28-12"><a href="#cb28-12"></a>    return dp[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>def <span class="kw">zl</span>(n)<span class="op">:</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="st">    </span>coins=[<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">16</span>,<span class="dv">64</span>]</span>
+<span id="cb29-3"><a href="#cb29-3"></a>    </span>
+<span id="cb29-4"><a href="#cb29-4"></a>    s=<span class="dv">1024</span><span class="op">-</span>n<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a>    dp=[<span class="dv">1024</span>]<span class="op">*</span>(s)</span>
+<span id="cb29-6"><a href="#cb29-6"></a>    dp[<span class="dv">0</span>]=<span class="dv">0</span></span>
+<span id="cb29-7"><a href="#cb29-7"></a>    <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>,s)<span class="op">:</span></span>
+<span id="cb29-8"><a href="#cb29-8"></a><span class="st">        </span><span class="cf">for</span> c <span class="cf">in</span> coins<span class="op">:</span></span>
+<span id="cb29-9"><a href="#cb29-9"></a><span class="st">            </span><span class="cf">if</span> i<span class="op">-</span>c<span class="op">&gt;=</span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb29-10"><a href="#cb29-10"></a><span class="st">                </span>dp[i]=<span class="kw">min</span>(dp[i<span class="op">-</span>c]<span class="op">+</span><span class="dv">1</span>,dp[i])</span>
+<span id="cb29-11"><a href="#cb29-11"></a>                </span>
+<span id="cb29-12"><a href="#cb29-12"></a>    return dp[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
 </div>
 <div id="点游戏" class="section level2">
 <h2><span class="header-section-number">1.28</span> 24点游戏</h2>
@@ -841,52 +850,52 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <blockquote>
 <p>四个数取出两个数之后,做加减乘除处理之后加入到原数组中会剩下三个数,递归交给下一层去处理<a href="https://leetcode-cn.com/problems/24-game/solution/python-dfsdi-gui-by-akari-5/">akari-5</a></p>
 </blockquote>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a><span class="st">    </span>def <span class="kw">judgePoint24</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>bool<span class="op">:</span></span>
-<span id="cb29-3"><a href="#cb29-3"></a><span class="st">        </span><span class="cf">if</span> not nums<span class="op">:</span><span class="st"> </span>return False</span>
-<span id="cb29-4"><a href="#cb29-4"></a>        def <span class="kw">helper</span>(nums)<span class="op">:</span></span>
-<span id="cb29-5"><a href="#cb29-5"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">len</span>(nums) <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="st"> </span>return <span class="kw">abs</span>(nums[<span class="dv">0</span>]<span class="op">-</span><span class="dv">24</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">1e-6</span></span>
-<span id="cb29-6"><a href="#cb29-6"></a>            <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(nums))<span class="op">:</span></span>
-<span id="cb29-7"><a href="#cb29-7"></a><span class="st">                </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(nums))<span class="op">:</span></span>
-<span id="cb29-8"><a href="#cb29-8"></a><span class="st">                    </span><span class="cf">if</span> i <span class="op">!=</span><span class="st"> </span>j<span class="op">:</span></span>
-<span id="cb29-9"><a href="#cb29-9"></a><span class="st">                        </span>newnums =<span class="st"> </span>[nums[k] <span class="cf">for</span> k <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(nums)) <span class="cf">if</span> i <span class="op">!=</span><span class="st"> </span>k <span class="op">!=</span><span class="st"> </span>j]</span>
-<span id="cb29-10"><a href="#cb29-10"></a>                        <span class="cf">if</span> <span class="kw">helper</span>(newnums <span class="op">+</span><span class="st"> </span>[nums[i]<span class="op">+</span>nums[j]])<span class="op">:</span><span class="st"> </span>return True</span>
-<span id="cb29-11"><a href="#cb29-11"></a>                        <span class="cf">if</span> <span class="kw">helper</span>(newnums <span class="op">+</span><span class="st"> </span>[nums[i]<span class="op">-</span>nums[j]])<span class="op">:</span><span class="st"> </span>return True</span>
-<span id="cb29-12"><a href="#cb29-12"></a>                        <span class="cf">if</span> <span class="kw">helper</span>(newnums <span class="op">+</span><span class="st"> </span>[nums[i]<span class="op">*</span>nums[j]])<span class="op">:</span><span class="st"> </span>return True</span>
-<span id="cb29-13"><a href="#cb29-13"></a>                        <span class="cf">if</span> nums[j] <span class="op">!=</span><span class="st"> </span><span class="dv">0</span> and <span class="kw">helper</span>(newnums <span class="op">+</span><span class="st"> </span>[nums[i]<span class="op">/</span>nums[j]])<span class="op">:</span><span class="st"> </span>return True</span>
-<span id="cb29-14"><a href="#cb29-14"></a>            return False</span>
-<span id="cb29-15"><a href="#cb29-15"></a>        return <span class="kw">helper</span>(nums)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="st">    </span>def <span class="kw">judgePoint24</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>bool<span class="op">:</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a><span class="st">        </span><span class="cf">if</span> not nums<span class="op">:</span><span class="st"> </span>return False</span>
+<span id="cb30-4"><a href="#cb30-4"></a>        def <span class="kw">helper</span>(nums)<span class="op">:</span></span>
+<span id="cb30-5"><a href="#cb30-5"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">len</span>(nums) <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="st"> </span>return <span class="kw">abs</span>(nums[<span class="dv">0</span>]<span class="op">-</span><span class="dv">24</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">1e-6</span></span>
+<span id="cb30-6"><a href="#cb30-6"></a>            <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(nums))<span class="op">:</span></span>
+<span id="cb30-7"><a href="#cb30-7"></a><span class="st">                </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(nums))<span class="op">:</span></span>
+<span id="cb30-8"><a href="#cb30-8"></a><span class="st">                    </span><span class="cf">if</span> i <span class="op">!=</span><span class="st"> </span>j<span class="op">:</span></span>
+<span id="cb30-9"><a href="#cb30-9"></a><span class="st">                        </span>newnums =<span class="st"> </span>[nums[k] <span class="cf">for</span> k <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(nums)) <span class="cf">if</span> i <span class="op">!=</span><span class="st"> </span>k <span class="op">!=</span><span class="st"> </span>j]</span>
+<span id="cb30-10"><a href="#cb30-10"></a>                        <span class="cf">if</span> <span class="kw">helper</span>(newnums <span class="op">+</span><span class="st"> </span>[nums[i]<span class="op">+</span>nums[j]])<span class="op">:</span><span class="st"> </span>return True</span>
+<span id="cb30-11"><a href="#cb30-11"></a>                        <span class="cf">if</span> <span class="kw">helper</span>(newnums <span class="op">+</span><span class="st"> </span>[nums[i]<span class="op">-</span>nums[j]])<span class="op">:</span><span class="st"> </span>return True</span>
+<span id="cb30-12"><a href="#cb30-12"></a>                        <span class="cf">if</span> <span class="kw">helper</span>(newnums <span class="op">+</span><span class="st"> </span>[nums[i]<span class="op">*</span>nums[j]])<span class="op">:</span><span class="st"> </span>return True</span>
+<span id="cb30-13"><a href="#cb30-13"></a>                        <span class="cf">if</span> nums[j] <span class="op">!=</span><span class="st"> </span><span class="dv">0</span> and <span class="kw">helper</span>(newnums <span class="op">+</span><span class="st"> </span>[nums[i]<span class="op">/</span>nums[j]])<span class="op">:</span><span class="st"> </span>return True</span>
+<span id="cb30-14"><a href="#cb30-14"></a>            return False</span>
+<span id="cb30-15"><a href="#cb30-15"></a>        return <span class="kw">helper</span>(nums)</span></code></pre></div>
 </div>
 <div id="从上到下打印二叉树" class="section level2">
 <h2><span class="header-section-number">1.29</span> 从上到下打印二叉树</h2>
 <p><strong>题目描述</strong>
 从上往下打印出二叉树的每个节点，同层节点从左至右打印。</p>
 <p>思路：二叉树的层次遍历,一层一层遍历完继续下一层</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a><span class="co"># class TreeNode:</span></span>
-<span id="cb30-3"><a href="#cb30-3"></a>def <span class="kw">__init__</span>(self, x)<span class="op">:</span></span>
-<span id="cb30-4"><a href="#cb30-4"></a><span class="st">        </span>self.val =<span class="st"> </span>x</span>
-<span id="cb30-5"><a href="#cb30-5"></a>        self.left =<span class="st"> </span>None</span>
-<span id="cb30-6"><a href="#cb30-6"></a>        self.right =<span class="st"> </span>None</span>
-<span id="cb30-7"><a href="#cb30-7"></a>class Solution<span class="op">:</span></span>
-<span id="cb30-8"><a href="#cb30-8"></a><span class="st">    </span><span class="co"># 返回从上到下每个节点值列表，例：[1,2,3]</span></span>
-<span id="cb30-9"><a href="#cb30-9"></a><span class="st">    </span>def <span class="kw">PrintFromTopToBottom</span>(self, root)<span class="op">:</span></span>
-<span id="cb30-10"><a href="#cb30-10"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb30-11"><a href="#cb30-11"></a><span class="st">        </span><span class="co">#</span></span>
-<span id="cb30-12"><a href="#cb30-12"></a><span class="st">        </span><span class="cf">if</span> not root<span class="op">:</span></span>
-<span id="cb30-13"><a href="#cb30-13"></a><span class="st">            </span>return <span class="st">&#39;&#39;</span></span>
-<span id="cb30-14"><a href="#cb30-14"></a>        </span>
-<span id="cb30-15"><a href="#cb30-15"></a>        que=[root] <span class="co">#根节点保存在队列中</span></span>
-<span id="cb30-16"><a href="#cb30-16"></a>        res=[] <span class="co">#用一个list保存输出值</span></span>
-<span id="cb30-17"><a href="#cb30-17"></a>        <span class="cf">while</span> que<span class="op">:</span></span>
-<span id="cb30-18"><a href="#cb30-18"></a><span class="st">            </span><span class="cf">if</span> que[<span class="dv">0</span>].left<span class="op">:</span></span>
-<span id="cb30-19"><a href="#cb30-19"></a><span class="st">                </span><span class="kw">que.append</span>(que[<span class="dv">0</span>].left)</span>
-<span id="cb30-20"><a href="#cb30-20"></a>            <span class="cf">if</span> que[<span class="dv">0</span>].right<span class="op">:</span></span>
-<span id="cb30-21"><a href="#cb30-21"></a><span class="st">                </span><span class="kw">que.append</span>(que[<span class="dv">0</span>].right)</span>
-<span id="cb30-22"><a href="#cb30-22"></a>            <span class="kw">res.append</span>(que[<span class="dv">0</span>].val)</span>
-<span id="cb30-23"><a href="#cb30-23"></a>            <span class="kw">que.pop</span>(<span class="dv">0</span>) <span class="co">#遍历完一个根和左右就删掉</span></span>
-<span id="cb30-24"><a href="#cb30-24"></a>        return res</span>
-<span id="cb30-25"><a href="#cb30-25"></a>        </span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="co"># class TreeNode:</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a>def <span class="kw">__init__</span>(self, x)<span class="op">:</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a><span class="st">        </span>self.val =<span class="st"> </span>x</span>
+<span id="cb31-5"><a href="#cb31-5"></a>        self.left =<span class="st"> </span>None</span>
+<span id="cb31-6"><a href="#cb31-6"></a>        self.right =<span class="st"> </span>None</span>
+<span id="cb31-7"><a href="#cb31-7"></a>class Solution<span class="op">:</span></span>
+<span id="cb31-8"><a href="#cb31-8"></a><span class="st">    </span><span class="co"># 返回从上到下每个节点值列表，例：[1,2,3]</span></span>
+<span id="cb31-9"><a href="#cb31-9"></a><span class="st">    </span>def <span class="kw">PrintFromTopToBottom</span>(self, root)<span class="op">:</span></span>
+<span id="cb31-10"><a href="#cb31-10"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb31-11"><a href="#cb31-11"></a><span class="st">        </span><span class="co">#</span></span>
+<span id="cb31-12"><a href="#cb31-12"></a><span class="st">        </span><span class="cf">if</span> not root<span class="op">:</span></span>
+<span id="cb31-13"><a href="#cb31-13"></a><span class="st">            </span>return <span class="st">&#39;&#39;</span></span>
+<span id="cb31-14"><a href="#cb31-14"></a>        </span>
+<span id="cb31-15"><a href="#cb31-15"></a>        que=[root] <span class="co">#根节点保存在队列中</span></span>
+<span id="cb31-16"><a href="#cb31-16"></a>        res=[] <span class="co">#用一个list保存输出值</span></span>
+<span id="cb31-17"><a href="#cb31-17"></a>        <span class="cf">while</span> que<span class="op">:</span></span>
+<span id="cb31-18"><a href="#cb31-18"></a><span class="st">            </span><span class="cf">if</span> que[<span class="dv">0</span>].left<span class="op">:</span></span>
+<span id="cb31-19"><a href="#cb31-19"></a><span class="st">                </span><span class="kw">que.append</span>(que[<span class="dv">0</span>].left)</span>
+<span id="cb31-20"><a href="#cb31-20"></a>            <span class="cf">if</span> que[<span class="dv">0</span>].right<span class="op">:</span></span>
+<span id="cb31-21"><a href="#cb31-21"></a><span class="st">                </span><span class="kw">que.append</span>(que[<span class="dv">0</span>].right)</span>
+<span id="cb31-22"><a href="#cb31-22"></a>            <span class="kw">res.append</span>(que[<span class="dv">0</span>].val)</span>
+<span id="cb31-23"><a href="#cb31-23"></a>            <span class="kw">que.pop</span>(<span class="dv">0</span>) <span class="co">#遍历完一个根和左右就删掉</span></span>
+<span id="cb31-24"><a href="#cb31-24"></a>        return res</span>
+<span id="cb31-25"><a href="#cb31-25"></a>        </span></code></pre></div>
 </div>
 <div id="二叉树的后续遍历" class="section level2">
 <h2><span class="header-section-number">1.30</span> 二叉树的后续遍历</h2>
@@ -898,64 +907,64 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <li>第二部分 是右子树节点的值，都比根节点的值大，</li>
 <li>后面用递归分别判断前后两部分 是否符合以上原则。</li>
 </ul>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a>class Solution<span class="op">:</span></span>
-<span id="cb31-3"><a href="#cb31-3"></a><span class="st">    </span>def <span class="kw">VerifySquenceOfBST</span>(self, sequence)<span class="op">:</span></span>
-<span id="cb31-4"><a href="#cb31-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb31-5"><a href="#cb31-5"></a><span class="st">        </span></span>
-<span id="cb31-6"><a href="#cb31-6"></a><span class="st">        </span><span class="cf">if</span> sequence<span class="op">==</span>None or <span class="kw">len</span>(sequence)<span class="op">==</span><span class="dv">0</span><span class="op">:</span></span>
-<span id="cb31-7"><a href="#cb31-7"></a><span class="st">            </span>return False</span>
-<span id="cb31-8"><a href="#cb31-8"></a>        length=<span class="kw">len</span>(sequence)</span>
-<span id="cb31-9"><a href="#cb31-9"></a>        root=sequence[length<span class="dv">-1</span>]</span>
-<span id="cb31-10"><a href="#cb31-10"></a>        <span class="co"># 在二叉搜索树中 左子树节点小于根节点</span></span>
-<span id="cb31-11"><a href="#cb31-11"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(length)<span class="op">:</span></span>
-<span id="cb31-12"><a href="#cb31-12"></a><span class="st">            </span><span class="cf">if</span> sequence[i]<span class="op">&gt;</span>root<span class="op">:</span></span>
-<span id="cb31-13"><a href="#cb31-13"></a><span class="st">                </span><span class="cf">break</span></span>
-<span id="cb31-14"><a href="#cb31-14"></a>        <span class="co"># 二叉搜索树中右子树的节点都大于根节点</span></span>
-<span id="cb31-15"><a href="#cb31-15"></a>        <span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(i,length)<span class="op">:</span></span>
-<span id="cb31-16"><a href="#cb31-16"></a><span class="st">            </span><span class="cf">if</span> sequence[j]<span class="op">&lt;</span>root<span class="op">:</span></span>
-<span id="cb31-17"><a href="#cb31-17"></a><span class="st">                </span>return False</span>
-<span id="cb31-18"><a href="#cb31-18"></a>        <span class="co"># 判断左子树是否为二叉树</span></span>
-<span id="cb31-19"><a href="#cb31-19"></a>        left=True</span>
-<span id="cb31-20"><a href="#cb31-20"></a>        <span class="cf">if</span> i<span class="op">&gt;</span><span class="dv">0</span><span class="op">:</span></span>
-<span id="cb31-21"><a href="#cb31-21"></a><span class="st">            </span>left=<span class="kw">self.VerifySquenceOfBST</span>(sequence[<span class="dv">0</span><span class="op">:</span>i])</span>
-<span id="cb31-22"><a href="#cb31-22"></a>        <span class="co"># 判断 右子树是否为二叉树</span></span>
-<span id="cb31-23"><a href="#cb31-23"></a>        right=True</span>
-<span id="cb31-24"><a href="#cb31-24"></a>        <span class="cf">if</span> i<span class="op">&lt;</span>length<span class="dv">-1</span><span class="op">:</span></span>
-<span id="cb31-25"><a href="#cb31-25"></a><span class="st">            </span>right=<span class="kw">self.VerifySquenceOfBST</span>(sequence[i<span class="op">:-</span><span class="dv">1</span>])</span>
-<span id="cb31-26"><a href="#cb31-26"></a>        return left and right</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="st">    </span>def <span class="kw">VerifySquenceOfBST</span>(self, sequence)<span class="op">:</span></span>
+<span id="cb32-4"><a href="#cb32-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a><span class="st">        </span></span>
+<span id="cb32-6"><a href="#cb32-6"></a><span class="st">        </span><span class="cf">if</span> sequence<span class="op">==</span>None or <span class="kw">len</span>(sequence)<span class="op">==</span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb32-7"><a href="#cb32-7"></a><span class="st">            </span>return False</span>
+<span id="cb32-8"><a href="#cb32-8"></a>        length=<span class="kw">len</span>(sequence)</span>
+<span id="cb32-9"><a href="#cb32-9"></a>        root=sequence[length<span class="dv">-1</span>]</span>
+<span id="cb32-10"><a href="#cb32-10"></a>        <span class="co"># 在二叉搜索树中 左子树节点小于根节点</span></span>
+<span id="cb32-11"><a href="#cb32-11"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(length)<span class="op">:</span></span>
+<span id="cb32-12"><a href="#cb32-12"></a><span class="st">            </span><span class="cf">if</span> sequence[i]<span class="op">&gt;</span>root<span class="op">:</span></span>
+<span id="cb32-13"><a href="#cb32-13"></a><span class="st">                </span><span class="cf">break</span></span>
+<span id="cb32-14"><a href="#cb32-14"></a>        <span class="co"># 二叉搜索树中右子树的节点都大于根节点</span></span>
+<span id="cb32-15"><a href="#cb32-15"></a>        <span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(i,length)<span class="op">:</span></span>
+<span id="cb32-16"><a href="#cb32-16"></a><span class="st">            </span><span class="cf">if</span> sequence[j]<span class="op">&lt;</span>root<span class="op">:</span></span>
+<span id="cb32-17"><a href="#cb32-17"></a><span class="st">                </span>return False</span>
+<span id="cb32-18"><a href="#cb32-18"></a>        <span class="co"># 判断左子树是否为二叉树</span></span>
+<span id="cb32-19"><a href="#cb32-19"></a>        left=True</span>
+<span id="cb32-20"><a href="#cb32-20"></a>        <span class="cf">if</span> i<span class="op">&gt;</span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb32-21"><a href="#cb32-21"></a><span class="st">            </span>left=<span class="kw">self.VerifySquenceOfBST</span>(sequence[<span class="dv">0</span><span class="op">:</span>i])</span>
+<span id="cb32-22"><a href="#cb32-22"></a>        <span class="co"># 判断 右子树是否为二叉树</span></span>
+<span id="cb32-23"><a href="#cb32-23"></a>        right=True</span>
+<span id="cb32-24"><a href="#cb32-24"></a>        <span class="cf">if</span> i<span class="op">&lt;</span>length<span class="dv">-1</span><span class="op">:</span></span>
+<span id="cb32-25"><a href="#cb32-25"></a><span class="st">            </span>right=<span class="kw">self.VerifySquenceOfBST</span>(sequence[i<span class="op">:-</span><span class="dv">1</span>])</span>
+<span id="cb32-26"><a href="#cb32-26"></a>        return left and right</span></code></pre></div>
 </div>
 <div id="二叉树中和为某一路径值" class="section level2">
 <h2><span class="header-section-number">1.31</span> 二叉树中和为某一路径值</h2>
 <p><strong>题目描述</strong></p>
 <p>输入一颗二叉树的根节点和一个整数，按字典序打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>思路是递归：递归方法是返回当前路径下匹配目标值的路径。</span>
-<span id="cb32-2"><a href="#cb32-2"></a>目标值 =<span class="st"> </span>目标值 <span class="op">-</span><span class="st"> </span>当前节点值</span>
-<span id="cb32-3"><a href="#cb32-3"></a>共有几种情况：</span>
-<span id="cb32-4"><a href="#cb32-4"></a>0，当节点为空，return</span>
-<span id="cb32-5"><a href="#cb32-5"></a>1，当目标值小于0，return</span>
-<span id="cb32-6"><a href="#cb32-6"></a>2，当目标值为0 并且 节点下无其他节点</span>
-<span id="cb32-7"><a href="#cb32-7"></a>节点下无其他节点说明是叶子节点，并且路径值的和满足了目标值，添加到结果中  并且return</span>
-<span id="cb32-8"><a href="#cb32-8"></a>3，当目标值大于0，继续递归</span></code></pre></div>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a><span class="st">    </span><span class="co"># 返回二维列表，内部每个列表表示找到的路径</span></span>
-<span id="cb33-3"><a href="#cb33-3"></a><span class="st">    </span>def <span class="kw">FindPath</span>(self, root, expectNumber)<span class="op">:</span></span>
-<span id="cb33-4"><a href="#cb33-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb33-5"><a href="#cb33-5"></a><span class="st">        </span>path =<span class="st"> </span>[]</span>
-<span id="cb33-6"><a href="#cb33-6"></a>        res =<span class="st"> </span>[]</span>
-<span id="cb33-7"><a href="#cb33-7"></a>        def <span class="kw">dfs</span>(root, sum)<span class="op">:</span></span>
-<span id="cb33-8"><a href="#cb33-8"></a><span class="st">            </span><span class="cf">if</span> not root<span class="op">:</span></span>
-<span id="cb33-9"><a href="#cb33-9"></a><span class="st">                </span>return</span>
-<span id="cb33-10"><a href="#cb33-10"></a>            <span class="kw">path.append</span>(root.val)</span>
-<span id="cb33-11"><a href="#cb33-11"></a>            sum <span class="op">-</span><span class="er">=</span><span class="st"> </span>root.val</span>
-<span id="cb33-12"><a href="#cb33-12"></a>            <span class="cf">if</span> sum <span class="op">==</span><span class="st"> </span><span class="dv">0</span> and not root.left and not root.right<span class="op">:</span></span>
-<span id="cb33-13"><a href="#cb33-13"></a><span class="st">                </span><span class="kw">res.append</span>(path[<span class="op">:</span>])</span>
-<span id="cb33-14"><a href="#cb33-14"></a>            <span class="kw">dfs</span>(root.left, sum)</span>
-<span id="cb33-15"><a href="#cb33-15"></a>            <span class="kw">dfs</span>(root.right, sum)</span>
-<span id="cb33-16"><a href="#cb33-16"></a>            <span class="kw">path.pop</span>()</span>
-<span id="cb33-17"><a href="#cb33-17"></a>            </span>
-<span id="cb33-18"><a href="#cb33-18"></a>        <span class="kw">dfs</span>(root, expectNumber)</span>
-<span id="cb33-19"><a href="#cb33-19"></a>        return res</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>思路是递归：递归方法是返回当前路径下匹配目标值的路径。</span>
+<span id="cb33-2"><a href="#cb33-2"></a>目标值 =<span class="st"> </span>目标值 <span class="op">-</span><span class="st"> </span>当前节点值</span>
+<span id="cb33-3"><a href="#cb33-3"></a>共有几种情况：</span>
+<span id="cb33-4"><a href="#cb33-4"></a>0，当节点为空，return</span>
+<span id="cb33-5"><a href="#cb33-5"></a>1，当目标值小于0，return</span>
+<span id="cb33-6"><a href="#cb33-6"></a>2，当目标值为0 并且 节点下无其他节点</span>
+<span id="cb33-7"><a href="#cb33-7"></a>节点下无其他节点说明是叶子节点，并且路径值的和满足了目标值，添加到结果中  并且return</span>
+<span id="cb33-8"><a href="#cb33-8"></a>3，当目标值大于0，继续递归</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="st">    </span><span class="co"># 返回二维列表，内部每个列表表示找到的路径</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="st">    </span>def <span class="kw">FindPath</span>(self, root, expectNumber)<span class="op">:</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="st">        </span>path =<span class="st"> </span>[]</span>
+<span id="cb34-6"><a href="#cb34-6"></a>        res =<span class="st"> </span>[]</span>
+<span id="cb34-7"><a href="#cb34-7"></a>        def <span class="kw">dfs</span>(root, sum)<span class="op">:</span></span>
+<span id="cb34-8"><a href="#cb34-8"></a><span class="st">            </span><span class="cf">if</span> not root<span class="op">:</span></span>
+<span id="cb34-9"><a href="#cb34-9"></a><span class="st">                </span>return</span>
+<span id="cb34-10"><a href="#cb34-10"></a>            <span class="kw">path.append</span>(root.val)</span>
+<span id="cb34-11"><a href="#cb34-11"></a>            sum <span class="op">-</span><span class="er">=</span><span class="st"> </span>root.val</span>
+<span id="cb34-12"><a href="#cb34-12"></a>            <span class="cf">if</span> sum <span class="op">==</span><span class="st"> </span><span class="dv">0</span> and not root.left and not root.right<span class="op">:</span></span>
+<span id="cb34-13"><a href="#cb34-13"></a><span class="st">                </span><span class="kw">res.append</span>(path[<span class="op">:</span>])</span>
+<span id="cb34-14"><a href="#cb34-14"></a>            <span class="kw">dfs</span>(root.left, sum)</span>
+<span id="cb34-15"><a href="#cb34-15"></a>            <span class="kw">dfs</span>(root.right, sum)</span>
+<span id="cb34-16"><a href="#cb34-16"></a>            <span class="kw">path.pop</span>()</span>
+<span id="cb34-17"><a href="#cb34-17"></a>            </span>
+<span id="cb34-18"><a href="#cb34-18"></a>        <span class="kw">dfs</span>(root, expectNumber)</span>
+<span id="cb34-19"><a href="#cb34-19"></a>        return res</span></code></pre></div>
 <p><strong>仔细去想上面三个题的思路</strong></p>
 </div>
 <div id="复杂链表的复制" class="section level2">
@@ -963,18 +972,18 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <p><strong>题目描述</strong>
 输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针random指向一个随机节点），请对此链表进行深拷贝，并返回拷贝后的头结点。（注意，输出结果中请不要返回参数中的节点引用，否则判题程序会直接返回空）</p>
 <p>思路：</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a><span class="st">    </span><span class="co"># 返回 RandomListNode</span></span>
-<span id="cb34-3"><a href="#cb34-3"></a><span class="st">    </span>def <span class="kw">Clone</span>(self, pHead)<span class="op">:</span></span>
-<span id="cb34-4"><a href="#cb34-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb34-5"><a href="#cb34-5"></a><span class="st">        </span><span class="cf">if</span> not pHead<span class="op">:</span></span>
-<span id="cb34-6"><a href="#cb34-6"></a><span class="st">            </span>return None</span>
-<span id="cb34-7"><a href="#cb34-7"></a>        newp =<span class="st"> </span><span class="kw">RandomListNode</span>(pHead.label)</span>
-<span id="cb34-8"><a href="#cb34-8"></a>        newp.random =<span class="st"> </span>pHead.random</span>
-<span id="cb34-9"><a href="#cb34-9"></a>        newp.next =<span class="st"> </span><span class="kw">self.Clone</span>(pHead.next)</span>
-<span id="cb34-10"><a href="#cb34-10"></a>        return newp</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="st">    </span><span class="co"># 返回 RandomListNode</span></span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="st">    </span>def <span class="kw">Clone</span>(self, pHead)<span class="op">:</span></span>
+<span id="cb35-4"><a href="#cb35-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb35-5"><a href="#cb35-5"></a><span class="st">        </span><span class="cf">if</span> not pHead<span class="op">:</span></span>
+<span id="cb35-6"><a href="#cb35-6"></a><span class="st">            </span>return None</span>
+<span id="cb35-7"><a href="#cb35-7"></a>        newp =<span class="st"> </span><span class="kw">RandomListNode</span>(pHead.label)</span>
+<span id="cb35-8"><a href="#cb35-8"></a>        newp.random =<span class="st"> </span>pHead.random</span>
+<span id="cb35-9"><a href="#cb35-9"></a>        newp.next =<span class="st"> </span><span class="kw">self.Clone</span>(pHead.next)</span>
+<span id="cb35-10"><a href="#cb35-10"></a>        return newp</span></code></pre></div>
 <p>或者下面这一句也是可以的</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>return <span class="kw">copy.deepcopy</span>(pHead)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>return <span class="kw">copy.deepcopy</span>(pHead)</span></code></pre></div>
 </div>
 <div id="反转单词顺序" class="section level2">
 <h2><span class="header-section-number">1.33</span> 反转单词顺序</h2>
@@ -982,25 +991,25 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <p>牛客最近来了一个新员工Fish，每天早晨总是会拿着一本英文杂志，写些句子在本子上。同事Cat对Fish写的内容颇感兴趣，有一天他向Fish借来翻看，但却读不懂它的意思。例如，“student. a am I”。后来才意识到，这家伙原来把句子单词的顺序翻转了，正确的句子应该是“I am a student.”。Cat对一一的翻转这些单词顺序可不在行，你能帮助他么？</p>
 <p>能~</p>
 <p>字符串的倒序，注意输出的结果表示</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb36-2"><a href="#cb36-2"></a><span class="st">    </span>def <span class="kw">ReverseSentence</span>(self, s)<span class="op">:</span></span>
-<span id="cb36-3"><a href="#cb36-3"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb36-4"><a href="#cb36-4"></a><span class="st">        </span><span class="cf">if</span> not s<span class="op">:</span></span>
-<span id="cb36-5"><a href="#cb36-5"></a><span class="st">            </span>return <span class="st">&#39;&#39;</span></span>
-<span id="cb36-6"><a href="#cb36-6"></a>        st=<span class="kw">s.split</span>(<span class="st">&#39; &#39;</span>)</span>
-<span id="cb36-7"><a href="#cb36-7"></a>        res=st[<span class="op">::-</span><span class="dv">1</span>]</span>
-<span id="cb36-8"><a href="#cb36-8"></a>        return <span class="st">&#39; &#39;</span><span class="kw">.join</span>(res)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a><span class="st">    </span>def <span class="kw">ReverseSentence</span>(self, s)<span class="op">:</span></span>
+<span id="cb37-3"><a href="#cb37-3"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb37-4"><a href="#cb37-4"></a><span class="st">        </span><span class="cf">if</span> not s<span class="op">:</span></span>
+<span id="cb37-5"><a href="#cb37-5"></a><span class="st">            </span>return <span class="st">&#39;&#39;</span></span>
+<span id="cb37-6"><a href="#cb37-6"></a>        st=<span class="kw">s.split</span>(<span class="st">&#39; &#39;</span>)</span>
+<span id="cb37-7"><a href="#cb37-7"></a>        res=st[<span class="op">::-</span><span class="dv">1</span>]</span>
+<span id="cb37-8"><a href="#cb37-8"></a>        return <span class="st">&#39; &#39;</span><span class="kw">.join</span>(res)</span></code></pre></div>
 </div>
 <div id="左旋字符串" class="section level2">
 <h2><span class="header-section-number">1.34</span> 左旋字符串</h2>
 <p><strong>题目描述</strong>
 汇编语言中有一种移位指令叫做循环左移（ROL），现在有个简单的任务，就是用字符串模拟这个指令的运算结果。对于一个给定的字符序列S，请你把其循环左移K位后的序列输出。例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”。是不是很简单？OK，搞定它！</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb37-2"><a href="#cb37-2"></a><span class="st">    </span>def <span class="kw">LeftRotateString</span>(self, s, n)<span class="op">:</span></span>
-<span id="cb37-3"><a href="#cb37-3"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb37-4"><a href="#cb37-4"></a><span class="st">        </span>l=<span class="kw">len</span>(s)</span>
-<span id="cb37-5"><a href="#cb37-5"></a>        return s[n<span class="op">:</span>]<span class="op">+</span>s[<span class="op">:</span>n]</span>
-<span id="cb37-6"><a href="#cb37-6"></a>        </span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a><span class="st">    </span>def <span class="kw">LeftRotateString</span>(self, s, n)<span class="op">:</span></span>
+<span id="cb38-3"><a href="#cb38-3"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb38-4"><a href="#cb38-4"></a><span class="st">        </span>l=<span class="kw">len</span>(s)</span>
+<span id="cb38-5"><a href="#cb38-5"></a>        return s[n<span class="op">:</span>]<span class="op">+</span>s[<span class="op">:</span>n]</span>
+<span id="cb38-6"><a href="#cb38-6"></a>        </span></code></pre></div>
 </div>
 <div id="把数组排成最小整数" class="section level2">
 <h2><span class="header-section-number">1.35</span> 把数组排成最小整数</h2>
@@ -1008,16 +1017,16 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 输入一个正整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。例如输入数组{3，32，321}，则打印出这三个数字能排成的最小数字为321323。</p>
 <p>把数组变成字符串，完事就是常规的冒泡排序就能解决。。冒泡排序的应用</p>
 <p>str和int之间的转换，这个需要知道一下</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb38-2"><a href="#cb38-2"></a>class Solution<span class="op">:</span></span>
-<span id="cb38-3"><a href="#cb38-3"></a><span class="st">    </span>def <span class="kw">PrintMinNumber</span>(self, numbers)<span class="op">:</span></span>
-<span id="cb38-4"><a href="#cb38-4"></a><span class="st">    </span><span class="co"># write code here</span></span>
-<span id="cb38-5"><a href="#cb38-5"></a><span class="st">        </span>n =<span class="st"> </span><span class="kw">len</span>(numbers)</span>
-<span id="cb38-6"><a href="#cb38-6"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(n)<span class="op">:</span></span>
-<span id="cb38-7"><a href="#cb38-7"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(i<span class="op">+</span><span class="dv">1</span>, n)<span class="op">:</span></span>
-<span id="cb38-8"><a href="#cb38-8"></a><span class="st">                </span><span class="cf">if</span> <span class="kw">int</span>(<span class="kw">str</span>(numbers[i]) <span class="op">+</span><span class="st"> </span><span class="kw">str</span>(numbers[j]) <span class="op">&gt;</span><span class="st"> </span><span class="kw">str</span>(numbers[j]) <span class="op">+</span><span class="st"> </span><span class="kw">str</span>(numbers[i]))<span class="op">:</span></span>
-<span id="cb38-9"><a href="#cb38-9"></a><span class="st">                    </span>numbers[j], numbers[i] =<span class="st"> </span>numbers[i], numbers[j]</span>
-<span id="cb38-10"><a href="#cb38-10"></a>        return <span class="st">&#39;&#39;</span><span class="kw">.join</span>([<span class="kw">str</span>(i) <span class="cf">for</span> i <span class="cf">in</span> numbers])</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb39-3"><a href="#cb39-3"></a><span class="st">    </span>def <span class="kw">PrintMinNumber</span>(self, numbers)<span class="op">:</span></span>
+<span id="cb39-4"><a href="#cb39-4"></a><span class="st">    </span><span class="co"># write code here</span></span>
+<span id="cb39-5"><a href="#cb39-5"></a><span class="st">        </span>n =<span class="st"> </span><span class="kw">len</span>(numbers)</span>
+<span id="cb39-6"><a href="#cb39-6"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(n)<span class="op">:</span></span>
+<span id="cb39-7"><a href="#cb39-7"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(i<span class="op">+</span><span class="dv">1</span>, n)<span class="op">:</span></span>
+<span id="cb39-8"><a href="#cb39-8"></a><span class="st">                </span><span class="cf">if</span> <span class="kw">int</span>(<span class="kw">str</span>(numbers[i]) <span class="op">+</span><span class="st"> </span><span class="kw">str</span>(numbers[j]) <span class="op">&gt;</span><span class="st"> </span><span class="kw">str</span>(numbers[j]) <span class="op">+</span><span class="st"> </span><span class="kw">str</span>(numbers[i]))<span class="op">:</span></span>
+<span id="cb39-9"><a href="#cb39-9"></a><span class="st">                    </span>numbers[j], numbers[i] =<span class="st"> </span>numbers[i], numbers[j]</span>
+<span id="cb39-10"><a href="#cb39-10"></a>        return <span class="st">&#39;&#39;</span><span class="kw">.join</span>([<span class="kw">str</span>(i) <span class="cf">for</span> i <span class="cf">in</span> numbers])</span></code></pre></div>
 </div>
 <div id="丑数" class="section level2">
 <h2><span class="header-section-number">1.36</span> 丑数</h2>
@@ -1025,52 +1034,52 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 把只包含质因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是，因为它包含质因子7。 习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。</p>
 <p><strong>思路：</strong>丑数 = 已有的丑数 * (2,3,5) 得到三个新的丑数，但是新的丑数位置不一定正确，切可能会有重复</p>
 <p>所以我们每次只新增一个最小值，然后用三个指针记录当前2，3，5质因子形成的最大丑数位置，这样的话就会形成递增的丑数队列，而且遍历的次数也很容易就知道，即n-1,因为1是第一个丑数，n-1次遍历后，我们就可以得到一个含有n个丑数的有序数组，返回最后一个即可。</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb39-2"><a href="#cb39-2"></a>class Solution<span class="op">:</span></span>
-<span id="cb39-3"><a href="#cb39-3"></a><span class="st">    </span>def <span class="kw">GetUglyNumber_Solution</span>(self, index)<span class="op">:</span></span>
-<span id="cb39-4"><a href="#cb39-4"></a><span class="st">    </span><span class="co"># write code here</span></span>
-<span id="cb39-5"><a href="#cb39-5"></a><span class="st">        </span><span class="cf">if</span> index <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
-<span id="cb39-6"><a href="#cb39-6"></a><span class="st">            </span>return <span class="dv">0</span></span>
-<span id="cb39-7"><a href="#cb39-7"></a>        uglyList =<span class="st"> </span>[<span class="dv">1</span>]</span>
-<span id="cb39-8"><a href="#cb39-8"></a>        p2 =<span class="st"> </span><span class="dv">0</span> <span class="co"># p2指向小于newUgly且最大的乘以2后可能成为下一个丑数的丑数</span></span>
-<span id="cb39-9"><a href="#cb39-9"></a>        p3 =<span class="st"> </span><span class="dv">0</span> <span class="co"># p3指向小于newUgly且最大的乘以3后可能成为下一个丑数的丑数</span></span>
-<span id="cb39-10"><a href="#cb39-10"></a>        p5 =<span class="st"> </span><span class="dv">0</span> <span class="co"># p5指向小于newUgly且最大的乘以5后可能成为下一个丑数的丑数</span></span>
-<span id="cb39-11"><a href="#cb39-11"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(index<span class="dv">-1</span>)<span class="op">:</span></span>
-<span id="cb39-12"><a href="#cb39-12"></a><span class="st">            </span>newUgly =<span class="st"> </span><span class="kw">min</span>(uglyList[p2]<span class="op">*</span><span class="dv">2</span>, uglyList[p3]<span class="op">*</span><span class="dv">3</span>, uglyList[p5]<span class="op">*</span><span class="dv">5</span>)</span>
-<span id="cb39-13"><a href="#cb39-13"></a>            <span class="kw">uglyList.append</span>(newUgly)</span>
-<span id="cb39-14"><a href="#cb39-14"></a>            <span class="cf">if</span> (newUgly % <span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)<span class="op">:</span></span>
-<span id="cb39-15"><a href="#cb39-15"></a><span class="st">                </span>p2 <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb39-16"><a href="#cb39-16"></a>            <span class="cf">if</span> (newUgly % <span class="dv">3</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)<span class="op">:</span></span>
-<span id="cb39-17"><a href="#cb39-17"></a><span class="st">                </span>p3 <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb39-18"><a href="#cb39-18"></a>            <span class="cf">if</span> (newUgly % <span class="dv">5</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)<span class="op">:</span></span>
-<span id="cb39-19"><a href="#cb39-19"></a><span class="st">                </span>p5 <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb39-20"><a href="#cb39-20"></a>        return uglyList[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb40-3"><a href="#cb40-3"></a><span class="st">    </span>def <span class="kw">GetUglyNumber_Solution</span>(self, index)<span class="op">:</span></span>
+<span id="cb40-4"><a href="#cb40-4"></a><span class="st">    </span><span class="co"># write code here</span></span>
+<span id="cb40-5"><a href="#cb40-5"></a><span class="st">        </span><span class="cf">if</span> index <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb40-6"><a href="#cb40-6"></a><span class="st">            </span>return <span class="dv">0</span></span>
+<span id="cb40-7"><a href="#cb40-7"></a>        uglyList =<span class="st"> </span>[<span class="dv">1</span>]</span>
+<span id="cb40-8"><a href="#cb40-8"></a>        p2 =<span class="st"> </span><span class="dv">0</span> <span class="co"># p2指向小于newUgly且最大的乘以2后可能成为下一个丑数的丑数</span></span>
+<span id="cb40-9"><a href="#cb40-9"></a>        p3 =<span class="st"> </span><span class="dv">0</span> <span class="co"># p3指向小于newUgly且最大的乘以3后可能成为下一个丑数的丑数</span></span>
+<span id="cb40-10"><a href="#cb40-10"></a>        p5 =<span class="st"> </span><span class="dv">0</span> <span class="co"># p5指向小于newUgly且最大的乘以5后可能成为下一个丑数的丑数</span></span>
+<span id="cb40-11"><a href="#cb40-11"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(index<span class="dv">-1</span>)<span class="op">:</span></span>
+<span id="cb40-12"><a href="#cb40-12"></a><span class="st">            </span>newUgly =<span class="st"> </span><span class="kw">min</span>(uglyList[p2]<span class="op">*</span><span class="dv">2</span>, uglyList[p3]<span class="op">*</span><span class="dv">3</span>, uglyList[p5]<span class="op">*</span><span class="dv">5</span>)</span>
+<span id="cb40-13"><a href="#cb40-13"></a>            <span class="kw">uglyList.append</span>(newUgly)</span>
+<span id="cb40-14"><a href="#cb40-14"></a>            <span class="cf">if</span> (newUgly % <span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)<span class="op">:</span></span>
+<span id="cb40-15"><a href="#cb40-15"></a><span class="st">                </span>p2 <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb40-16"><a href="#cb40-16"></a>            <span class="cf">if</span> (newUgly % <span class="dv">3</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)<span class="op">:</span></span>
+<span id="cb40-17"><a href="#cb40-17"></a><span class="st">                </span>p3 <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb40-18"><a href="#cb40-18"></a>            <span class="cf">if</span> (newUgly % <span class="dv">5</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)<span class="op">:</span></span>
+<span id="cb40-19"><a href="#cb40-19"></a><span class="st">                </span>p5 <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb40-20"><a href="#cb40-20"></a>        return uglyList[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
 </div>
 <div id="第一个只出现一次的字符串" class="section level2">
 <h2><span class="header-section-number">1.37</span> 第一个只出现一次的字符串</h2>
 <p><strong>题目描述</strong>
 在一个字符串(0&lt;=字符串长度&lt;=10000，全部由字母组成)中找到第一个只出现一次的字符,并返回它的位置, 如果没有则返回 -1（需要区分大小写）.（从0开始计数）</p>
 <p>简单解法，count计数法</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb40-2"><a href="#cb40-2"></a>class Solution<span class="op">:</span></span>
-<span id="cb40-3"><a href="#cb40-3"></a><span class="st">    </span>def <span class="kw">FirstNotRepeatingChar</span>(self, s)<span class="op">:</span></span>
-<span id="cb40-4"><a href="#cb40-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb40-5"><a href="#cb40-5"></a><span class="st">        </span><span class="cf">if</span> not s<span class="op">:</span></span>
-<span id="cb40-6"><a href="#cb40-6"></a><span class="st">            </span>return <span class="dv">-1</span></span>
-<span id="cb40-7"><a href="#cb40-7"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(s))<span class="op">:</span></span>
-<span id="cb40-8"><a href="#cb40-8"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">s.count</span>(s[i]) <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span></span>
-<span id="cb40-9"><a href="#cb40-9"></a><span class="st">                </span>return i</span>
-<span id="cb40-10"><a href="#cb40-10"></a>        return <span class="dv">-1</span></span></code></pre></div>
-<p>或者直接字典</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
 <span id="cb41-2"><a href="#cb41-2"></a>class Solution<span class="op">:</span></span>
 <span id="cb41-3"><a href="#cb41-3"></a><span class="st">    </span>def <span class="kw">FirstNotRepeatingChar</span>(self, s)<span class="op">:</span></span>
 <span id="cb41-4"><a href="#cb41-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb41-5"><a href="#cb41-5"></a><span class="st">        </span><span class="cf">if</span> <span class="kw">len</span>(s) <span class="op">==</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb41-5"><a href="#cb41-5"></a><span class="st">        </span><span class="cf">if</span> not s<span class="op">:</span></span>
 <span id="cb41-6"><a href="#cb41-6"></a><span class="st">            </span>return <span class="dv">-1</span></span>
-<span id="cb41-7"><a href="#cb41-7"></a>        <span class="cf">for</span> index, value <span class="cf">in</span> <span class="kw">enumerate</span>(s)<span class="op">:</span></span>
-<span id="cb41-8"><a href="#cb41-8"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">s.count</span>(value) <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span></span>
-<span id="cb41-9"><a href="#cb41-9"></a><span class="st">                </span>return index</span></code></pre></div>
+<span id="cb41-7"><a href="#cb41-7"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(s))<span class="op">:</span></span>
+<span id="cb41-8"><a href="#cb41-8"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">s.count</span>(s[i]) <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span></span>
+<span id="cb41-9"><a href="#cb41-9"></a><span class="st">                </span>return i</span>
+<span id="cb41-10"><a href="#cb41-10"></a>        return <span class="dv">-1</span></span></code></pre></div>
+<p>或者直接字典</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb42-3"><a href="#cb42-3"></a><span class="st">    </span>def <span class="kw">FirstNotRepeatingChar</span>(self, s)<span class="op">:</span></span>
+<span id="cb42-4"><a href="#cb42-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb42-5"><a href="#cb42-5"></a><span class="st">        </span><span class="cf">if</span> <span class="kw">len</span>(s) <span class="op">==</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb42-6"><a href="#cb42-6"></a><span class="st">            </span>return <span class="dv">-1</span></span>
+<span id="cb42-7"><a href="#cb42-7"></a>        <span class="cf">for</span> index, value <span class="cf">in</span> <span class="kw">enumerate</span>(s)<span class="op">:</span></span>
+<span id="cb42-8"><a href="#cb42-8"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">s.count</span>(value) <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span></span>
+<span id="cb42-9"><a href="#cb42-9"></a><span class="st">                </span>return index</span></code></pre></div>
 </div>
 <div id="数组中的逆序对" class="section level2">
 <h2><span class="header-section-number">1.38</span> 数组中的逆序对</h2>
@@ -1086,18 +1095,18 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 输入1,2,3,4,5,6,7,0</p>
 <p>输出7</p>
 <p>思路1：先将原序列排序，然后从排完序的数组中取出最小的，它在原数组中的位置表示有多少比它大的数在它前面，每取出一个在原数组中删除该元素，保证后面取出的元素在原数组中是最小的，这样其位置才能表示有多少比它大的数在它前面，即逆序对数。</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a></span>
-<span id="cb42-2"><a href="#cb42-2"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb42-3"><a href="#cb42-3"></a>class Solution<span class="op">:</span></span>
-<span id="cb42-4"><a href="#cb42-4"></a><span class="st">    </span>def <span class="kw">InversePairs</span>(self, data)<span class="op">:</span></span>
-<span id="cb42-5"><a href="#cb42-5"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb42-6"><a href="#cb42-6"></a><span class="st">        </span>cnt =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb42-7"><a href="#cb42-7"></a>        copy =<span class="st"> </span>data[<span class="op">:</span>]</span>
-<span id="cb42-8"><a href="#cb42-8"></a>        <span class="kw">copy.sort</span>()</span>
-<span id="cb42-9"><a href="#cb42-9"></a>        <span class="cf">for</span> i <span class="cf">in</span> copy<span class="op">:</span></span>
-<span id="cb42-10"><a href="#cb42-10"></a><span class="st">            </span>cnt <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="kw">data.index</span>(i)</span>
-<span id="cb42-11"><a href="#cb42-11"></a>            <span class="kw">data.remove</span>(i)</span>
-<span id="cb42-12"><a href="#cb42-12"></a>        return cnt%<span class="dv">1000000007</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a></span>
+<span id="cb43-2"><a href="#cb43-2"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb43-3"><a href="#cb43-3"></a>class Solution<span class="op">:</span></span>
+<span id="cb43-4"><a href="#cb43-4"></a><span class="st">    </span>def <span class="kw">InversePairs</span>(self, data)<span class="op">:</span></span>
+<span id="cb43-5"><a href="#cb43-5"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb43-6"><a href="#cb43-6"></a><span class="st">        </span>cnt =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb43-7"><a href="#cb43-7"></a>        copy =<span class="st"> </span>data[<span class="op">:</span>]</span>
+<span id="cb43-8"><a href="#cb43-8"></a>        <span class="kw">copy.sort</span>()</span>
+<span id="cb43-9"><a href="#cb43-9"></a>        <span class="cf">for</span> i <span class="cf">in</span> copy<span class="op">:</span></span>
+<span id="cb43-10"><a href="#cb43-10"></a><span class="st">            </span>cnt <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="kw">data.index</span>(i)</span>
+<span id="cb43-11"><a href="#cb43-11"></a>            <span class="kw">data.remove</span>(i)</span>
+<span id="cb43-12"><a href="#cb43-12"></a>        return cnt%<span class="dv">1000000007</span></span></code></pre></div>
 <p>思路2：归并排序
 冒泡排序太暴力了</p>
 <p>待我默写出来</p>
@@ -1108,70 +1117,70 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <p>输入两个链表，找出它们的第一个公共结点。（注意因为传入数据是链表，所以错误测试数据的提示是用其他方式显示的，保证传入数据是正确的）</p>
 <p>思路1
 如果能从后面遍历两个链表，找到最后一个相同的节点，输出即可。可以利用两个栈来实现。</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="co">#         self.next = None</span></span>
-<span id="cb43-2"><a href="#cb43-2"></a>class Solution<span class="op">:</span></span>
-<span id="cb43-3"><a href="#cb43-3"></a><span class="st">    </span>def <span class="kw">FindFirstCommonNode</span>(self, pHead1, pHead2)<span class="op">:</span></span>
-<span id="cb43-4"><a href="#cb43-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb43-5"><a href="#cb43-5"></a><span class="st">        </span><span class="cf">if</span> pHead1<span class="op">==</span><span class="st"> </span>None or pHead2 <span class="op">==</span><span class="st"> </span>None<span class="op">:</span></span>
-<span id="cb43-6"><a href="#cb43-6"></a><span class="st">            </span>return None</span>
-<span id="cb43-7"><a href="#cb43-7"></a>        stack1 =<span class="st"> </span>[]</span>
-<span id="cb43-8"><a href="#cb43-8"></a>        stack2 =<span class="st"> </span>[]</span>
-<span id="cb43-9"><a href="#cb43-9"></a>        p1 =<span class="st"> </span>pHead1</span>
-<span id="cb43-10"><a href="#cb43-10"></a>        <span class="cf">while</span> p1 is not None<span class="op">:</span><span class="st">   </span><span class="co"># 依次将两个链表的所有节点分别压入两个栈中</span></span>
-<span id="cb43-11"><a href="#cb43-11"></a><span class="st">            </span><span class="kw">stack1.append</span>(p1)</span>
-<span id="cb43-12"><a href="#cb43-12"></a>            p1 =<span class="st"> </span>p1.next</span>
-<span id="cb43-13"><a href="#cb43-13"></a>        p2 =<span class="st"> </span>pHead2</span>
-<span id="cb43-14"><a href="#cb43-14"></a>        <span class="cf">while</span> p2 is not None<span class="op">:</span></span>
-<span id="cb43-15"><a href="#cb43-15"></a><span class="st">            </span><span class="kw">stack2.append</span>(p2)</span>
-<span id="cb43-16"><a href="#cb43-16"></a>            p2 =<span class="st"> </span>p2.next</span>
-<span id="cb43-17"><a href="#cb43-17"></a>        res =<span class="st"> </span>None</span>
-<span id="cb43-18"><a href="#cb43-18"></a>        <span class="cf">while</span> <span class="kw">len</span>(stack1) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> and <span class="kw">len</span>(stack2) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
-<span id="cb43-19"><a href="#cb43-19"></a><span class="st">        </span><span class="co"># 从后往前遍历，直到找到两个链表相同的最后一个节点，如果相同的话。</span></span>
-<span id="cb43-20"><a href="#cb43-20"></a><span class="st">            </span>v1 =<span class="st"> </span><span class="kw">stack1.pop</span>()</span>
-<span id="cb43-21"><a href="#cb43-21"></a>            v2 =<span class="st"> </span><span class="kw">stack2.pop</span>()</span>
-<span id="cb43-22"><a href="#cb43-22"></a>            <span class="cf">if</span> v1 <span class="op">==</span><span class="st"> </span>v2<span class="op">:</span></span>
-<span id="cb43-23"><a href="#cb43-23"></a><span class="st">                </span>res =<span class="st"> </span>v1</span>
-<span id="cb43-24"><a href="#cb43-24"></a>            <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb43-25"><a href="#cb43-25"></a><span class="st">                </span><span class="cf">break</span></span>
-<span id="cb43-26"><a href="#cb43-26"></a>        return res</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co">#         self.next = None</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb44-3"><a href="#cb44-3"></a><span class="st">    </span>def <span class="kw">FindFirstCommonNode</span>(self, pHead1, pHead2)<span class="op">:</span></span>
+<span id="cb44-4"><a href="#cb44-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb44-5"><a href="#cb44-5"></a><span class="st">        </span><span class="cf">if</span> pHead1<span class="op">==</span><span class="st"> </span>None or pHead2 <span class="op">==</span><span class="st"> </span>None<span class="op">:</span></span>
+<span id="cb44-6"><a href="#cb44-6"></a><span class="st">            </span>return None</span>
+<span id="cb44-7"><a href="#cb44-7"></a>        stack1 =<span class="st"> </span>[]</span>
+<span id="cb44-8"><a href="#cb44-8"></a>        stack2 =<span class="st"> </span>[]</span>
+<span id="cb44-9"><a href="#cb44-9"></a>        p1 =<span class="st"> </span>pHead1</span>
+<span id="cb44-10"><a href="#cb44-10"></a>        <span class="cf">while</span> p1 is not None<span class="op">:</span><span class="st">   </span><span class="co"># 依次将两个链表的所有节点分别压入两个栈中</span></span>
+<span id="cb44-11"><a href="#cb44-11"></a><span class="st">            </span><span class="kw">stack1.append</span>(p1)</span>
+<span id="cb44-12"><a href="#cb44-12"></a>            p1 =<span class="st"> </span>p1.next</span>
+<span id="cb44-13"><a href="#cb44-13"></a>        p2 =<span class="st"> </span>pHead2</span>
+<span id="cb44-14"><a href="#cb44-14"></a>        <span class="cf">while</span> p2 is not None<span class="op">:</span></span>
+<span id="cb44-15"><a href="#cb44-15"></a><span class="st">            </span><span class="kw">stack2.append</span>(p2)</span>
+<span id="cb44-16"><a href="#cb44-16"></a>            p2 =<span class="st"> </span>p2.next</span>
+<span id="cb44-17"><a href="#cb44-17"></a>        res =<span class="st"> </span>None</span>
+<span id="cb44-18"><a href="#cb44-18"></a>        <span class="cf">while</span> <span class="kw">len</span>(stack1) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> and <span class="kw">len</span>(stack2) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb44-19"><a href="#cb44-19"></a><span class="st">        </span><span class="co"># 从后往前遍历，直到找到两个链表相同的最后一个节点，如果相同的话。</span></span>
+<span id="cb44-20"><a href="#cb44-20"></a><span class="st">            </span>v1 =<span class="st"> </span><span class="kw">stack1.pop</span>()</span>
+<span id="cb44-21"><a href="#cb44-21"></a>            v2 =<span class="st"> </span><span class="kw">stack2.pop</span>()</span>
+<span id="cb44-22"><a href="#cb44-22"></a>            <span class="cf">if</span> v1 <span class="op">==</span><span class="st"> </span>v2<span class="op">:</span></span>
+<span id="cb44-23"><a href="#cb44-23"></a><span class="st">                </span>res =<span class="st"> </span>v1</span>
+<span id="cb44-24"><a href="#cb44-24"></a>            <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb44-25"><a href="#cb44-25"></a><span class="st">                </span><span class="cf">break</span></span>
+<span id="cb44-26"><a href="#cb44-26"></a>        return res</span></code></pre></div>
 <p>下面这个思路好骚啊~<a href="https://blog.csdn.net/ggdhs/article/details/90319403">csdn</a></p>
 <p>感觉有点不懂</p>
 <p><img src="figs/lbggjd.png" /></p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb44-2"><a href="#cb44-2"></a><span class="co"># class ListNode:</span></span>
-<span id="cb44-3"><a href="#cb44-3"></a><span class="co">#     def __init__(self, x):</span></span>
-<span id="cb44-4"><a href="#cb44-4"></a><span class="co">#         self.val = x</span></span>
-<span id="cb44-5"><a href="#cb44-5"></a><span class="co">#         self.next = None</span></span>
-<span id="cb44-6"><a href="#cb44-6"></a>class Solution<span class="op">:</span></span>
-<span id="cb44-7"><a href="#cb44-7"></a><span class="st">    </span>def <span class="kw">FindFirstCommonNode</span>(self, pHead1, pHead2)<span class="op">:</span></span>
-<span id="cb44-8"><a href="#cb44-8"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb44-9"><a href="#cb44-9"></a><span class="st">        </span><span class="cf">if</span> pHead1<span class="op">==</span><span class="st"> </span>None or pHead2 <span class="op">==</span><span class="st"> </span>None<span class="op">:</span></span>
-<span id="cb44-10"><a href="#cb44-10"></a><span class="st">            </span>return None</span>
-<span id="cb44-11"><a href="#cb44-11"></a>        p1 =<span class="st"> </span>pHead1</span>
-<span id="cb44-12"><a href="#cb44-12"></a>        p2 =<span class="st"> </span>pHead2</span>
-<span id="cb44-13"><a href="#cb44-13"></a>        <span class="cf">while</span>(p1<span class="op">!=</span>p2)<span class="op">:</span><span class="st">  </span></span>
-<span id="cb44-14"><a href="#cb44-14"></a><span class="st">            </span>p1 =<span class="st"> </span>pHead2 <span class="cf">if</span> p1 is None <span class="cf">else</span> p1.next</span>
-<span id="cb44-15"><a href="#cb44-15"></a>            <span class="co"># 由于若pHead2是pHead1的最后一个节点，，因此不能以p1.next==None作为判断条件。</span></span>
-<span id="cb44-16"><a href="#cb44-16"></a>            <span class="co"># 否则就会死循环。</span></span>
-<span id="cb44-17"><a href="#cb44-17"></a>            p2 =<span class="st"> </span>pHead1 <span class="cf">if</span> p2 is None <span class="cf">else</span> p2.next</span>
-<span id="cb44-18"><a href="#cb44-18"></a>        return p1</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="co"># class ListNode:</span></span>
+<span id="cb45-3"><a href="#cb45-3"></a><span class="co">#     def __init__(self, x):</span></span>
+<span id="cb45-4"><a href="#cb45-4"></a><span class="co">#         self.val = x</span></span>
+<span id="cb45-5"><a href="#cb45-5"></a><span class="co">#         self.next = None</span></span>
+<span id="cb45-6"><a href="#cb45-6"></a>class Solution<span class="op">:</span></span>
+<span id="cb45-7"><a href="#cb45-7"></a><span class="st">    </span>def <span class="kw">FindFirstCommonNode</span>(self, pHead1, pHead2)<span class="op">:</span></span>
+<span id="cb45-8"><a href="#cb45-8"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb45-9"><a href="#cb45-9"></a><span class="st">        </span><span class="cf">if</span> pHead1<span class="op">==</span><span class="st"> </span>None or pHead2 <span class="op">==</span><span class="st"> </span>None<span class="op">:</span></span>
+<span id="cb45-10"><a href="#cb45-10"></a><span class="st">            </span>return None</span>
+<span id="cb45-11"><a href="#cb45-11"></a>        p1 =<span class="st"> </span>pHead1</span>
+<span id="cb45-12"><a href="#cb45-12"></a>        p2 =<span class="st"> </span>pHead2</span>
+<span id="cb45-13"><a href="#cb45-13"></a>        <span class="cf">while</span>(p1<span class="op">!=</span>p2)<span class="op">:</span><span class="st">  </span></span>
+<span id="cb45-14"><a href="#cb45-14"></a><span class="st">            </span>p1 =<span class="st"> </span>pHead2 <span class="cf">if</span> p1 is None <span class="cf">else</span> p1.next</span>
+<span id="cb45-15"><a href="#cb45-15"></a>            <span class="co"># 由于若pHead2是pHead1的最后一个节点，，因此不能以p1.next==None作为判断条件。</span></span>
+<span id="cb45-16"><a href="#cb45-16"></a>            <span class="co"># 否则就会死循环。</span></span>
+<span id="cb45-17"><a href="#cb45-17"></a>            p2 =<span class="st"> </span>pHead1 <span class="cf">if</span> p2 is None <span class="cf">else</span> p2.next</span>
+<span id="cb45-18"><a href="#cb45-18"></a>        return p1</span></code></pre></div>
 </div>
 <div id="数字在升序数组中出现的次数" class="section level2">
 <h2><span class="header-section-number">1.40</span> 数字在升序数组中出现的次数</h2>
 <p><strong>题目描述</strong></p>
 <p>统计一个数字在升序数组中出现的次数。</p>
 <p>怎么写都能通过吧</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb45-2"><a href="#cb45-2"></a>class Solution<span class="op">:</span></span>
-<span id="cb45-3"><a href="#cb45-3"></a><span class="st">    </span>def <span class="kw">GetNumberOfK</span>(self, data, k)<span class="op">:</span></span>
-<span id="cb45-4"><a href="#cb45-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb45-5"><a href="#cb45-5"></a><span class="st">        </span>count =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb45-6"><a href="#cb45-6"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(data))<span class="op">:</span></span>
-<span id="cb45-7"><a href="#cb45-7"></a><span class="st">            </span><span class="cf">if</span>(data[i] <span class="op">==</span><span class="st"> </span>k)<span class="op">:</span></span>
-<span id="cb45-8"><a href="#cb45-8"></a><span class="st">                </span>count <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb45-9"><a href="#cb45-9"></a>        return count</span>
-<span id="cb45-10"><a href="#cb45-10"></a>        <span class="co"># 或者就直接用python的count函数</span></span>
-<span id="cb45-11"><a href="#cb45-11"></a>        <span class="co"># return data.count(k)</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb46-3"><a href="#cb46-3"></a><span class="st">    </span>def <span class="kw">GetNumberOfK</span>(self, data, k)<span class="op">:</span></span>
+<span id="cb46-4"><a href="#cb46-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb46-5"><a href="#cb46-5"></a><span class="st">        </span>count =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb46-6"><a href="#cb46-6"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(data))<span class="op">:</span></span>
+<span id="cb46-7"><a href="#cb46-7"></a><span class="st">            </span><span class="cf">if</span>(data[i] <span class="op">==</span><span class="st"> </span>k)<span class="op">:</span></span>
+<span id="cb46-8"><a href="#cb46-8"></a><span class="st">                </span>count <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb46-9"><a href="#cb46-9"></a>        return count</span>
+<span id="cb46-10"><a href="#cb46-10"></a>        <span class="co"># 或者就直接用python的count函数</span></span>
+<span id="cb46-11"><a href="#cb46-11"></a>        <span class="co"># return data.count(k)</span></span></code></pre></div>
 </div>
 <div id="平衡二叉树" class="section level2">
 <h2><span class="header-section-number">1.41</span> 平衡二叉树</h2>
@@ -1186,16 +1195,16 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <h2><span class="header-section-number">1.42</span> 数组中只出现一次的数</h2>
 <p><strong>题目描述</strong>
 一个整型数组里除了两个数字之外，其他的数字都出现了两次。请写程序找出这两个只出现一次的数字。</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb46-2"><a href="#cb46-2"></a>class Solution<span class="op">:</span></span>
-<span id="cb46-3"><a href="#cb46-3"></a><span class="st">    </span><span class="co"># 返回[a,b] 其中ab是出现一次的两个数字</span></span>
-<span id="cb46-4"><a href="#cb46-4"></a><span class="st">    </span>def <span class="kw">FindNumsAppearOnce</span>(self, array)<span class="op">:</span></span>
-<span id="cb46-5"><a href="#cb46-5"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb46-6"><a href="#cb46-6"></a><span class="st">        </span>res=[]</span>
-<span id="cb46-7"><a href="#cb46-7"></a>        <span class="cf">for</span> i <span class="cf">in</span> array<span class="op">:</span></span>
-<span id="cb46-8"><a href="#cb46-8"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">array.count</span>(i)<span class="op">==</span><span class="dv">1</span><span class="op">:</span></span>
-<span id="cb46-9"><a href="#cb46-9"></a><span class="st">                </span><span class="kw">res.append</span>(i)</span>
-<span id="cb46-10"><a href="#cb46-10"></a>        return res</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb47-2"><a href="#cb47-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb47-3"><a href="#cb47-3"></a><span class="st">    </span><span class="co"># 返回[a,b] 其中ab是出现一次的两个数字</span></span>
+<span id="cb47-4"><a href="#cb47-4"></a><span class="st">    </span>def <span class="kw">FindNumsAppearOnce</span>(self, array)<span class="op">:</span></span>
+<span id="cb47-5"><a href="#cb47-5"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb47-6"><a href="#cb47-6"></a><span class="st">        </span>res=[]</span>
+<span id="cb47-7"><a href="#cb47-7"></a>        <span class="cf">for</span> i <span class="cf">in</span> array<span class="op">:</span></span>
+<span id="cb47-8"><a href="#cb47-8"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">array.count</span>(i)<span class="op">==</span><span class="dv">1</span><span class="op">:</span></span>
+<span id="cb47-9"><a href="#cb47-9"></a><span class="st">                </span><span class="kw">res.append</span>(i)</span>
+<span id="cb47-10"><a href="#cb47-10"></a>        return res</span></code></pre></div>
 </div>
 <div id="和为s的连续子序列" class="section level2">
 <h2><span class="header-section-number">1.43</span> 和为S的连续子序列</h2>
@@ -1204,100 +1213,100 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <p><strong>思路1</strong>
 在连续的正数序列中，如果一个数比和的一半要大的话，如和为100，其中一个数是51，那么，存在51且和等于100的这个序列是不存在的。因此，我们可以借助两个循环，来循环遍历所有和等于tsum的序列。</p>
 <p>也就是穷举法</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb47-2"><a href="#cb47-2"></a>class Solution<span class="op">:</span></span>
-<span id="cb47-3"><a href="#cb47-3"></a><span class="st">    </span>def <span class="kw">FindContinuousSequence</span>(self, tsum)<span class="op">:</span></span>
-<span id="cb47-4"><a href="#cb47-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb47-5"><a href="#cb47-5"></a><span class="st">        </span>res =<span class="st"> </span>[]</span>
-<span id="cb47-6"><a href="#cb47-6"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>, tsum<span class="op">/</span><span class="er">/</span><span class="dv">2</span><span class="op">+</span><span class="dv">1</span>)<span class="op">:</span><span class="st"> </span>遍历一半就行了</span>
-<span id="cb47-7"><a href="#cb47-7"></a>            sum =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb47-8"><a href="#cb47-8"></a>            <span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(i, tsum<span class="op">/</span><span class="er">/</span><span class="dv">2</span><span class="op">+</span><span class="dv">2</span>)<span class="op">:</span></span>
-<span id="cb47-9"><a href="#cb47-9"></a><span class="st">                </span>sum <span class="op">+</span><span class="er">=</span><span class="st"> </span>j</span>
-<span id="cb47-10"><a href="#cb47-10"></a>                <span class="cf">if</span> sum <span class="op">==</span><span class="st"> </span>tsum<span class="op">:</span></span>
-<span id="cb47-11"><a href="#cb47-11"></a><span class="st">                    </span><span class="kw">res.append</span>(<span class="kw">list</span>(<span class="kw">range</span>(i, j<span class="op">+</span><span class="dv">1</span>)))</span>
-<span id="cb47-12"><a href="#cb47-12"></a>                <span class="cf">if</span> sum <span class="op">&gt;</span><span class="st"> </span>tsum<span class="op">:</span></span>
-<span id="cb47-13"><a href="#cb47-13"></a><span class="st">                    </span><span class="cf">break</span></span>
-<span id="cb47-14"><a href="#cb47-14"></a>        return res</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb48-2"><a href="#cb48-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb48-3"><a href="#cb48-3"></a><span class="st">    </span>def <span class="kw">FindContinuousSequence</span>(self, tsum)<span class="op">:</span></span>
+<span id="cb48-4"><a href="#cb48-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb48-5"><a href="#cb48-5"></a><span class="st">        </span>res =<span class="st"> </span>[]</span>
+<span id="cb48-6"><a href="#cb48-6"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>, tsum<span class="op">/</span><span class="er">/</span><span class="dv">2</span><span class="op">+</span><span class="dv">1</span>)<span class="op">:</span><span class="st"> </span>遍历一半就行了</span>
+<span id="cb48-7"><a href="#cb48-7"></a>            sum =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb48-8"><a href="#cb48-8"></a>            <span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(i, tsum<span class="op">/</span><span class="er">/</span><span class="dv">2</span><span class="op">+</span><span class="dv">2</span>)<span class="op">:</span></span>
+<span id="cb48-9"><a href="#cb48-9"></a><span class="st">                </span>sum <span class="op">+</span><span class="er">=</span><span class="st"> </span>j</span>
+<span id="cb48-10"><a href="#cb48-10"></a>                <span class="cf">if</span> sum <span class="op">==</span><span class="st"> </span>tsum<span class="op">:</span></span>
+<span id="cb48-11"><a href="#cb48-11"></a><span class="st">                    </span><span class="kw">res.append</span>(<span class="kw">list</span>(<span class="kw">range</span>(i, j<span class="op">+</span><span class="dv">1</span>)))</span>
+<span id="cb48-12"><a href="#cb48-12"></a>                <span class="cf">if</span> sum <span class="op">&gt;</span><span class="st"> </span>tsum<span class="op">:</span></span>
+<span id="cb48-13"><a href="#cb48-13"></a><span class="st">                    </span><span class="cf">break</span></span>
+<span id="cb48-14"><a href="#cb48-14"></a>        return res</span></code></pre></div>
 <p><em>思路2</em></p>
 <blockquote>
 <p>利用一个双指针来实现一个滑动窗口，如果当前窗口内的和等于tsum，返回窗口内的所有数，并且移动窗口，窗口右侧向右移动一位或者左侧右移一位都行，如果小于tsum的话，窗口的左侧向右移动一位，如果大于tsum的话，窗口的右侧向左移动一位，循环终止条件是，窗口左侧，即（窗口左侧）序列的最小值大于tsum//2，即思路1中的不会有数大于和的一半。<a href="https://blog.csdn.net/ggdhs/article/details/90344263">csdn</a></p>
 </blockquote>
 <p>滑动窗口的思想真的挺常见的，要熟练使用哇</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb48-2"><a href="#cb48-2"></a>class Solution<span class="op">:</span></span>
-<span id="cb48-3"><a href="#cb48-3"></a><span class="st">    </span>def <span class="kw">FindContinuousSequence</span>(self, tsum)<span class="op">:</span></span>
-<span id="cb48-4"><a href="#cb48-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb48-5"><a href="#cb48-5"></a><span class="st">        </span><span class="cf">if</span> tsum <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span></span>
-<span id="cb48-6"><a href="#cb48-6"></a><span class="st">            </span>return []</span>
-<span id="cb48-7"><a href="#cb48-7"></a>        small =<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb48-8"><a href="#cb48-8"></a>        big =<span class="st"> </span><span class="dv">2</span></span>
-<span id="cb48-9"><a href="#cb48-9"></a>        mid =<span class="st"> </span>tsum<span class="op">/</span><span class="er">/</span><span class="dv">2</span></span>
-<span id="cb48-10"><a href="#cb48-10"></a>        sum =<span class="st"> </span>big<span class="op">+</span>small       <span class="co"># 用来不断更新当前序列的和，也可以利用求和公式。</span></span>
-<span id="cb48-11"><a href="#cb48-11"></a>        ret =<span class="st"> </span>[]</span>
-<span id="cb48-12"><a href="#cb48-12"></a>        <span class="cf">while</span> small <span class="op">&lt;=</span><span class="st"> </span>mid<span class="op">:</span></span>
-<span id="cb48-13"><a href="#cb48-13"></a><span class="st">            </span><span class="cf">if</span> sum <span class="op">==</span><span class="st"> </span>tsum<span class="op">:</span></span>
-<span id="cb48-14"><a href="#cb48-14"></a><span class="st">                </span><span class="kw">ret.append</span>(<span class="kw">list</span>(<span class="kw">range</span>(small,big<span class="op">+</span><span class="dv">1</span>)))</span>
-<span id="cb48-15"><a href="#cb48-15"></a>                big <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span>       <span class="co"># 如果右侧窗口移动，先移动在加</span></span>
-<span id="cb48-16"><a href="#cb48-16"></a>                sum <span class="op">+</span><span class="er">=</span><span class="st"> </span>big     <span class="co"># 不断更新，也可以利用求和公式来计算窗口内数的和</span></span>
-<span id="cb48-17"><a href="#cb48-17"></a>            elif sum <span class="op">&lt;</span><span class="st"> </span>tsum<span class="op">:</span></span>
-<span id="cb48-18"><a href="#cb48-18"></a><span class="st">                </span>big <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span>      </span>
-<span id="cb48-19"><a href="#cb48-19"></a>                sum <span class="op">+</span><span class="er">=</span><span class="st"> </span>big</span>
-<span id="cb48-20"><a href="#cb48-20"></a>            <span class="cf">else</span><span class="op">:</span><span class="st">             </span><span class="co"># 如果左侧窗口移动，先减在移动</span></span>
-<span id="cb48-21"><a href="#cb48-21"></a><span class="st">                </span>sum <span class="op">-</span><span class="er">=</span><span class="st"> </span>small</span>
-<span id="cb48-22"><a href="#cb48-22"></a>                small <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb48-23"><a href="#cb48-23"></a>        return ret</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb49-2"><a href="#cb49-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb49-3"><a href="#cb49-3"></a><span class="st">    </span>def <span class="kw">FindContinuousSequence</span>(self, tsum)<span class="op">:</span></span>
+<span id="cb49-4"><a href="#cb49-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb49-5"><a href="#cb49-5"></a><span class="st">        </span><span class="cf">if</span> tsum <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span></span>
+<span id="cb49-6"><a href="#cb49-6"></a><span class="st">            </span>return []</span>
+<span id="cb49-7"><a href="#cb49-7"></a>        small =<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb49-8"><a href="#cb49-8"></a>        big =<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb49-9"><a href="#cb49-9"></a>        mid =<span class="st"> </span>tsum<span class="op">/</span><span class="er">/</span><span class="dv">2</span></span>
+<span id="cb49-10"><a href="#cb49-10"></a>        sum =<span class="st"> </span>big<span class="op">+</span>small       <span class="co"># 用来不断更新当前序列的和，也可以利用求和公式。</span></span>
+<span id="cb49-11"><a href="#cb49-11"></a>        ret =<span class="st"> </span>[]</span>
+<span id="cb49-12"><a href="#cb49-12"></a>        <span class="cf">while</span> small <span class="op">&lt;=</span><span class="st"> </span>mid<span class="op">:</span></span>
+<span id="cb49-13"><a href="#cb49-13"></a><span class="st">            </span><span class="cf">if</span> sum <span class="op">==</span><span class="st"> </span>tsum<span class="op">:</span></span>
+<span id="cb49-14"><a href="#cb49-14"></a><span class="st">                </span><span class="kw">ret.append</span>(<span class="kw">list</span>(<span class="kw">range</span>(small,big<span class="op">+</span><span class="dv">1</span>)))</span>
+<span id="cb49-15"><a href="#cb49-15"></a>                big <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span>       <span class="co"># 如果右侧窗口移动，先移动在加</span></span>
+<span id="cb49-16"><a href="#cb49-16"></a>                sum <span class="op">+</span><span class="er">=</span><span class="st"> </span>big     <span class="co"># 不断更新，也可以利用求和公式来计算窗口内数的和</span></span>
+<span id="cb49-17"><a href="#cb49-17"></a>            elif sum <span class="op">&lt;</span><span class="st"> </span>tsum<span class="op">:</span></span>
+<span id="cb49-18"><a href="#cb49-18"></a><span class="st">                </span>big <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span>      </span>
+<span id="cb49-19"><a href="#cb49-19"></a>                sum <span class="op">+</span><span class="er">=</span><span class="st"> </span>big</span>
+<span id="cb49-20"><a href="#cb49-20"></a>            <span class="cf">else</span><span class="op">:</span><span class="st">             </span><span class="co"># 如果左侧窗口移动，先减在移动</span></span>
+<span id="cb49-21"><a href="#cb49-21"></a><span class="st">                </span>sum <span class="op">-</span><span class="er">=</span><span class="st"> </span>small</span>
+<span id="cb49-22"><a href="#cb49-22"></a>                small <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb49-23"><a href="#cb49-23"></a>        return ret</span></code></pre></div>
 </div>
 <div id="两个数之和为s" class="section level2">
 <h2><span class="header-section-number">1.44</span> 两个数之和为s</h2>
 <p><strong>题目描述</strong>
 输入一个递增排序的数组和一个数字S，在数组中查找两个数，使得他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。</p>
 <p>easy题</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb49-2"><a href="#cb49-2"></a>class Solution<span class="op">:</span></span>
-<span id="cb49-3"><a href="#cb49-3"></a><span class="st">    </span>def <span class="kw">FindNumbersWithSum</span>(self, array, tsum)<span class="op">:</span></span>
-<span id="cb49-4"><a href="#cb49-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb49-5"><a href="#cb49-5"></a><span class="st">        </span><span class="cf">if</span> not array or not tsum<span class="op">:</span></span>
-<span id="cb49-6"><a href="#cb49-6"></a><span class="st">            </span>return []</span>
-<span id="cb49-7"><a href="#cb49-7"></a>        result =<span class="st"> </span>[]</span>
-<span id="cb49-8"><a href="#cb49-8"></a>        <span class="cf">for</span> i <span class="cf">in</span> array<span class="op">:</span></span>
-<span id="cb49-9"><a href="#cb49-9"></a><span class="st">            </span><span class="cf">if</span> (tsum <span class="op">-</span><span class="st"> </span>i) <span class="cf">in</span> array<span class="op">:</span></span>
-<span id="cb49-10"><a href="#cb49-10"></a><span class="st">                </span><span class="kw">result.append</span>([i, tsum <span class="op">-</span><span class="st"> </span>i])</span>
-<span id="cb49-11"><a href="#cb49-11"></a>        <span class="cf">if</span> result<span class="op">:</span></span>
-<span id="cb49-12"><a href="#cb49-12"></a><span class="st">            </span><span class="kw">result.sort</span>(<span class="dt">key=</span>lambda x<span class="op">:</span><span class="st"> </span>x[<span class="dv">0</span>] <span class="op">*</span><span class="st"> </span>x[<span class="dv">1</span>])</span>
-<span id="cb49-13"><a href="#cb49-13"></a>            result =<span class="st"> </span>result[<span class="dv">0</span>]</span>
-<span id="cb49-14"><a href="#cb49-14"></a>            return result</span>
-<span id="cb49-15"><a href="#cb49-15"></a>        return []</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb50-2"><a href="#cb50-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb50-3"><a href="#cb50-3"></a><span class="st">    </span>def <span class="kw">FindNumbersWithSum</span>(self, array, tsum)<span class="op">:</span></span>
+<span id="cb50-4"><a href="#cb50-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb50-5"><a href="#cb50-5"></a><span class="st">        </span><span class="cf">if</span> not array or not tsum<span class="op">:</span></span>
+<span id="cb50-6"><a href="#cb50-6"></a><span class="st">            </span>return []</span>
+<span id="cb50-7"><a href="#cb50-7"></a>        result =<span class="st"> </span>[]</span>
+<span id="cb50-8"><a href="#cb50-8"></a>        <span class="cf">for</span> i <span class="cf">in</span> array<span class="op">:</span></span>
+<span id="cb50-9"><a href="#cb50-9"></a><span class="st">            </span><span class="cf">if</span> (tsum <span class="op">-</span><span class="st"> </span>i) <span class="cf">in</span> array<span class="op">:</span></span>
+<span id="cb50-10"><a href="#cb50-10"></a><span class="st">                </span><span class="kw">result.append</span>([i, tsum <span class="op">-</span><span class="st"> </span>i])</span>
+<span id="cb50-11"><a href="#cb50-11"></a>        <span class="cf">if</span> result<span class="op">:</span></span>
+<span id="cb50-12"><a href="#cb50-12"></a><span class="st">            </span><span class="kw">result.sort</span>(<span class="dt">key=</span>lambda x<span class="op">:</span><span class="st"> </span>x[<span class="dv">0</span>] <span class="op">*</span><span class="st"> </span>x[<span class="dv">1</span>])</span>
+<span id="cb50-13"><a href="#cb50-13"></a>            result =<span class="st"> </span>result[<span class="dv">0</span>]</span>
+<span id="cb50-14"><a href="#cb50-14"></a>            return result</span>
+<span id="cb50-15"><a href="#cb50-15"></a>        return []</span></code></pre></div>
 </div>
 <div id="减绳子" class="section level2">
 <h2><span class="header-section-number">1.45</span> 减绳子</h2>
 <p><strong>题目描述</strong></p>
 <p>给你一根长度为n的绳子，请把绳子剪成整数长的m段（m、n都是整数，n&gt;1并且m&gt;1，m&lt;=n），每段绳子的长度记为k[1],…,k[m]。请问k[1]x…xk[m]可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb50-2"><a href="#cb50-2"></a><span class="co">#动态规划</span></span>
-<span id="cb50-3"><a href="#cb50-3"></a>class Solution<span class="op">:</span></span>
-<span id="cb50-4"><a href="#cb50-4"></a><span class="st">    </span>def <span class="kw">cutRope</span>(self, number)<span class="op">:</span></span>
-<span id="cb50-5"><a href="#cb50-5"></a><span class="st">         </span><span class="co"># write code here</span></span>
-<span id="cb50-6"><a href="#cb50-6"></a><span class="st">        </span><span class="cf">if</span> number <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span><span class="op">:</span></span>
-<span id="cb50-7"><a href="#cb50-7"></a><span class="st">            </span>return <span class="dv">0</span></span>
-<span id="cb50-8"><a href="#cb50-8"></a>        <span class="cf">if</span> number <span class="op">==</span><span class="st"> </span><span class="dv">2</span><span class="op">:</span></span>
-<span id="cb50-9"><a href="#cb50-9"></a><span class="st">            </span>return <span class="dv">1</span></span>
-<span id="cb50-10"><a href="#cb50-10"></a>        <span class="cf">if</span> number <span class="op">==</span><span class="st"> </span><span class="dv">3</span><span class="op">:</span></span>
-<span id="cb50-11"><a href="#cb50-11"></a><span class="st">            </span>return <span class="dv">2</span>       </span>
-<span id="cb50-12"><a href="#cb50-12"></a>         <span class="co">#申请辅助空间</span></span>
-<span id="cb50-13"><a href="#cb50-13"></a>        products =<span class="st"> </span>[<span class="dv">0</span>]<span class="op">*</span>(number<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb50-14"><a href="#cb50-14"></a>         <span class="co">#定义前几个初始变量的值</span></span>
-<span id="cb50-15"><a href="#cb50-15"></a>        products[<span class="dv">0</span>] =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb50-16"><a href="#cb50-16"></a>        products[<span class="dv">1</span>] =<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb50-17"><a href="#cb50-17"></a>        products[<span class="dv">2</span>] =<span class="st"> </span><span class="dv">2</span></span>
-<span id="cb50-18"><a href="#cb50-18"></a>        products[<span class="dv">3</span>] =<span class="st"> </span><span class="dv">3</span> <span class="co">#可以考虑先把可能出现的情况列出来</span></span>
-<span id="cb50-19"><a href="#cb50-19"></a>         <span class="co">#进行动态规划,也就是从下向上的进行求解</span></span>
-<span id="cb50-20"><a href="#cb50-20"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">4</span>, number<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb50-21"><a href="#cb50-21"></a><span class="st">            </span>max_ =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb50-22"><a href="#cb50-22"></a>            <span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>, i<span class="op">/</span><span class="dv">2</span><span class="op">+</span><span class="dv">1</span>)<span class="op">:</span><span class="st"> </span><span class="co">#可以用数学方法先找下范围，长方形面积问题把</span></span>
-<span id="cb50-23"><a href="#cb50-23"></a><span class="st">                </span>max_ =<span class="st"> </span><span class="kw">max</span>(products[j]<span class="op">*</span>products[i<span class="op">-</span>j], max_) <span class="co">#剪出长度为j的绳子所得到饿最大的乘积，与当前最大的乘积做比较</span></span>
-<span id="cb50-24"><a href="#cb50-24"></a>            products[i] =<span class="st"> </span>max_</span>
-<span id="cb50-25"><a href="#cb50-25"></a>            max_ =<span class="st"> </span>products[number]</span>
-<span id="cb50-26"><a href="#cb50-26"></a>        return max_</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb51-2"><a href="#cb51-2"></a><span class="co">#动态规划</span></span>
+<span id="cb51-3"><a href="#cb51-3"></a>class Solution<span class="op">:</span></span>
+<span id="cb51-4"><a href="#cb51-4"></a><span class="st">    </span>def <span class="kw">cutRope</span>(self, number)<span class="op">:</span></span>
+<span id="cb51-5"><a href="#cb51-5"></a><span class="st">         </span><span class="co"># write code here</span></span>
+<span id="cb51-6"><a href="#cb51-6"></a><span class="st">        </span><span class="cf">if</span> number <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span><span class="op">:</span></span>
+<span id="cb51-7"><a href="#cb51-7"></a><span class="st">            </span>return <span class="dv">0</span></span>
+<span id="cb51-8"><a href="#cb51-8"></a>        <span class="cf">if</span> number <span class="op">==</span><span class="st"> </span><span class="dv">2</span><span class="op">:</span></span>
+<span id="cb51-9"><a href="#cb51-9"></a><span class="st">            </span>return <span class="dv">1</span></span>
+<span id="cb51-10"><a href="#cb51-10"></a>        <span class="cf">if</span> number <span class="op">==</span><span class="st"> </span><span class="dv">3</span><span class="op">:</span></span>
+<span id="cb51-11"><a href="#cb51-11"></a><span class="st">            </span>return <span class="dv">2</span>       </span>
+<span id="cb51-12"><a href="#cb51-12"></a>         <span class="co">#申请辅助空间</span></span>
+<span id="cb51-13"><a href="#cb51-13"></a>        products =<span class="st"> </span>[<span class="dv">0</span>]<span class="op">*</span>(number<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb51-14"><a href="#cb51-14"></a>         <span class="co">#定义前几个初始变量的值</span></span>
+<span id="cb51-15"><a href="#cb51-15"></a>        products[<span class="dv">0</span>] =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb51-16"><a href="#cb51-16"></a>        products[<span class="dv">1</span>] =<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb51-17"><a href="#cb51-17"></a>        products[<span class="dv">2</span>] =<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb51-18"><a href="#cb51-18"></a>        products[<span class="dv">3</span>] =<span class="st"> </span><span class="dv">3</span> <span class="co">#可以考虑先把可能出现的情况列出来</span></span>
+<span id="cb51-19"><a href="#cb51-19"></a>         <span class="co">#进行动态规划,也就是从下向上的进行求解</span></span>
+<span id="cb51-20"><a href="#cb51-20"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">4</span>, number<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb51-21"><a href="#cb51-21"></a><span class="st">            </span>max_ =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb51-22"><a href="#cb51-22"></a>            <span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>, i<span class="op">/</span><span class="dv">2</span><span class="op">+</span><span class="dv">1</span>)<span class="op">:</span><span class="st"> </span><span class="co">#可以用数学方法先找下范围，长方形面积问题把</span></span>
+<span id="cb51-23"><a href="#cb51-23"></a><span class="st">                </span>max_ =<span class="st"> </span><span class="kw">max</span>(products[j]<span class="op">*</span>products[i<span class="op">-</span>j], max_) <span class="co">#剪出长度为j的绳子所得到饿最大的乘积，与当前最大的乘积做比较</span></span>
+<span id="cb51-24"><a href="#cb51-24"></a>            products[i] =<span class="st"> </span>max_</span>
+<span id="cb51-25"><a href="#cb51-25"></a>            max_ =<span class="st"> </span>products[number]</span>
+<span id="cb51-26"><a href="#cb51-26"></a>        return max_</span></code></pre></div>
 </div>
 <div id="机器人的移动范围" class="section level2">
 <h2><span class="header-section-number">1.46</span> 机器人的移动范围</h2>
@@ -1307,25 +1316,25 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 个位：取余
 十位：取商</p>
 <p>就正常的遍历每个格子就是正常的解法</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb51-2"><a href="#cb51-2"></a>class Solution<span class="op">:</span></span>
-<span id="cb51-3"><a href="#cb51-3"></a><span class="st">    </span>def <span class="kw">calSum</span>(self, temp)<span class="op">:</span></span>
-<span id="cb51-4"><a href="#cb51-4"></a><span class="st">        </span>sum =<span class="st"> </span><span class="dv">0</span> <span class="co">#两数的和</span></span>
-<span id="cb51-5"><a href="#cb51-5"></a>        <span class="cf">while</span>(temp <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)<span class="op">:</span></span>
-<span id="cb51-6"><a href="#cb51-6"></a><span class="st">            </span>sum <span class="op">+</span><span class="er">=</span><span class="st"> </span>temp % <span class="dv">10</span> <span class="co"># 取到个位数</span></span>
-<span id="cb51-7"><a href="#cb51-7"></a>            temp =<span class="st"> </span>temp <span class="op">/</span><span class="st"> </span><span class="dv">10</span>  <span class="co">#取到十位数</span></span>
-<span id="cb51-8"><a href="#cb51-8"></a>        return sum</span>
-<span id="cb51-9"><a href="#cb51-9"></a>      </span>
-<span id="cb51-10"><a href="#cb51-10"></a>    def <span class="kw">movingCount</span>(self, threshold, rows, cols)<span class="op">:</span></span>
-<span id="cb51-11"><a href="#cb51-11"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb51-12"><a href="#cb51-12"></a><span class="st">        </span>num =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb51-13"><a href="#cb51-13"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(rows)<span class="op">:</span></span>
-<span id="cb51-14"><a href="#cb51-14"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(cols)<span class="op">:</span></span>
-<span id="cb51-15"><a href="#cb51-15"></a><span class="st">                </span><span class="cf">if</span>(<span class="kw">self.calSum</span>(i) <span class="op">+</span><span class="st"> </span><span class="kw">self.calSum</span>(j) <span class="op">&lt;=</span><span class="st"> </span>threshold)<span class="op">:</span></span>
-<span id="cb51-16"><a href="#cb51-16"></a><span class="st">                    </span>num =<span class="st"> </span>num <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb51-17"><a href="#cb51-17"></a>                <span class="kw">elif</span>(rows<span class="op">==</span><span class="dv">1</span> or cols<span class="op">==</span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb51-18"><a href="#cb51-18"></a><span class="st">                    </span>return num</span>
-<span id="cb51-19"><a href="#cb51-19"></a>        return num</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb52-3"><a href="#cb52-3"></a><span class="st">    </span>def <span class="kw">calSum</span>(self, temp)<span class="op">:</span></span>
+<span id="cb52-4"><a href="#cb52-4"></a><span class="st">        </span>sum =<span class="st"> </span><span class="dv">0</span> <span class="co">#两数的和</span></span>
+<span id="cb52-5"><a href="#cb52-5"></a>        <span class="cf">while</span>(temp <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)<span class="op">:</span></span>
+<span id="cb52-6"><a href="#cb52-6"></a><span class="st">            </span>sum <span class="op">+</span><span class="er">=</span><span class="st"> </span>temp % <span class="dv">10</span> <span class="co"># 取到个位数</span></span>
+<span id="cb52-7"><a href="#cb52-7"></a>            temp =<span class="st"> </span>temp <span class="op">/</span><span class="st"> </span><span class="dv">10</span>  <span class="co">#取到十位数</span></span>
+<span id="cb52-8"><a href="#cb52-8"></a>        return sum</span>
+<span id="cb52-9"><a href="#cb52-9"></a>      </span>
+<span id="cb52-10"><a href="#cb52-10"></a>    def <span class="kw">movingCount</span>(self, threshold, rows, cols)<span class="op">:</span></span>
+<span id="cb52-11"><a href="#cb52-11"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb52-12"><a href="#cb52-12"></a><span class="st">        </span>num =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb52-13"><a href="#cb52-13"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(rows)<span class="op">:</span></span>
+<span id="cb52-14"><a href="#cb52-14"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(cols)<span class="op">:</span></span>
+<span id="cb52-15"><a href="#cb52-15"></a><span class="st">                </span><span class="cf">if</span>(<span class="kw">self.calSum</span>(i) <span class="op">+</span><span class="st"> </span><span class="kw">self.calSum</span>(j) <span class="op">&lt;=</span><span class="st"> </span>threshold)<span class="op">:</span></span>
+<span id="cb52-16"><a href="#cb52-16"></a><span class="st">                    </span>num =<span class="st"> </span>num <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb52-17"><a href="#cb52-17"></a>                <span class="kw">elif</span>(rows<span class="op">==</span><span class="dv">1</span> or cols<span class="op">==</span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb52-18"><a href="#cb52-18"></a><span class="st">                    </span>return num</span>
+<span id="cb52-19"><a href="#cb52-19"></a>        return num</span></code></pre></div>
 </div>
 <div id="矩阵中的路径" class="section level2">
 <h2><span class="header-section-number">1.47</span> 矩阵中的路径</h2>
@@ -1333,55 +1342,55 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一个格子开始，每一步可以在矩阵中向左，向右，向上，向下移动一个格子。如果一条路径经过了矩阵中的某一个格子，则该路径不能再进入该格子。 例如 <span class="math inline">\(\left[\begin{array}{llll}a &amp; b &amp; c &amp; e \\ s &amp; f &amp; c &amp; s \\ a &amp; d &amp; e &amp; e\end{array}\right]\)</span>
 矩阵中包含一条字符串“bcced”的路径，但是矩阵中不包含“abcb”路径，因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入该格子。</p>
 <p>不太会</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb52-2"><a href="#cb52-2"></a>class Solution<span class="op">:</span></span>
-<span id="cb52-3"><a href="#cb52-3"></a><span class="st">    </span>def <span class="kw">hasPath</span>(self, matrix, rows, cols, path)<span class="op">:</span></span>
-<span id="cb52-4"><a href="#cb52-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb52-5"><a href="#cb52-5"></a><span class="st">        </span><span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(rows)<span class="op">:</span></span>
-<span id="cb52-6"><a href="#cb52-6"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span> (cols)<span class="op">:</span></span>
-<span id="cb52-7"><a href="#cb52-7"></a><span class="st">                </span><span class="cf">if</span> matrix[i<span class="op">*</span>cols<span class="op">+</span>j]<span class="op">==</span>path[<span class="dv">0</span>]<span class="op">:</span></span>
-<span id="cb52-8"><a href="#cb52-8"></a><span class="st">                    </span><span class="cf">if</span> <span class="kw">self.findpath</span>(i,j,path[<span class="dv">1</span><span class="op">:</span>],<span class="kw">list</span>(matrix),rows,cols)<span class="op">:</span></span>
-<span id="cb52-9"><a href="#cb52-9"></a><span class="st">                        </span>return True</span>
-<span id="cb52-10"><a href="#cb52-10"></a>        return False</span>
-<span id="cb52-11"><a href="#cb52-11"></a>    def <span class="kw">findpath</span>(self,i,j,path,matrix,rows,cols)<span class="op">:</span></span>
-<span id="cb52-12"><a href="#cb52-12"></a><span class="st">        </span><span class="cf">if</span> i<span class="op">&lt;</span><span class="dv">0</span> or j<span class="op">&lt;</span><span class="dv">0</span> or i<span class="op">&gt;</span>rows or j<span class="op">&gt;</span>cols<span class="op">:</span></span>
-<span id="cb52-13"><a href="#cb52-13"></a><span class="st">            </span>return False</span>
-<span id="cb52-14"><a href="#cb52-14"></a>        <span class="cf">if</span> not path<span class="op">:</span></span>
-<span id="cb52-15"><a href="#cb52-15"></a><span class="st">            </span>return True</span>
-<span id="cb52-16"><a href="#cb52-16"></a>        matrix[i<span class="op">*</span>cols<span class="op">+</span>j]=<span class="st">&#39;0&#39;</span></span>
-<span id="cb52-17"><a href="#cb52-17"></a>        <span class="cf">if</span> i<span class="op">+</span><span class="dv">1</span><span class="op">&lt;</span>rows and matrix[(i<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span>cols<span class="op">+</span>j]<span class="op">==</span>path[<span class="dv">0</span>]<span class="op">:</span></span>
-<span id="cb52-18"><a href="#cb52-18"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">self.findpath</span>(i<span class="op">+</span><span class="dv">1</span>, j, path[<span class="dv">1</span><span class="op">:</span>], matrix, rows, cols)<span class="op">:</span></span>
-<span id="cb52-19"><a href="#cb52-19"></a><span class="st">                </span>return True</span>
-<span id="cb52-20"><a href="#cb52-20"></a>        <span class="cf">if</span> j<span class="op">+</span><span class="dv">1</span><span class="op">&lt;</span>cols and matrix[i<span class="op">*</span>cols<span class="op">+</span>j<span class="op">+</span><span class="dv">1</span>]<span class="op">==</span>path[<span class="dv">0</span>]<span class="op">:</span></span>
-<span id="cb52-21"><a href="#cb52-21"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">self.findpath</span>(i, j<span class="op">+</span><span class="dv">1</span>, path[<span class="dv">1</span><span class="op">:</span>], matrix, rows, cols)<span class="op">:</span></span>
-<span id="cb52-22"><a href="#cb52-22"></a><span class="st">                </span>return True</span>
-<span id="cb52-23"><a href="#cb52-23"></a>        <span class="cf">if</span> i<span class="dv">-1</span><span class="op">&gt;=</span><span class="dv">0</span> and matrix[(i<span class="dv">-1</span>)<span class="op">*</span>cols<span class="op">+</span>j]<span class="op">==</span>path[<span class="dv">0</span>]<span class="op">:</span></span>
-<span id="cb52-24"><a href="#cb52-24"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">self.findpath</span>(i<span class="dv">-1</span>, j, path[<span class="dv">1</span><span class="op">:</span>], matrix, rows, cols)<span class="op">:</span></span>
-<span id="cb52-25"><a href="#cb52-25"></a><span class="st">                </span>return True</span>
-<span id="cb52-26"><a href="#cb52-26"></a>        <span class="cf">if</span> j<span class="dv">-1</span><span class="op">&gt;=</span><span class="dv">0</span> and matrix[i<span class="op">*</span>cols<span class="op">+</span>j<span class="dv">-1</span>]<span class="op">==</span>path[<span class="dv">0</span>]<span class="op">:</span></span>
-<span id="cb52-27"><a href="#cb52-27"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">self.findpath</span>(i, j<span class="dv">-1</span>, path[<span class="dv">1</span><span class="op">:</span>], matrix, rows, cols)<span class="op">:</span></span>
-<span id="cb52-28"><a href="#cb52-28"></a><span class="st">                </span>return True</span>
-<span id="cb52-29"><a href="#cb52-29"></a>        <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb52-30"><a href="#cb52-30"></a><span class="st">            </span>return False</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb53-2"><a href="#cb53-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb53-3"><a href="#cb53-3"></a><span class="st">    </span>def <span class="kw">hasPath</span>(self, matrix, rows, cols, path)<span class="op">:</span></span>
+<span id="cb53-4"><a href="#cb53-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb53-5"><a href="#cb53-5"></a><span class="st">        </span><span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(rows)<span class="op">:</span></span>
+<span id="cb53-6"><a href="#cb53-6"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span> (cols)<span class="op">:</span></span>
+<span id="cb53-7"><a href="#cb53-7"></a><span class="st">                </span><span class="cf">if</span> matrix[i<span class="op">*</span>cols<span class="op">+</span>j]<span class="op">==</span>path[<span class="dv">0</span>]<span class="op">:</span></span>
+<span id="cb53-8"><a href="#cb53-8"></a><span class="st">                    </span><span class="cf">if</span> <span class="kw">self.findpath</span>(i,j,path[<span class="dv">1</span><span class="op">:</span>],<span class="kw">list</span>(matrix),rows,cols)<span class="op">:</span></span>
+<span id="cb53-9"><a href="#cb53-9"></a><span class="st">                        </span>return True</span>
+<span id="cb53-10"><a href="#cb53-10"></a>        return False</span>
+<span id="cb53-11"><a href="#cb53-11"></a>    def <span class="kw">findpath</span>(self,i,j,path,matrix,rows,cols)<span class="op">:</span></span>
+<span id="cb53-12"><a href="#cb53-12"></a><span class="st">        </span><span class="cf">if</span> i<span class="op">&lt;</span><span class="dv">0</span> or j<span class="op">&lt;</span><span class="dv">0</span> or i<span class="op">&gt;</span>rows or j<span class="op">&gt;</span>cols<span class="op">:</span></span>
+<span id="cb53-13"><a href="#cb53-13"></a><span class="st">            </span>return False</span>
+<span id="cb53-14"><a href="#cb53-14"></a>        <span class="cf">if</span> not path<span class="op">:</span></span>
+<span id="cb53-15"><a href="#cb53-15"></a><span class="st">            </span>return True</span>
+<span id="cb53-16"><a href="#cb53-16"></a>        matrix[i<span class="op">*</span>cols<span class="op">+</span>j]=<span class="st">&#39;0&#39;</span></span>
+<span id="cb53-17"><a href="#cb53-17"></a>        <span class="cf">if</span> i<span class="op">+</span><span class="dv">1</span><span class="op">&lt;</span>rows and matrix[(i<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span>cols<span class="op">+</span>j]<span class="op">==</span>path[<span class="dv">0</span>]<span class="op">:</span></span>
+<span id="cb53-18"><a href="#cb53-18"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">self.findpath</span>(i<span class="op">+</span><span class="dv">1</span>, j, path[<span class="dv">1</span><span class="op">:</span>], matrix, rows, cols)<span class="op">:</span></span>
+<span id="cb53-19"><a href="#cb53-19"></a><span class="st">                </span>return True</span>
+<span id="cb53-20"><a href="#cb53-20"></a>        <span class="cf">if</span> j<span class="op">+</span><span class="dv">1</span><span class="op">&lt;</span>cols and matrix[i<span class="op">*</span>cols<span class="op">+</span>j<span class="op">+</span><span class="dv">1</span>]<span class="op">==</span>path[<span class="dv">0</span>]<span class="op">:</span></span>
+<span id="cb53-21"><a href="#cb53-21"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">self.findpath</span>(i, j<span class="op">+</span><span class="dv">1</span>, path[<span class="dv">1</span><span class="op">:</span>], matrix, rows, cols)<span class="op">:</span></span>
+<span id="cb53-22"><a href="#cb53-22"></a><span class="st">                </span>return True</span>
+<span id="cb53-23"><a href="#cb53-23"></a>        <span class="cf">if</span> i<span class="dv">-1</span><span class="op">&gt;=</span><span class="dv">0</span> and matrix[(i<span class="dv">-1</span>)<span class="op">*</span>cols<span class="op">+</span>j]<span class="op">==</span>path[<span class="dv">0</span>]<span class="op">:</span></span>
+<span id="cb53-24"><a href="#cb53-24"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">self.findpath</span>(i<span class="dv">-1</span>, j, path[<span class="dv">1</span><span class="op">:</span>], matrix, rows, cols)<span class="op">:</span></span>
+<span id="cb53-25"><a href="#cb53-25"></a><span class="st">                </span>return True</span>
+<span id="cb53-26"><a href="#cb53-26"></a>        <span class="cf">if</span> j<span class="dv">-1</span><span class="op">&gt;=</span><span class="dv">0</span> and matrix[i<span class="op">*</span>cols<span class="op">+</span>j<span class="dv">-1</span>]<span class="op">==</span>path[<span class="dv">0</span>]<span class="op">:</span></span>
+<span id="cb53-27"><a href="#cb53-27"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">self.findpath</span>(i, j<span class="dv">-1</span>, path[<span class="dv">1</span><span class="op">:</span>], matrix, rows, cols)<span class="op">:</span></span>
+<span id="cb53-28"><a href="#cb53-28"></a><span class="st">                </span>return True</span>
+<span id="cb53-29"><a href="#cb53-29"></a>        <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb53-30"><a href="#cb53-30"></a><span class="st">            </span>return False</span></code></pre></div>
 </div>
 <div id="滑动窗口的最大值" class="section level2">
 <h2><span class="header-section-number">1.48</span> 滑动窗口的最大值</h2>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>题目描述</span>
-<span id="cb53-2"><a href="#cb53-2"></a>给定一个数组和滑动窗口的大小，找出所有滑动窗口里数值的最大值。例如，如果输入数组{<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>}及滑动窗口的大小3，那么一共存在6个滑动窗口，他们的最大值分别为{<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">5</span>}； 针对数组{<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>}的滑动窗口有以下6个： {[<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>}， {<span class="dv">2</span>,[<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>],<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>}， {<span class="dv">2</span>,<span class="dv">3</span>,[<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">6</span>],<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>}， {<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,[<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">2</span>],<span class="dv">5</span>,<span class="dv">1</span>}， {<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>,[<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>],<span class="dv">1</span>}， {<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">6</span>,[<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>]}。</span>
-<span id="cb53-3"><a href="#cb53-3"></a>窗口大于数组长度的时候，返回空</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a>题目描述</span>
+<span id="cb54-2"><a href="#cb54-2"></a>给定一个数组和滑动窗口的大小，找出所有滑动窗口里数值的最大值。例如，如果输入数组{<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>}及滑动窗口的大小3，那么一共存在6个滑动窗口，他们的最大值分别为{<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">5</span>}； 针对数组{<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>}的滑动窗口有以下6个： {[<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>}， {<span class="dv">2</span>,[<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>],<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>}， {<span class="dv">2</span>,<span class="dv">3</span>,[<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">6</span>],<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>}， {<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,[<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">2</span>],<span class="dv">5</span>,<span class="dv">1</span>}， {<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>,[<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>],<span class="dv">1</span>}， {<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">6</span>,[<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>]}。</span>
+<span id="cb54-3"><a href="#cb54-3"></a>窗口大于数组长度的时候，返回空</span></code></pre></div>
 <p>想起了卷积核滑窗有木有</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb54-2"><a href="#cb54-2"></a>class Solution<span class="op">:</span></span>
-<span id="cb54-3"><a href="#cb54-3"></a><span class="st">    </span>def <span class="kw">maxInWindows</span>(self, num, size)<span class="op">:</span></span>
-<span id="cb54-4"><a href="#cb54-4"></a><span class="st">        </span><span class="cf">if</span> size<span class="op">==</span><span class="dv">0</span><span class="op">:</span></span>
-<span id="cb54-5"><a href="#cb54-5"></a><span class="st">            </span>return []</span>
-<span id="cb54-6"><a href="#cb54-6"></a>        <span class="cf">if</span> size<span class="op">&gt;</span><span class="kw">len</span>(num)<span class="op">:</span></span>
-<span id="cb54-7"><a href="#cb54-7"></a><span class="st">            </span>return []</span>
-<span id="cb54-8"><a href="#cb54-8"></a>        <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb54-9"><a href="#cb54-9"></a><span class="st">            </span>result=[]</span>
-<span id="cb54-10"><a href="#cb54-10"></a>            <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(num)<span class="op">-</span>size<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb54-11"><a href="#cb54-11"></a><span class="st">                </span><span class="kw">result.append</span>(<span class="kw">max</span>(num[i<span class="op">:</span>i<span class="op">+</span>size]))</span>
-<span id="cb54-12"><a href="#cb54-12"></a>            return result</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb55-2"><a href="#cb55-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb55-3"><a href="#cb55-3"></a><span class="st">    </span>def <span class="kw">maxInWindows</span>(self, num, size)<span class="op">:</span></span>
+<span id="cb55-4"><a href="#cb55-4"></a><span class="st">        </span><span class="cf">if</span> size<span class="op">==</span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb55-5"><a href="#cb55-5"></a><span class="st">            </span>return []</span>
+<span id="cb55-6"><a href="#cb55-6"></a>        <span class="cf">if</span> size<span class="op">&gt;</span><span class="kw">len</span>(num)<span class="op">:</span></span>
+<span id="cb55-7"><a href="#cb55-7"></a><span class="st">            </span>return []</span>
+<span id="cb55-8"><a href="#cb55-8"></a>        <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb55-9"><a href="#cb55-9"></a><span class="st">            </span>result=[]</span>
+<span id="cb55-10"><a href="#cb55-10"></a>            <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(num)<span class="op">-</span>size<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb55-11"><a href="#cb55-11"></a><span class="st">                </span><span class="kw">result.append</span>(<span class="kw">max</span>(num[i<span class="op">:</span>i<span class="op">+</span>size]))</span>
+<span id="cb55-12"><a href="#cb55-12"></a>            return result</span></code></pre></div>
 </div>
 <div id="孩子们的游戏" class="section level2">
 <h2><span class="header-section-number">1.49</span> 孩子们的游戏</h2>
@@ -1392,14 +1401,14 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 f[1]=0;
 f[i]=(f[i-1]+m)%i; (i&gt;1)
 通过递推公式即可求得f[n]。</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>def <span class="kw">LastRemaining_Solution</span>(self, n, m)<span class="op">:</span></span>
-<span id="cb55-2"><a href="#cb55-2"></a><span class="st">    </span><span class="co"># write code here</span></span>
-<span id="cb55-3"><a href="#cb55-3"></a><span class="st">    </span><span class="cf">if</span> n <span class="op">==</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
-<span id="cb55-4"><a href="#cb55-4"></a><span class="st">        </span>return <span class="dv">-1</span></span>
-<span id="cb55-5"><a href="#cb55-5"></a>    s =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb55-6"><a href="#cb55-6"></a>    <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">2</span>, n<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb55-7"><a href="#cb55-7"></a><span class="st">        </span>s =<span class="st"> </span>(s<span class="op">+</span>m) % i</span>
-<span id="cb55-8"><a href="#cb55-8"></a>    return s</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a>def <span class="kw">LastRemaining_Solution</span>(self, n, m)<span class="op">:</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a><span class="st">    </span><span class="co"># write code here</span></span>
+<span id="cb56-3"><a href="#cb56-3"></a><span class="st">    </span><span class="cf">if</span> n <span class="op">==</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb56-4"><a href="#cb56-4"></a><span class="st">        </span>return <span class="dv">-1</span></span>
+<span id="cb56-5"><a href="#cb56-5"></a>    s =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb56-6"><a href="#cb56-6"></a>    <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">2</span>, n<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb56-7"><a href="#cb56-7"></a><span class="st">        </span>s =<span class="st"> </span>(s<span class="op">+</span>m) % i</span>
+<span id="cb56-8"><a href="#cb56-8"></a>    return s</span></code></pre></div>
 </div>
 <div id="扑克牌的顺子" class="section level2">
 <h2><span class="header-section-number">1.50</span> 扑克牌的顺子</h2>
@@ -1411,19 +1420,19 @@ f[i]=(f[i-1]+m)%i; (i&gt;1)
 <li>除0外，最大值与最小值之差小于等于4</li>
 <li>除0外，不能在包含其它重复的牌</li>
 </ul>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb56-2"><a href="#cb56-2"></a>class Solution<span class="op">:</span></span>
-<span id="cb56-3"><a href="#cb56-3"></a><span class="st">    </span>def <span class="kw">IsContinuous</span>(self, numbers)<span class="op">:</span></span>
-<span id="cb56-4"><a href="#cb56-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb56-5"><a href="#cb56-5"></a><span class="st">        </span><span class="cf">if</span> not numbers<span class="op">:</span></span>
-<span id="cb56-6"><a href="#cb56-6"></a><span class="st">            </span>return False</span>
-<span id="cb56-7"><a href="#cb56-7"></a>        res =<span class="st"> </span>[]</span>
-<span id="cb56-8"><a href="#cb56-8"></a>        <span class="cf">for</span> i <span class="cf">in</span> numbers<span class="op">:</span></span>
-<span id="cb56-9"><a href="#cb56-9"></a><span class="st">            </span><span class="cf">if</span> i <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
-<span id="cb56-10"><a href="#cb56-10"></a><span class="st">                </span><span class="kw">res.append</span>(i)</span>
-<span id="cb56-11"><a href="#cb56-11"></a>        <span class="cf">if</span> <span class="kw">max</span>(res) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(res) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">4</span> and <span class="kw">len</span>(res) <span class="op">==</span><span class="st"> </span><span class="kw">len</span>(<span class="kw">set</span>(res))<span class="op">:</span></span>
-<span id="cb56-12"><a href="#cb56-12"></a><span class="st">            </span>return True</span>
-<span id="cb56-13"><a href="#cb56-13"></a>        return False</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb57-2"><a href="#cb57-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb57-3"><a href="#cb57-3"></a><span class="st">    </span>def <span class="kw">IsContinuous</span>(self, numbers)<span class="op">:</span></span>
+<span id="cb57-4"><a href="#cb57-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb57-5"><a href="#cb57-5"></a><span class="st">        </span><span class="cf">if</span> not numbers<span class="op">:</span></span>
+<span id="cb57-6"><a href="#cb57-6"></a><span class="st">            </span>return False</span>
+<span id="cb57-7"><a href="#cb57-7"></a>        res =<span class="st"> </span>[]</span>
+<span id="cb57-8"><a href="#cb57-8"></a>        <span class="cf">for</span> i <span class="cf">in</span> numbers<span class="op">:</span></span>
+<span id="cb57-9"><a href="#cb57-9"></a><span class="st">            </span><span class="cf">if</span> i <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb57-10"><a href="#cb57-10"></a><span class="st">                </span><span class="kw">res.append</span>(i)</span>
+<span id="cb57-11"><a href="#cb57-11"></a>        <span class="cf">if</span> <span class="kw">max</span>(res) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(res) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">4</span> and <span class="kw">len</span>(res) <span class="op">==</span><span class="st"> </span><span class="kw">len</span>(<span class="kw">set</span>(res))<span class="op">:</span></span>
+<span id="cb57-12"><a href="#cb57-12"></a><span class="st">            </span>return True</span>
+<span id="cb57-13"><a href="#cb57-13"></a>        return False</span></code></pre></div>
 </div>
 <div id="将字符串转化为整数" class="section level2">
 <h2><span class="header-section-number">1.51</span> 将字符串转化为整数</h2>
@@ -1433,105 +1442,105 @@ f[i]=(f[i-1]+m)%i; (i&gt;1)
 输入一个字符串,包括数字字母符号,可以为空
 输出描述:
 如果是合法的数值表达则返回该数字，否则返回0</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb57-2"><a href="#cb57-2"></a>class Solution<span class="op">:</span></span>
-<span id="cb57-3"><a href="#cb57-3"></a><span class="st">    </span>def <span class="kw">StrToInt</span>(self, s)<span class="op">:</span></span>
-<span id="cb57-4"><a href="#cb57-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb57-5"><a href="#cb57-5"></a><span class="st">        </span><span class="cf">if</span> not s or <span class="kw">len</span>(s) <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span></span>
-<span id="cb57-6"><a href="#cb57-6"></a><span class="st">            </span>return <span class="dv">0</span></span>
-<span id="cb57-7"><a href="#cb57-7"></a>        numdict =<span class="st"> </span>{<span class="st">&#39;0&#39;</span><span class="op">:</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&#39;1&#39;</span><span class="op">:</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&#39;2&#39;</span><span class="op">:</span><span class="st"> </span><span class="dv">2</span>, <span class="st">&#39;3&#39;</span><span class="op">:</span><span class="st"> </span><span class="dv">3</span>, <span class="st">&#39;4&#39;</span><span class="op">:</span><span class="st"> </span><span class="dv">4</span>, <span class="st">&#39;5&#39;</span><span class="op">:</span><span class="st"> </span><span class="dv">5</span>, <span class="st">&#39;6&#39;</span><span class="op">:</span><span class="st"> </span><span class="dv">6</span>, <span class="st">&#39;7&#39;</span><span class="op">:</span><span class="st"> </span><span class="dv">7</span>, <span class="st">&#39;8&#39;</span><span class="op">:</span><span class="st"> </span><span class="dv">8</span>, <span class="st">&#39;9&#39;</span><span class="op">:</span><span class="st"> </span><span class="dv">9</span>}</span>
-<span id="cb57-8"><a href="#cb57-8"></a>        result =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb57-9"><a href="#cb57-9"></a>        nums =<span class="st"> </span>[]</span>
-<span id="cb57-10"><a href="#cb57-10"></a>        <span class="cf">for</span> char <span class="cf">in</span> s<span class="op">:</span></span>
-<span id="cb57-11"><a href="#cb57-11"></a><span class="st">            </span><span class="cf">if</span> char <span class="op">==</span><span class="st"> &#39;+&#39;</span> or char <span class="op">==</span><span class="st"> &#39;-&#39;</span><span class="op">:</span></span>
-<span id="cb57-12"><a href="#cb57-12"></a><span class="st">                </span>continue</span>
-<span id="cb57-13"><a href="#cb57-13"></a>            elif char <span class="cf">in</span> numdict<span class="op">:</span></span>
-<span id="cb57-14"><a href="#cb57-14"></a><span class="st">                </span><span class="kw">nums.append</span>(numdict[char])</span>
-<span id="cb57-15"><a href="#cb57-15"></a>            <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb57-16"><a href="#cb57-16"></a><span class="st">                </span>return <span class="dv">0</span></span>
-<span id="cb57-17"><a href="#cb57-17"></a>        <span class="co"># 由list得到数值，这个写法要会</span></span>
-<span id="cb57-18"><a href="#cb57-18"></a>        <span class="cf">for</span> i <span class="cf">in</span> nums<span class="op">:</span></span>
-<span id="cb57-19"><a href="#cb57-19"></a><span class="st">            </span>result =<span class="st"> </span>result<span class="op">*</span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span>i</span>
-<span id="cb57-20"><a href="#cb57-20"></a>        return <span class="dv">-1</span><span class="op">*</span>result <span class="cf">if</span> s[<span class="dv">0</span>] <span class="op">==</span><span class="st"> &#39;-&#39;</span> <span class="cf">else</span> result</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb58-2"><a href="#cb58-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb58-3"><a href="#cb58-3"></a><span class="st">    </span>def <span class="kw">StrToInt</span>(self, s)<span class="op">:</span></span>
+<span id="cb58-4"><a href="#cb58-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb58-5"><a href="#cb58-5"></a><span class="st">        </span><span class="cf">if</span> not s or <span class="kw">len</span>(s) <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span></span>
+<span id="cb58-6"><a href="#cb58-6"></a><span class="st">            </span>return <span class="dv">0</span></span>
+<span id="cb58-7"><a href="#cb58-7"></a>        numdict =<span class="st"> </span>{<span class="st">&#39;0&#39;</span><span class="op">:</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&#39;1&#39;</span><span class="op">:</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&#39;2&#39;</span><span class="op">:</span><span class="st"> </span><span class="dv">2</span>, <span class="st">&#39;3&#39;</span><span class="op">:</span><span class="st"> </span><span class="dv">3</span>, <span class="st">&#39;4&#39;</span><span class="op">:</span><span class="st"> </span><span class="dv">4</span>, <span class="st">&#39;5&#39;</span><span class="op">:</span><span class="st"> </span><span class="dv">5</span>, <span class="st">&#39;6&#39;</span><span class="op">:</span><span class="st"> </span><span class="dv">6</span>, <span class="st">&#39;7&#39;</span><span class="op">:</span><span class="st"> </span><span class="dv">7</span>, <span class="st">&#39;8&#39;</span><span class="op">:</span><span class="st"> </span><span class="dv">8</span>, <span class="st">&#39;9&#39;</span><span class="op">:</span><span class="st"> </span><span class="dv">9</span>}</span>
+<span id="cb58-8"><a href="#cb58-8"></a>        result =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb58-9"><a href="#cb58-9"></a>        nums =<span class="st"> </span>[]</span>
+<span id="cb58-10"><a href="#cb58-10"></a>        <span class="cf">for</span> char <span class="cf">in</span> s<span class="op">:</span></span>
+<span id="cb58-11"><a href="#cb58-11"></a><span class="st">            </span><span class="cf">if</span> char <span class="op">==</span><span class="st"> &#39;+&#39;</span> or char <span class="op">==</span><span class="st"> &#39;-&#39;</span><span class="op">:</span></span>
+<span id="cb58-12"><a href="#cb58-12"></a><span class="st">                </span>continue</span>
+<span id="cb58-13"><a href="#cb58-13"></a>            elif char <span class="cf">in</span> numdict<span class="op">:</span></span>
+<span id="cb58-14"><a href="#cb58-14"></a><span class="st">                </span><span class="kw">nums.append</span>(numdict[char])</span>
+<span id="cb58-15"><a href="#cb58-15"></a>            <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb58-16"><a href="#cb58-16"></a><span class="st">                </span>return <span class="dv">0</span></span>
+<span id="cb58-17"><a href="#cb58-17"></a>        <span class="co"># 由list得到数值，这个写法要会</span></span>
+<span id="cb58-18"><a href="#cb58-18"></a>        <span class="cf">for</span> i <span class="cf">in</span> nums<span class="op">:</span></span>
+<span id="cb58-19"><a href="#cb58-19"></a><span class="st">            </span>result =<span class="st"> </span>result<span class="op">*</span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span>i</span>
+<span id="cb58-20"><a href="#cb58-20"></a>        return <span class="dv">-1</span><span class="op">*</span>result <span class="cf">if</span> s[<span class="dv">0</span>] <span class="op">==</span><span class="st"> &#39;-&#39;</span> <span class="cf">else</span> result</span></code></pre></div>
 </div>
 <div id="数组中第一个重复数字" class="section level2">
 <h2><span class="header-section-number">1.52</span> 数组中第一个重复数字</h2>
 <p>题目描述
 在一个长度为n的数组里的所有数字都在0到n-1的范围内。 数组中某些数字是重复的，但不知道有几个数字是重复的。也不知道每个数字重复几次。请找出数组中任意一个重复的数字。 例如，如果输入长度为7的数组{2,3,1,0,2,5,3}，那么对应的输出是第一个重复的数字2。</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb58-2"><a href="#cb58-2"></a><span class="st">    </span><span class="co"># 这里要特别注意~找到任意重复的一个值并赋值到duplication[0]</span></span>
-<span id="cb58-3"><a href="#cb58-3"></a><span class="st">    </span><span class="co"># 函数返回True/False</span></span>
-<span id="cb58-4"><a href="#cb58-4"></a><span class="st">    </span>def <span class="kw">duplicate</span>(self, numbers, duplication)<span class="op">:</span></span>
-<span id="cb58-5"><a href="#cb58-5"></a><span class="st">        </span><span class="cf">for</span> i <span class="cf">in</span> numbers<span class="op">:</span></span>
-<span id="cb58-6"><a href="#cb58-6"></a><span class="st">            </span><span class="cf">if</span> i not <span class="cf">in</span> duplication<span class="op">:</span></span>
-<span id="cb58-7"><a href="#cb58-7"></a><span class="st">                </span><span class="kw">duplication.append</span>(i)</span>
-<span id="cb58-8"><a href="#cb58-8"></a>            <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb58-9"><a href="#cb58-9"></a><span class="st">                </span>duplication[<span class="dv">0</span>]=i</span>
-<span id="cb58-10"><a href="#cb58-10"></a>                return True</span>
-<span id="cb58-11"><a href="#cb58-11"></a>        return False</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb59-2"><a href="#cb59-2"></a><span class="st">    </span><span class="co"># 这里要特别注意~找到任意重复的一个值并赋值到duplication[0]</span></span>
+<span id="cb59-3"><a href="#cb59-3"></a><span class="st">    </span><span class="co"># 函数返回True/False</span></span>
+<span id="cb59-4"><a href="#cb59-4"></a><span class="st">    </span>def <span class="kw">duplicate</span>(self, numbers, duplication)<span class="op">:</span></span>
+<span id="cb59-5"><a href="#cb59-5"></a><span class="st">        </span><span class="cf">for</span> i <span class="cf">in</span> numbers<span class="op">:</span></span>
+<span id="cb59-6"><a href="#cb59-6"></a><span class="st">            </span><span class="cf">if</span> i not <span class="cf">in</span> duplication<span class="op">:</span></span>
+<span id="cb59-7"><a href="#cb59-7"></a><span class="st">                </span><span class="kw">duplication.append</span>(i)</span>
+<span id="cb59-8"><a href="#cb59-8"></a>            <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb59-9"><a href="#cb59-9"></a><span class="st">                </span>duplication[<span class="dv">0</span>]=i</span>
+<span id="cb59-10"><a href="#cb59-10"></a>                return True</span>
+<span id="cb59-11"><a href="#cb59-11"></a>        return False</span></code></pre></div>
 </div>
 <div id="构建乘积数组" class="section level2">
 <h2><span class="header-section-number">1.53</span> 构建乘积数组</h2>
 <p><strong>题目描述</strong></p>
 <p>给定一个数组A[0,1,…,n-1],请构建一个数组B[0,1,…,n-1],其中B中的元素B[i]=A[0]<em>A[1]</em>…<em>A[i-1]</em>A[i+1]<em>…</em>A[n-1]。不能使用除法。（注意：规定B[0] = A[1] * A[2] * … * A[n-1]，B[n-1] = A[0] * A[1] * … * A[n-2];）
 对于A长度为1的情况，B无意义，故而无法构建，因此该情况不会存在。</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a></span>
-<span id="cb59-2"><a href="#cb59-2"></a>class Solution<span class="op">:</span></span>
-<span id="cb59-3"><a href="#cb59-3"></a><span class="st">    </span>def <span class="kw">multiply</span>(self, A)<span class="op">:</span></span>
-<span id="cb59-4"><a href="#cb59-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb59-5"><a href="#cb59-5"></a><span class="st">        </span>length =<span class="st"> </span><span class="kw">len</span>(A)</span>
-<span id="cb59-6"><a href="#cb59-6"></a>        B =<span class="st"> </span>[]</span>
-<span id="cb59-7"><a href="#cb59-7"></a>        <span class="cf">if</span>(length <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)<span class="op">:</span></span>
-<span id="cb59-8"><a href="#cb59-8"></a><span class="st">            </span>return B</span>
-<span id="cb59-9"><a href="#cb59-9"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(length)<span class="op">:</span></span>
-<span id="cb59-10"><a href="#cb59-10"></a><span class="st">            </span>temp =<span class="st"> </span>A[i]</span>
-<span id="cb59-11"><a href="#cb59-11"></a>            A[i] =<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb59-12"><a href="#cb59-12"></a>            Bi =<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb59-13"><a href="#cb59-13"></a>            <span class="cf">for</span> j <span class="cf">in</span> A<span class="op">:</span></span>
-<span id="cb59-14"><a href="#cb59-14"></a><span class="st">                </span>Bi <span class="op">*</span><span class="er">=</span><span class="st"> </span>j</span>
-<span id="cb59-15"><a href="#cb59-15"></a>            <span class="kw">B.append</span>(Bi)</span>
-<span id="cb59-16"><a href="#cb59-16"></a>            A[i] =<span class="st"> </span>temp</span>
-<span id="cb59-17"><a href="#cb59-17"></a>        return B</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a></span>
+<span id="cb60-2"><a href="#cb60-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb60-3"><a href="#cb60-3"></a><span class="st">    </span>def <span class="kw">multiply</span>(self, A)<span class="op">:</span></span>
+<span id="cb60-4"><a href="#cb60-4"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb60-5"><a href="#cb60-5"></a><span class="st">        </span>length =<span class="st"> </span><span class="kw">len</span>(A)</span>
+<span id="cb60-6"><a href="#cb60-6"></a>        B =<span class="st"> </span>[]</span>
+<span id="cb60-7"><a href="#cb60-7"></a>        <span class="cf">if</span>(length <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)<span class="op">:</span></span>
+<span id="cb60-8"><a href="#cb60-8"></a><span class="st">            </span>return B</span>
+<span id="cb60-9"><a href="#cb60-9"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(length)<span class="op">:</span></span>
+<span id="cb60-10"><a href="#cb60-10"></a><span class="st">            </span>temp =<span class="st"> </span>A[i]</span>
+<span id="cb60-11"><a href="#cb60-11"></a>            A[i] =<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb60-12"><a href="#cb60-12"></a>            Bi =<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb60-13"><a href="#cb60-13"></a>            <span class="cf">for</span> j <span class="cf">in</span> A<span class="op">:</span></span>
+<span id="cb60-14"><a href="#cb60-14"></a><span class="st">                </span>Bi <span class="op">*</span><span class="er">=</span><span class="st"> </span>j</span>
+<span id="cb60-15"><a href="#cb60-15"></a>            <span class="kw">B.append</span>(Bi)</span>
+<span id="cb60-16"><a href="#cb60-16"></a>            A[i] =<span class="st"> </span>temp</span>
+<span id="cb60-17"><a href="#cb60-17"></a>        return B</span></code></pre></div>
 </div>
 <div id="字符串中第一个不重复得字符串" class="section level2">
 <h2><span class="header-section-number">1.54</span> 字符串中第一个不重复得字符串</h2>
 <p><strong>题目描述</strong></p>
 <p>请实现一个函数用来找出字符流中第一个只出现一次的字符。例如，当从字符流中只读出前两个字符“go”时，第一个只出现一次的字符是“g”。当从该字符流中读出前六个字符“google”时，第一个只出现一次的字符是“l”。</p>
 <p>找个辅助栈</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb60-2"><a href="#cb60-2"></a><span class="st">    </span><span class="co"># 返回对应char</span></span>
-<span id="cb60-3"><a href="#cb60-3"></a><span class="st">    </span>def <span class="kw">__init__</span>(self)<span class="op">:</span></span>
-<span id="cb60-4"><a href="#cb60-4"></a><span class="st">        </span>self.s=<span class="st">&#39;&#39;</span></span>
-<span id="cb60-5"><a href="#cb60-5"></a>    def <span class="kw">FirstAppearingOnce</span>(self)<span class="op">:</span></span>
-<span id="cb60-6"><a href="#cb60-6"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb60-7"><a href="#cb60-7"></a><span class="st">        </span>res=[]</span>
-<span id="cb60-8"><a href="#cb60-8"></a>        <span class="cf">for</span> i <span class="cf">in</span> self.s<span class="op">:</span></span>
-<span id="cb60-9"><a href="#cb60-9"></a><span class="st">            </span><span class="cf">if</span> i <span class="cf">in</span> res<span class="op">:</span></span>
-<span id="cb60-10"><a href="#cb60-10"></a><span class="st">                </span><span class="kw">res.remove</span>(i)</span>
-<span id="cb60-11"><a href="#cb60-11"></a>            <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb60-12"><a href="#cb60-12"></a><span class="st">                </span><span class="kw">res.append</span>(i)</span>
-<span id="cb60-13"><a href="#cb60-13"></a>        return res[<span class="dv">0</span>] <span class="cf">if</span> res <span class="cf">else</span> <span class="st">&quot;#&quot;</span></span>
-<span id="cb60-14"><a href="#cb60-14"></a>    def <span class="kw">Insert</span>(self, char)<span class="op">:</span></span>
-<span id="cb60-15"><a href="#cb60-15"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb60-16"><a href="#cb60-16"></a><span class="st">        </span>self.s<span class="op">+</span><span class="er">=</span>char</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb61-2"><a href="#cb61-2"></a><span class="st">    </span><span class="co"># 返回对应char</span></span>
+<span id="cb61-3"><a href="#cb61-3"></a><span class="st">    </span>def <span class="kw">__init__</span>(self)<span class="op">:</span></span>
+<span id="cb61-4"><a href="#cb61-4"></a><span class="st">        </span>self.s=<span class="st">&#39;&#39;</span></span>
+<span id="cb61-5"><a href="#cb61-5"></a>    def <span class="kw">FirstAppearingOnce</span>(self)<span class="op">:</span></span>
+<span id="cb61-6"><a href="#cb61-6"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb61-7"><a href="#cb61-7"></a><span class="st">        </span>res=[]</span>
+<span id="cb61-8"><a href="#cb61-8"></a>        <span class="cf">for</span> i <span class="cf">in</span> self.s<span class="op">:</span></span>
+<span id="cb61-9"><a href="#cb61-9"></a><span class="st">            </span><span class="cf">if</span> i <span class="cf">in</span> res<span class="op">:</span></span>
+<span id="cb61-10"><a href="#cb61-10"></a><span class="st">                </span><span class="kw">res.remove</span>(i)</span>
+<span id="cb61-11"><a href="#cb61-11"></a>            <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb61-12"><a href="#cb61-12"></a><span class="st">                </span><span class="kw">res.append</span>(i)</span>
+<span id="cb61-13"><a href="#cb61-13"></a>        return res[<span class="dv">0</span>] <span class="cf">if</span> res <span class="cf">else</span> <span class="st">&quot;#&quot;</span></span>
+<span id="cb61-14"><a href="#cb61-14"></a>    def <span class="kw">Insert</span>(self, char)<span class="op">:</span></span>
+<span id="cb61-15"><a href="#cb61-15"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb61-16"><a href="#cb61-16"></a><span class="st">        </span>self.s<span class="op">+</span><span class="er">=</span>char</span></code></pre></div>
 </div>
 <div id="数流中得中位数" class="section level2">
 <h2><span class="header-section-number">1.55</span> 数流中得中位数</h2>
 <p><strong>题目描述</strong></p>
 <p>如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。我们使用Insert()方法读取数据流，使用GetMedian()方法获取当前读取数据的中位数。</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb61-2"><a href="#cb61-2"></a>class Solution<span class="op">:</span></span>
-<span id="cb61-3"><a href="#cb61-3"></a><span class="st">    </span>def <span class="kw">__init__</span>(self)<span class="op">:</span></span>
-<span id="cb61-4"><a href="#cb61-4"></a><span class="st">        </span>self.data =<span class="st"> </span>[]</span>
-<span id="cb61-5"><a href="#cb61-5"></a>    def <span class="kw">Insert</span>(self, num)<span class="op">:</span></span>
-<span id="cb61-6"><a href="#cb61-6"></a><span class="st">        </span><span class="kw">self.data.append</span>(num)</span>
-<span id="cb61-7"><a href="#cb61-7"></a>        <span class="kw">self.data.sort</span>()</span>
-<span id="cb61-8"><a href="#cb61-8"></a>    def <span class="kw">GetMedian</span>(self,data)<span class="op">:</span></span>
-<span id="cb61-9"><a href="#cb61-9"></a><span class="st">        </span>length =<span class="st"> </span><span class="kw">len</span>(self.data)</span>
-<span id="cb61-10"><a href="#cb61-10"></a>        <span class="cf">if</span> length%<span class="dv">2</span><span class="op">==</span><span class="dv">0</span><span class="op">:</span></span>
-<span id="cb61-11"><a href="#cb61-11"></a><span class="st">            </span><span class="kw">return</span> (self.data[length<span class="op">/</span><span class="er">/</span><span class="dv">2</span>]<span class="op">+</span>self.data[length<span class="op">/</span><span class="er">/</span><span class="dv">2-1</span>])<span class="op">/</span><span class="fl">2.0</span></span>
-<span id="cb61-12"><a href="#cb61-12"></a>        <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb61-13"><a href="#cb61-13"></a><span class="st">            </span>return self.data[length<span class="op">/</span><span class="er">/</span><span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb62-3"><a href="#cb62-3"></a><span class="st">    </span>def <span class="kw">__init__</span>(self)<span class="op">:</span></span>
+<span id="cb62-4"><a href="#cb62-4"></a><span class="st">        </span>self.data =<span class="st"> </span>[]</span>
+<span id="cb62-5"><a href="#cb62-5"></a>    def <span class="kw">Insert</span>(self, num)<span class="op">:</span></span>
+<span id="cb62-6"><a href="#cb62-6"></a><span class="st">        </span><span class="kw">self.data.append</span>(num)</span>
+<span id="cb62-7"><a href="#cb62-7"></a>        <span class="kw">self.data.sort</span>()</span>
+<span id="cb62-8"><a href="#cb62-8"></a>    def <span class="kw">GetMedian</span>(self,data)<span class="op">:</span></span>
+<span id="cb62-9"><a href="#cb62-9"></a><span class="st">        </span>length =<span class="st"> </span><span class="kw">len</span>(self.data)</span>
+<span id="cb62-10"><a href="#cb62-10"></a>        <span class="cf">if</span> length%<span class="dv">2</span><span class="op">==</span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb62-11"><a href="#cb62-11"></a><span class="st">            </span><span class="kw">return</span> (self.data[length<span class="op">/</span><span class="er">/</span><span class="dv">2</span>]<span class="op">+</span>self.data[length<span class="op">/</span><span class="er">/</span><span class="dv">2-1</span>])<span class="op">/</span><span class="fl">2.0</span></span>
+<span id="cb62-12"><a href="#cb62-12"></a>        <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb62-13"><a href="#cb62-13"></a><span class="st">            </span>return self.data[length<span class="op">/</span><span class="er">/</span><span class="dv">2</span>]</span></code></pre></div>
 <p>有一部分二叉树的题，我就先不放了，因为我确实没摸索好二叉树的题咋写才能通过</p>
 <p>下面就是复习两边，掌握 核心的idea即可</p>
 </div>
@@ -1552,31 +1561,31 @@ f[i]=(f[i-1]+m)%i; (i&gt;1)
 <p>在k-1个骰子的基础上，再增加一个骰子出现点数和为n的结果只有这6种情况！</p>
 <p>所以：f(k,n)=f(k-1,n-1)+f(k-1,n-2)+f(k-1,n-3)+f(k-1,n-4)+f(k-1,n-5)+f(k-1,n-6)</p>
 <p>3.有1个骰子，f(1,1)=f(1,2)=f(1,3)=f(1,4)=f(1,5)=f(1,6)=1。</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb62-2"><a href="#cb62-2"></a><span class="st">    </span>def <span class="kw">twoSum</span>(self, n)<span class="op">:</span></span>
-<span id="cb62-3"><a href="#cb62-3"></a><span class="st">        </span><span class="co">#构建dp数组</span></span>
-<span id="cb62-4"><a href="#cb62-4"></a><span class="st">        </span>dp =<span class="st"> </span>[[<span class="dv">0</span>] <span class="op">*</span><span class="st"> </span>(<span class="dv">6</span><span class="op">*</span>n<span class="op">+</span><span class="dv">1</span>) <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(n<span class="op">+</span><span class="dv">1</span>)]</span>
-<span id="cb62-5"><a href="#cb62-5"></a>        <span class="co"># dp = [ [0 for _ in range(6*n+1)] for _ in range(n+1)]</span></span>
-<span id="cb62-6"><a href="#cb62-6"></a>        <span class="co">#初始化操作</span></span>
-<span id="cb62-7"><a href="#cb62-7"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>,<span class="dv">7</span>)<span class="op">:</span></span>
-<span id="cb62-8"><a href="#cb62-8"></a><span class="st">            </span>dp[<span class="dv">1</span>][i] =<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb62-9"><a href="#cb62-9"></a>        <span class="co">#建立动态规划</span></span>
-<span id="cb62-10"><a href="#cb62-10"></a>        <span class="co">#建立两层for循环，第一层表示骰子的数量，第二层表示和的数量</span></span>
-<span id="cb62-11"><a href="#cb62-11"></a>        <span class="co">#第三层表示每个骰子可以取的点数</span></span>
-<span id="cb62-12"><a href="#cb62-12"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">2</span>, n <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb62-13"><a href="#cb62-13"></a></span>
-<span id="cb62-14"><a href="#cb62-14"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(i, <span class="dv">6</span><span class="op">*</span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb62-15"><a href="#cb62-15"></a></span>
-<span id="cb62-16"><a href="#cb62-16"></a><span class="st">                </span><span class="cf">for</span> cur <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>, <span class="dv">7</span>)<span class="op">:</span></span>
-<span id="cb62-17"><a href="#cb62-17"></a></span>
-<span id="cb62-18"><a href="#cb62-18"></a><span class="st">                    </span><span class="cf">if</span> j <span class="op">&gt;</span><span class="st"> </span>cur<span class="op">:</span></span>
-<span id="cb62-19"><a href="#cb62-19"></a><span class="st">                        </span>dp[i][j] <span class="op">+</span><span class="er">=</span><span class="st"> </span>dp[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>][j <span class="op">-</span><span class="st"> </span>cur]</span>
-<span id="cb62-20"><a href="#cb62-20"></a>        <span class="co">#然后计算概率</span></span>
-<span id="cb62-21"><a href="#cb62-21"></a>        <span class="co"># sum_num = math.pow(6,n)</span></span>
-<span id="cb62-22"><a href="#cb62-22"></a>        result =<span class="st"> </span>[]</span>
-<span id="cb62-23"><a href="#cb62-23"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(n, <span class="dv">6</span> <span class="op">*</span><span class="st"> </span>n <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb62-24"><a href="#cb62-24"></a><span class="st">            </span><span class="kw">result.append</span>(dp[n][i]<span class="op">*</span><span class="fl">1.0</span><span class="op">/</span><span class="dv">6</span><span class="op">**</span>n)</span>
-<span id="cb62-25"><a href="#cb62-25"></a>        return result</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb63-2"><a href="#cb63-2"></a><span class="st">    </span>def <span class="kw">twoSum</span>(self, n)<span class="op">:</span></span>
+<span id="cb63-3"><a href="#cb63-3"></a><span class="st">        </span><span class="co">#构建dp数组</span></span>
+<span id="cb63-4"><a href="#cb63-4"></a><span class="st">        </span>dp =<span class="st"> </span>[[<span class="dv">0</span>] <span class="op">*</span><span class="st"> </span>(<span class="dv">6</span><span class="op">*</span>n<span class="op">+</span><span class="dv">1</span>) <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(n<span class="op">+</span><span class="dv">1</span>)]</span>
+<span id="cb63-5"><a href="#cb63-5"></a>        <span class="co"># dp = [ [0 for _ in range(6*n+1)] for _ in range(n+1)]</span></span>
+<span id="cb63-6"><a href="#cb63-6"></a>        <span class="co">#初始化操作</span></span>
+<span id="cb63-7"><a href="#cb63-7"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>,<span class="dv">7</span>)<span class="op">:</span></span>
+<span id="cb63-8"><a href="#cb63-8"></a><span class="st">            </span>dp[<span class="dv">1</span>][i] =<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb63-9"><a href="#cb63-9"></a>        <span class="co">#建立动态规划</span></span>
+<span id="cb63-10"><a href="#cb63-10"></a>        <span class="co">#建立两层for循环，第一层表示骰子的数量，第二层表示和的数量</span></span>
+<span id="cb63-11"><a href="#cb63-11"></a>        <span class="co">#第三层表示每个骰子可以取的点数</span></span>
+<span id="cb63-12"><a href="#cb63-12"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">2</span>, n <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb63-13"><a href="#cb63-13"></a></span>
+<span id="cb63-14"><a href="#cb63-14"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(i, <span class="dv">6</span><span class="op">*</span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb63-15"><a href="#cb63-15"></a></span>
+<span id="cb63-16"><a href="#cb63-16"></a><span class="st">                </span><span class="cf">for</span> cur <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>, <span class="dv">7</span>)<span class="op">:</span></span>
+<span id="cb63-17"><a href="#cb63-17"></a></span>
+<span id="cb63-18"><a href="#cb63-18"></a><span class="st">                    </span><span class="cf">if</span> j <span class="op">&gt;</span><span class="st"> </span>cur<span class="op">:</span></span>
+<span id="cb63-19"><a href="#cb63-19"></a><span class="st">                        </span>dp[i][j] <span class="op">+</span><span class="er">=</span><span class="st"> </span>dp[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>][j <span class="op">-</span><span class="st"> </span>cur]</span>
+<span id="cb63-20"><a href="#cb63-20"></a>        <span class="co">#然后计算概率</span></span>
+<span id="cb63-21"><a href="#cb63-21"></a>        <span class="co"># sum_num = math.pow(6,n)</span></span>
+<span id="cb63-22"><a href="#cb63-22"></a>        result =<span class="st"> </span>[]</span>
+<span id="cb63-23"><a href="#cb63-23"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(n, <span class="dv">6</span> <span class="op">*</span><span class="st"> </span>n <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb63-24"><a href="#cb63-24"></a><span class="st">            </span><span class="kw">result.append</span>(dp[n][i]<span class="op">*</span><span class="fl">1.0</span><span class="op">/</span><span class="dv">6</span><span class="op">**</span>n)</span>
+<span id="cb63-25"><a href="#cb63-25"></a>        return result</span></code></pre></div>
 </div>
 </div>
             </section>
