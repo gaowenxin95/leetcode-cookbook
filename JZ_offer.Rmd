@@ -301,6 +301,28 @@ class Solution:
 
 其实我jio的一行就行了，bin+count,但是牛客不给通过
 
+补充一点基础的语法
+
+```r
+
+0xffffffff是多少？
+
+0xffffffff表示的是一个十六进制数 
+
+1.将其转换为十进制数 
+    0xffffffff=16x10^7+16x10^6+...+16x10^0=4294967295 
+
+2.将其转换为二进制数 
+    十六进制转换为二进制就是直接把每位转换成二进制就可以了 
+    f(15)变成二进制：1111，则 
+    0xffffffff = 1111 1111 1111 1111 1111 1111 1111 1111 (8个F的二进制形式, 一个F占4个字节 ) 
+    即32位数都是1的二进制数
+
+0x代表16进制，后面是数字，十进制是4294967295
+```
+
+
+
 ```r
 
 #class Solution:
@@ -325,6 +347,13 @@ class Solution:
         return count
         
 ```
+
+n & 0xffffffff
+
+解释一下这句话的意思
+
+
+
 ## 数值得整熟次方
 
 **题目描述**
@@ -1830,6 +1859,147 @@ class Solution:
     		result.append(dp[n][i]*1.0/6**n)
     	return result
 ```
+
+## 数组为0的三元组
+
+题目描述
+给出一个有n个元素的数组S，S中是否有元素a,b,c满足a+b+c=0？找出数组S中所有满足条件的三元组。
+注意：
+三元组（a、b、c）中的元素必须按非降序排列。（即a≤b≤c）
+解集中不能包含重复的三元组。
+
+例如，给定的数组 S = {-1 0 1 2 -1 -4},解集为(-1, 0, 1) (-1, -1, 2)
+
+多来一点注释
+
+```r
+class Solution:
+    def threeSum(self, nums):
+        #数组长度
+        n = len(nums)
+        if (not nums or n < 3):
+            return []
+        #先将数组进行排序
+        nums.sort()
+        #保存结果
+        res = []
+        #从左开始遍历数组
+        for i in range(n):
+            #当遍历到正数时就可以返回结果了
+            if (nums[i] > 0):
+                return res
+            #如果i>0且相邻两个值相等，则继续
+            if (i > 0 and nums[i] == nums[i - 1]):
+                continue
+            #左指针指向i的下一位
+            L = i + 1
+            #右指针指向数组右端
+            R = n - 1
+            #循环条件
+            #核心就是在第i位时，考虑从i+1位到末尾，不断通过增加左指针指向的值大小
+            #和减少右指针指向的值的大小来找到一个平衡位置使三者之和为0
+            while (L < R):
+                #如果这三个数加起来为0
+                if (nums[i] + nums[L] + nums[R] == 0):
+                    #加入结果
+                    res.append([nums[i], nums[L], nums[R]])
+                    #此时对左指针的下一位进行判断，如果和其相同，左指针继续右移
+                    while (L < R and nums[L] == nums[L + 1]):
+                        L = L + 1
+                    #同理，右指针继续左移
+                    while (L < R and nums[R] == nums[R - 1]):
+                        R = R - 1
+                    #如果不相同直接左指针右移一位
+                    L = L + 1
+                    #如果不相同直接右指针左移一位
+                    R = R - 1
+                elif (nums[i] + nums[L] + nums[R] > 0):
+                    #如果大于0，右指针左移一位
+                    R = R - 1
+                else:
+                    #如果小于0，左指针右移一位
+                    L = L + 1
+        return res
+```
+
+## 数组中最长的无重复子串的长度
+
+**题目描述**
+给定一个数组arr，返回arr的最长无的重复子串的长度(无重复指的是所有数字都不相同)。
+
+输入
+[2,3,4,5]
+输出
+4
+示例2
+输入
+[2,2,3,4,3]
+输出
+3
+
+
+怎么想呢？
+
+利用了字典查找，i用来从前往后遍历，start用来标记最近重复字符的位置，i-start+1就是当前不重复字符串长度。
+
+```r
+class Solution:
+    def maxLength(self , arr ):
+        # write code here
+        if len(arr) == 0:
+            return 0
+        start = 0
+        max_len = 1
+        dic = {}
+        for i in range(len(arr)):
+            if arr[i] in dic and dic[arr[i]] >= start:
+                start = dic[arr[i]] + 1
+            dic[arr[i]] = i
+            max_len = max(max_len, i-start+1)
+        return max_len
+```
+
+字典的方式，出现重读的就截断
+
+```r
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        l=[]
+        lenth=0
+        for i in s:
+            if i not in l:
+                l.append(i)
+            else:
+                ids=l.index(i)
+                l=l[ids+1:]
+                l.append(i)
+            current=len(l)
+            lenth=max(current,lenth)
+        return lenth
+
+```
+
+
+## 求最长无重复子串
+从一个字符串中找到一个连续子串，该子串中任何两个字符不能相同，求子串的最大长度并输出一条最长不重复子串。
+
+输入: "pwwkew"
+
+输出: "wke" 
+
+
+思路：
+两层循环：
+
+外层，循环遍历每一个字符，获得其最长的子字符串，与最大的子字符串比较，如果大于max_str，则替换
+
+内层，判断此元素是否已在外层子字符串中，在则内层循环结束 外层子字符串与最大子字符串比较；不在则添加到子字符串[艾雅fly](https://www.jianshu.com/p/b28aa7ea8e5f)
+
+```r
+
+
+```
+
 
 
 
