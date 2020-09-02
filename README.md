@@ -17,3 +17,9 @@
 - [剑指offer题解](https://gaowenxin95.github.io/leetcode-cookbook/剑指offer题解.html)
 
 持续更新。。。
+
+老铁们加油哇~
+本来觉得刷这个就是为了应付校招考试，但其实真的有用哇~
+之前子俊说的时候我还不信，果然亲身实践~~
+
+
