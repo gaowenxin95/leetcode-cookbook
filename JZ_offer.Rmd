@@ -8,7 +8,7 @@ bibliography: refs/add.bib
 
 # 剑指offer题解
 
-安装牛客网的顺序的来的~
+按照牛客网的顺序的来的~
 
 
 ## 二维数组中的查找
@@ -1998,6 +1998,68 @@ class Solution:
 
 ![](figs/zuida.png)
 
+## 表示数值的字符串
+
+**题目描述**
+
+请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串"+100"、"5e2"、"-123"、"3.1416"、"-1E-16"、"0123"都表示数值，但"12e"、"1a3.14"、"1.2.3"、"+-5"及"12e+5.4"都不是。
+
+一个比较骚气的写，也就是判断是否为浮点数
+
+```r
+class Solution:
+# s字符串
+    def isNumeric(self, s):
+# write code here
+        try:
+            float(s)
+            return True
+        except:
+            return False
+
+```
+
+常规写法正则表达式
+
+```r
+# -*- coding:utf-8 -*-
+import re
+class Solution:
+    # s字符串
+    def isNumeric(self, s):
+        # write code here
+        pattern = "^[-+]?\\d*(?:\\.\\d*)?(?:[eE][+\\-]?\\d+)?$"
+        return re.match(pattern,s)
+```
+
+
+更常规的操作,就是穷尽可能出现的额情况
+
+```r
+# -*- coding:utf-8 -*-
+class Solution:
+    # s字符串
+    def isNumeric(self, s):
+        # write code here
+        s = s.strip()
+        met_dot = met_e  = False
+        for i, char in enumerate(s):
+            if char in ('+', '-'):
+                if i > 0 and s[i-1] != 'e' and s[i-1] != 'E':
+                    return False
+            elif char == '.':
+                if met_dot or met_e: 
+                    return False
+                met_dot = True
+            elif char == 'e' or char == 'E':
+                if met_e or i == len(s)-1:
+                    return False
+                met_e = True # e后必须接，所以这时重置met_digit为False,以免e为最后一个char
+            elif not char.isdigit():
+                return False
+        return True
+
+```
 
 
 

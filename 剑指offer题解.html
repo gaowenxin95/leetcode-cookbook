@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2020-09-02" />
+<meta name="date" content="2020-09-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -189,6 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.57" data-path=""><a href="#数组为0的三元组"><i class="fa fa-check"></i><b>1.57</b> 数组为0的三元组</a></li>
 <li class="chapter" data-level="1.58" data-path=""><a href="#数组中最长的无重复子串的长度"><i class="fa fa-check"></i><b>1.58</b> 数组中最长的无重复子串的长度</a></li>
 <li class="chapter" data-level="1.59" data-path=""><a href="#求最长无重复子串"><i class="fa fa-check"></i><b>1.59</b> 求最长无重复子串</a></li>
+<li class="chapter" data-level="1.60" data-path=""><a href="#表示数值的字符串"><i class="fa fa-check"></i><b>1.60</b> 表示数值的字符串</a></li>
 </ul></li>
 </ul>
 
@@ -210,11 +211,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">剑指offer</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2020-09-02</em></p>
+<p class="date"><em>2020-09-03</em></p>
 </div>
 <div id="剑指offer题解" class="section level1">
 <h1><span class="header-section-number">1</span> 剑指offer题解</h1>
-<p>安装牛客网的顺序的来的~</p>
+<p>按照牛客网的顺序的来的~</p>
 <div id="二维数组中的查找" class="section level2">
 <h2><span class="header-section-number">1.1</span> 二维数组中的查找</h2>
 <p><strong>题目描述</strong>
@@ -1750,6 +1751,53 @@ f[i]=(f[i-1]+m)%i; (i&gt;1)
 <p>外层，循环遍历每一个字符，获得其最长的子字符串，与最大的子字符串比较，如果大于max_str，则替换</p>
 <p>内层，判断此元素是否已在外层子字符串中，在则内层循环结束 外层子字符串与最大子字符串比较；不在则添加到子字符串<a href="https://www.jianshu.com/p/b28aa7ea8e5f">艾雅fly</a></p>
 <p><img src="figs/zuida.png" /></p>
+</div>
+<div id="表示数值的字符串" class="section level2">
+<h2><span class="header-section-number">1.60</span> 表示数值的字符串</h2>
+<p><strong>题目描述</strong></p>
+<p>请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串“+100”、“5e2”、“-123”、“3.1416”、“-1E-16”、“0123”都表示数值，但“12e”、“1a3.14”、“1.2.3”、“+-5”及“12e+5.4”都不是。</p>
+<p>一个比较骚气的写，也就是判断是否为浮点数</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb70-2"><a href="#cb70-2"></a><span class="co"># s字符串</span></span>
+<span id="cb70-3"><a href="#cb70-3"></a><span class="st">    </span>def <span class="kw">isNumeric</span>(self, s)<span class="op">:</span></span>
+<span id="cb70-4"><a href="#cb70-4"></a><span class="co"># write code here</span></span>
+<span id="cb70-5"><a href="#cb70-5"></a><span class="st">        </span>try<span class="op">:</span></span>
+<span id="cb70-6"><a href="#cb70-6"></a><span class="st">            </span><span class="kw">float</span>(s)</span>
+<span id="cb70-7"><a href="#cb70-7"></a>            return True</span>
+<span id="cb70-8"><a href="#cb70-8"></a>        except<span class="op">:</span></span>
+<span id="cb70-9"><a href="#cb70-9"></a><span class="st">            </span>return False</span></code></pre></div>
+<p>常规写法正则表达式</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb71-2"><a href="#cb71-2"></a>import re</span>
+<span id="cb71-3"><a href="#cb71-3"></a>class Solution<span class="op">:</span></span>
+<span id="cb71-4"><a href="#cb71-4"></a><span class="st">    </span><span class="co"># s字符串</span></span>
+<span id="cb71-5"><a href="#cb71-5"></a><span class="st">    </span>def <span class="kw">isNumeric</span>(self, s)<span class="op">:</span></span>
+<span id="cb71-6"><a href="#cb71-6"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb71-7"><a href="#cb71-7"></a><span class="st">        </span>pattern =<span class="st"> &quot;^[-+]?</span><span class="ch">\\</span><span class="st">d*(?:</span><span class="ch">\\</span><span class="st">.</span><span class="ch">\\</span><span class="st">d*)?(?:[eE][+</span><span class="ch">\\</span><span class="st">-]?</span><span class="ch">\\</span><span class="st">d+)?$&quot;</span></span>
+<span id="cb71-8"><a href="#cb71-8"></a>        return <span class="kw">re.match</span>(pattern,s)</span></code></pre></div>
+<p>更常规的操作,就是穷尽可能出现的额情况</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb72-2"><a href="#cb72-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb72-3"><a href="#cb72-3"></a><span class="st">    </span><span class="co"># s字符串</span></span>
+<span id="cb72-4"><a href="#cb72-4"></a><span class="st">    </span>def <span class="kw">isNumeric</span>(self, s)<span class="op">:</span></span>
+<span id="cb72-5"><a href="#cb72-5"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb72-6"><a href="#cb72-6"></a><span class="st">        </span>s =<span class="st"> </span><span class="kw">s.strip</span>()</span>
+<span id="cb72-7"><a href="#cb72-7"></a>        met_dot =<span class="st"> </span>met_e  =<span class="st"> </span>False</span>
+<span id="cb72-8"><a href="#cb72-8"></a>        <span class="cf">for</span> i, char <span class="cf">in</span> <span class="kw">enumerate</span>(s)<span class="op">:</span></span>
+<span id="cb72-9"><a href="#cb72-9"></a><span class="st">            </span><span class="cf">if</span> char <span class="cf">in</span> (<span class="st">&#39;+&#39;</span>, <span class="st">&#39;-&#39;</span>)<span class="op">:</span></span>
+<span id="cb72-10"><a href="#cb72-10"></a><span class="st">                </span><span class="cf">if</span> i <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> and s[i<span class="dv">-1</span>] <span class="op">!=</span><span class="st"> &#39;e&#39;</span> and s[i<span class="dv">-1</span>] <span class="op">!=</span><span class="st"> &#39;E&#39;</span><span class="op">:</span></span>
+<span id="cb72-11"><a href="#cb72-11"></a><span class="st">                    </span>return False</span>
+<span id="cb72-12"><a href="#cb72-12"></a>            elif char <span class="op">==</span><span class="st"> &#39;.&#39;</span><span class="op">:</span></span>
+<span id="cb72-13"><a href="#cb72-13"></a><span class="st">                </span><span class="cf">if</span> met_dot or met_e<span class="op">:</span><span class="st"> </span></span>
+<span id="cb72-14"><a href="#cb72-14"></a><span class="st">                    </span>return False</span>
+<span id="cb72-15"><a href="#cb72-15"></a>                met_dot =<span class="st"> </span>True</span>
+<span id="cb72-16"><a href="#cb72-16"></a>            elif char <span class="op">==</span><span class="st"> &#39;e&#39;</span> or char <span class="op">==</span><span class="st"> &#39;E&#39;</span><span class="op">:</span></span>
+<span id="cb72-17"><a href="#cb72-17"></a><span class="st">                </span><span class="cf">if</span> met_e or i <span class="op">==</span><span class="st"> </span><span class="kw">len</span>(s)<span class="op">-</span><span class="dv">1</span><span class="op">:</span></span>
+<span id="cb72-18"><a href="#cb72-18"></a><span class="st">                    </span>return False</span>
+<span id="cb72-19"><a href="#cb72-19"></a>                met_e =<span class="st"> </span>True <span class="co"># e后必须接，所以这时重置met_digit为False,以免e为最后一个char</span></span>
+<span id="cb72-20"><a href="#cb72-20"></a>            elif not <span class="kw">char.isdigit</span>()<span class="op">:</span></span>
+<span id="cb72-21"><a href="#cb72-21"></a><span class="st">                </span>return False</span>
+<span id="cb72-22"><a href="#cb72-22"></a>        return True</span></code></pre></div>
 </div>
 </div>
             </section>
