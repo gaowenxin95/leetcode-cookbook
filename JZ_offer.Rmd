@@ -2061,5 +2061,164 @@ class Solution:
 
 ```
 
+## 零食柜问题
+
+**题目描述**
+
+  shopee的零食柜，有着各式各样的零食，但是因为贪吃，小虾同学体重日益增加，终于被人叫为小胖了，他终于下定决心减肥了，他决定每天晚上去操场跑两圈，但是跑步太累人了，他想转移注意力，忘记痛苦，正在听着音乐的他，突然有个想法，他想跟着音乐的节奏来跑步，音乐有7种音符，对应的是1到7，那么他对应的步长就可以是1-7分米，这样的话他就可以转移注意力了，但是他想保持自己跑步的速度，在规定时间m分钟跑完。为了避免被累死，他需要规划他每分钟需要跑过的音符，这些音符的步长总和要尽量小。下面是小虾同学听的歌曲的音符，以及规定的时间，你能告诉他每分钟他应该跑多少步长？
+  
+
+输入描述:
+输入的第一行输入 n（1 ≤ n ≤ 1000000，表示音符数），m（1<=m< 1000000, m <= n）组成，
+
+第二行有 n 个数，表示每个音符（1<= f <= 7）
+输出描述:
+输出每分钟应该跑的步长
+
+输入：也就是8个音符，控制在5min中
+8 5 
+6 5 6 7 6 6 3 1
+输出
+11
+
+
+非常尴尬，题都没读懂~但是是校招的原题
+
+看了讨论的思路
+首先题意比较难理解，实际上笔试时经常有这种场景题，这道题是为了**求最小的最大子序列和**，连续的n个音符分到m分钟，也就是m个子序列。
+
+这个题目的实际含义就是：
+（1）把一个长度为n的数组，顺序不变的情况下划分为m个子数组，可以理解为长度为n的数组中插入m-1个split
+（2）在所有划分方案中，找到一种方案使得m个子数组中的和最大的子数组的和尽可能的小
+
+
+看下leetcode上面的这个描述
+
+给定一个非负整数数组和一个整数 m，你需要将这个数组分成 m 个非空的连续子数组。设计一个算法使得这 m 个子数组各自和的最大值最小。
+
+注意:
+数组长度 n 满足以下条件:
+
+1 ≤ n ≤ 1000
+1 ≤ m ≤ min(50, n)
+示例:
+
+输入:
+nums = [7,2,5,10,8]
+m = 2
+
+输出:
+18
+
+解释:
+一共有四种方法将nums分割为2个子数组。
+其中最好的方式是将其分为[7,2,5] 和 [10,8]，
+因为此时这两个子数组各自的和的最大值为18，在所有情况中最小。[leetcode](https://leetcode-cn.com/problems/split-array-largest-sum/solution/pao-ding-jie-niu-dai-ni-yi-bu-bu-shi-yong-er-fen-c/)
+
+
+
+最近发现了一个问题，赛码上面的题A不过是因为输入的格式有问题，沃日~
+
+```r
+def countStep(m, nums):
+    left, right = nums[0], sum(nums)
+    while left < right:
+        mid = (left + right) // 2
+        M = countM(mid, nums)
+        if M > m:
+            left = mid + 1
+        elif M < m:
+            right = mid - 1
+        else:
+            right = mid
+    return left
+
+def countM(x, nums):
+    res, tem =1, 0  # res是分组数 #tem是分组和
+    for num in nums:
+        if tem + num > x:
+            tem = num
+            res += 1
+        else:
+            tem += num
+    return res
+
+
+# 下面是正确的输入格式，是正确的输入格式，是正确的输入格式，重要的事情说三遍，再梳理一下思路，好好哦记住二分法查找
+
+n,m = map(int,input().strip().split())
+nums = list(map(int,input().strip().split()))
+print(countStep(m, nums))
+        
+            
+            
+```
+
+
+## 二分法的查找模板
+
+二分查找的通常思路
+如果做多了二分查找的题，这道题应该会有思路。
+我们二分查找的时候，关键是要抓到施以查找的变量。即我们的left,right 和 mid 表示的是什么。
+对于简单题，往往就是列表的一项。比如对一个排序好的列表找到一个相应的值的位置，那么我们要施以查找的变量就是列表的下标，而缩小范围的依据就是列表的值。
+对于复杂的题，往往这个施以查找的变量会比较难抓。它往往不是列表里的一个项，而是一个要输出的值或判断依据做相应的变换。
+难点就在于划分出哪些是施以查找的变量，哪些是这些变量的更新准则。
+[qsctech-sange](https://leetcode-cn.com/problems/split-array-largest-sum/solution/pao-ding-jie-niu-dai-ni-yi-bu-bu-shi-yong-er-fen-c/)
+
+
+```r
+left, right = max(nums),sum(nums)
+while left < right:
+    mid = (left + right) // 2
+    if #排除右侧的条件:
+        right = mid
+    else:
+        left = mid + 1
+return left
+
+```
+
+
+## 回溯
+
+## 深度优先搜索和广度优先搜索
+
+## 每k个 一组反转链表
+
+## 四个数之和
+
+也就是24点游戏的思想,不会4个一起算，难就2个一起算呐
+
+还是我刷题太少啦
+
+```r
+class Solution(object):
+    def fourSumCount(self, A, B, C, D):
+        """
+        :type A: List[int]
+        :type B: List[int]
+        :type C: List[int]
+        :type D: List[int]
+        :rtype: int
+        """
+        count = 0
+        ab_map = dict()
+        
+        for a in A:
+            for b in B:
+                if  a+b in  ab_map:
+                     ab_map[a+b] +=1
+                else:
+                     ab_map[a+b] =1
+            
+        for c in C:
+            for d in D:
+                s = -(c + d)
+                if s in ab_map:
+                    count += ab_map[s]
+        
+        return count
+```
+ 
 
 
