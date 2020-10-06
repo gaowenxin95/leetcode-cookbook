@@ -2221,4 +2221,15 @@ class Solution(object):
 ```
  
 
+## 牛客和赛码网常见输入 和输出的格式
+
+.strip() 去除首位空格
+.split()  分割
+.strip().strip(‘-a’)去除首位空格和字符‘-a’
+.replace(‘a’,’b’) 替换字符
+S[:3]、S[5:] 、S[5:7]（前3、第5之后、5到7）拼接字符串，去除某个字符
+.index(str,beg,end) 返回开始索引或异常
+.find(str,beg,end) 返回开始索引或-1
+
+
 

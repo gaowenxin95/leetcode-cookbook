@@ -1,0 +1,20 @@
+---
+title: "stack_queue"
+author: "wenxin Gao"
+date: "2020/9/20"
+output: html_document
+---
+
+# 栈和队列
+
+## 定义
+
+**栈**：后进先出（LIFO-last in first out）:最后插入的元素最先出来。
+
+**队列**：先进先出（FIFO-first in first out）:最先插入的元素最先出来
+
+pop和peek都可以返回栈顶元素，时间复杂度是O(1)
+stack1.peek() 返回栈顶元素，但不在堆栈中删除它。
+Stack2.pop() 返回栈顶元素，并在进程中删除它。
+
+栈这里考的辅助栈比较多一点

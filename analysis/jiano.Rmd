@@ -1,0 +1,90 @@
+---
+title: "Untitled"
+author: "wenxin Gao"
+date: "2020/9/19"
+output: html_document
+---
+
+```{r,warning=FALSE}
+
+
+library(forecast)
+library(fUnitRoots)
+
+```
+
+```{r}
+data <- readxl::read_xlsx("D:/JupyterNotebook/E/data/n.xlsx")
+
+View(data)
+
+```
+
+```{r}
+
+library(devtools)
+#install_github('sinhrks/ggfortify')
+```
+
+```{r}
+library(ggplot2)
+
+```
+
+
+```{r}
+clears <- ts(data[,2])
+plot.ts(clears, xlab = "时间", ylab = "能见度")
+```
+
+
+```{r}
+library(magrittr)
+# 自相关图
+acf(data[,2])
+
+# 单位根检验
+unitrootTest(data[,2] %>% as.matrix())
+
+# 对原始序列进行 一阶差分，并进行 平稳性和白噪声检验
+# 一阶差分
+# 语法:（默认）diff(x, lag = 1, diff= 1, …)
+# 若x是一个数值向量，则表示后一项减前一项，即滞后一阶差分；
+# lag 表示滞后项
+# 如果要指定差分的阶数，则一定要使用带名称的参数:diff=2
+
+# sample表示样本数据。
+# 1、diff(sample,2)表示是对滞后2阶的数据进行差分，一阶差分，等同于：diff(sample,lag=2)
+# 2、diff(sample,diff=2)才是表示二阶差分
+
+
+
+# 单位根检验
+unitrootTest(data[,2]%>% as.matrix())
+
+# 白噪声检验
+Box.test(data[,2]%>% as.matrix(), type="Ljung-Box") 
+
+# 偏自相关图
+pacf(data[,2])
+
+# ARIMA(1,1,0)模型
+# ARIMA(p，d，q)模型全称为差分自回归移动平均模型(Autoregressive Integrated Moving Average Model,简记ARIMA)，
+# AR是自回归， p为自回归项；
+# MA为移动平均，q为移动平均项数;
+# d为时间序列成为平稳时所做的差分次数。
+
+arima <- arima(data[,2], order = c(1, 0, 1))
+arima
+
+# forecast <- forecast.Arima(arima, h = 5, level = c(99.5))
+forecast <- forecast(arima, h = 20, level = c(99.5))
+forecast
+plot(forecast)
+
+# tsdiag检验
+tsdiag(arima)
+```
+
+
+
