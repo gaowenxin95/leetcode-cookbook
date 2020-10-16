@@ -344,4 +344,22 @@ class Solution:
         node.next=node.next.next
 ```
 
+## 判断链表中是否有环
+
+
+```r
+class Solution:
+    def hasCycle(self , head ):
+        # write code here
+        # head始终没有变
+        cur = head
+        while cur:
+            cur_next = cur.next
+            if cur_next is head:
+                return True
+            cur.next = head
+            cur = cur_next
+        return False
+
+```
 

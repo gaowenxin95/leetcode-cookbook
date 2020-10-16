@@ -185,7 +185,7 @@ while True:
 
 '''
 
-'''
+```r
 m存储前i项和对应下标，a存储前i项和，ans最大长，即求第i项时m[a-k]是否存在
 def solve(l, n, k):
     m = {0:-1}
@@ -207,7 +207,7 @@ while True:
         break
 
 
-'''
+```
 ## 最长子序列问题3
 
 题目描述
@@ -339,7 +339,7 @@ if __name__ == "__main__":
 第一行一个整数N，表示数组长度
 第二行N个整数，分别表示数组内的元素
 
-```python
+```r
 while True:
     try:
         n = int(input())
@@ -419,7 +419,7 @@ print(change_cion(arr,aim))
 - [ ] 还没看懂啊
 
 
-```python
+```r
 def f():
     n,m=map(int,input().split())
     M=[]
@@ -513,4 +513,110 @@ f（n） = f(n - arr[0]) + f(n - arr[1]) + f(n - arr[2]) + ... + f(n - arr[i]) i
 '''
 ```
 
+## 二分法查找
+
+二分法查找/折半查找的时间复杂度是nlog(n)
+
+
+```r
+#递归实现二分查找 li是列表   item是要查找的元素
+def merge_search( li ,item ):
+    #传来的列表每次都是新生成的，如果发现里面没有元素，则是查找到尽头都没找到
+    if not li :
+        return False
+
+    mid = len(li)//2   #mid记录li的中间位置
+    #检查一下 如果中间这个数就是要找的元素 返回真
+    if li[mid] == item :
+        return True
+    # 如果mid比item大，说明item可能会出现在mid左边，对左边再查找
+    elif li[mid]> item :
+        return merge_search( li[:mid] ,item )
+    # mid 比item小，说明item有可能在mid右边，对右边再查找
+    else :
+        return merge_search( li[mid+1:] , item )
+
+if __name__ == '__main__':
+    li = [1,2,3,4,5,6,7]
+    print( merge_search(li , 0) )   #False
+    print( merge_search(li , 1) )   #True
+```
+
+因此需要看一个二分法查找的例子
+
+**题目描述**
+
+请实现有重复数字的有序数组的二分查找。
+输出在数组中第一个大于等于查找值的位置，如果数组中不存在这样的数，则输出数组长度加一。
+
+```r
+# 二分查找
+# @param n int整型 数组长度
+# @param v int整型 查找值
+# @param a int整型一维数组 有序数组
+# @return int整型
+class Solution:
+    def __init__(self):
+        data = input().split(",", 2)
+        self.n = int(data[0])
+        self.v = int(data[1])
+        self.a = eval(data[2]) #这里其实也可以不这么写啊，输入的话
+    def upper_bound_(self):
+        # write code here
+        if self.v > self.a[-1]:
+            return self.n+1
+        l, r = 0, self.n-1
+        while l<=r:
+            m = (l+r)//2 # 整体的思想就是折半查找
+            if self.a[m]<=(self.v-1):
+                l = m + 1
+            else:
+                r = m - 1
+        right = l
+        return right+1
+solution = Solution()
+res = solution.upper_bound_()
+print(res)
+```
+
+## 二叉树的先序中序后序遍历
+
+
+输入
+{1,2,3}
+输出
+[[1,2,3],[2,1,3],[2,3,1]]
+
+
+```r
+class TreeNode:
+    def __init__(self, x):
+         self.val = x
+         self.left = None
+         self.right = None
+#
+# @param root TreeNode类 the root of binary tree
+# @return int整型二维数组
+#
+class Solution:
+    def threeOrders(self , root ):
+        pre_order, in_order, post_order = [], [], []
+        def find(root):
+            if not root: return None
+            pre_order.append(root.val)  # 先序：根左右
+            find(root.left)  # 这个是递归吧
+            in_order.append(root.val)   # 中序：左根右
+            find(root.right)
+            post_order.append(root.val) # 后序：左右根
+        find(root)
+        return [pre_order, in_order, post_order]
+    
+```
+
+
+
+
+
 ## 维特比算法
+
+
