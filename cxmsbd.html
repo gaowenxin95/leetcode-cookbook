@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2020-10-16" />
+<meta name="date" content="2020-10-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,11 +140,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.9" data-path=""><a href="#背包问题"><i class="fa fa-check"></i><b>0.9</b> 背包问题</a></li>
 <li class="chapter" data-level="0.10" data-path=""><a href="#零钱兑换问题"><i class="fa fa-check"></i><b>0.10</b> 零钱兑换问题</a></li>
 <li class="chapter" data-level="0.11" data-path=""><a href="#求最大子矩阵的大小"><i class="fa fa-check"></i><b>0.11</b> 求最大子矩阵的大小</a></li>
-<li class="chapter" data-level="0.12" data-path=""><a href="#最小值减去最大值小于或者等于nums的子矩阵的数量"><i class="fa fa-check"></i><b>0.12</b> 最小值减去最大值小于或者等于nums的子矩阵的数量</a></li>
-<li class="chapter" data-level="0.13" data-path=""><a href="#换钱的方法"><i class="fa fa-check"></i><b>0.13</b> 换钱的方法</a></li>
-<li class="chapter" data-level="0.14" data-path=""><a href="#二分法查找"><i class="fa fa-check"></i><b>0.14</b> 二分法查找</a></li>
-<li class="chapter" data-level="0.15" data-path=""><a href="#二叉树的先序中序后序遍历"><i class="fa fa-check"></i><b>0.15</b> 二叉树的先序中序后序遍历</a></li>
-<li class="chapter" data-level="0.16" data-path=""><a href="#维特比算法"><i class="fa fa-check"></i><b>0.16</b> 维特比算法</a></li>
+<li class="chapter" data-level="0.12" data-path=""><a href="#换钱的方法"><i class="fa fa-check"></i><b>0.12</b> 换钱的方法</a></li>
+<li class="chapter" data-level="0.13" data-path=""><a href="#二分法查找"><i class="fa fa-check"></i><b>0.13</b> 二分法查找</a></li>
+<li class="chapter" data-level="0.14" data-path=""><a href="#二叉树的先序中序后序遍历"><i class="fa fa-check"></i><b>0.14</b> 二叉树的先序中序后序遍历</a></li>
+<li class="chapter" data-level="0.15" data-path=""><a href="#机器人到达指定位置的方法数"><i class="fa fa-check"></i><b>0.15</b> 机器人到达指定位置的方法数</a></li>
+<li class="chapter" data-level="0.16" data-path=""><a href="#打气球的最大分数"><i class="fa fa-check"></i><b>0.16</b> 打气球的最大分数</a></li>
+<li class="chapter" data-level="0.17" data-path=""><a href="#维特比算法"><i class="fa fa-check"></i><b>0.17</b> 维特比算法</a></li>
 </ul>
 
       </nav>
@@ -165,7 +166,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">面试指南</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2020-10-16</em></p>
+<p class="date"><em>2020-10-21</em></p>
 </div>
 <div id="不重复两数之和的问题" class="section level2" number="0.1">
 <h2><span class="header-section-number">0.1</span> 不重复两数之和的问题</h2>
@@ -514,15 +515,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="求最大子矩阵的大小" class="section level2" number="0.11">
 <h2><span class="header-section-number">0.11</span> 求最大子矩阵的大小</h2>
 <p>题目描述
-给定一个整型矩阵 map，其中的值只有 0 和 1 两种，求其中全是 1 的所有矩形区域中，最大的矩形区域里 1 的数量。
-输入描述:
+给定一个整型矩阵 map，其中的值只有0和1两种，求其中全是1的所有矩形区域中，最大的矩形区域里 1 的数量。</p>
+<p>输入描述:
 第一行输入两个整数 n 和 m，代表 n<em>m 的矩阵
 接下来输入一个 n</em>m 的矩阵</p>
+<p>例子：
+1 0 1 0
+0 1 1 0
+0 1 1 0
+0 1 0 1</p>
+<p>最大子矩阵的大小为2*2</p>
 <!-- 貌似也是转化为了直方图求面积 -->
-<ul class="task-list">
-<li><input type="checkbox" disabled="" />
-还没看懂啊</li>
-</ul>
+<blockquote>
+<p>思路非常好懂，遍历每一行，以当前行为底，统计在此行之上连续的1的个数，像直方图一样；此时，问题重新转化为单调栈问题，时间和空间复杂度为O(M)。再考虑有N行，则总的时间复杂度为O(N*M)</p>
+</blockquote>
+<p><del>- [ ] 还没看懂啊</del></p>
+<p>突然明白了，这个题类似与求最高的水位面积的那个，这是转化直方图之后的思想</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>def <span class="kw">f</span>()<span class="op">:</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="st">    </span>n,m=<span class="kw">map</span>(int,<span class="kw">input</span>()<span class="kw">.split</span>())</span>
 <span id="cb12-3"><a href="#cb12-3"></a>    M=[]</span>
@@ -548,37 +556,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-23"><a href="#cb12-23"></a>    <span class="kw">print</span>(res)           </span>
 <span id="cb12-24"><a href="#cb12-24"></a><span class="kw">f</span>()</span></code></pre></div>
 </div>
-<div id="最小值减去最大值小于或者等于nums的子矩阵的数量" class="section level2" number="0.12">
-<h2><span class="header-section-number">0.12</span> 最小值减去最大值小于或者等于nums的子矩阵的数量</h2>
-<p>题目描述
-给定数组 arr 和整数 num，共返回有多少个子数组满足如下情况：
-max(arr[i…j]) - min(arr[i…j]) &lt;= num
-max(arr[i…j])表示子数组arr[i…j]中的最大值，min[arr[i…j])表示子数组arr[i…j]中的最小值。</p>
-<p>输入描述:
-第一行输入两个数 n 和 num，其中 n 表示数组 arr 的长度
-第二行输入n个整数<span class="math inline">\(X_i\)</span>，表示数组arr中的每个元素</p>
-<p>感觉在考滑动窗口</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a></span>
-<span id="cb13-2"><a href="#cb13-2"></a></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="kw">def</span> f():</span>
-<span id="cb13-4"><a href="#cb13-4"></a>    n,k <span class="op">=</span> <span class="bu">map</span>(<span class="bu">int</span>,<span class="bu">input</span>().split())</span>
-<span id="cb13-5"><a href="#cb13-5"></a>    nums <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="bu">int</span>,<span class="bu">input</span>().split()))</span>
-<span id="cb13-6"><a href="#cb13-6"></a>    ans <span class="op">=</span> n</span>
-<span id="cb13-7"><a href="#cb13-7"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n<span class="op">-</span><span class="dv">1</span>):</span>
-<span id="cb13-8"><a href="#cb13-8"></a>        mi <span class="op">=</span> nums[i]</span>
-<span id="cb13-9"><a href="#cb13-9"></a>        ma <span class="op">=</span> nums[i]</span>
-<span id="cb13-10"><a href="#cb13-10"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i<span class="op">+</span><span class="dv">1</span>,n):</span>
-<span id="cb13-11"><a href="#cb13-11"></a>            mi <span class="op">=</span> <span class="bu">min</span>(mi,nums[j])</span>
-<span id="cb13-12"><a href="#cb13-12"></a>            ma <span class="op">=</span> <span class="bu">max</span>(ma,nums[j])</span>
-<span id="cb13-13"><a href="#cb13-13"></a>            <span class="cf">if</span> ma<span class="op">-</span>mi<span class="op">&lt;=</span>k:</span>
-<span id="cb13-14"><a href="#cb13-14"></a>                ans<span class="op">+=</span><span class="dv">1</span></span>
-<span id="cb13-15"><a href="#cb13-15"></a>            <span class="cf">else</span>:</span>
-<span id="cb13-16"><a href="#cb13-16"></a>                <span class="cf">break</span></span>
-<span id="cb13-17"><a href="#cb13-17"></a>    <span class="bu">print</span>(ans)</span>
-<span id="cb13-18"><a href="#cb13-18"></a>f()</span></code></pre></div>
-</div>
-<div id="换钱的方法" class="section level2" number="0.13">
-<h2><span class="header-section-number">0.13</span> 换钱的方法</h2>
+<div id="换钱的方法" class="section level2" number="0.12">
+<h2><span class="header-section-number">0.12</span> 换钱的方法</h2>
 <p>题目描述
 给定数组arr，设数组长度为n，arr中所有的值都为正整数且不重复。每个值代表一种面值的货币，每种面值的货币可以使用任意张，再给定一个整数aim，代表要找的钱数，求换钱的方法数有多少种。由于方法的种数比较大，所以要求输出对10^9+710
 9
@@ -586,113 +565,176 @@ max(arr[i…j])表示子数组arr[i…j]中的最大值，min[arr[i…j])表示�
 输入描述:
 输出包括两行，第一行包括两个整数n(0 n )(0≤n≤1000)和aim(0 aim )(0≤aim≤20000)。第二行包含n个整数，表示arr数组( 1 arr_i 1e9 )(1≤arr
 i≤1e9)。</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>n,aim <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="bu">int</span>,<span class="bu">input</span>().split()))</span>
-<span id="cb14-2"><a href="#cb14-2"></a>arr <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="bu">int</span>,<span class="bu">input</span>().split()))</span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="co">#arr.sort(reverse=True)</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="kw">def</span> shaibi(arr,aim):</span>
-<span id="cb14-5"><a href="#cb14-5"></a>    res <span class="op">=</span> [<span class="dv">1</span>]<span class="op">+</span>[<span class="dv">0</span>]<span class="op">*</span>aim <span class="co"># 第0位是辅助位，代表面额数刚好等于金钱数的一种情况</span></span>
-<span id="cb14-6"><a href="#cb14-6"></a>    <span class="cf">for</span> x <span class="kw">in</span> arr:</span>
-<span id="cb14-7"><a href="#cb14-7"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(x,aim<span class="op">+</span><span class="dv">1</span>):</span>
-<span id="cb14-8"><a href="#cb14-8"></a>            res[j] <span class="op">+=</span> res[j<span class="op">-</span>x]</span>
-<span id="cb14-9"><a href="#cb14-9"></a>    <span class="cf">return</span> res[<span class="op">-</span><span class="dv">1</span>]<span class="op">%</span><span class="dv">1000000007</span></span>
-<span id="cb14-10"><a href="#cb14-10"></a>a <span class="op">=</span> shaibi(arr,aim)</span>
-<span id="cb14-11"><a href="#cb14-11"></a><span class="bu">print</span>(a)</span>
-<span id="cb14-12"><a href="#cb14-12"></a><span class="co">&#39;&#39;&#39;</span></span>
-<span id="cb14-13"><a href="#cb14-13"></a><span class="co">解题思路：</span></span>
-<span id="cb14-14"><a href="#cb14-14"></a><span class="co">动态规划核心状态转移方程式</span></span>
-<span id="cb14-15"><a href="#cb14-15"></a><span class="co">f（n） = f(n - arr[0]) + f(n - arr[1]) + f(n - arr[2]) + ... + f(n - arr[i]) i为arr的长度</span></span>
-<span id="cb14-16"><a href="#cb14-16"></a><span class="co">对于组成n的情况，每个arr[i]元与f（n - arr[i]）都可以组成一个n，所以把每种f（n - arr[i]）的种类数</span></span>
-<span id="cb14-17"><a href="#cb14-17"></a><span class="co">相加，就找出了arr能组成n的种类。递归计算会重复计算f（n - arr[i]），运用斐波那契数列类似的方法，</span></span>
-<span id="cb14-18"><a href="#cb14-18"></a><span class="co">从0开始遍历，重复利用计算过的f（n - arr[i]）。结果数值会过大，题目要求输出对10 ^ 9 +7取模后的答案。</span></span>
-<span id="cb14-19"><a href="#cb14-19"></a><span class="co">&#39;&#39;&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>n,aim <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="bu">int</span>,<span class="bu">input</span>().split()))</span>
+<span id="cb13-2"><a href="#cb13-2"></a>arr <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="bu">int</span>,<span class="bu">input</span>().split()))</span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#arr.sort(reverse=True)</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="kw">def</span> shaibi(arr,aim):</span>
+<span id="cb13-5"><a href="#cb13-5"></a>    res <span class="op">=</span> [<span class="dv">1</span>]<span class="op">+</span>[<span class="dv">0</span>]<span class="op">*</span>aim <span class="co"># 第0位是辅助位，代表面额数刚好等于金钱数的一种情况</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>    <span class="cf">for</span> x <span class="kw">in</span> arr:</span>
+<span id="cb13-7"><a href="#cb13-7"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(x,aim<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb13-8"><a href="#cb13-8"></a>            res[j] <span class="op">+=</span> res[j<span class="op">-</span>x]</span>
+<span id="cb13-9"><a href="#cb13-9"></a>    <span class="cf">return</span> res[<span class="op">-</span><span class="dv">1</span>]<span class="op">%</span><span class="dv">1000000007</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>a <span class="op">=</span> shaibi(arr,aim)</span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="bu">print</span>(a)</span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="co">&#39;&#39;&#39;</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="co">解题思路：</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="co">动态规划核心状态转移方程式</span></span>
+<span id="cb13-15"><a href="#cb13-15"></a><span class="co">f（n） = f(n - arr[0]) + f(n - arr[1]) + f(n - arr[2]) + ... + f(n - arr[i]) i为arr的长度</span></span>
+<span id="cb13-16"><a href="#cb13-16"></a><span class="co">对于组成n的情况，每个arr[i]元与f（n - arr[i]）都可以组成一个n，所以把每种f（n - arr[i]）的种类数</span></span>
+<span id="cb13-17"><a href="#cb13-17"></a><span class="co">相加，就找出了arr能组成n的种类。递归计算会重复计算f（n - arr[i]），运用斐波那契数列类似的方法，</span></span>
+<span id="cb13-18"><a href="#cb13-18"></a><span class="co">从0开始遍历，重复利用计算过的f（n - arr[i]）。结果数值会过大，题目要求输出对10 ^ 9 +7取模后的答案。</span></span>
+<span id="cb13-19"><a href="#cb13-19"></a><span class="co">&#39;&#39;&#39;</span></span></code></pre></div>
 </div>
-<div id="二分法查找" class="section level2" number="0.14">
-<h2><span class="header-section-number">0.14</span> 二分法查找</h2>
+<div id="二分法查找" class="section level2" number="0.13">
+<h2><span class="header-section-number">0.13</span> 二分法查找</h2>
 <p>二分法查找/折半查找的时间复杂度是nlog(n)</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co">#递归实现二分查找 li是列表   item是要查找的元素</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>def <span class="kw">merge_search</span>( li ,item )<span class="op">:</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="st">    </span><span class="co">#传来的列表每次都是新生成的，如果发现里面没有元素，则是查找到尽头都没找到</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="st">    </span><span class="cf">if</span> not li <span class="op">:</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="st">        </span>return False</span>
-<span id="cb15-6"><a href="#cb15-6"></a></span>
-<span id="cb15-7"><a href="#cb15-7"></a>    mid =<span class="st"> </span><span class="kw">len</span>(li)<span class="op">/</span><span class="er">/</span><span class="dv">2</span>   <span class="co">#mid记录li的中间位置</span></span>
-<span id="cb15-8"><a href="#cb15-8"></a>    <span class="co">#检查一下 如果中间这个数就是要找的元素 返回真</span></span>
-<span id="cb15-9"><a href="#cb15-9"></a>    <span class="cf">if</span> li[mid] <span class="op">==</span><span class="st"> </span>item <span class="op">:</span></span>
-<span id="cb15-10"><a href="#cb15-10"></a><span class="st">        </span>return True</span>
-<span id="cb15-11"><a href="#cb15-11"></a>    <span class="co"># 如果mid比item大，说明item可能会出现在mid左边，对左边再查找</span></span>
-<span id="cb15-12"><a href="#cb15-12"></a>    elif li[mid]<span class="op">&gt;</span><span class="st"> </span>item <span class="op">:</span></span>
-<span id="cb15-13"><a href="#cb15-13"></a><span class="st">        </span>return <span class="kw">merge_search</span>( li[<span class="op">:</span>mid] ,item )</span>
-<span id="cb15-14"><a href="#cb15-14"></a>    <span class="co"># mid 比item小，说明item有可能在mid右边，对右边再查找</span></span>
-<span id="cb15-15"><a href="#cb15-15"></a>    <span class="cf">else</span> <span class="op">:</span></span>
-<span id="cb15-16"><a href="#cb15-16"></a><span class="st">        </span>return <span class="kw">merge_search</span>( li[mid<span class="op">+</span><span class="dv">1</span><span class="op">:</span>] , item )</span>
-<span id="cb15-17"><a href="#cb15-17"></a></span>
-<span id="cb15-18"><a href="#cb15-18"></a><span class="cf">if</span> __name__ <span class="op">==</span><span class="st"> &#39;__main__&#39;</span><span class="op">:</span></span>
-<span id="cb15-19"><a href="#cb15-19"></a><span class="st">    </span>li =<span class="st"> </span>[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>]</span>
-<span id="cb15-20"><a href="#cb15-20"></a>    <span class="kw">print</span>( <span class="kw">merge_search</span>(li , <span class="dv">0</span>) )   <span class="co">#False</span></span>
-<span id="cb15-21"><a href="#cb15-21"></a>    <span class="kw">print</span>( <span class="kw">merge_search</span>(li , <span class="dv">1</span>) )   <span class="co">#True</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co">#递归实现二分查找 li是列表   item是要查找的元素</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>def <span class="kw">merge_search</span>( li ,item )<span class="op">:</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="st">    </span><span class="co">#传来的列表每次都是新生成的，如果发现里面没有元素，则是查找到尽头都没找到</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="st">    </span><span class="cf">if</span> not li <span class="op">:</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="st">        </span>return False</span>
+<span id="cb14-6"><a href="#cb14-6"></a></span>
+<span id="cb14-7"><a href="#cb14-7"></a>    mid =<span class="st"> </span><span class="kw">len</span>(li)<span class="op">/</span><span class="er">/</span><span class="dv">2</span>   <span class="co">#mid记录li的中间位置</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>    <span class="co">#检查一下 如果中间这个数就是要找的元素 返回真</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a>    <span class="cf">if</span> li[mid] <span class="op">==</span><span class="st"> </span>item <span class="op">:</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="st">        </span>return True</span>
+<span id="cb14-11"><a href="#cb14-11"></a>    <span class="co"># 如果mid比item大，说明item可能会出现在mid左边，对左边再查找</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a>    elif li[mid]<span class="op">&gt;</span><span class="st"> </span>item <span class="op">:</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a><span class="st">        </span>return <span class="kw">merge_search</span>( li[<span class="op">:</span>mid] ,item )</span>
+<span id="cb14-14"><a href="#cb14-14"></a>    <span class="co"># mid 比item小，说明item有可能在mid右边，对右边再查找</span></span>
+<span id="cb14-15"><a href="#cb14-15"></a>    <span class="cf">else</span> <span class="op">:</span></span>
+<span id="cb14-16"><a href="#cb14-16"></a><span class="st">        </span>return <span class="kw">merge_search</span>( li[mid<span class="op">+</span><span class="dv">1</span><span class="op">:</span>] , item )</span>
+<span id="cb14-17"><a href="#cb14-17"></a></span>
+<span id="cb14-18"><a href="#cb14-18"></a><span class="cf">if</span> __name__ <span class="op">==</span><span class="st"> &#39;__main__&#39;</span><span class="op">:</span></span>
+<span id="cb14-19"><a href="#cb14-19"></a><span class="st">    </span>li =<span class="st"> </span>[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>]</span>
+<span id="cb14-20"><a href="#cb14-20"></a>    <span class="kw">print</span>( <span class="kw">merge_search</span>(li , <span class="dv">0</span>) )   <span class="co">#False</span></span>
+<span id="cb14-21"><a href="#cb14-21"></a>    <span class="kw">print</span>( <span class="kw">merge_search</span>(li , <span class="dv">1</span>) )   <span class="co">#True</span></span></code></pre></div>
 <p>因此需要看一个二分法查找的例子</p>
 <p><strong>题目描述</strong></p>
 <p>请实现有重复数字的有序数组的二分查找。
 输出在数组中第一个大于等于查找值的位置，如果数组中不存在这样的数，则输出数组长度加一。</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># 二分查找</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="co"># @param n int整型 数组长度</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a><span class="co"># @param v int整型 查找值</span></span>
-<span id="cb16-4"><a href="#cb16-4"></a><span class="co"># @param a int整型一维数组 有序数组</span></span>
-<span id="cb16-5"><a href="#cb16-5"></a><span class="co"># @return int整型</span></span>
-<span id="cb16-6"><a href="#cb16-6"></a>class Solution<span class="op">:</span></span>
-<span id="cb16-7"><a href="#cb16-7"></a><span class="st">    </span>def <span class="kw">__init__</span>(self)<span class="op">:</span></span>
-<span id="cb16-8"><a href="#cb16-8"></a><span class="st">        </span>data =<span class="st"> </span><span class="kw">input</span>()<span class="kw">.split</span>(<span class="st">&quot;,&quot;</span>, <span class="dv">2</span>)</span>
-<span id="cb16-9"><a href="#cb16-9"></a>        self.n =<span class="st"> </span><span class="kw">int</span>(data[<span class="dv">0</span>])</span>
-<span id="cb16-10"><a href="#cb16-10"></a>        self.v =<span class="st"> </span><span class="kw">int</span>(data[<span class="dv">1</span>])</span>
-<span id="cb16-11"><a href="#cb16-11"></a>        self.a =<span class="st"> </span><span class="kw">eval</span>(data[<span class="dv">2</span>]) <span class="co">#这里其实也可以不这么写啊，输入的话</span></span>
-<span id="cb16-12"><a href="#cb16-12"></a>    def <span class="kw">upper_bound_</span>(self)<span class="op">:</span></span>
-<span id="cb16-13"><a href="#cb16-13"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb16-14"><a href="#cb16-14"></a><span class="st">        </span><span class="cf">if</span> self.v <span class="op">&gt;</span><span class="st"> </span>self.a[<span class="op">-</span><span class="dv">1</span>]<span class="op">:</span></span>
-<span id="cb16-15"><a href="#cb16-15"></a><span class="st">            </span>return self.n<span class="op">+</span><span class="dv">1</span></span>
-<span id="cb16-16"><a href="#cb16-16"></a>        l, r =<span class="st"> </span><span class="dv">0</span>, self.n<span class="dv">-1</span></span>
-<span id="cb16-17"><a href="#cb16-17"></a>        <span class="cf">while</span> l<span class="op">&lt;=</span>r<span class="op">:</span></span>
-<span id="cb16-18"><a href="#cb16-18"></a><span class="st">            </span>m =<span class="st"> </span>(l<span class="op">+</span>r)<span class="op">/</span><span class="er">/</span><span class="dv">2</span> <span class="co"># 整体的思想就是折半查找</span></span>
-<span id="cb16-19"><a href="#cb16-19"></a>            <span class="cf">if</span> self.a[m]<span class="op">&lt;=</span>(self.v<span class="dv">-1</span>)<span class="op">:</span></span>
-<span id="cb16-20"><a href="#cb16-20"></a><span class="st">                </span>l =<span class="st"> </span>m <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb16-21"><a href="#cb16-21"></a>            <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb16-22"><a href="#cb16-22"></a><span class="st">                </span>r =<span class="st"> </span>m <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb16-23"><a href="#cb16-23"></a>        right =<span class="st"> </span>l</span>
-<span id="cb16-24"><a href="#cb16-24"></a>        return right<span class="op">+</span><span class="dv">1</span></span>
-<span id="cb16-25"><a href="#cb16-25"></a>solution =<span class="st"> </span><span class="kw">Solution</span>()</span>
-<span id="cb16-26"><a href="#cb16-26"></a>res =<span class="st"> </span><span class="kw">solution.upper_bound_</span>()</span>
-<span id="cb16-27"><a href="#cb16-27"></a><span class="kw">print</span>(res)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># 二分查找</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="co"># @param n int整型 数组长度</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="co"># @param v int整型 查找值</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co"># @param a int整型一维数组 有序数组</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="co"># @return int整型</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a>class Solution<span class="op">:</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="st">    </span>def <span class="kw">__init__</span>(self)<span class="op">:</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="st">        </span>data =<span class="st"> </span><span class="kw">input</span>()<span class="kw">.split</span>(<span class="st">&quot;,&quot;</span>, <span class="dv">2</span>)</span>
+<span id="cb15-9"><a href="#cb15-9"></a>        self.n =<span class="st"> </span><span class="kw">int</span>(data[<span class="dv">0</span>])</span>
+<span id="cb15-10"><a href="#cb15-10"></a>        self.v =<span class="st"> </span><span class="kw">int</span>(data[<span class="dv">1</span>])</span>
+<span id="cb15-11"><a href="#cb15-11"></a>        self.a =<span class="st"> </span><span class="kw">eval</span>(data[<span class="dv">2</span>]) <span class="co">#这里其实也可以不这么写啊，输入的话</span></span>
+<span id="cb15-12"><a href="#cb15-12"></a>    def <span class="kw">upper_bound_</span>(self)<span class="op">:</span></span>
+<span id="cb15-13"><a href="#cb15-13"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb15-14"><a href="#cb15-14"></a><span class="st">        </span><span class="cf">if</span> self.v <span class="op">&gt;</span><span class="st"> </span>self.a[<span class="op">-</span><span class="dv">1</span>]<span class="op">:</span></span>
+<span id="cb15-15"><a href="#cb15-15"></a><span class="st">            </span>return self.n<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb15-16"><a href="#cb15-16"></a>        l, r =<span class="st"> </span><span class="dv">0</span>, self.n<span class="dv">-1</span></span>
+<span id="cb15-17"><a href="#cb15-17"></a>        <span class="cf">while</span> l<span class="op">&lt;=</span>r<span class="op">:</span></span>
+<span id="cb15-18"><a href="#cb15-18"></a><span class="st">            </span>m =<span class="st"> </span>(l<span class="op">+</span>r)<span class="op">/</span><span class="er">/</span><span class="dv">2</span> <span class="co"># 整体的思想就是折半查找</span></span>
+<span id="cb15-19"><a href="#cb15-19"></a>            <span class="cf">if</span> self.a[m]<span class="op">&lt;=</span>(self.v<span class="dv">-1</span>)<span class="op">:</span></span>
+<span id="cb15-20"><a href="#cb15-20"></a><span class="st">                </span>l =<span class="st"> </span>m <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb15-21"><a href="#cb15-21"></a>            <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb15-22"><a href="#cb15-22"></a><span class="st">                </span>r =<span class="st"> </span>m <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb15-23"><a href="#cb15-23"></a>        right =<span class="st"> </span>l</span>
+<span id="cb15-24"><a href="#cb15-24"></a>        return right<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb15-25"><a href="#cb15-25"></a>solution =<span class="st"> </span><span class="kw">Solution</span>()</span>
+<span id="cb15-26"><a href="#cb15-26"></a>res =<span class="st"> </span><span class="kw">solution.upper_bound_</span>()</span>
+<span id="cb15-27"><a href="#cb15-27"></a><span class="kw">print</span>(res)</span></code></pre></div>
 </div>
-<div id="二叉树的先序中序后序遍历" class="section level2" number="0.15">
-<h2><span class="header-section-number">0.15</span> 二叉树的先序中序后序遍历</h2>
+<div id="二叉树的先序中序后序遍历" class="section level2" number="0.14">
+<h2><span class="header-section-number">0.14</span> 二叉树的先序中序后序遍历</h2>
 <p>输入
 {1,2,3}
 输出
 [[1,2,3],[2,1,3],[2,3,1]]</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>class TreeNode<span class="op">:</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="st">    </span>def <span class="kw">__init__</span>(self, x)<span class="op">:</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="st">         </span>self.val =<span class="st"> </span>x</span>
-<span id="cb17-4"><a href="#cb17-4"></a>         self.left =<span class="st"> </span>None</span>
-<span id="cb17-5"><a href="#cb17-5"></a>         self.right =<span class="st"> </span>None</span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="co">#</span></span>
-<span id="cb17-7"><a href="#cb17-7"></a><span class="co"># @param root TreeNode类 the root of binary tree</span></span>
-<span id="cb17-8"><a href="#cb17-8"></a><span class="co"># @return int整型二维数组</span></span>
-<span id="cb17-9"><a href="#cb17-9"></a><span class="co">#</span></span>
-<span id="cb17-10"><a href="#cb17-10"></a>class Solution<span class="op">:</span></span>
-<span id="cb17-11"><a href="#cb17-11"></a><span class="st">    </span>def <span class="kw">threeOrders</span>(self , root )<span class="op">:</span></span>
-<span id="cb17-12"><a href="#cb17-12"></a><span class="st">        </span>pre_order, in_order, post_order =<span class="st"> </span>[], [], []</span>
-<span id="cb17-13"><a href="#cb17-13"></a>        def <span class="kw">find</span>(root)<span class="op">:</span></span>
-<span id="cb17-14"><a href="#cb17-14"></a><span class="st">            </span><span class="cf">if</span> not root<span class="op">:</span><span class="st"> </span>return None</span>
-<span id="cb17-15"><a href="#cb17-15"></a>            <span class="kw">pre_order.append</span>(root.val)  <span class="co"># 先序：根左右</span></span>
-<span id="cb17-16"><a href="#cb17-16"></a>            <span class="kw">find</span>(root.left)  <span class="co"># 这个是递归吧</span></span>
-<span id="cb17-17"><a href="#cb17-17"></a>            <span class="kw">in_order.append</span>(root.val)   <span class="co"># 中序：左根右</span></span>
-<span id="cb17-18"><a href="#cb17-18"></a>            <span class="kw">find</span>(root.right)</span>
-<span id="cb17-19"><a href="#cb17-19"></a>            <span class="kw">post_order.append</span>(root.val) <span class="co"># 后序：左右根</span></span>
-<span id="cb17-20"><a href="#cb17-20"></a>        <span class="kw">find</span>(root)</span>
-<span id="cb17-21"><a href="#cb17-21"></a>        return [pre_order, in_order, post_order]</span>
-<span id="cb17-22"><a href="#cb17-22"></a>    </span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>class TreeNode<span class="op">:</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="st">    </span>def <span class="kw">__init__</span>(self, x)<span class="op">:</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="st">         </span>self.val =<span class="st"> </span>x</span>
+<span id="cb16-4"><a href="#cb16-4"></a>         self.left =<span class="st"> </span>None</span>
+<span id="cb16-5"><a href="#cb16-5"></a>         self.right =<span class="st"> </span>None</span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="co">#</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="co"># @param root TreeNode类 the root of binary tree</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="co"># @return int整型二维数组</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="co">#</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a>class Solution<span class="op">:</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a><span class="st">    </span>def <span class="kw">threeOrders</span>(self , root )<span class="op">:</span></span>
+<span id="cb16-12"><a href="#cb16-12"></a><span class="st">        </span>pre_order, in_order, post_order =<span class="st"> </span>[], [], []</span>
+<span id="cb16-13"><a href="#cb16-13"></a>        def <span class="kw">find</span>(root)<span class="op">:</span></span>
+<span id="cb16-14"><a href="#cb16-14"></a><span class="st">            </span><span class="cf">if</span> not root<span class="op">:</span><span class="st"> </span>return None</span>
+<span id="cb16-15"><a href="#cb16-15"></a>            <span class="kw">pre_order.append</span>(root.val)  <span class="co"># 先序：根左右</span></span>
+<span id="cb16-16"><a href="#cb16-16"></a>            <span class="kw">find</span>(root.left)  <span class="co"># 这个是递归吧</span></span>
+<span id="cb16-17"><a href="#cb16-17"></a>            <span class="kw">in_order.append</span>(root.val)   <span class="co"># 中序：左根右</span></span>
+<span id="cb16-18"><a href="#cb16-18"></a>            <span class="kw">find</span>(root.right)</span>
+<span id="cb16-19"><a href="#cb16-19"></a>            <span class="kw">post_order.append</span>(root.val) <span class="co"># 后序：左右根</span></span>
+<span id="cb16-20"><a href="#cb16-20"></a>        <span class="kw">find</span>(root)</span>
+<span id="cb16-21"><a href="#cb16-21"></a>        return [pre_order, in_order, post_order]</span>
+<span id="cb16-22"><a href="#cb16-22"></a>    </span></code></pre></div>
 </div>
-<div id="维特比算法" class="section level2" number="0.16">
-<h2><span class="header-section-number">0.16</span> 维特比算法</h2>
+<div id="机器人到达指定位置的方法数" class="section level2" number="0.15">
+<h2><span class="header-section-number">0.15</span> 机器人到达指定位置的方法数</h2>
+<p><strong>题目描述</strong></p>
+<p>假设有排成一行的N个位置，记为1~N，开始时机器人在M位置，机器人可以往左或者往右走，如果机器人在1位置，那么下一步机器人只能走到2位置，如果机器人在N位置，那么下一步机器人只能走到N-1位置。规定机器人只能走k步，最终能来到P位置的方法有多少种。由于方案数可能比较大，所以答案需要对1e9+7取模。</p>
+<p>输入描述:
+输出包括一行四个正整数N（2&lt;=N&lt;=5000）、M(1&lt;=M&lt;=N)、K(1&lt;=K&lt;=5000)、P(1&lt;=P&lt;=N)。
+输出描述:
+输出一个整数，代表最终走到P的方法数对10^9+7109+7取模后的值。</p>
+<p>画个图可能更加直观</p>
+<p>机器人路径规划可以处一个板块了</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>n,m,k,p =<span class="st"> </span><span class="kw">map</span>(int,<span class="kw">input</span>()<span class="kw">.split</span>())</span>
+<span id="cb17-2"><a href="#cb17-2"></a>dp =<span class="st"> </span>[<span class="dv">0</span>] <span class="op">*</span><span class="st"> </span>(n<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb17-3"><a href="#cb17-3"></a>dp[p<span class="dv">-1</span>] =<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(k)<span class="op">:</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="st">    </span>leftup =<span class="st"> </span>dp[<span class="dv">0</span>]</span>
+<span id="cb17-7"><a href="#cb17-7"></a>    <span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(n)<span class="op">:</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a><span class="st">        </span>temp =<span class="st"> </span>dp[j]</span>
+<span id="cb17-9"><a href="#cb17-9"></a>        <span class="cf">if</span> j <span class="op">==</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb17-10"><a href="#cb17-10"></a><span class="st">            </span>dp[j] =<span class="st"> </span>dp[j<span class="op">+</span><span class="dv">1</span>]%<span class="dv">100000007</span></span>
+<span id="cb17-11"><a href="#cb17-11"></a>        elif j <span class="op">==</span><span class="st"> </span>n<span class="dv">-1</span><span class="op">:</span></span>
+<span id="cb17-12"><a href="#cb17-12"></a><span class="st">            </span>dp[j] =<span class="st"> </span>leftup%<span class="dv">100000007</span></span>
+<span id="cb17-13"><a href="#cb17-13"></a>        <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb17-14"><a href="#cb17-14"></a><span class="st">            </span>dp[j] =<span class="st"> </span>(leftup <span class="op">+</span><span class="st"> </span>dp[j<span class="op">+</span><span class="dv">1</span>])%<span class="dv">100000007</span></span>
+<span id="cb17-15"><a href="#cb17-15"></a>        leftup =<span class="st"> </span>temp</span>
+<span id="cb17-16"><a href="#cb17-16"></a><span class="kw">print</span>(dp[m<span class="dv">-1</span>])</span>
+<span id="cb17-17"><a href="#cb17-17"></a></span>
+<span id="cb17-18"><a href="#cb17-18"></a></span>
+<span id="cb17-19"><a href="#cb17-19"></a><span class="co"># 动态规划的思想</span></span></code></pre></div>
+</div>
+<div id="打气球的最大分数" class="section level2" number="0.16">
+<h2><span class="header-section-number">0.16</span> 打气球的最大分数</h2>
+<p>题目描述
+给定一个数组arr,长度为n。代表排有分数的气球。 每打爆一个气球都能获得分数，假设打爆气球的分数为X，获得分数的规则如下:
+1)如果被打爆气球的左边有没被打爆的气球，找到离被打爆气球最近的气球，假设分数为L:如果被打爆气球的右边有没被打爆的气球，找到离被打爆气球最近的气球，假设分数为R.获得分数为L<em>X</em>R
+2)如果被打爆的气球的左边有没被打爆的气球，找到离被打爆气球最近的气球，假设分数为L:如果被打爆气球的右边所有气球都已经被打爆，获得分数为L<em>X。
+3)如果被打爆气球的左边所有的气球都已经被打爆:如果被打爆气球的右边有没被打爆的气球，找到离被打爆气球最近的气球。获得分数为X</em>R.
+4)如果被打爆气球的左边和右边所有的气球都已经被打爆。获得分数为X。
+目标是打爆所有气球，获得每次打爆的分数。通过选择打爆气球的顺序，可以得到不同的总分，请返回能获得的最大分数。
+输入描述:
+输出包括两行，第一行包括一个整数n（0&lt;=n&lt;=500），第二行包括n个整数，代表数组arr （1&lt;=arr[i]&lt;=100）。
+输出描述:
+输出包括一个整数，代表可能获得的最大分数。
+示例1
+输入
+复制
+3
+3 2 5
+输出
+复制
+50
+说明
+2-&gt;1-&gt;3 3<em>2</em>5+3*5+5=50
+示例2
+输入
+复制
+8
+23 4 45 65 23 43 54 56
+输出
+复制
+639019</p>
+</div>
+<div id="维特比算法" class="section level2" number="0.17">
+<h2><span class="header-section-number">0.17</span> 维特比算法</h2>
+<p>目前可以简单的理解为动态规划，因此需要用动态规划的方式进行解题</p>
 </div>
             </section>
 
@@ -751,20 +793,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
