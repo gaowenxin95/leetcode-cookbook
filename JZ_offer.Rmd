@@ -1800,13 +1800,6 @@ class Solution:
 思路：定义两个数组。数组的长度为6*n,即可能出现的最大和。数组每个元素的值代表出现的次数，比如probability[5]表示点数和为5出现的次数。在一轮循环中，一个数组记录之前一次所有出现的情况，一个数组记录这一次的所有出现的情况。例如这一次出现和为n的次数，应该等于另一个数组里记录的n-1,n-2, n-3, n-4, n-5, n-6的和。
 
 
-
-
-
-
-
-
-
 思路2：
 
 分析：动态规划就是分阶段考虑问题，给出变量，找出相邻阶段间的关系。具体定义给忘了。
@@ -2183,13 +2176,57 @@ return left
 
 ## 深度优先搜索和广度优先搜索
 
-## 每k个 一组反转链表
+## 每k个一组反转链表
+
+
+题意是以 k 个nodes为一组进行翻转，返回翻转后的linked list.
+
+
+使用栈的思路啊
+
+
+```r
+# 使用栈
+    def reverseKGroup(self, head, k):
+        """
+        :type head: ListNode
+        :type k: int
+        :rtype: ListNode
+        """
+        dummyhead = ListNode(0)
+        p = dummyhead
+        while True:
+            count = k                           # 作为k的计数器
+            s = []                              # 生成一个空列表当做栈
+            curr = head                         # curr指向头结点
+            while count and curr:               # 查看计数和当前节点
+                s.append(curr)                  # 把curr节点推入栈中
+                curr = curr.next                # curr往前移动
+                count -= 1                      # 计数器-1，k个中已经有一个进入栈中
+
+            if count:                           # 如果count不为空但是现在退出了循环，那么也就是上面终止循环的条件是curr变空了，但是还不够k个，所以直接跳出主循环，不翻转
+                p.next = head
+                break
+
+            # 否则就是因为count=0退出的上面循环，那么现在curr停在了k+1的位置
+            while s:                            # 只要s不空则一个一个推出里面的节点
+                p.next = s.pop()                # p的next指向推出的节点
+                p = p.next      # p向前移动， 直到s里的节点推出干净， 此时p指向这一组的最后一个节点，对于剩下的所有节点来说是dummyhead
+
+            # 连接剩下的链表， p.next 指向k+1的位置，这个如果放在循环外面可能会出现错误，因为上面break的话curr不是k+1的位置，而是None,导致连接错误
+            p.next = curr
+            head = curr                         # 这时候要把head放到下一段头结点的位置
+        return dummyhead.next
+
+```
+
+
 
 ## 四个数之和
 
 也就是24点游戏的思想,不会4个一起算，难就2个一起算呐
 
-还是我刷题太少啦
+~~还是我刷题太少啦~~
 
 ```r
 class Solution(object):
@@ -2222,6 +2259,8 @@ class Solution(object):
  
 
 ## 牛客和赛码网常见输入 和输出的格式
+
+其实input(就可以了
 
 .strip() 去除首位空格
 .split()  分割

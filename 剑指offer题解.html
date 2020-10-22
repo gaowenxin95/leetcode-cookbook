@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2020-09-12" />
+<meta name="date" content="2020-10-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 
 
+<script src="libs/header-attrs-2.2/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -53,18 +54,17 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -84,7 +84,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -129,7 +129,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path=""><a href="#剑指offer题解"><i class="fa fa-check"></i><b>1</b> 剑指offer题解</a><ul>
+<li class="chapter" data-level="1" data-path=""><a href="#剑指offer题解"><i class="fa fa-check"></i><b>1</b> 剑指offer题解</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path=""><a href="#二维数组中的查找"><i class="fa fa-check"></i><b>1.1</b> 二维数组中的查找</a></li>
 <li class="chapter" data-level="1.2" data-path=""><a href="#替换空格"><i class="fa fa-check"></i><b>1.2</b> 替换空格</a></li>
 <li class="chapter" data-level="1.3" data-path=""><a href="#从头到尾打印链表"><i class="fa fa-check"></i><b>1.3</b> 从头到尾打印链表</a></li>
@@ -194,8 +195,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.62" data-path=""><a href="#二分法的查找模板"><i class="fa fa-check"></i><b>1.62</b> 二分法的查找模板</a></li>
 <li class="chapter" data-level="1.63" data-path=""><a href="#回溯"><i class="fa fa-check"></i><b>1.63</b> 回溯</a></li>
 <li class="chapter" data-level="1.64" data-path=""><a href="#深度优先搜索和广度优先搜索"><i class="fa fa-check"></i><b>1.64</b> 深度优先搜索和广度优先搜索</a></li>
-<li class="chapter" data-level="1.65" data-path=""><a href="#每k个-一组反转链表"><i class="fa fa-check"></i><b>1.65</b> 每k个 一组反转链表</a></li>
+<li class="chapter" data-level="1.65" data-path=""><a href="#每k个一组反转链表"><i class="fa fa-check"></i><b>1.65</b> 每k个一组反转链表</a></li>
 <li class="chapter" data-level="1.66" data-path=""><a href="#四个数之和"><i class="fa fa-check"></i><b>1.66</b> 四个数之和</a></li>
+<li class="chapter" data-level="1.67" data-path=""><a href="#牛客和赛码网常见输入-和输出的格式"><i class="fa fa-check"></i><b>1.67</b> 牛客和赛码网常见输入 和输出的格式</a></li>
 </ul></li>
 </ul>
 
@@ -217,12 +219,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">剑指offer</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2020-09-12</em></p>
+<p class="date"><em>2020-10-22</em></p>
 </div>
-<div id="剑指offer题解" class="section level1">
+<div id="剑指offer题解" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> 剑指offer题解</h1>
 <p>按照牛客网的顺序的来的~</p>
-<div id="二维数组中的查找" class="section level2">
+<div id="二维数组中的查找" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> 二维数组中的查找</h2>
 <p><strong>题目描述</strong>
 在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p>
@@ -237,7 +239,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-8"><a href="#cb1-8"></a><span class="st">                </span>return True</span>
 <span id="cb1-9"><a href="#cb1-9"></a>        return False</span></code></pre></div>
 </div>
-<div id="替换空格" class="section level2">
+<div id="替换空格" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> 替换空格</h2>
 <p><strong>题目描述</strong>
 请实现一个函数，将一个字符串中的每个空格替换成“%20”。例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。</p>
@@ -251,7 +253,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-6"><a href="#cb2-6"></a><span class="st">        </span><span class="co"># write code here</span></span>
 <span id="cb2-7"><a href="#cb2-7"></a><span class="st">        </span>return <span class="kw">s.replace</span>(<span class="st">&#39; &#39;</span>,<span class="st">&#39;%20&#39;</span>)</span></code></pre></div>
 </div>
-<div id="从头到尾打印链表" class="section level2">
+<div id="从头到尾打印链表" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> 从头到尾打印链表</h2>
 <p><strong>题目描述</strong></p>
 <p>输入一个链表，按链表从尾到头的顺序返回一个ArrayList。</p>
@@ -275,7 +277,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-16"><a href="#cb3-16"></a>            listNode =<span class="st"> </span>listNode.next</span>
 <span id="cb3-17"><a href="#cb3-17"></a>        return res[<span class="op">::-</span><span class="dv">1</span>]</span></code></pre></div>
 </div>
-<div id="重建二叉树" class="section level2">
+<div id="重建二叉树" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> 重建二叉树</h2>
 <p><strong>题目描述</strong></p>
 <p>输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。</p>
@@ -303,7 +305,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-13"><a href="#cb4-13"></a>        root.right =<span class="st"> </span><span class="kw">self.buildTree</span>(preorder[idx<span class="op">+</span><span class="dv">1</span><span class="op">:</span>], inorder[idx<span class="op">+</span><span class="dv">1</span><span class="op">:</span>])</span>
 <span id="cb4-14"><a href="#cb4-14"></a>        return root</span></code></pre></div>
 </div>
-<div id="两个栈实现队列" class="section level2">
+<div id="两个栈实现队列" class="section level2" number="1.5">
 <h2><span class="header-section-number">1.5</span> 两个栈实现队列</h2>
 <p>栈：先进后厨
 队列：先进先出</p>
@@ -329,7 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-17"><a href="#cb5-17"></a>        <span class="kw">self.stack2.pop</span>()</span>
 <span id="cb5-18"><a href="#cb5-18"></a>        return pop</span></code></pre></div>
 </div>
-<div id="旋转数组中最小的数" class="section level2">
+<div id="旋转数组中最小的数" class="section level2" number="1.6">
 <h2><span class="header-section-number">1.6</span> 旋转数组中最小的数</h2>
 <p><strong>题目描述</strong></p>
 <p>把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。
@@ -365,7 +367,7 @@ NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。</p>
 <span id="cb6-23"><a href="#cb6-23"></a><span class="st">                </span>left<span class="op">+</span><span class="er">=</span><span class="dv">1</span></span>
 <span id="cb6-24"><a href="#cb6-24"></a>        return rotateArray[left]</span></code></pre></div>
 </div>
-<div id="斐波那契数列" class="section level2">
+<div id="斐波那契数列" class="section level2" number="1.7">
 <h2><span class="header-section-number">1.7</span> 斐波那契数列</h2>
 <p><strong>题目描述</strong>
 大家都知道斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项（从0开始，第0项为0，第1项是1）。
@@ -386,7 +388,7 @@ n&lt;=39</p>
 <span id="cb7-13"><a href="#cb7-13"></a></span>
 <span id="cb7-14"><a href="#cb7-14"></a><span class="co"># 绝了，一开始最后的结果没除1000000007取余，死活通不过</span></span></code></pre></div>
 </div>
-<div id="青蛙跳台阶问题" class="section level2">
+<div id="青蛙跳台阶问题" class="section level2" number="1.8">
 <h2><span class="header-section-number">1.8</span> 青蛙跳台阶问题</h2>
 <p><strong>题目描述</strong>
 一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法（先后次序不同算不同的结果）。</p>
@@ -400,7 +402,7 @@ n&lt;=39</p>
 <span id="cb8-8"><a href="#cb8-8"></a><span class="st">            </span><span class="kw">res.append</span>(res[i<span class="dv">-1</span>]<span class="op">+</span>res[i<span class="dv">-2</span>])</span>
 <span id="cb8-9"><a href="#cb8-9"></a>        return res[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
 </div>
-<div id="变态跳台问题" class="section level2">
+<div id="变态跳台问题" class="section level2" number="1.9">
 <h2><span class="header-section-number">1.9</span> 变态跳台问题</h2>
 <p>加强版</p>
 <p><strong>题目描述</strong></p>
@@ -418,7 +420,7 @@ f(n-1)=f(n-2)+……f(1)
 <span id="cb9-7"><a href="#cb9-7"></a>        return n</span>
 <span id="cb9-8"><a href="#cb9-8"></a>        </span></code></pre></div>
 </div>
-<div id="矩形覆盖" class="section level2">
+<div id="矩形覆盖" class="section level2" number="1.10">
 <h2><span class="header-section-number">1.10</span> 矩形覆盖</h2>
 <p><strong>题目描述</strong>
 我们可以用2<em>1的小矩形横着或者竖着去覆盖更大的矩形。请问用n个2</em>1的小矩形无重叠地覆盖一个2*n的大矩形，总共有多少种方法？</p>
@@ -436,7 +438,7 @@ f(n-1)=f(n-2)+……f(1)
 <span id="cb10-10"><a href="#cb10-10"></a>        return res[number]</span>
 <span id="cb10-11"><a href="#cb10-11"></a>        </span></code></pre></div>
 </div>
-<div id="二进制中的1的个数" class="section level2">
+<div id="二进制中的1的个数" class="section level2" number="1.11">
 <h2><span class="header-section-number">1.11</span> 二进制中的1的个数</h2>
 <p><strong>题目描述</strong>
 输入一个整数，输出该数32位二进制表示中1的个数。其中负数用补码表示。</p>
@@ -479,7 +481,7 @@ f(n-1)=f(n-2)+……f(1)
 <p>n &amp; 0xffffffff</p>
 <p>解释一下这句话的意思</p>
 </div>
-<div id="数值得整熟次方" class="section level2">
+<div id="数值得整熟次方" class="section level2" number="1.12">
 <h2><span class="header-section-number">1.12</span> 数值得整熟次方</h2>
 <p><strong>题目描述</strong></p>
 <p>给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。</p>
@@ -512,7 +514,7 @@ f(n-1)=f(n-2)+……f(1)
 <p>今天贝壳找房得笔试挂了，因此多来三个题平复下心情~</p>
 <p>算法虐我千百遍我待算法如初恋~</p>
 </div>
-<div id="调整数组顺序使其位于整熟前面" class="section level2">
+<div id="调整数组顺序使其位于整熟前面" class="section level2" number="1.13">
 <h2><span class="header-section-number">1.13</span> 调整数组顺序使其位于整熟前面</h2>
 <p><strong>题目描述</strong></p>
 <p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。</p>
@@ -530,7 +532,7 @@ f(n-1)=f(n-2)+……f(1)
 <span id="cb15-11"><a href="#cb15-11"></a>        return j<span class="op">+</span>o</span>
 <span id="cb15-12"><a href="#cb15-12"></a>        </span></code></pre></div>
 </div>
-<div id="链表的倒数第k个节点" class="section level2">
+<div id="链表的倒数第k个节点" class="section level2" number="1.14">
 <h2><span class="header-section-number">1.14</span> 链表的倒数第k个节点</h2>
 <p>题目描述
 输入一个链表，输出该链表中倒数第k个结点。</p>
@@ -549,7 +551,7 @@ f(n-1)=f(n-2)+……f(1)
 <span id="cb16-12"><a href="#cb16-12"></a>        return res[<span class="op">-</span>k]</span>
 <span id="cb16-13"><a href="#cb16-13"></a>        </span></code></pre></div>
 </div>
-<div id="反转链表" class="section level2">
+<div id="反转链表" class="section level2" number="1.15">
 <h2><span class="header-section-number">1.15</span> 反转链表</h2>
 <p><strong>题目描述</strong>
 输入一个链表，反转链表后，输出新链表的表头。</p>
@@ -568,7 +570,7 @@ f(n-1)=f(n-2)+……f(1)
 <span id="cb17-12"><a href="#cb17-12"></a>        return p</span></code></pre></div>
 <p>突然发现，今天笔试题不会的原因是因为，比较重要的5个排序没有学透！！</p>
 </div>
-<div id="合并两个有序链表" class="section level2">
+<div id="合并两个有序链表" class="section level2" number="1.16">
 <h2><span class="header-section-number">1.16</span> 合并两个有序链表</h2>
 <p><strong>题目描述</strong>
 输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。</p>
@@ -588,13 +590,13 @@ f(n-1)=f(n-2)+……f(1)
 <span id="cb18-14"><a href="#cb18-14"></a><span class="st">            </span>pHead2.next =<span class="st"> </span><span class="kw">self.Merge</span>(pHead1,pHead2.next)</span>
 <span id="cb18-15"><a href="#cb18-15"></a>            return pHead2</span></code></pre></div>
 </div>
-<div id="树的子结构" class="section level2">
+<div id="树的子结构" class="section level2" number="1.17">
 <h2><span class="header-section-number">1.17</span> 树的子结构</h2>
 <p><strong>题目描述</strong></p>
 <p>输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）</p>
 <p>把树看作一个链表的问题呗</p>
 </div>
-<div id="二叉树的镜像" class="section level2">
+<div id="二叉树的镜像" class="section level2" number="1.18">
 <h2><span class="header-section-number">1.18</span> 二叉树的镜像</h2>
 <p>题目描述
 操作给定的二叉树，将其变换为源二叉树的镜像。
@@ -630,7 +632,7 @@ f(n-1)=f(n-2)+……f(1)
 <span id="cb19-16"><a href="#cb19-16"></a>        <span class="kw">self.Mirror</span>(root.right)</span>
 <span id="cb19-17"><a href="#cb19-17"></a>        return root</span></code></pre></div>
 </div>
-<div id="顺时针打印矩阵" class="section level2">
+<div id="顺时针打印矩阵" class="section level2" number="1.19">
 <h2><span class="header-section-number">1.19</span> 顺时针打印矩阵</h2>
 <p><strong>题目描述</strong>
 输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字，例如，如果输入如下4 X 4矩阵： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 则依次打印出数字1,2,3,4,8,12,16,15,14,13,9,5,6,7,11,10.</p>
@@ -647,7 +649,7 @@ f(n-1)=f(n-2)+……f(1)
 <span id="cb20-10"><a href="#cb20-10"></a>            matrix =<span class="st"> </span><span class="kw">list</span>(<span class="kw">zip</span>(<span class="op">*</span>matrix))[<span class="op">::-</span><span class="dv">1</span>] <span class="co">#这个转置矩阵的好骚啊！</span></span>
 <span id="cb20-11"><a href="#cb20-11"></a>        return res</span></code></pre></div>
 </div>
-<div id="包含min函数的栈" class="section level2">
+<div id="包含min函数的栈" class="section level2" number="1.20">
 <h2><span class="header-section-number">1.20</span> 包含min函数的栈</h2>
 <p><strong>题目描述</strong></p>
 <p>定义栈的数据结构，请在该类型中实现一个能够得到栈中所含最小元素的min函数（时间复杂度应为O(1)。</p>
@@ -667,7 +669,7 @@ f(n-1)=f(n-2)+……f(1)
 <span id="cb21-14"><a href="#cb21-14"></a><span class="st">        </span><span class="co"># write code here</span></span>
 <span id="cb21-15"><a href="#cb21-15"></a><span class="st">        </span>return <span class="kw">min</span>(self.arr)</span></code></pre></div>
 </div>
-<div id="栈的压入和弹出顺序" class="section level2">
+<div id="栈的压入和弹出顺序" class="section level2" number="1.21">
 <h2><span class="header-section-number">1.21</span> 栈的压入和弹出顺序</h2>
 <p><strong>题目描述</strong></p>
 <p>输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否可能为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如序列1,2,3,4,5是某栈的压入顺序，序列4,5,3,2,1是该压栈序列对应的一个弹出序列，但4,3,5,1,2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的）</p>
@@ -703,7 +705,7 @@ f(n-1)=f(n-2)+……f(1)
 <span id="cb22-16"><a href="#cb22-16"></a>        return True</span>
 <span id="cb22-17"><a href="#cb22-17"></a>        </span></code></pre></div>
 </div>
-<div id="最小的k个数" class="section level2">
+<div id="最小的k个数" class="section level2" number="1.22">
 <h2><span class="header-section-number">1.22</span> 最小的K个数</h2>
 <p><strong>题目描述</strong>
 输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2,3,4。</p>
@@ -715,7 +717,7 @@ f(n-1)=f(n-2)+……f(1)
 <span id="cb23-6"><a href="#cb23-6"></a>        <span class="kw">tinput.sort</span>()</span>
 <span id="cb23-7"><a href="#cb23-7"></a>        return tinput[<span class="op">:</span>k]</span></code></pre></div>
 </div>
-<div id="最大子序和" class="section level2">
+<div id="最大子序和" class="section level2" number="1.23">
 <h2><span class="header-section-number">1.23</span> 最大子序和</h2>
 <p><strong>题目描述</strong>
 HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天测试组开完会后,他又发话了:在古老的一维模式识别中,常常需要计算连续子向量的最大和,当向量全为正数的时候,问题很好解决。但是,如果向量中包含负数,是否应该包含某个负数,并期望旁边的正数会弥补它呢？例如:{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。给一个数组，返回它的最大连续子序列的和，你会不会被他忽悠住？(子向量的长度至少是1)</p>
@@ -734,7 +736,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb24-12"><a href="#cb24-12"></a><span class="st">            </span>dp[i]=<span class="kw">max</span>(dp[i<span class="dv">-1</span>]<span class="op">+</span>array[i],array[i])</span>
 <span id="cb24-13"><a href="#cb24-13"></a>        return <span class="kw">max</span>(dp)</span></code></pre></div>
 </div>
-<div id="数组中出现次数超过一半的数字" class="section level2">
+<div id="数组中出现次数超过一半的数字" class="section level2" number="1.24">
 <h2><span class="header-section-number">1.24</span> 数组中出现次数超过一半的数字</h2>
 <p><strong>题目描述</strong>
 数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。</p>
@@ -765,7 +767,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb26-14"><a href="#cb26-14"></a>        <span class="cf">else</span><span class="op">:</span></span>
 <span id="cb26-15"><a href="#cb26-15"></a><span class="st">            </span>return <span class="dv">0</span></span></code></pre></div>
 </div>
-<div id="字符串的排序" class="section level2">
+<div id="字符串的排序" class="section level2" number="1.25">
 <h2><span class="header-section-number">1.25</span> 字符串的排序</h2>
 <p>这个题是腾讯今年的笔试题之一</p>
 <p><strong>题目描述</strong>
@@ -813,7 +815,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb29-16"><a href="#cb29-16"></a>        return result</span></code></pre></div>
 <p><strong>b站笔试题</strong></p>
 </div>
-<div id="有效的括号" class="section level2">
+<div id="有效的括号" class="section level2" number="1.26">
 <h2><span class="header-section-number">1.26</span> 有效的括号</h2>
 <p>题目描述：</p>
 <p>给定一个只包括 ‘(’，‘)’，‘{’，‘}’，‘[’，’]’ 的字符串，判断字符串是否有效。</p>
@@ -872,11 +874,11 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb31-6"><a href="#cb31-6"></a>            s =<span class="st"> </span><span class="kw">s.replace</span>(<span class="st">&#39;()&#39;</span>, <span class="st">&#39;&#39;</span>)</span>
 <span id="cb31-7"><a href="#cb31-7"></a>        return s <span class="op">==</span><span class="st"> &#39;&#39;</span></span></code></pre></div>
 </div>
-<div id="找零" class="section level2">
+<div id="找零" class="section level2" number="1.27">
 <h2><span class="header-section-number">1.27</span> 找零</h2>
 <p>链接：<a href="https://www.nowcoder.com/questionTerminal/944e5ca0ea88471fbfa73061ebe95728" class="uri">https://www.nowcoder.com/questionTerminal/944e5ca0ea88471fbfa73061ebe95728</a>
 来源：牛客网</p>
-<p>Z国的货币系统包含面值1元、4元、16元、64元共计4种硬币，以及面值1024元的纸币。现在小Y使用1024元的纸币购买了一件价值为N (0 &lt; N 1024)N(0&lt;N≤1024)的商品，请问最少他会收到多少硬币？</p>
+<p>Z国的货币系统包含面值1元、4元、16元、64元共计4种硬币，以及面值1024元的纸币。现在小Y使用1024元的纸币购买了一件价值为N (0 &lt; N )N(0&lt;N≤1024)的商品，请问最少他会收到多少硬币？</p>
 <p>也就是买柠檬水找钱的问题</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>def <span class="kw">zl</span>(n)<span class="op">:</span></span>
 <span id="cb32-2"><a href="#cb32-2"></a><span class="st">    </span>coins=[<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">16</span>,<span class="dv">64</span>]</span>
@@ -891,7 +893,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb32-11"><a href="#cb32-11"></a>                </span>
 <span id="cb32-12"><a href="#cb32-12"></a>    return dp[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
 </div>
-<div id="点游戏" class="section level2">
+<div id="点游戏" class="section level2" number="1.28">
 <h2><span class="header-section-number">1.28</span> 24点游戏</h2>
 <p>你有 4 张写有 1 到 9 数字的牌。你需要判断是否能通过 *，/，+，-，(，) 的运算得到 24。</p>
 <p>示例 1:</p>
@@ -924,7 +926,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb33-14"><a href="#cb33-14"></a>            return False</span>
 <span id="cb33-15"><a href="#cb33-15"></a>        return <span class="kw">helper</span>(nums)</span></code></pre></div>
 </div>
-<div id="从上到下打印二叉树" class="section level2">
+<div id="从上到下打印二叉树" class="section level2" number="1.29">
 <h2><span class="header-section-number">1.29</span> 从上到下打印二叉树</h2>
 <p><strong>题目描述</strong>
 从上往下打印出二叉树的每个节点，同层节点从左至右打印。</p>
@@ -955,7 +957,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb34-24"><a href="#cb34-24"></a>        return res</span>
 <span id="cb34-25"><a href="#cb34-25"></a>        </span></code></pre></div>
 </div>
-<div id="二叉树的后续遍历" class="section level2">
+<div id="二叉树的后续遍历" class="section level2" number="1.30">
 <h2><span class="header-section-number">1.30</span> 二叉树的后续遍历</h2>
 <p><strong>题目描述</strong>
 输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则返回true,否则返回false。假设输入的数组的任意两个数字都互不相同。</p>
@@ -992,7 +994,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb35-25"><a href="#cb35-25"></a><span class="st">            </span>right=<span class="kw">self.VerifySquenceOfBST</span>(sequence[i<span class="op">:-</span><span class="dv">1</span>])</span>
 <span id="cb35-26"><a href="#cb35-26"></a>        return left and right</span></code></pre></div>
 </div>
-<div id="二叉树中和为某一路径值" class="section level2">
+<div id="二叉树中和为某一路径值" class="section level2" number="1.31">
 <h2><span class="header-section-number">1.31</span> 二叉树中和为某一路径值</h2>
 <p><strong>题目描述</strong></p>
 <p>输入一颗二叉树的根节点和一个整数，按字典序打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。</p>
@@ -1025,7 +1027,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb37-19"><a href="#cb37-19"></a>        return res</span></code></pre></div>
 <p><strong>仔细去想上面三个题的思路</strong></p>
 </div>
-<div id="复杂链表的复制" class="section level2">
+<div id="复杂链表的复制" class="section level2" number="1.32">
 <h2><span class="header-section-number">1.32</span> 复杂链表的复制</h2>
 <p><strong>题目描述</strong>
 输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针random指向一个随机节点），请对此链表进行深拷贝，并返回拷贝后的头结点。（注意，输出结果中请不要返回参数中的节点引用，否则判题程序会直接返回空）</p>
@@ -1043,7 +1045,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <p>或者下面这一句也是可以的</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>return <span class="kw">copy.deepcopy</span>(pHead)</span></code></pre></div>
 </div>
-<div id="反转单词顺序" class="section level2">
+<div id="反转单词顺序" class="section level2" number="1.33">
 <h2><span class="header-section-number">1.33</span> 反转单词顺序</h2>
 <p><strong>题目描述</strong></p>
 <p>牛客最近来了一个新员工Fish，每天早晨总是会拿着一本英文杂志，写些句子在本子上。同事Cat对Fish写的内容颇感兴趣，有一天他向Fish借来翻看，但却读不懂它的意思。例如，“student. a am I”。后来才意识到，这家伙原来把句子单词的顺序翻转了，正确的句子应该是“I am a student.”。Cat对一一的翻转这些单词顺序可不在行，你能帮助他么？</p>
@@ -1058,7 +1060,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb40-7"><a href="#cb40-7"></a>        res=st[<span class="op">::-</span><span class="dv">1</span>]</span>
 <span id="cb40-8"><a href="#cb40-8"></a>        return <span class="st">&#39; &#39;</span><span class="kw">.join</span>(res)</span></code></pre></div>
 </div>
-<div id="左旋字符串" class="section level2">
+<div id="左旋字符串" class="section level2" number="1.34">
 <h2><span class="header-section-number">1.34</span> 左旋字符串</h2>
 <p><strong>题目描述</strong>
 汇编语言中有一种移位指令叫做循环左移（ROL），现在有个简单的任务，就是用字符串模拟这个指令的运算结果。对于一个给定的字符序列S，请你把其循环左移K位后的序列输出。例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”。是不是很简单？OK，搞定它！</p>
@@ -1069,7 +1071,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb41-5"><a href="#cb41-5"></a>        return s[n<span class="op">:</span>]<span class="op">+</span>s[<span class="op">:</span>n]</span>
 <span id="cb41-6"><a href="#cb41-6"></a>        </span></code></pre></div>
 </div>
-<div id="把数组排成最小整数" class="section level2">
+<div id="把数组排成最小整数" class="section level2" number="1.35">
 <h2><span class="header-section-number">1.35</span> 把数组排成最小整数</h2>
 <p><strong>题目描述</strong>
 输入一个正整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。例如输入数组{3，32，321}，则打印出这三个数字能排成的最小数字为321323。</p>
@@ -1086,7 +1088,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb42-9"><a href="#cb42-9"></a><span class="st">                    </span>numbers[j], numbers[i] =<span class="st"> </span>numbers[i], numbers[j]</span>
 <span id="cb42-10"><a href="#cb42-10"></a>        return <span class="st">&#39;&#39;</span><span class="kw">.join</span>([<span class="kw">str</span>(i) <span class="cf">for</span> i <span class="cf">in</span> numbers])</span></code></pre></div>
 </div>
-<div id="丑数" class="section level2">
+<div id="丑数" class="section level2" number="1.36">
 <h2><span class="header-section-number">1.36</span> 丑数</h2>
 <p><strong>题目描述</strong>
 把只包含质因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是，因为它包含质因子7。 习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。</p>
@@ -1113,7 +1115,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb43-19"><a href="#cb43-19"></a><span class="st">                </span>p5 <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
 <span id="cb43-20"><a href="#cb43-20"></a>        return uglyList[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
 </div>
-<div id="第一个只出现一次的字符串" class="section level2">
+<div id="第一个只出现一次的字符串" class="section level2" number="1.37">
 <h2><span class="header-section-number">1.37</span> 第一个只出现一次的字符串</h2>
 <p><strong>题目描述</strong>
 在一个字符串(0&lt;=字符串长度&lt;=10000，全部由字母组成)中找到第一个只出现一次的字符,并返回它的位置, 如果没有则返回 -1（需要区分大小写）.（从0开始计数）</p>
@@ -1139,7 +1141,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb45-8"><a href="#cb45-8"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">s.count</span>(value) <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span></span>
 <span id="cb45-9"><a href="#cb45-9"></a><span class="st">                </span>return index</span></code></pre></div>
 </div>
-<div id="数组中的逆序对" class="section level2">
+<div id="数组中的逆序对" class="section level2" number="1.38">
 <h2><span class="header-section-number">1.38</span> 数组中的逆序对</h2>
 <p><strong>题目描述</strong></p>
 <p>在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组,求出这个数组中的逆序对的总数P。并将P对1000000007取模的结果输出。 即输出P%1000000007</p>
@@ -1169,7 +1171,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 冒泡排序太暴力了</p>
 <p>待我默写出来</p>
 </div>
-<div id="两个链表的第一个公共节点" class="section level2">
+<div id="两个链表的第一个公共节点" class="section level2" number="1.39">
 <h2><span class="header-section-number">1.39</span> 两个链表的第一个公共节点</h2>
 <p><strong>题目描述</strong></p>
 <p>输入两个链表，找出它们的第一个公共结点。（注意因为传入数据是链表，所以错误测试数据的提示是用其他方式显示的，保证传入数据是正确的）</p>
@@ -1223,7 +1225,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb48-17"><a href="#cb48-17"></a>            p2 =<span class="st"> </span>pHead1 <span class="cf">if</span> p2 is None <span class="cf">else</span> p2.next</span>
 <span id="cb48-18"><a href="#cb48-18"></a>        return p1</span></code></pre></div>
 </div>
-<div id="数字在升序数组中出现的次数" class="section level2">
+<div id="数字在升序数组中出现的次数" class="section level2" number="1.40">
 <h2><span class="header-section-number">1.40</span> 数字在升序数组中出现的次数</h2>
 <p><strong>题目描述</strong></p>
 <p>统计一个数字在升序数组中出现的次数。</p>
@@ -1240,7 +1242,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb49-10"><a href="#cb49-10"></a>        <span class="co"># 或者就直接用python的count函数</span></span>
 <span id="cb49-11"><a href="#cb49-11"></a>        <span class="co"># return data.count(k)</span></span></code></pre></div>
 </div>
-<div id="平衡二叉树" class="section level2">
+<div id="平衡二叉树" class="section level2" number="1.41">
 <h2><span class="header-section-number">1.41</span> 平衡二叉树</h2>
 <p><strong>题目描述</strong>
 输入一棵二叉树，判断该二叉树是否是平衡二叉树。</p>
@@ -1249,7 +1251,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <p><strong>一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值小于1。</strong></p>
 <p>大于1就返回fasle呗</p>
 </div>
-<div id="数组中只出现一次的数" class="section level2">
+<div id="数组中只出现一次的数" class="section level2" number="1.42">
 <h2><span class="header-section-number">1.42</span> 数组中只出现一次的数</h2>
 <p><strong>题目描述</strong>
 一个整型数组里除了两个数字之外，其他的数字都出现了两次。请写程序找出这两个只出现一次的数字。</p>
@@ -1264,7 +1266,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb50-9"><a href="#cb50-9"></a><span class="st">                </span><span class="kw">res.append</span>(i)</span>
 <span id="cb50-10"><a href="#cb50-10"></a>        return res</span></code></pre></div>
 </div>
-<div id="和为s的连续子序列" class="section level2">
+<div id="和为s的连续子序列" class="section level2" number="1.43">
 <h2><span class="header-section-number">1.43</span> 和为S的连续子序列</h2>
 <p><strong>题目描述</strong></p>
 <p>小明很喜欢数学,有一天他在做数学作业时,要求计算出9~16的和,他马上就写出了正确答案是100。但是他并不满足于此,他在想究竟有多少种连续的正数序列的和为100(至少包括两个数)。没多久,他就得到另一组连续正数和为100的序列:18,19,20,21,22。现在把问题交给你,你能不能也很快的找出所有和为S的连续正数序列? Good Luck!</p>
@@ -1314,7 +1316,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb52-22"><a href="#cb52-22"></a>                small <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
 <span id="cb52-23"><a href="#cb52-23"></a>        return ret</span></code></pre></div>
 </div>
-<div id="两个数之和为s" class="section level2">
+<div id="两个数之和为s" class="section level2" number="1.44">
 <h2><span class="header-section-number">1.44</span> 两个数之和为s</h2>
 <p><strong>题目描述</strong>
 输入一个递增排序的数组和一个数字S，在数组中查找两个数，使得他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。</p>
@@ -1335,7 +1337,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb53-14"><a href="#cb53-14"></a>            return result</span>
 <span id="cb53-15"><a href="#cb53-15"></a>        return []</span></code></pre></div>
 </div>
-<div id="减绳子" class="section level2">
+<div id="减绳子" class="section level2" number="1.45">
 <h2><span class="header-section-number">1.45</span> 减绳子</h2>
 <p><strong>题目描述</strong></p>
 <p>给你一根长度为n的绳子，请把绳子剪成整数长的m段（m、n都是整数，n&gt;1并且m&gt;1，m&lt;=n），每段绳子的长度记为k[1],…,k[m]。请问k[1]x…xk[m]可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。</p>
@@ -1366,7 +1368,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb54-25"><a href="#cb54-25"></a>            max_ =<span class="st"> </span>products[number]</span>
 <span id="cb54-26"><a href="#cb54-26"></a>        return max_</span></code></pre></div>
 </div>
-<div id="机器人的移动范围" class="section level2">
+<div id="机器人的移动范围" class="section level2" number="1.46">
 <h2><span class="header-section-number">1.46</span> 机器人的移动范围</h2>
 <p><strong>题目描述</strong>
 地上有一个m行和n列的方格。一个机器人从坐标0,0的格子开始移动，每一次只能向左，右，上，下四个方向移动一格，但是不能进入行坐标和列坐标的数位之和大于k的格子。 例如，当k为18时，机器人能够进入方格（35,37），因为3+5+3+7 = 18。但是，它不能进入方格（35,38），因为3+5+3+8 = 19。请问该机器人能够达到多少个格子？</p>
@@ -1394,7 +1396,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb55-18"><a href="#cb55-18"></a><span class="st">                    </span>return num</span>
 <span id="cb55-19"><a href="#cb55-19"></a>        return num</span></code></pre></div>
 </div>
-<div id="矩阵中的路径" class="section level2">
+<div id="矩阵中的路径" class="section level2" number="1.47">
 <h2><span class="header-section-number">1.47</span> 矩阵中的路径</h2>
 <p><strong>题目描述</strong>
 请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一个格子开始，每一步可以在矩阵中向左，向右，向上，向下移动一个格子。如果一条路径经过了矩阵中的某一个格子，则该路径不能再进入该格子。 例如 <span class="math inline">\(\left[\begin{array}{llll}a &amp; b &amp; c &amp; e \\ s &amp; f &amp; c &amp; s \\ a &amp; d &amp; e &amp; e\end{array}\right]\)</span>
@@ -1431,7 +1433,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb56-29"><a href="#cb56-29"></a>        <span class="cf">else</span><span class="op">:</span></span>
 <span id="cb56-30"><a href="#cb56-30"></a><span class="st">            </span>return False</span></code></pre></div>
 </div>
-<div id="滑动窗口的最大值" class="section level2">
+<div id="滑动窗口的最大值" class="section level2" number="1.48">
 <h2><span class="header-section-number">1.48</span> 滑动窗口的最大值</h2>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>题目描述</span>
 <span id="cb57-2"><a href="#cb57-2"></a>给定一个数组和滑动窗口的大小，找出所有滑动窗口里数值的最大值。例如，如果输入数组{<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>}及滑动窗口的大小3，那么一共存在6个滑动窗口，他们的最大值分别为{<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">5</span>}； 针对数组{<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>}的滑动窗口有以下6个： {[<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>}， {<span class="dv">2</span>,[<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>],<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>}， {<span class="dv">2</span>,<span class="dv">3</span>,[<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">6</span>],<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>}， {<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,[<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">2</span>],<span class="dv">5</span>,<span class="dv">1</span>}， {<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>,[<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">5</span>],<span class="dv">1</span>}， {<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">6</span>,[<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">1</span>]}。</span>
@@ -1450,7 +1452,7 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 <span id="cb58-11"><a href="#cb58-11"></a><span class="st">                </span><span class="kw">result.append</span>(<span class="kw">max</span>(num[i<span class="op">:</span>i<span class="op">+</span>size]))</span>
 <span id="cb58-12"><a href="#cb58-12"></a>            return result</span></code></pre></div>
 </div>
-<div id="孩子们的游戏" class="section level2">
+<div id="孩子们的游戏" class="section level2" number="1.49">
 <h2><span class="header-section-number">1.49</span> 孩子们的游戏</h2>
 <p><strong>题目描述</strong>
 每年六一儿童节,牛客都会准备一些小礼物去看望孤儿院的小朋友,今年亦是如此。HF作为牛客的资深元老,自然也准备了一些小游戏。其中,有个游戏是这样的:首先,让小朋友们围成一个大圈。然后,他随机指定一个数m,让编号为0的小朋友开始报数。每次喊到m-1的那个小朋友要出列唱首歌,然后可以在礼品箱中任意的挑选礼物,并且不再回到圈中,从他的下一个小朋友开始,继续0…m-1报数….这样下去….直到剩下最后一个小朋友,可以不用表演,并且拿到牛客名贵的“名侦探柯南”典藏版(名额有限哦!!^_^)。请你试着想下,哪个小朋友会得到这份礼品呢？(注：小朋友的编号是从0到n-1)</p>
@@ -1468,7 +1470,7 @@ f[i]=(f[i-1]+m)%i; (i&gt;1)
 <span id="cb59-7"><a href="#cb59-7"></a><span class="st">        </span>s =<span class="st"> </span>(s<span class="op">+</span>m) % i</span>
 <span id="cb59-8"><a href="#cb59-8"></a>    return s</span></code></pre></div>
 </div>
-<div id="扑克牌的顺子" class="section level2">
+<div id="扑克牌的顺子" class="section level2" number="1.50">
 <h2><span class="header-section-number">1.50</span> 扑克牌的顺子</h2>
 <p><strong>题目描述</strong></p>
 <p>LL今天心情特别好,因为他去买了一副扑克牌,发现里面居然有2个大王,2个小王(一副牌原本是54张^_^)…他随机从中抽出了5张牌,想测测自己的手气,看看能不能抽到顺子,如果抽到的话,他决定去买体育彩票,嘿嘿！！“红心A,黑桃3,小王,大王,方片5”,“Oh My God!”不是顺子…..LL不高兴了,他想了想,决定大王可以看成任何数字,并且A看作1,J为11,Q为12,K为13。上面的5张牌就可以变成“1,2,3,4,5”(大小王分别看作2和4),“So Lucky!”。LL决定去买体育彩票啦。 现在,要求你使用这幅牌模拟上面的过程,然后告诉我们LL的运气如何， 如果牌能组成顺子就输出true，否则就输出false。为了方便起见,你可以认为大小王是0。</p>
@@ -1492,7 +1494,7 @@ f[i]=(f[i-1]+m)%i; (i&gt;1)
 <span id="cb60-12"><a href="#cb60-12"></a><span class="st">            </span>return True</span>
 <span id="cb60-13"><a href="#cb60-13"></a>        return False</span></code></pre></div>
 </div>
-<div id="将字符串转化为整数" class="section level2">
+<div id="将字符串转化为整数" class="section level2" number="1.51">
 <h2><span class="header-section-number">1.51</span> 将字符串转化为整数</h2>
 <p><strong>题目描述</strong>
 将一个字符串转换成一个整数，要求不能使用字符串转换整数的库函数。 数值为0或者字符串不是一个合法的数值则返回0
@@ -1521,7 +1523,7 @@ f[i]=(f[i-1]+m)%i; (i&gt;1)
 <span id="cb61-19"><a href="#cb61-19"></a><span class="st">            </span>result =<span class="st"> </span>result<span class="op">*</span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span>i</span>
 <span id="cb61-20"><a href="#cb61-20"></a>        return <span class="dv">-1</span><span class="op">*</span>result <span class="cf">if</span> s[<span class="dv">0</span>] <span class="op">==</span><span class="st"> &#39;-&#39;</span> <span class="cf">else</span> result</span></code></pre></div>
 </div>
-<div id="数组中第一个重复数字" class="section level2">
+<div id="数组中第一个重复数字" class="section level2" number="1.52">
 <h2><span class="header-section-number">1.52</span> 数组中第一个重复数字</h2>
 <p>题目描述
 在一个长度为n的数组里的所有数字都在0到n-1的范围内。 数组中某些数字是重复的，但不知道有几个数字是重复的。也不知道每个数字重复几次。请找出数组中任意一个重复的数字。 例如，如果输入长度为7的数组{2,3,1,0,2,5,3}，那么对应的输出是第一个重复的数字2。</p>
@@ -1537,7 +1539,7 @@ f[i]=(f[i-1]+m)%i; (i&gt;1)
 <span id="cb62-10"><a href="#cb62-10"></a>                return True</span>
 <span id="cb62-11"><a href="#cb62-11"></a>        return False</span></code></pre></div>
 </div>
-<div id="构建乘积数组" class="section level2">
+<div id="构建乘积数组" class="section level2" number="1.53">
 <h2><span class="header-section-number">1.53</span> 构建乘积数组</h2>
 <p><strong>题目描述</strong></p>
 <p>给定一个数组A[0,1,…,n-1],请构建一个数组B[0,1,…,n-1],其中B中的元素B[i]=A[0]<em>A[1]</em>…<em>A[i-1]</em>A[i+1]<em>…</em>A[n-1]。不能使用除法。（注意：规定B[0] = A[1] * A[2] * … * A[n-1]，B[n-1] = A[0] * A[1] * … * A[n-2];）
@@ -1560,7 +1562,7 @@ f[i]=(f[i-1]+m)%i; (i&gt;1)
 <span id="cb63-16"><a href="#cb63-16"></a>            A[i] =<span class="st"> </span>temp</span>
 <span id="cb63-17"><a href="#cb63-17"></a>        return B</span></code></pre></div>
 </div>
-<div id="字符串中第一个不重复得字符串" class="section level2">
+<div id="字符串中第一个不重复得字符串" class="section level2" number="1.54">
 <h2><span class="header-section-number">1.54</span> 字符串中第一个不重复得字符串</h2>
 <p><strong>题目描述</strong></p>
 <p>请实现一个函数用来找出字符流中第一个只出现一次的字符。例如，当从字符流中只读出前两个字符“go”时，第一个只出现一次的字符是“g”。当从该字符流中读出前六个字符“google”时，第一个只出现一次的字符是“l”。</p>
@@ -1582,7 +1584,7 @@ f[i]=(f[i-1]+m)%i; (i&gt;1)
 <span id="cb64-15"><a href="#cb64-15"></a><span class="st">        </span><span class="co"># write code here</span></span>
 <span id="cb64-16"><a href="#cb64-16"></a><span class="st">        </span>self.s<span class="op">+</span><span class="er">=</span>char</span></code></pre></div>
 </div>
-<div id="数流中得中位数" class="section level2">
+<div id="数流中得中位数" class="section level2" number="1.55">
 <h2><span class="header-section-number">1.55</span> 数流中得中位数</h2>
 <p><strong>题目描述</strong></p>
 <p>如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。我们使用Insert()方法读取数据流，使用GetMedian()方法获取当前读取数据的中位数。</p>
@@ -1602,7 +1604,7 @@ f[i]=(f[i-1]+m)%i; (i&gt;1)
 <p>有一部分二叉树的题，我就先不放了，因为我确实没摸索好二叉树的题咋写才能通过</p>
 <p>下面就是复习两边，掌握 核心的idea即可</p>
 </div>
-<div id="求n个骰子各点数和出现的概率" class="section level2">
+<div id="求n个骰子各点数和出现的概率" class="section level2" number="1.56">
 <h2><span class="header-section-number">1.56</span> 求n个骰子各点数和出现的概率</h2>
 <p>题目描述：</p>
 <p>把n个骰子扔在地上，所有骰子朝上一面的点数之和为s。输入n，打印出s的所有可能的值的出现概率。</p>
@@ -1645,7 +1647,7 @@ f[i]=(f[i-1]+m)%i; (i&gt;1)
 <span id="cb66-24"><a href="#cb66-24"></a><span class="st">            </span><span class="kw">result.append</span>(dp[n][i]<span class="op">*</span><span class="fl">1.0</span><span class="op">/</span><span class="dv">6</span><span class="op">**</span>n)</span>
 <span id="cb66-25"><a href="#cb66-25"></a>        return result</span></code></pre></div>
 </div>
-<div id="数组为0的三元组" class="section level2">
+<div id="数组为0的三元组" class="section level2" number="1.57">
 <h2><span class="header-section-number">1.57</span> 数组为0的三元组</h2>
 <p>题目描述
 给出一个有n个元素的数组S，S中是否有元素a,b,c满足a+b+c=0？找出数组S中所有满足条件的三元组。
@@ -1702,7 +1704,7 @@ f[i]=(f[i-1]+m)%i; (i&gt;1)
 <span id="cb67-46"><a href="#cb67-46"></a><span class="st">                    </span>L =<span class="st"> </span>L <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
 <span id="cb67-47"><a href="#cb67-47"></a>        return res</span></code></pre></div>
 </div>
-<div id="数组中最长的无重复子串的长度" class="section level2">
+<div id="数组中最长的无重复子串的长度" class="section level2" number="1.58">
 <h2><span class="header-section-number">1.58</span> 数组中最长的无重复子串的长度</h2>
 <p><strong>题目描述</strong>
 给定一个数组arr，返回arr的最长无的重复子串的长度(无重复指的是所有数字都不相同)。</p>
@@ -1747,7 +1749,7 @@ f[i]=(f[i-1]+m)%i; (i&gt;1)
 <span id="cb69-13"><a href="#cb69-13"></a>            lenth=<span class="kw">max</span>(current,lenth)</span>
 <span id="cb69-14"><a href="#cb69-14"></a>        return lenth</span></code></pre></div>
 </div>
-<div id="求最长无重复子串" class="section level2">
+<div id="求最长无重复子串" class="section level2" number="1.59">
 <h2><span class="header-section-number">1.59</span> 求最长无重复子串</h2>
 <p>从一个字符串中找到一个连续子串，该子串中任何两个字符不能相同，求子串的最大长度并输出一条最长不重复子串。</p>
 <p>输入: “pwwkew”</p>
@@ -1758,7 +1760,7 @@ f[i]=(f[i-1]+m)%i; (i&gt;1)
 <p>内层，判断此元素是否已在外层子字符串中，在则内层循环结束 外层子字符串与最大子字符串比较；不在则添加到子字符串<a href="https://www.jianshu.com/p/b28aa7ea8e5f">艾雅fly</a></p>
 <p><img src="figs/zuida.png" /></p>
 </div>
-<div id="表示数值的字符串" class="section level2">
+<div id="表示数值的字符串" class="section level2" number="1.60">
 <h2><span class="header-section-number">1.60</span> 表示数值的字符串</h2>
 <p><strong>题目描述</strong></p>
 <p>请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串“+100”、“5e2”、“-123”、“3.1416”、“-1E-16”、“0123”都表示数值，但“12e”、“1a3.14”、“1.2.3”、“+-5”及“12e+5.4”都不是。</p>
@@ -1805,7 +1807,7 @@ f[i]=(f[i-1]+m)%i; (i&gt;1)
 <span id="cb72-21"><a href="#cb72-21"></a><span class="st">                </span>return False</span>
 <span id="cb72-22"><a href="#cb72-22"></a>        return True</span></code></pre></div>
 </div>
-<div id="零食柜问题" class="section level2">
+<div id="零食柜问题" class="section level2" number="1.61">
 <h2><span class="header-section-number">1.61</span> 零食柜问题</h2>
 <p><strong>题目描述</strong></p>
 <p>shopee的零食柜，有着各式各样的零食，但是因为贪吃，小虾同学体重日益增加，终于被人叫为小胖了，他终于下定决心减肥了，他决定每天晚上去操场跑两圈，但是跑步太累人了，他想转移注意力，忘记痛苦，正在听着音乐的他，突然有个想法，他想跟着音乐的节奏来跑步，音乐有7种音符，对应的是1到7，那么他对应的步长就可以是1-7分米，这样的话他就可以转移注意力了，但是他想保持自己跑步的速度，在规定时间m分钟跑完。为了避免被累死，他需要规划他每分钟需要跑过的音符，这些音符的步长总和要尽量小。下面是小虾同学听的歌曲的音符，以及规定的时间，你能告诉他每分钟他应该跑多少步长？</p>
@@ -1875,7 +1877,7 @@ m = 2</p>
 <span id="cb73-31"><a href="#cb73-31"></a>            </span>
 <span id="cb73-32"><a href="#cb73-32"></a>            </span></code></pre></div>
 </div>
-<div id="二分法的查找模板" class="section level2">
+<div id="二分法的查找模板" class="section level2" number="1.62">
 <h2><span class="header-section-number">1.62</span> 二分法的查找模板</h2>
 <p>二分查找的通常思路
 如果做多了二分查找的题，这道题应该会有思路。
@@ -1893,45 +1895,89 @@ m = 2</p>
 <span id="cb74-7"><a href="#cb74-7"></a><span class="st">        </span>left =<span class="st"> </span>mid <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
 <span id="cb74-8"><a href="#cb74-8"></a>return left</span></code></pre></div>
 </div>
-<div id="回溯" class="section level2">
+<div id="回溯" class="section level2" number="1.63">
 <h2><span class="header-section-number">1.63</span> 回溯</h2>
 </div>
-<div id="深度优先搜索和广度优先搜索" class="section level2">
+<div id="深度优先搜索和广度优先搜索" class="section level2" number="1.64">
 <h2><span class="header-section-number">1.64</span> 深度优先搜索和广度优先搜索</h2>
 </div>
-<div id="每k个-一组反转链表" class="section level2">
-<h2><span class="header-section-number">1.65</span> 每k个 一组反转链表</h2>
+<div id="每k个一组反转链表" class="section level2" number="1.65">
+<h2><span class="header-section-number">1.65</span> 每k个一组反转链表</h2>
+<p>题意是以 k 个nodes为一组进行翻转，返回翻转后的linked list.</p>
+<p>使用栈的思路啊</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a><span class="co"># 使用栈</span></span>
+<span id="cb75-2"><a href="#cb75-2"></a>    def <span class="kw">reverseKGroup</span>(self, head, k)<span class="op">:</span></span>
+<span id="cb75-3"><a href="#cb75-3"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb75-4"><a href="#cb75-4"></a><span class="st">        :type head: ListNode</span></span>
+<span id="cb75-5"><a href="#cb75-5"></a><span class="st">        :type k: int</span></span>
+<span id="cb75-6"><a href="#cb75-6"></a><span class="st">        :rtype: ListNode</span></span>
+<span id="cb75-7"><a href="#cb75-7"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb75-8"><a href="#cb75-8"></a>        dummyhead =<span class="st"> </span><span class="kw">ListNode</span>(<span class="dv">0</span>)</span>
+<span id="cb75-9"><a href="#cb75-9"></a>        p =<span class="st"> </span>dummyhead</span>
+<span id="cb75-10"><a href="#cb75-10"></a>        <span class="cf">while</span> True<span class="op">:</span></span>
+<span id="cb75-11"><a href="#cb75-11"></a><span class="st">            </span>count =<span class="st"> </span>k                           <span class="co"># 作为k的计数器</span></span>
+<span id="cb75-12"><a href="#cb75-12"></a>            s =<span class="st"> </span>[]                              <span class="co"># 生成一个空列表当做栈</span></span>
+<span id="cb75-13"><a href="#cb75-13"></a>            curr =<span class="st"> </span>head                         <span class="co"># curr指向头结点</span></span>
+<span id="cb75-14"><a href="#cb75-14"></a>            <span class="cf">while</span> count and curr<span class="op">:</span><span class="st">               </span><span class="co"># 查看计数和当前节点</span></span>
+<span id="cb75-15"><a href="#cb75-15"></a><span class="st">                </span><span class="kw">s.append</span>(curr)                  <span class="co"># 把curr节点推入栈中</span></span>
+<span id="cb75-16"><a href="#cb75-16"></a>                curr =<span class="st"> </span>curr.next                <span class="co"># curr往前移动</span></span>
+<span id="cb75-17"><a href="#cb75-17"></a>                count <span class="op">-</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span>                      <span class="co"># 计数器-1，k个中已经有一个进入栈中</span></span>
+<span id="cb75-18"><a href="#cb75-18"></a></span>
+<span id="cb75-19"><a href="#cb75-19"></a>            <span class="cf">if</span> count<span class="op">:</span><span class="st">                           </span><span class="co"># 如果count不为空但是现在退出了循环，那么也就是上面终止循环的条件是curr变空了，但是还不够k个，所以直接跳出主循环，不翻转</span></span>
+<span id="cb75-20"><a href="#cb75-20"></a><span class="st">                </span>p.next =<span class="st"> </span>head</span>
+<span id="cb75-21"><a href="#cb75-21"></a>                <span class="cf">break</span></span>
+<span id="cb75-22"><a href="#cb75-22"></a></span>
+<span id="cb75-23"><a href="#cb75-23"></a>            <span class="co"># 否则就是因为count=0退出的上面循环，那么现在curr停在了k+1的位置</span></span>
+<span id="cb75-24"><a href="#cb75-24"></a>            <span class="cf">while</span> s<span class="op">:</span><span class="st">                            </span><span class="co"># 只要s不空则一个一个推出里面的节点</span></span>
+<span id="cb75-25"><a href="#cb75-25"></a><span class="st">                </span>p.next =<span class="st"> </span><span class="kw">s.pop</span>()                <span class="co"># p的next指向推出的节点</span></span>
+<span id="cb75-26"><a href="#cb75-26"></a>                p =<span class="st"> </span>p.next      <span class="co"># p向前移动， 直到s里的节点推出干净， 此时p指向这一组的最后一个节点，对于剩下的所有节点来说是dummyhead</span></span>
+<span id="cb75-27"><a href="#cb75-27"></a></span>
+<span id="cb75-28"><a href="#cb75-28"></a>            <span class="co"># 连接剩下的链表， p.next 指向k+1的位置，这个如果放在循环外面可能会出现错误，因为上面break的话curr不是k+1的位置，而是None,导致连接错误</span></span>
+<span id="cb75-29"><a href="#cb75-29"></a>            p.next =<span class="st"> </span>curr</span>
+<span id="cb75-30"><a href="#cb75-30"></a>            head =<span class="st"> </span>curr                         <span class="co"># 这时候要把head放到下一段头结点的位置</span></span>
+<span id="cb75-31"><a href="#cb75-31"></a>        return dummyhead.next</span></code></pre></div>
 </div>
-<div id="四个数之和" class="section level2">
+<div id="四个数之和" class="section level2" number="1.66">
 <h2><span class="header-section-number">1.66</span> 四个数之和</h2>
 <p>也就是24点游戏的思想,不会4个一起算，难就2个一起算呐</p>
-<p>还是我刷题太少啦</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
-<span id="cb75-2"><a href="#cb75-2"></a><span class="st">    </span>def <span class="kw">fourSumCount</span>(self, A, B, C, D)<span class="op">:</span></span>
-<span id="cb75-3"><a href="#cb75-3"></a><span class="st">        &quot;&quot;&quot;</span></span>
-<span id="cb75-4"><a href="#cb75-4"></a><span class="st">        :type A: List[int]</span></span>
-<span id="cb75-5"><a href="#cb75-5"></a><span class="st">        :type B: List[int]</span></span>
-<span id="cb75-6"><a href="#cb75-6"></a><span class="st">        :type C: List[int]</span></span>
-<span id="cb75-7"><a href="#cb75-7"></a><span class="st">        :type D: List[int]</span></span>
-<span id="cb75-8"><a href="#cb75-8"></a><span class="st">        :rtype: int</span></span>
-<span id="cb75-9"><a href="#cb75-9"></a><span class="st">        &quot;&quot;&quot;</span></span>
-<span id="cb75-10"><a href="#cb75-10"></a>        count =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb75-11"><a href="#cb75-11"></a>        ab_map =<span class="st"> </span><span class="kw">dict</span>()</span>
-<span id="cb75-12"><a href="#cb75-12"></a>        </span>
-<span id="cb75-13"><a href="#cb75-13"></a>        <span class="cf">for</span> a <span class="cf">in</span> A<span class="op">:</span></span>
-<span id="cb75-14"><a href="#cb75-14"></a><span class="st">            </span><span class="cf">for</span> b <span class="cf">in</span> B<span class="op">:</span></span>
-<span id="cb75-15"><a href="#cb75-15"></a><span class="st">                </span><span class="cf">if</span>  a<span class="op">+</span>b <span class="cf">in</span>  ab_map<span class="op">:</span></span>
-<span id="cb75-16"><a href="#cb75-16"></a><span class="st">                     </span>ab_map[a<span class="op">+</span>b] <span class="op">+</span><span class="er">=</span><span class="dv">1</span></span>
-<span id="cb75-17"><a href="#cb75-17"></a>                <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb75-18"><a href="#cb75-18"></a><span class="st">                     </span>ab_map[a<span class="op">+</span>b] =<span class="dv">1</span></span>
-<span id="cb75-19"><a href="#cb75-19"></a>            </span>
-<span id="cb75-20"><a href="#cb75-20"></a>        <span class="cf">for</span> c <span class="cf">in</span> C<span class="op">:</span></span>
-<span id="cb75-21"><a href="#cb75-21"></a><span class="st">            </span><span class="cf">for</span> d <span class="cf">in</span> D<span class="op">:</span></span>
-<span id="cb75-22"><a href="#cb75-22"></a><span class="st">                </span>s =<span class="st"> </span><span class="op">-</span>(c <span class="op">+</span><span class="st"> </span>d)</span>
-<span id="cb75-23"><a href="#cb75-23"></a>                <span class="cf">if</span> s <span class="cf">in</span> ab_map<span class="op">:</span></span>
-<span id="cb75-24"><a href="#cb75-24"></a><span class="st">                    </span>count <span class="op">+</span><span class="er">=</span><span class="st"> </span>ab_map[s]</span>
-<span id="cb75-25"><a href="#cb75-25"></a>        </span>
-<span id="cb75-26"><a href="#cb75-26"></a>        return count</span></code></pre></div>
+<p><del>还是我刷题太少啦</del></p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
+<span id="cb76-2"><a href="#cb76-2"></a><span class="st">    </span>def <span class="kw">fourSumCount</span>(self, A, B, C, D)<span class="op">:</span></span>
+<span id="cb76-3"><a href="#cb76-3"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb76-4"><a href="#cb76-4"></a><span class="st">        :type A: List[int]</span></span>
+<span id="cb76-5"><a href="#cb76-5"></a><span class="st">        :type B: List[int]</span></span>
+<span id="cb76-6"><a href="#cb76-6"></a><span class="st">        :type C: List[int]</span></span>
+<span id="cb76-7"><a href="#cb76-7"></a><span class="st">        :type D: List[int]</span></span>
+<span id="cb76-8"><a href="#cb76-8"></a><span class="st">        :rtype: int</span></span>
+<span id="cb76-9"><a href="#cb76-9"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb76-10"><a href="#cb76-10"></a>        count =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb76-11"><a href="#cb76-11"></a>        ab_map =<span class="st"> </span><span class="kw">dict</span>()</span>
+<span id="cb76-12"><a href="#cb76-12"></a>        </span>
+<span id="cb76-13"><a href="#cb76-13"></a>        <span class="cf">for</span> a <span class="cf">in</span> A<span class="op">:</span></span>
+<span id="cb76-14"><a href="#cb76-14"></a><span class="st">            </span><span class="cf">for</span> b <span class="cf">in</span> B<span class="op">:</span></span>
+<span id="cb76-15"><a href="#cb76-15"></a><span class="st">                </span><span class="cf">if</span>  a<span class="op">+</span>b <span class="cf">in</span>  ab_map<span class="op">:</span></span>
+<span id="cb76-16"><a href="#cb76-16"></a><span class="st">                     </span>ab_map[a<span class="op">+</span>b] <span class="op">+</span><span class="er">=</span><span class="dv">1</span></span>
+<span id="cb76-17"><a href="#cb76-17"></a>                <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb76-18"><a href="#cb76-18"></a><span class="st">                     </span>ab_map[a<span class="op">+</span>b] =<span class="dv">1</span></span>
+<span id="cb76-19"><a href="#cb76-19"></a>            </span>
+<span id="cb76-20"><a href="#cb76-20"></a>        <span class="cf">for</span> c <span class="cf">in</span> C<span class="op">:</span></span>
+<span id="cb76-21"><a href="#cb76-21"></a><span class="st">            </span><span class="cf">for</span> d <span class="cf">in</span> D<span class="op">:</span></span>
+<span id="cb76-22"><a href="#cb76-22"></a><span class="st">                </span>s =<span class="st"> </span><span class="op">-</span>(c <span class="op">+</span><span class="st"> </span>d)</span>
+<span id="cb76-23"><a href="#cb76-23"></a>                <span class="cf">if</span> s <span class="cf">in</span> ab_map<span class="op">:</span></span>
+<span id="cb76-24"><a href="#cb76-24"></a><span class="st">                    </span>count <span class="op">+</span><span class="er">=</span><span class="st"> </span>ab_map[s]</span>
+<span id="cb76-25"><a href="#cb76-25"></a>        </span>
+<span id="cb76-26"><a href="#cb76-26"></a>        return count</span></code></pre></div>
+</div>
+<div id="牛客和赛码网常见输入-和输出的格式" class="section level2" number="1.67">
+<h2><span class="header-section-number">1.67</span> 牛客和赛码网常见输入 和输出的格式</h2>
+<p>其实input(就可以了</p>
+<p>.strip() 去除首位空格
+.split() 分割
+.strip().strip(‘-a’)去除首位空格和字符‘-a’
+.replace(‘a’,’b’) 替换字符
+S[:3]、S[5:] 、S[5:7]（前3、第5之后、5到7）拼接字符串，去除某个字符
+.index(str,beg,end) 返回开始索引或异常
+.find(str,beg,end) 返回开始索引或-1</p>
 </div>
 </div>
             </section>

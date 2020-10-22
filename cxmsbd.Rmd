@@ -673,3 +673,17 @@ print(dp[m-1])
 目前可以简单的理解为动态规划，因此需要用动态规划的方式进行解题
 
 
+## 字典按照value逆序
+
+```r
+
+d = {'a': 1, 'b': 4, 'c': 2, 'f' : 12}
+ 
+# 第一种方法，key使用lambda匿名函数取value进行排序
+a = sorted(d.items(), key=lambda x: x[1]) #正序
+a1 = sorted(d.items(),key = lambda x:x[1],reverse = True) #倒叙
+
+```
+
+
+
