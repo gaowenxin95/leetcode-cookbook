@@ -1,0 +1,104 @@
+
+
+# 基础结构
+
+## stack
+
+后进先出，删除与加入均在**栈顶操作**
+
+栈也称为堆栈，是一种**线性表**。
+
+堆栈的特性： 最先放入堆栈中的内容最后被拿出来，最后放入堆栈中的内容最先被拿出来， 被称为先进后出、后进先出。
+
+堆栈中两个最重要的操作是PUSH和POP，两个是相反的操作。
+
+PUSH：在堆栈的顶部加入一个元素。
+
+POP：在堆栈顶部移去一个元素， 并将堆栈的大小减一。
+具体参考[「大羚羊」](https://blog.csdn.net/m0_37622530/article/details/81429837)
+
+![](../figs/base_kg_1.png)
+
+## queue
+
+
+队列——先进先出
+
+队列也是一种特殊的线性表。不同于栈所服从的先进后出的原则，队列的原则是先进先出。
+
+队列在队头做删除操作,在队尾做插入操作：
+
+![](../figs/base_kg_2.jpg)
+
+**我一直在想怎么可以把两种数据结构不记混，后来发现，画个图！**其次是“每日一遍，神清气爽~”
+
+![](../figs/base_kg_3.png)
+
+主要考题：深度优先搜索和广度优先搜索（二叉树的层序遍历，先、中、后序遍历等）
+
+### 数组实现栈
+
+```r
+
+class Stack:
+    def __init__(self, array = None):
+        super().__init__()
+        self.array = array
+
+    # 入栈
+    def push(self, x):
+        self.array.append(x)
+
+    # 出栈
+    def pop(self,):
+        if len(self.array) == 0:
+            return
+
+        return self.array.pop()
+
+    # 取栈顶元素
+    def top(self,):
+        if len(self.array) == 0:
+            return
+
+        return self.array[-1]
+
+    # 判空
+    def isEmpty(self,):
+        return True if self.array == [] else False
+
+```
+
+### 数组实现队列
+
+```r
+class Queue:
+    def __init__(self, array = None):
+        super().__init__()
+        self.array = array
+
+    # 入队
+    def enqueue(self, x):
+        self.array.append(x)
+
+    # 出队
+    def dequeue(self):
+        if len(self.array) == 0:
+            return
+
+        return self.array.pop(0)
+
+    # 判空
+    def isEmpty(self,):
+        return True if self.array == [] else False
+
+
+
+```
+
+## 链表
+
+
+## array
+
+## tree
