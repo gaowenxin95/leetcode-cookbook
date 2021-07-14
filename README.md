@@ -1,5 +1,7 @@
 # leetcode-cookbook
 
+- [基本数据结构一览](https://gaowenxin95.github.io/leetcode-cookbook/analysis/base_kg.html)
+
 - [二叉树](https://gaowenxin95.github.io/leetcode-cookbook/tree.html)
 
 - [动态规划](https://gaowenxin95.github.io/leetcode-cookbook/analysis/DP.html)
@@ -27,5 +29,5 @@
 目前在社招里面，字节跳动和阿里也是会考一些算法题，数据结构算法不能丢啊！！！
 
 ==========================================================================================================================================================
-又要重新撸一遍了
-哎～
+
+基础不牢，地动山摇~
