@@ -1,4 +1,10 @@
-
+---
+title : tree_topic
+author: 高文欣
+date: "`r Sys.Date()`"
+output: bookdown::gitbook
+bibliography: refs/add.bib
+---
 
 
 懵逼树上懵逼果，懵逼树下只有我。。。
@@ -142,7 +148,7 @@ class Solution(object):
 
 
 
-### 将有序数组转化为二叉树
+### 序数组转化为二叉树
 
 ![将有序数组转化为二叉树](figs/youxushuzuzhuantree.png)
 
@@ -184,7 +190,7 @@ class Solution(object):
             return max(self.height(root.left),self.height(root.right))+ 1
 ```
 
-### 路径总和1
+### 路径总和一
 
 ![](figs/lujingzonghe.png)
 给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。
@@ -307,7 +313,7 @@ class Solution(object):
         return result+self.sumOfLeftLeaves(root.left)+self.sumOfLeftLeaves(root.right) 
 ```
 
-### 路径总和2
+### 路径总和二
 
 ![路径总和](figs/路径总和.png)
 
@@ -435,7 +441,7 @@ class Solution:
 ```
 
 
-## 前序中序后序遍历的另一种写法
+## 前序中序后序遍历
 
 
 ```r
