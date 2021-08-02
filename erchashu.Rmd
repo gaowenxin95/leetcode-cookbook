@@ -399,5 +399,30 @@ class Solution(object):
 
 
 ```r
+```
 
+## 二叉树两个节点的最低公共祖先
+
+```r
+class Solution(object):
+    def lowestCommonAncestor(self, root, p, q):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+        """
+        if not root:
+            return None
+        if q == root or p == root: # 如果找到了某一个点 则当前节点为答案
+            return root
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+        if left and right: # 如果左子树中可以找到其公共祖先 右子树也可以 则说明当前节点就是答案
+            return root
+        if not left: # 左边找不到了 那就是右子树的答案
+            return right
+        elif not right: # 右边亦然
+            return left
+```
 
