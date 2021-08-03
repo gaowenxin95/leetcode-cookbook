@@ -1,3 +1,12 @@
+---
+title : 链表专题
+author: 高文欣
+date: "`r Sys.Date()`"
+output: bookdown::gitbook
+bibliography: ../refs/add.bib
+---
+
+
 # 链表问题
 
 必考题
