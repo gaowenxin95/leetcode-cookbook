@@ -7,6 +7,24 @@
 
 # 排序问题
 
+## 二分查找
+
+def binary_search(lis, left, right, num):
+
+        if left > right: #递归结束条件
+            return -1
+        mid = (left + right) // 2
+        if num < lis[mid]:
+            right = mid -1
+        elif num > lis[mid]:
+            left = mid + 1
+        else:
+            return mid
+        return binary_search(lis, left, right, num)
+        #这里之所以会有return是因为必须要接收值，不然返回None
+        #回溯到最后一层的时候，如果没有return，那么将会返回None
+
+
 '''
 冒泡排序算法
 时间复杂度为$o^n$
