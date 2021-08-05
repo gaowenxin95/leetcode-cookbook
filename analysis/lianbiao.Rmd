@@ -581,6 +581,8 @@ class Solution(object):
 
 - 方法2 使用集合
 
+集合这个更巧妙一点
+
 ```r
 class Solution():
     def getIntersectionNode(self, headA, headB):
