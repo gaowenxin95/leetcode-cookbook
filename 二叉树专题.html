@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2021-08-03" />
+<meta name="date" content="2021-08-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -145,9 +145,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.12" data-path=""><a href="#前序遍历和中序遍历构造二叉树"><i class="fa fa-check"></i><b>1.12</b> 前序遍历和中序遍历构造二叉树</a></li>
 <li class="chapter" data-level="1.13" data-path=""><a href="#对称二叉树"><i class="fa fa-check"></i><b>1.13</b> 对称二叉树</a></li>
 <li class="chapter" data-level="1.14" data-path=""><a href="#判断是否是完全二叉树"><i class="fa fa-check"></i><b>1.14</b> 判断是否是完全二叉树</a></li>
-<li class="chapter" data-level="1.15" data-path=""><a href="#二叉树两个节点的最低公共祖先"><i class="fa fa-check"></i><b>1.15</b> 二叉树两个节点的最低公共祖先</a></li>
+<li class="chapter" data-level="1.15" data-path=""><a href="#最低公共祖先"><i class="fa fa-check"></i><b>1.15</b> 最低公共祖先</a></li>
 <li class="chapter" data-level="1.16" data-path=""><a href="#判断是否是二叉搜索树"><i class="fa fa-check"></i><b>1.16</b> 判断是否是二叉搜索树</a></li>
 <li class="chapter" data-level="1.17" data-path=""><a href="#路径总和问题"><i class="fa fa-check"></i><b>1.17</b> 路径总和问题</a></li>
+<li class="chapter" data-level="1.18" data-path=""><a href="#平衡二叉树"><i class="fa fa-check"></i><b>1.18</b> 平衡二叉树</a></li>
+<li class="chapter" data-level="1.19" data-path=""><a href="#翻转二叉树"><i class="fa fa-check"></i><b>1.19</b> 翻转二叉树</a></li>
 </ul></li>
 </ul>
 
@@ -169,7 +171,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">二叉树专题</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2021-08-03</em></p>
+<p class="date"><em>2021-08-05</em></p>
 </div>
 <div id="二叉树专题" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> 二叉树专题</h1>
@@ -495,8 +497,8 @@ left,right就是位置</p>
 <p>什么是完全二叉树:若设二叉树的深度为k，除第 k 层外，其它各层 (1～k-1) 的结点数都达到最大个数，第k 层所有的结点都连续集中在最左边，这就是完全二叉树。</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"></code></pre></div>
 </div>
-<div id="二叉树两个节点的最低公共祖先" class="section level2" number="1.15">
-<h2><span class="header-section-number">1.15</span> 二叉树两个节点的最低公共祖先</h2>
+<div id="最低公共祖先" class="section level2" number="1.15">
+<h2><span class="header-section-number">1.15</span> 最低公共祖先</h2>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
 <span id="cb17-2"><a href="#cb17-2"></a><span class="st">    </span>def <span class="kw">lowestCommonAncestor</span>(self, root, p, q)<span class="op">:</span></span>
 <span id="cb17-3"><a href="#cb17-3"></a><span class="st">        &quot;&quot;&quot;</span></span>
@@ -570,6 +572,7 @@ left,right就是位置</p>
 </ul>
 <p>题目描述:
 <img src="figs/lujingzonghe.png" /></p>
+<p>不会解题的时候相递归</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
 <span id="cb20-2"><a href="#cb20-2"></a><span class="st">    </span>def <span class="kw">hasPathSum</span>(self, root, sum)<span class="op">:</span></span>
 <span id="cb20-3"><a href="#cb20-3"></a><span class="st">        </span><span class="cf">if</span> root is None<span class="op">:</span></span>
@@ -603,6 +606,36 @@ left,right就是位置</p>
 <span id="cb21-14"><a href="#cb21-14"></a><span class="st">            </span>return <span class="dv">0</span></span>
 <span id="cb21-15"><a href="#cb21-15"></a>        <span class="kw">return</span> (<span class="dv">1</span> <span class="cf">if</span> node.val <span class="op">==</span><span class="st"> </span>sum <span class="cf">else</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="kw">self.pathSumFrom</span>(node.left, sum <span class="op">-</span><span class="st"> </span>node.val) <span class="op">+</span><span class="st"> </span><span class="kw">self.pathSumFrom</span>(node.right, sum <span class="op">-</span><span class="st"> </span>node.val) </span>
 <span id="cb21-16"><a href="#cb21-16"></a>        </span></code></pre></div>
+</div>
+<div id="平衡二叉树" class="section level2" number="1.18">
+<h2><span class="header-section-number">1.18</span> 平衡二叉树</h2>
+<p><img src="figs/pinghengtree.png" /></p>
+<p><strong>一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值小于1。</strong></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="st">    </span>def <span class="kw">isBalanced</span>(self, root)<span class="op">:</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="st">        </span><span class="cf">if</span> root <span class="op">==</span><span class="st"> </span>None<span class="op">:</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="st">            </span>return True</span>
+<span id="cb22-6"><a href="#cb22-6"></a>        elif <span class="kw">abs</span>(<span class="kw">self.height</span>(root.left)<span class="op">-</span><span class="kw">self.height</span>(root.right))<span class="op">&gt;</span><span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="co">#高度的绝对值之差大于1，不平衡</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="st">            </span>return False</span>
+<span id="cb22-8"><a href="#cb22-8"></a>        <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a><span class="st">            </span>return <span class="kw">self.isBalanced</span>(root.left) and <span class="kw">self.isBalanced</span>(root.right)</span>
+<span id="cb22-10"><a href="#cb22-10"></a>    </span>
+<span id="cb22-11"><a href="#cb22-11"></a>    def <span class="kw">height</span>(self,root)<span class="op">:</span><span class="st"> </span><span class="co">#判断是否为平衡</span></span>
+<span id="cb22-12"><a href="#cb22-12"></a><span class="st">        </span><span class="cf">if</span> root <span class="op">==</span><span class="st"> </span>None<span class="op">:</span></span>
+<span id="cb22-13"><a href="#cb22-13"></a><span class="st">            </span>return <span class="dv">0</span></span>
+<span id="cb22-14"><a href="#cb22-14"></a>        <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb22-15"><a href="#cb22-15"></a><span class="st">            </span>return <span class="kw">max</span>(<span class="kw">self.height</span>(root.left),<span class="kw">self.height</span>(root.right))<span class="op">+</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+</div>
+<div id="翻转二叉树" class="section level2" number="1.19">
+<h2><span class="header-section-number">1.19</span> 翻转二叉树</h2>
+<p><img src="figs/fanzhuantree.png" /></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="st">    </span>def <span class="kw">invertTree</span>(self, root)<span class="op">:</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="st">        </span><span class="cf">if</span> root is not None<span class="op">:</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="st">            </span>root.left,root.right =<span class="st"> </span><span class="kw">self.invertTree</span>(root.right),<span class="kw">self.invertTree</span>(root.left)</span>
+<span id="cb23-6"><a href="#cb23-6"></a>        return root</span></code></pre></div>
 </div>
 </div>
             </section>

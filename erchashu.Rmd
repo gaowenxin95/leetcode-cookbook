@@ -401,7 +401,7 @@ class Solution(object):
 ```r
 ```
 
-## 二叉树两个节点的最低公共祖先
+## 最低公共祖先
 
 ```r
 class Solution(object):
@@ -488,6 +488,8 @@ class Solution:
 题目描述:
 ![](figs/lujingzonghe.png)
 
+不会解题的时候相递归
+
 
 ```r
 class Solution(object):
@@ -524,4 +526,41 @@ class Solution(object):
             return 0
         return (1 if node.val == sum else 0) + self.pathSumFrom(node.left, sum - node.val) + self.pathSumFrom(node.right, sum - node.val) 
         
+```
+
+## 平衡二叉树
+
+![](figs/pinghengtree.png)
+
+**一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值小于1。**
+
+```r
+class Solution(object):
+    def isBalanced(self, root):
+
+        if root == None:
+            return True
+        elif abs(self.height(root.left)-self.height(root.right))>1: #高度的绝对值之差大于1，不平衡
+            return False
+        else:
+            return self.isBalanced(root.left) and self.isBalanced(root.right)
+    
+    def height(self,root): #判断是否为平衡
+        if root == None:
+            return 0
+        else:
+            return max(self.height(root.left),self.height(root.right))+ 1
+```
+
+## 翻转二叉树
+
+![](figs/fanzhuantree.png)
+
+```r
+class Solution(object):
+    def invertTree(self, root):
+
+        if root is not None:
+            root.left,root.right = self.invertTree(root.right),self.invertTree(root.left)
+        return root
 ```
