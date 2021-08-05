@@ -557,12 +557,38 @@ class Solution:
         return p1
 ```
 
+## 每k个节点反转链表
 
+题目描述：
+给出一个链表，每k个节点一组进行翻转，并返回翻转后的链表。
+k是一个正整数，它的值小于或等于链表的长度。如果节点总数不是k的整数倍，那么将最后剩余节点保持原有顺序。
 
+第一行输入是链表的值
+第二行输入是K的值，K是大于或等于1的整数
 
+输入形式为：
+1 2 3 4 5
+当k = 2时，应当输出: 2 1 4 3 5
 
+当k = 3时，应当输出: 3 2 1 4 5
 
+当k=6时，应当输出： 1 2 3 4 5
 
+```r
+def reverseList_k(head,k):
+    cur = head
+    cnt = 0
+    while cur and cnt != k:
+        cur = cur.next
+        cnt += 1
+    if cnt == k:
+        cur = reverseList_k(cur,k)
+        while cnt:
+            head.next,cur,head = cur,head,head.next
+            cnt -= 1
+        head = cur
+    return head
+```
 
 ## 限制时间复杂度输出链表的中间值
 
