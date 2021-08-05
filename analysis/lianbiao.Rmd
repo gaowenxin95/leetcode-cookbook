@@ -375,39 +375,45 @@ class Solution:
 
 ## 判断链表中是否有环
 
+- 方法1 快慢指针法 
+- 参考[阿常呓语」](https://blog.csdn.net/u010339879/article/details/86664813)
 
 ```r
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
 class Solution:
-    """
-    定义 两个指针, 一个快指针fast, 一个慢指针slow,  快指针一次都两步,慢指针一次走一步. 
-    如果 两个指针相遇了, 则说明链表是有环的. 
-    如果 fast 都走到null了, 还没有相遇则说明没有环. 
-    """
+    def hasCycle(self, head: ListNode) -> bool:
+        if head is None or  head.next is None:
+            return False 
+        
+        slow = head 
+        fast  =head.next 
+        while slow != fast:    
+            if fast is None or fast.next is None:
+                return False 
+            fast = fast.next.next 
+            slow = slow.next 
 
-    def hasCycle(self, head):
+        return True 
 
-        flag = False
-        if head is None or head.next is None or head.next.next is None:
-            return flag
+```
 
-        fast = head.next.next
-        slow = head.next
 
-        while fast is not slow:
-
-            if fast.next is None or fast.next.next is None:
-                # no circle
-                return flag
-            fast = fast.next.next
-            slow = slow.next
-
-        # 相遇肯定有环
-        if fast is slow:
-            # hasCircle
-            flag = True
-
-        return flag
-
+- 方法2 集合法
+```r
+class Solution02:
+    def hasCycle(self, head: ListNode) -> bool:
+        seen = set()
+        while head:
+            if head in seen:
+                return True
+            seen.add(head)
+            head = head.next
+        return False
 
 ```
 
