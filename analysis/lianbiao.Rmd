@@ -378,17 +378,36 @@ class Solution:
 
 ```r
 class Solution:
-    def hasCycle(self , head ):
-        # write code here
-        # head始终没有变
-        cur = head
-        while cur:
-            cur_next = cur.next
-            if cur_next is head:
-                return True
-            cur.next = head
-            cur = cur_next
-        return False
+    """
+    定义 两个指针, 一个快指针fast, 一个慢指针slow,  快指针一次都两步,慢指针一次走一步. 
+    如果 两个指针相遇了, 则说明链表是有环的. 
+    如果 fast 都走到null了, 还没有相遇则说明没有环. 
+    """
+
+    def hasCycle(self, head):
+
+        flag = False
+        if head is None or head.next is None or head.next.next is None:
+            return flag
+
+        fast = head.next.next
+        slow = head.next
+
+        while fast is not slow:
+
+            if fast.next is None or fast.next.next is None:
+                # no circle
+                return flag
+            fast = fast.next.next
+            slow = slow.next
+
+        # 相遇肯定有环
+        if fast is slow:
+            # hasCircle
+            flag = True
+
+        return flag
+
 
 ```
 
