@@ -132,16 +132,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path=""><a href="#链表问题"><i class="fa fa-check"></i><b>1</b> 链表问题</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path=""><a href="#删除链表的倒数第n个节点"><i class="fa fa-check"></i><b>1.1</b> 删除链表的倒数第N个节点</a></li>
-<li class="chapter" data-level="1.2" data-path=""><a href="#环形链表"><i class="fa fa-check"></i><b>1.2</b> 环形链表</a></li>
-<li class="chapter" data-level="1.3" data-path=""><a href="#反转链表"><i class="fa fa-check"></i><b>1.3</b> 反转链表</a></li>
-<li class="chapter" data-level="1.4" data-path=""><a href="#排序链表"><i class="fa fa-check"></i><b>1.4</b> 排序链表</a></li>
-<li class="chapter" data-level="1.5" data-path=""><a href="#回文链表"><i class="fa fa-check"></i><b>1.5</b> 回文链表</a></li>
-<li class="chapter" data-level="1.6" data-path=""><a href="#合并两个有序链表"><i class="fa fa-check"></i><b>1.6</b> 合并两个有序链表</a></li>
-<li class="chapter" data-level="1.7" data-path=""><a href="#删除链表中的结点"><i class="fa fa-check"></i><b>1.7</b> 删除链表中的结点</a></li>
-<li class="chapter" data-level="1.8" data-path=""><a href="#判断链表中是否有环"><i class="fa fa-check"></i><b>1.8</b> 判断链表中是否有环</a></li>
-<li class="chapter" data-level="1.9" data-path=""><a href="#链表中环的入口"><i class="fa fa-check"></i><b>1.9</b> 链表中环的入口</a></li>
-<li class="chapter" data-level="1.10" data-path=""><a href="#两两交换链表的节点"><i class="fa fa-check"></i><b>1.10</b> 两两交换链表的节点</a></li>
-<li class="chapter" data-level="1.11" data-path=""><a href="#链表相交并找出交点"><i class="fa fa-check"></i><b>1.11</b> 链表相交并找出交点</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#判断是否是环形链表"><i class="fa fa-check"></i><b>1.2</b> 判断是否是环形链表</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#链表中环的入口"><i class="fa fa-check"></i><b>1.3</b> 链表中环的入口</a></li>
+<li class="chapter" data-level="1.4" data-path=""><a href="#反转链表"><i class="fa fa-check"></i><b>1.4</b> 反转链表</a></li>
+<li class="chapter" data-level="1.5" data-path=""><a href="#排序链表"><i class="fa fa-check"></i><b>1.5</b> 排序链表</a></li>
+<li class="chapter" data-level="1.6" data-path=""><a href="#回文链表"><i class="fa fa-check"></i><b>1.6</b> 回文链表</a></li>
+<li class="chapter" data-level="1.7" data-path=""><a href="#合并两个有序链表"><i class="fa fa-check"></i><b>1.7</b> 合并两个有序链表</a></li>
+<li class="chapter" data-level="1.8" data-path=""><a href="#删除链表中的结点"><i class="fa fa-check"></i><b>1.8</b> 删除链表中的结点</a></li>
+<li class="chapter" data-level="1.9" data-path=""><a href="#两两交换链表的节点"><i class="fa fa-check"></i><b>1.9</b> 两两交换链表的节点</a></li>
+<li class="chapter" data-level="1.10" data-path=""><a href="#链表相交并找出交点"><i class="fa fa-check"></i><b>1.10</b> 链表相交并找出交点</a></li>
+<li class="chapter" data-level="1.11" data-path=""><a href="#每k个节点反转链表"><i class="fa fa-check"></i><b>1.11</b> 每k个节点反转链表</a></li>
 <li class="chapter" data-level="1.12" data-path=""><a href="#限制时间复杂度输出链表的中间值"><i class="fa fa-check"></i><b>1.12</b> 限制时间复杂度输出链表的中间值</a></li>
 </ul></li>
 </ul>
@@ -184,7 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>能不能用1次遍历解决这个问题呢？这里我们运用到解决这类线性列表的数据结构题目一个高频技巧，双指针。
 为了方便，<strong>在原有链表前面设置一个哑结点，哑结点的好处在于，因为这里我们是要删除一个结点，所以我们可以定位到被删除结点的前置结点，然后将前置结点的后续指针指向被删除结点的后续结点，则可完成删除。</strong></p>
-<p><strong>建立两个链表，l1先从第一个节点访问到第n个节点，然后l1和l2同时进行扫描，当l1扫描到链表尾时，l2到倒数第n个节点。</strong></p>
+<p><strong>建立两个指针，l1先从第一个节点访问到第n个节点，然后l1和l2同时进行扫描，当l1扫描到链表尾时，l2恰好到倒数第n个节点。</strong></p>
 <p>我们设置两个指针，两个指针初始状态都指向哑结点，指针fast 先走n步，然后指针fast和指针slow同步往前继续遍历链表，直至fast的后续结点为空，此时指针slow到达被删除结点的前置结点。<a href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/solution/chao-ke-ai-dong-hua-jiao-ni-ru-he-shan-chu-lian-bi/">belinda</a></p>
 <p>1.定义一个头结点，指向链表的第一个结点
 2.快慢指针指向头结点
@@ -217,22 +217,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-23"><a href="#cb1-23"></a>        slow.next =<span class="st"> </span>slow.next.next <span class="co">#指向删除节点的后续位置</span></span>
 <span id="cb1-24"><a href="#cb1-24"></a>        return Node.next</span></code></pre></div>
 <ul>
+<li>利用快指针fast和慢指针slow，先让快指针fast和慢指针slow都位于首节点，然后让快指针fast先走n-1步，随后慢指针slow开始走，当fast走到链表的尾节点时，slow此时正位于倒数第n个节点上。</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="st">    </span>def <span class="kw">getKthFromEnd</span>(self,head,k)<span class="op">:</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="st">        </span>fast=slow=head</span>
+<span id="cb2-4"><a href="#cb2-4"></a>        <span class="cf">if</span> head<span class="op">==</span>None or k<span class="op">&lt;=</span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="st">            </span>return None</span>
+<span id="cb2-6"><a href="#cb2-6"></a>        <span class="cf">while</span> k<span class="op">&gt;</span><span class="dv">0</span> and fast <span class="op">!=</span>None<span class="op">:</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="st">            </span>fast=fast.next</span>
+<span id="cb2-8"><a href="#cb2-8"></a>            k<span class="op">-</span><span class="er">=</span><span class="dv">1</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>        <span class="cf">while</span> fast<span class="op">!=</span>None<span class="op">:</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="st">            </span>fast=fast.next</span>
+<span id="cb2-11"><a href="#cb2-11"></a>            slow=slow.next</span>
+<span id="cb2-12"><a href="#cb2-12"></a>        return slow</span></code></pre></div>
+<ul>
 <li>方法二</li>
 </ul>
 <p>list法</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="st">    </span>def <span class="kw">FindKthToTail</span>(self, head, k)<span class="op">:</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="st">        </span>res=[]</span>
-<span id="cb2-5"><a href="#cb2-5"></a>        <span class="cf">while</span> head<span class="op">:</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="st">            </span><span class="kw">res.append</span>(head)</span>
-<span id="cb2-7"><a href="#cb2-7"></a>            head=head.next</span>
-<span id="cb2-8"><a href="#cb2-8"></a>        <span class="cf">if</span> k<span class="op">&gt;</span><span class="kw">len</span>(res) or k<span class="op">&lt;</span><span class="dv">1</span><span class="op">:</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="st">            </span>return </span>
-<span id="cb2-10"><a href="#cb2-10"></a>        return res[<span class="op">-</span>k]</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="st">    </span>def <span class="kw">FindKthToTail</span>(self, head, k)<span class="op">:</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="st">        </span>res=[]</span>
+<span id="cb3-5"><a href="#cb3-5"></a>        <span class="cf">while</span> head<span class="op">:</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="st">            </span><span class="kw">res.append</span>(head)</span>
+<span id="cb3-7"><a href="#cb3-7"></a>            head=head.next</span>
+<span id="cb3-8"><a href="#cb3-8"></a>        <span class="cf">if</span> k<span class="op">&gt;</span><span class="kw">len</span>(res) or k<span class="op">&lt;</span><span class="dv">1</span><span class="op">:</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="st">            </span>return </span>
+<span id="cb3-10"><a href="#cb3-10"></a>        return res[<span class="op">-</span>k]</span></code></pre></div>
 </div>
-<div id="环形链表" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> 环形链表</h2>
+<div id="判断是否是环形链表" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> 判断是否是环形链表</h2>
 <p><img src="../figs/huanxinglianbiao.png" />
 示例 3：</p>
 <p>输入：head = [1], pos = -1
@@ -244,28 +259,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>如果列表中不存在环，最终快指针将会最先到达尾部，此时我们可以返回 false。</p></li>
 <li><p>现在考虑一个环形链表，把慢指针和快指针想象成两个在环形赛道上跑步的运动员（分别称之为慢跑者与快跑者）。而快跑者最终一定会追上慢跑者。这是为什么呢？考虑下面这种情况（记作情况 A）- 假如快跑者只落后慢跑者一步，在下一次迭代中，它们就会分别跑了一步或两步并相遇。</p></li>
 <li><p>其他情况又会怎样呢？例如，我们没有考虑快跑者在慢跑者之后两步或三步的情况。但其实不难想到，因为在下一次或者下下次迭代后，又会变成上面提到的情况 A。</p></li>
+<li><p>方法1 快慢指针法</p></li>
+<li><p>参考<a href="https://blog.csdn.net/u010339879/article/details/86664813">阿常呓语」</a></p></li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="st">    </span>def <span class="kw">hasCycle</span>(self, head)<span class="op">:</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="st">        </span><span class="cf">if</span>(head <span class="op">==</span><span class="st"> </span>None or head.next <span class="op">==</span><span class="st"> </span>None)<span class="op">:</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="st">            </span>return False</span>
-<span id="cb3-5"><a href="#cb3-5"></a>        node1 =<span class="st"> </span>head <span class="co">#慢指针</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a>        node2 =<span class="st"> </span>head.next <span class="co">#快指针</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a>        <span class="cf">while</span>(node1 <span class="op">!=</span><span class="st"> </span>node2)<span class="op">:</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="st">            </span><span class="cf">if</span>(node2 <span class="op">==</span><span class="st"> </span>None or node2.next <span class="op">==</span><span class="st"> </span>None)<span class="op">:</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="st">                </span>return False</span>
-<span id="cb3-10"><a href="#cb3-10"></a>            node1 =<span class="st"> </span>node1.next</span>
-<span id="cb3-11"><a href="#cb3-11"></a>            node2 =<span class="st"> </span>node2.next.next</span>
-<span id="cb3-12"><a href="#cb3-12"></a>            </span>
-<span id="cb3-13"><a href="#cb3-13"></a>        return True <span class="co">#相遇的话返回true</span></span></code></pre></div>
-</div>
-<div id="反转链表" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> 反转链表</h2>
-<p>反转一个单链表。</p>
-<p>示例:</p>
-<p>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
-输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL
-<a href="https://blog.csdn.net/gongliming_/article/details/88712221">这个图解挺好的</a></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Definition for singly-linked list.</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="co"># class ListNode:</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="co">#     def __init__(self, x):</span></span>
@@ -273,65 +269,159 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-5"><a href="#cb4-5"></a><span class="co">#         self.next = None</span></span>
 <span id="cb4-6"><a href="#cb4-6"></a></span>
 <span id="cb4-7"><a href="#cb4-7"></a>class Solution<span class="op">:</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="st">    </span>def <span class="kw">reverseList</span>(self, head<span class="op">:</span><span class="st"> </span>ListNode) -&gt;<span class="st"> </span>ListNode<span class="op">:</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="st">        </span><span class="cf">if</span> head <span class="op">==</span><span class="st"> </span>None or head.next<span class="op">==</span>None<span class="op">:</span><span class="st">  </span><span class="co"># 若链表为空或者仅一个数就直接返回</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="st">        </span>return head </span>
-<span id="cb4-11"><a href="#cb4-11"></a>        rev,p=None,head</span>
-<span id="cb4-12"><a href="#cb4-12"></a>        <span class="cf">while</span> p<span class="op">:</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="st">          </span>rev,rev.next,p=p,rev,p.next</span>
-<span id="cb4-14"><a href="#cb4-14"></a>        return rev</span></code></pre></div>
-<p>写一个过程</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>迭代指针：p =<span class="st"> </span>head、结果指针：res =<span class="st"> </span>none</span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a>以1-&gt;<span class="dv">2</span>-&gt;<span class="dv">3</span>-&gt;<span class="dv">4</span>-&gt;5为例：</span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a>过程：</span>
-<span id="cb5-6"><a href="#cb5-6"></a></span>
-<span id="cb5-7"><a href="#cb5-7"></a>res<span class="op">:</span>None</span>
-<span id="cb5-8"><a href="#cb5-8"></a></span>
-<span id="cb5-9"><a href="#cb5-9"></a>第一层循环</span>
-<span id="cb5-10"><a href="#cb5-10"></a></span>
-<span id="cb5-11"><a href="#cb5-11"></a>res<span class="op">:</span><span class="dv">1</span>-&gt;<span class="dv">2</span>-&gt;<span class="dv">3</span>-&gt;<span class="dv">4</span>-&gt;<span class="dv">5</span> res =<span class="st"> </span>p</span>
-<span id="cb5-12"><a href="#cb5-12"></a></span>
-<span id="cb5-13"><a href="#cb5-13"></a>res<span class="op">:</span><span class="dv">1</span>-&gt;None res.next =<span class="st"> </span>res</span>
-<span id="cb5-14"><a href="#cb5-14"></a></span>
-<span id="cb5-15"><a href="#cb5-15"></a>p<span class="op">:</span><span class="dv">2</span>-&gt;<span class="dv">3</span>-&gt;<span class="dv">4</span>-&gt;<span class="dv">5</span> p =<span class="st"> </span>p.next</span>
-<span id="cb5-16"><a href="#cb5-16"></a></span>
-<span id="cb5-17"><a href="#cb5-17"></a>第二层循环</span>
-<span id="cb5-18"><a href="#cb5-18"></a></span>
-<span id="cb5-19"><a href="#cb5-19"></a>res<span class="op">:</span><span class="dv">2</span>-&gt;<span class="dv">3</span>-&gt;<span class="dv">4</span>-&gt;<span class="dv">5</span> res =<span class="st"> </span>p</span>
-<span id="cb5-20"><a href="#cb5-20"></a></span>
-<span id="cb5-21"><a href="#cb5-21"></a>res<span class="op">:</span><span class="dv">2</span>-&gt;<span class="dv">1</span>-&gt;None res.next =<span class="st"> </span>res</span>
-<span id="cb5-22"><a href="#cb5-22"></a></span>
-<span id="cb5-23"><a href="#cb5-23"></a>p<span class="op">:</span><span class="dv">3</span>-&gt;<span class="dv">4</span>-&gt;<span class="dv">5</span> p =<span class="st"> </span>p.next</span>
-<span id="cb5-24"><a href="#cb5-24"></a></span>
-<span id="cb5-25"><a href="#cb5-25"></a>第三层循环</span>
-<span id="cb5-26"><a href="#cb5-26"></a></span>
-<span id="cb5-27"><a href="#cb5-27"></a>res<span class="op">:</span><span class="dv">3</span>-&gt;<span class="dv">4</span>-&gt;<span class="dv">5</span> res =<span class="st"> </span>p</span>
-<span id="cb5-28"><a href="#cb5-28"></a></span>
-<span id="cb5-29"><a href="#cb5-29"></a>res<span class="op">:</span><span class="dv">3</span>-&gt;<span class="dv">2</span>-&gt;<span class="dv">1</span>-&gt;None res.next =<span class="st"> </span>res</span>
-<span id="cb5-30"><a href="#cb5-30"></a></span>
-<span id="cb5-31"><a href="#cb5-31"></a>p<span class="op">:</span><span class="dv">4</span>-&gt;<span class="dv">5</span> p =<span class="st"> </span>p.next</span>
-<span id="cb5-32"><a href="#cb5-32"></a></span>
-<span id="cb5-33"><a href="#cb5-33"></a>第四层循环</span>
-<span id="cb5-34"><a href="#cb5-34"></a></span>
-<span id="cb5-35"><a href="#cb5-35"></a>res<span class="op">:</span><span class="dv">4</span>-&gt;<span class="dv">5</span> res =<span class="st"> </span>p</span>
-<span id="cb5-36"><a href="#cb5-36"></a></span>
-<span id="cb5-37"><a href="#cb5-37"></a>res<span class="op">:</span><span class="dv">4</span>-&gt;<span class="dv">3</span>-&gt;<span class="dv">2</span>-&gt;<span class="dv">1</span>-&gt;None res.next =<span class="st"> </span>res</span>
-<span id="cb5-38"><a href="#cb5-38"></a></span>
-<span id="cb5-39"><a href="#cb5-39"></a>p<span class="op">:</span><span class="dv">5</span> p =<span class="st"> </span>p.next</span>
-<span id="cb5-40"><a href="#cb5-40"></a></span>
-<span id="cb5-41"><a href="#cb5-41"></a>第五层循环</span>
-<span id="cb5-42"><a href="#cb5-42"></a></span>
-<span id="cb5-43"><a href="#cb5-43"></a>res<span class="op">:</span><span class="dv">5</span> res =<span class="st"> </span>p</span>
-<span id="cb5-44"><a href="#cb5-44"></a></span>
-<span id="cb5-45"><a href="#cb5-45"></a>res<span class="op">:</span><span class="dv">5</span>-&gt;<span class="dv">4</span>-&gt;<span class="dv">3</span>-&gt;<span class="dv">2</span>-&gt;<span class="dv">1</span>-&gt;None res.next =<span class="st"> </span>res</span>
-<span id="cb5-46"><a href="#cb5-46"></a></span>
-<span id="cb5-47"><a href="#cb5-47"></a>p<span class="op">:</span>None p =<span class="st"> </span>p.next</span>
-<span id="cb5-48"><a href="#cb5-48"></a></span></code></pre></div>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="st">    </span>def <span class="kw">hasCycle</span>(self, head<span class="op">:</span><span class="st"> </span>ListNode) -&gt;<span class="st"> </span>bool<span class="op">:</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="st">        </span><span class="cf">if</span> head is None or  head.next is None<span class="op">:</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="st">            </span>return False </span>
+<span id="cb4-11"><a href="#cb4-11"></a>        </span>
+<span id="cb4-12"><a href="#cb4-12"></a>        slow =<span class="st"> </span>head </span>
+<span id="cb4-13"><a href="#cb4-13"></a>        fast  =head.next </span>
+<span id="cb4-14"><a href="#cb4-14"></a>        <span class="cf">while</span> slow <span class="op">!=</span><span class="st"> </span>fast<span class="op">:</span><span class="st">    </span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="st">            </span><span class="cf">if</span> fast is None or fast.next is None<span class="op">:</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="st">                </span>return False </span>
+<span id="cb4-17"><a href="#cb4-17"></a>            fast =<span class="st"> </span>fast.next.next </span>
+<span id="cb4-18"><a href="#cb4-18"></a>            slow =<span class="st"> </span>slow.next </span>
+<span id="cb4-19"><a href="#cb4-19"></a></span>
+<span id="cb4-20"><a href="#cb4-20"></a>        return True </span></code></pre></div>
+<ul>
+<li>方法2 集合法</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>class Solution02<span class="op">:</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="st">    </span>def <span class="kw">hasCycle</span>(self, head<span class="op">:</span><span class="st"> </span>ListNode) -&gt;<span class="st"> </span>bool<span class="op">:</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="st">        </span>seen =<span class="st"> </span><span class="kw">set</span>()</span>
+<span id="cb5-4"><a href="#cb5-4"></a>        <span class="cf">while</span> head<span class="op">:</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="st">            </span><span class="cf">if</span> head <span class="cf">in</span> seen<span class="op">:</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="st">                </span>return True</span>
+<span id="cb5-7"><a href="#cb5-7"></a>            <span class="kw">seen.add</span>(head)</span>
+<span id="cb5-8"><a href="#cb5-8"></a>            head =<span class="st"> </span>head.next</span>
+<span id="cb5-9"><a href="#cb5-9"></a>        return False</span></code></pre></div>
 </div>
-<div id="排序链表" class="section level2" number="1.4">
-<h2><span class="header-section-number">1.4</span> 排序链表</h2>
+<div id="链表中环的入口" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> 链表中环的入口</h2>
+<p>给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，输出null。</p>
+<p>本质上也是快慢指针的思想，但是可以有简单一点的方法</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># class ListNode:</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#     def __init__(self, x):</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#         self.val = x</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#         self.next = None</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>class Solution<span class="op">:</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="st">    </span>def <span class="kw">EntryNodeOfLoop</span>(self, pHead)<span class="op">:</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="st">        </span><span class="cf">if</span> not pHead<span class="op">:</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="st">            </span>return None</span>
+<span id="cb6-11"><a href="#cb6-11"></a>        lst =<span class="st"> </span>[]</span>
+<span id="cb6-12"><a href="#cb6-12"></a>        <span class="cf">while</span> pHead<span class="op">:</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="st">            </span><span class="cf">if</span> pHead <span class="cf">in</span> lst<span class="op">:</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="st">                </span>return pHead</span>
+<span id="cb6-15"><a href="#cb6-15"></a>            <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="st">                </span><span class="kw">lst.append</span>(pHead)</span>
+<span id="cb6-17"><a href="#cb6-17"></a>                pHead =<span class="st"> </span>pHead.next</span>
+<span id="cb6-18"><a href="#cb6-18"></a>        return None</span></code></pre></div>
+<ul>
+<li>方法二</li>
+</ul>
+<p>快慢指针的方式才是主流</p>
+<p>第一步：如何确定一个链表中包含环。
+定义两个指针，同时从链表的头节点出发，一个指针一次走一步，另一个一次走两步。如果走得快的指针走上了走的慢的指针，那么链表就包含环；如果走的快的指针走到了链表的末尾都没有追上第一个指针，那么链表就不包含环。</p>
+<p>第二步：如何找到环的入口。
+慢指针回到表头，快指针留在相遇点，二者同步往前直到相遇在入口结点。</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co"># class ListNode:</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#     def __init__(self, x):</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#         self.val = x</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#         self.next = None</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>class Solution<span class="op">:</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="st">    </span>def <span class="kw">detectCycle</span>(self, head<span class="op">:</span><span class="st"> </span>ListNode) -&gt;<span class="st"> </span>ListNode<span class="op">:</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="st">        </span>slow, fast =<span class="st"> </span>head, head</span>
+<span id="cb7-9"><a href="#cb7-9"></a>        <span class="cf">while</span> fast and fast.next<span class="op">:</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="st">            </span>slow =<span class="st"> </span>slow.next</span>
+<span id="cb7-11"><a href="#cb7-11"></a>            fast =<span class="st"> </span>fast.next.next</span>
+<span id="cb7-12"><a href="#cb7-12"></a>            <span class="co"># 如果相遇</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>            <span class="cf">if</span> slow <span class="op">==</span><span class="st"> </span>fast<span class="op">:</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="st">                </span>p =<span class="st"> </span>head</span>
+<span id="cb7-15"><a href="#cb7-15"></a>                q =<span class="st"> </span>slow</span>
+<span id="cb7-16"><a href="#cb7-16"></a>                <span class="cf">while</span> p<span class="op">!=</span>q<span class="op">:</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="st">                    </span>p =<span class="st"> </span>p.next</span>
+<span id="cb7-18"><a href="#cb7-18"></a>                    q =<span class="st"> </span>q.next</span>
+<span id="cb7-19"><a href="#cb7-19"></a>                <span class="co">#你也可以return q</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a>                return p</span>
+<span id="cb7-21"><a href="#cb7-21"></a></span>
+<span id="cb7-22"><a href="#cb7-22"></a>        return None</span>
+<span id="cb7-23"><a href="#cb7-23"></a>        </span></code></pre></div>
+</div>
+<div id="反转链表" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> 反转链表</h2>
+<p>反转一个单链表。</p>
+<p>示例:</p>
+<p>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
+输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL
+<a href="https://blog.csdn.net/gongliming_/article/details/88712221">这个图解挺好的</a></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Definition for singly-linked list.</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co"># class ListNode:</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#     def __init__(self, x):</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#         self.val = x</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#         self.next = None</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a>class Solution<span class="op">:</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="st">    </span>def <span class="kw">reverseList</span>(self, head<span class="op">:</span><span class="st"> </span>ListNode) -&gt;<span class="st"> </span>ListNode<span class="op">:</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="st">        </span><span class="cf">if</span> head <span class="op">==</span><span class="st"> </span>None or head.next<span class="op">==</span>None<span class="op">:</span><span class="st">  </span><span class="co"># 若链表为空或者仅一个数就直接返回</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="st">        </span>return head </span>
+<span id="cb8-11"><a href="#cb8-11"></a>        rev,p=None,head</span>
+<span id="cb8-12"><a href="#cb8-12"></a>        <span class="cf">while</span> p<span class="op">:</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="st">          </span>rev,rev.next,p=p,rev,p.next</span>
+<span id="cb8-14"><a href="#cb8-14"></a>        return rev</span></code></pre></div>
+<p>写一个过程</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>迭代指针：p =<span class="st"> </span>head、结果指针：res =<span class="st"> </span>none</span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a>以1-&gt;<span class="dv">2</span>-&gt;<span class="dv">3</span>-&gt;<span class="dv">4</span>-&gt;5为例：</span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a>过程：</span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a>res<span class="op">:</span>None</span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a>第一层循环</span>
+<span id="cb9-10"><a href="#cb9-10"></a></span>
+<span id="cb9-11"><a href="#cb9-11"></a>res<span class="op">:</span><span class="dv">1</span>-&gt;<span class="dv">2</span>-&gt;<span class="dv">3</span>-&gt;<span class="dv">4</span>-&gt;<span class="dv">5</span> res =<span class="st"> </span>p</span>
+<span id="cb9-12"><a href="#cb9-12"></a></span>
+<span id="cb9-13"><a href="#cb9-13"></a>res<span class="op">:</span><span class="dv">1</span>-&gt;None res.next =<span class="st"> </span>res</span>
+<span id="cb9-14"><a href="#cb9-14"></a></span>
+<span id="cb9-15"><a href="#cb9-15"></a>p<span class="op">:</span><span class="dv">2</span>-&gt;<span class="dv">3</span>-&gt;<span class="dv">4</span>-&gt;<span class="dv">5</span> p =<span class="st"> </span>p.next</span>
+<span id="cb9-16"><a href="#cb9-16"></a></span>
+<span id="cb9-17"><a href="#cb9-17"></a>第二层循环</span>
+<span id="cb9-18"><a href="#cb9-18"></a></span>
+<span id="cb9-19"><a href="#cb9-19"></a>res<span class="op">:</span><span class="dv">2</span>-&gt;<span class="dv">3</span>-&gt;<span class="dv">4</span>-&gt;<span class="dv">5</span> res =<span class="st"> </span>p</span>
+<span id="cb9-20"><a href="#cb9-20"></a></span>
+<span id="cb9-21"><a href="#cb9-21"></a>res<span class="op">:</span><span class="dv">2</span>-&gt;<span class="dv">1</span>-&gt;None res.next =<span class="st"> </span>res</span>
+<span id="cb9-22"><a href="#cb9-22"></a></span>
+<span id="cb9-23"><a href="#cb9-23"></a>p<span class="op">:</span><span class="dv">3</span>-&gt;<span class="dv">4</span>-&gt;<span class="dv">5</span> p =<span class="st"> </span>p.next</span>
+<span id="cb9-24"><a href="#cb9-24"></a></span>
+<span id="cb9-25"><a href="#cb9-25"></a>第三层循环</span>
+<span id="cb9-26"><a href="#cb9-26"></a></span>
+<span id="cb9-27"><a href="#cb9-27"></a>res<span class="op">:</span><span class="dv">3</span>-&gt;<span class="dv">4</span>-&gt;<span class="dv">5</span> res =<span class="st"> </span>p</span>
+<span id="cb9-28"><a href="#cb9-28"></a></span>
+<span id="cb9-29"><a href="#cb9-29"></a>res<span class="op">:</span><span class="dv">3</span>-&gt;<span class="dv">2</span>-&gt;<span class="dv">1</span>-&gt;None res.next =<span class="st"> </span>res</span>
+<span id="cb9-30"><a href="#cb9-30"></a></span>
+<span id="cb9-31"><a href="#cb9-31"></a>p<span class="op">:</span><span class="dv">4</span>-&gt;<span class="dv">5</span> p =<span class="st"> </span>p.next</span>
+<span id="cb9-32"><a href="#cb9-32"></a></span>
+<span id="cb9-33"><a href="#cb9-33"></a>第四层循环</span>
+<span id="cb9-34"><a href="#cb9-34"></a></span>
+<span id="cb9-35"><a href="#cb9-35"></a>res<span class="op">:</span><span class="dv">4</span>-&gt;<span class="dv">5</span> res =<span class="st"> </span>p</span>
+<span id="cb9-36"><a href="#cb9-36"></a></span>
+<span id="cb9-37"><a href="#cb9-37"></a>res<span class="op">:</span><span class="dv">4</span>-&gt;<span class="dv">3</span>-&gt;<span class="dv">2</span>-&gt;<span class="dv">1</span>-&gt;None res.next =<span class="st"> </span>res</span>
+<span id="cb9-38"><a href="#cb9-38"></a></span>
+<span id="cb9-39"><a href="#cb9-39"></a>p<span class="op">:</span><span class="dv">5</span> p =<span class="st"> </span>p.next</span>
+<span id="cb9-40"><a href="#cb9-40"></a></span>
+<span id="cb9-41"><a href="#cb9-41"></a>第五层循环</span>
+<span id="cb9-42"><a href="#cb9-42"></a></span>
+<span id="cb9-43"><a href="#cb9-43"></a>res<span class="op">:</span><span class="dv">5</span> res =<span class="st"> </span>p</span>
+<span id="cb9-44"><a href="#cb9-44"></a></span>
+<span id="cb9-45"><a href="#cb9-45"></a>res<span class="op">:</span><span class="dv">5</span>-&gt;<span class="dv">4</span>-&gt;<span class="dv">3</span>-&gt;<span class="dv">2</span>-&gt;<span class="dv">1</span>-&gt;None res.next =<span class="st"> </span>res</span>
+<span id="cb9-46"><a href="#cb9-46"></a></span>
+<span id="cb9-47"><a href="#cb9-47"></a>p<span class="op">:</span>None p =<span class="st"> </span>p.next</span>
+<span id="cb9-48"><a href="#cb9-48"></a></span></code></pre></div>
+</div>
+<div id="排序链表" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> 排序链表</h2>
 <p>在<strong>O(n log n)</strong> 时间复杂度和<strong>常数级空间复杂度</strong>下，对链表进行排序。</p>
 <p>示例 1:</p>
 <p>输入: 4-&gt;2-&gt;1-&gt;3
@@ -347,38 +437,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>3，合并两个链表</li>
 </ul>
 <p>这个答案也能通过</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a></span>
-<span id="cb6-2"><a href="#cb6-2"></a></span>
-<span id="cb6-3"><a href="#cb6-3"></a>class Solution<span class="op">:</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="st">    </span>def <span class="kw">sortList</span>(self, head<span class="op">:</span><span class="st"> </span>ListNode) -&gt;<span class="st"> </span>ListNode<span class="op">:</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="st">        </span><span class="cf">if</span> <span class="kw">not</span> (head and head.next)<span class="op">:</span><span class="st"> </span>return head</span>
-<span id="cb6-6"><a href="#cb6-6"></a>        pre, slow, fast =<span class="st"> </span>None, head, head</span>
-<span id="cb6-7"><a href="#cb6-7"></a>        <span class="cf">while</span> fast and fast.next<span class="op">:</span><span class="st"> </span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="st">            </span>pre, slow, fast =<span class="st"> </span>slow, slow.next, fast.next.next</span>
-<span id="cb6-9"><a href="#cb6-9"></a>        pre.next =<span class="st"> </span>None</span>
-<span id="cb6-10"><a href="#cb6-10"></a>        return <span class="kw">self.mergeTwoLists</span>(<span class="op">*</span><span class="kw">map</span>(self.sortList, (head, slow)))</span>
-<span id="cb6-11"><a href="#cb6-11"></a>    </span>
-<span id="cb6-12"><a href="#cb6-12"></a>    def <span class="kw">mergeTwoLists</span>(self, l1<span class="op">:</span><span class="st"> </span>ListNode, l2<span class="op">:</span><span class="st"> </span>ListNode) -&gt;<span class="st"> </span>ListNode<span class="op">:</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="st">        </span><span class="cf">if</span> l1 and l2<span class="op">:</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="st">            </span><span class="cf">if</span> l1.val <span class="op">&gt;</span><span class="st"> </span>l2.val<span class="op">:</span><span class="st"> </span>l1, l2 =<span class="st"> </span>l2, l1</span>
-<span id="cb6-15"><a href="#cb6-15"></a>            l1.next =<span class="st"> </span><span class="kw">self.mergeTwoLists</span>(l1.next, l2)</span>
-<span id="cb6-16"><a href="#cb6-16"></a>        return l1 or l2</span></code></pre></div>
-<p><strong>bug</strong></p>
-<p>我这个事件复杂度为o(n)的为啥报错</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="st">    </span>def <span class="kw">sortList</span>(self, head<span class="op">:</span><span class="st"> </span>ListNode) -&gt;<span class="st"> </span>ListNode<span class="op">:</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="st">        </span>t =<span class="st"> </span>[]</span>
-<span id="cb7-4"><a href="#cb7-4"></a>        cur =<span class="st"> </span>head</span>
-<span id="cb7-5"><a href="#cb7-5"></a>        <span class="cf">while</span> cur<span class="op">:</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="st">            </span><span class="kw">t.append</span>(cur.val)</span>
-<span id="cb7-7"><a href="#cb7-7"></a>            cur =<span class="st"> </span>cur.next</span>
-<span id="cb7-8"><a href="#cb7-8"></a></span>
-<span id="cb7-9"><a href="#cb7-9"></a>        return <span class="kw">t.sort</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a></span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a>class Solution<span class="op">:</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="st">    </span>def <span class="kw">sortList</span>(self, head<span class="op">:</span><span class="st"> </span>ListNode) -&gt;<span class="st"> </span>ListNode<span class="op">:</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="st">        </span><span class="cf">if</span> <span class="kw">not</span> (head and head.next)<span class="op">:</span><span class="st"> </span>return head</span>
+<span id="cb10-6"><a href="#cb10-6"></a>        pre, slow, fast =<span class="st"> </span>None, head, head</span>
+<span id="cb10-7"><a href="#cb10-7"></a>        <span class="cf">while</span> fast and fast.next<span class="op">:</span><span class="st"> </span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="st">            </span>pre, slow, fast =<span class="st"> </span>slow, slow.next, fast.next.next</span>
+<span id="cb10-9"><a href="#cb10-9"></a>        pre.next =<span class="st"> </span>None</span>
+<span id="cb10-10"><a href="#cb10-10"></a>        return <span class="kw">self.mergeTwoLists</span>(<span class="op">*</span><span class="kw">map</span>(self.sortList, (head, slow)))</span>
+<span id="cb10-11"><a href="#cb10-11"></a>    </span>
+<span id="cb10-12"><a href="#cb10-12"></a>    def <span class="kw">mergeTwoLists</span>(self, l1<span class="op">:</span><span class="st"> </span>ListNode, l2<span class="op">:</span><span class="st"> </span>ListNode) -&gt;<span class="st"> </span>ListNode<span class="op">:</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="st">        </span><span class="cf">if</span> l1 and l2<span class="op">:</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="st">            </span><span class="cf">if</span> l1.val <span class="op">&gt;</span><span class="st"> </span>l2.val<span class="op">:</span><span class="st"> </span>l1, l2 =<span class="st"> </span>l2, l1</span>
+<span id="cb10-15"><a href="#cb10-15"></a>            l1.next =<span class="st"> </span><span class="kw">self.mergeTwoLists</span>(l1.next, l2)</span>
+<span id="cb10-16"><a href="#cb10-16"></a>        return l1 or l2</span></code></pre></div>
+<ul>
+<li>方法2</li>
+</ul>
+<p>时间复杂度是o(n)</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="st">    </span>def <span class="kw">sortList</span>(self, head<span class="op">:</span><span class="st"> </span>ListNode) -&gt;<span class="st"> </span>ListNode<span class="op">:</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="st">        </span>t =<span class="st"> </span>[]</span>
+<span id="cb11-4"><a href="#cb11-4"></a>        cur =<span class="st"> </span>head</span>
+<span id="cb11-5"><a href="#cb11-5"></a>        <span class="cf">while</span> cur<span class="op">:</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="st">            </span><span class="kw">t.append</span>(cur.val)</span>
+<span id="cb11-7"><a href="#cb11-7"></a>            cur =<span class="st"> </span>cur.next</span>
+<span id="cb11-8"><a href="#cb11-8"></a></span>
+<span id="cb11-9"><a href="#cb11-9"></a>        return <span class="kw">t.sort</span>()</span></code></pre></div>
 <p>至此，双指针的链表题都齐了</p>
 <p>下面开始单指针的</p>
 </div>
-<div id="回文链表" class="section level2" number="1.5">
-<h2><span class="header-section-number">1.5</span> 回文链表</h2>
+<div id="回文链表" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> 回文链表</h2>
 <p>请判断一个链表是否为回文链表。</p>
 <p>示例 1:</p>
 <p>输入: 1-&gt;2
@@ -386,24 +478,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 示例 2:</p>
 <p>输入: 1-&gt;2-&gt;2-&gt;1
 输出: true</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Definition for singly-linked list.</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="co"># class ListNode:</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#     def __init__(self, x):</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#         self.val = x</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#         self.next = None</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a></span>
-<span id="cb8-7"><a href="#cb8-7"></a>class Solution<span class="op">:</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="st">    </span>def <span class="kw">isPalindrome</span>(self, head<span class="op">:</span><span class="st"> </span>ListNode) -&gt;<span class="st"> </span>bool<span class="op">:</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="st">        </span>t =<span class="st"> </span>[]</span>
-<span id="cb8-10"><a href="#cb8-10"></a>        cur =<span class="st"> </span>head</span>
-<span id="cb8-11"><a href="#cb8-11"></a>        <span class="cf">while</span> cur<span class="op">:</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a><span class="st">            </span><span class="kw">t.append</span>(cur.val)</span>
-<span id="cb8-13"><a href="#cb8-13"></a>            cur =<span class="st"> </span>cur.next</span>
-<span id="cb8-14"><a href="#cb8-14"></a></span>
-<span id="cb8-15"><a href="#cb8-15"></a>        return t <span class="op">==</span><span class="st"> </span>t[<span class="op">::-</span><span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Definition for singly-linked list.</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co"># class ListNode:</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">#     def __init__(self, x):</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co">#         self.val = x</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co">#         self.next = None</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a>class Solution<span class="op">:</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="st">    </span>def <span class="kw">isPalindrome</span>(self, head<span class="op">:</span><span class="st"> </span>ListNode) -&gt;<span class="st"> </span>bool<span class="op">:</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="st">        </span>t =<span class="st"> </span>[]</span>
+<span id="cb12-10"><a href="#cb12-10"></a>        cur =<span class="st"> </span>head</span>
+<span id="cb12-11"><a href="#cb12-11"></a>        <span class="cf">while</span> cur<span class="op">:</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="st">            </span><span class="kw">t.append</span>(cur.val)</span>
+<span id="cb12-13"><a href="#cb12-13"></a>            cur =<span class="st"> </span>cur.next</span>
+<span id="cb12-14"><a href="#cb12-14"></a></span>
+<span id="cb12-15"><a href="#cb12-15"></a>        return t <span class="op">==</span><span class="st"> </span>t[<span class="op">::-</span><span class="dv">1</span>]</span></code></pre></div>
 </div>
-<div id="合并两个有序链表" class="section level2" number="1.6">
-<h2><span class="header-section-number">1.6</span> 合并两个有序链表</h2>
+<div id="合并两个有序链表" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> 合并两个有序链表</h2>
 <p>将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
 示例：</p>
 <p>输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4
@@ -413,28 +505,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>判断两个链表是否存在，否则返回另一个</li>
 <li>比较两个链表结点的值</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Definition for singly-linked list.</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="co"># class ListNode:</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#     def __init__(self, val=0, next=None):</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#         self.val = val</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#         self.next = next</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a>class Solution<span class="op">:</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="st">    </span>def <span class="kw">mergeTwoLists</span>(self, l1<span class="op">:</span><span class="st"> </span>ListNode, l2<span class="op">:</span><span class="st"> </span>ListNode) -&gt;<span class="st"> </span>ListNode<span class="op">:</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="st">      </span><span class="cf">if</span> not l1<span class="op">:</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="st">          </span>return l2</span>
-<span id="cb9-10"><a href="#cb9-10"></a>      <span class="cf">if</span> not l2<span class="op">:</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a><span class="st">          </span>return l1<span class="op">:</span></span>
-<span id="cb9-12"><a href="#cb9-12"></a><span class="st">      </span><span class="cf">while</span> l1 and l2<span class="op">:</span></span>
-<span id="cb9-13"><a href="#cb9-13"></a><span class="st">          </span><span class="cf">if</span> l1.val<span class="op">&lt;=</span>l2.val<span class="op">:</span></span>
-<span id="cb9-14"><a href="#cb9-14"></a><span class="st">              </span>l1.next=<span class="kw">self.mergeTwoLists</span>(l1.next,l2)</span>
-<span id="cb9-15"><a href="#cb9-15"></a>              return l1</span>
-<span id="cb9-16"><a href="#cb9-16"></a>          <span class="cf">else</span><span class="op">:</span><span class="st"> </span></span>
-<span id="cb9-17"><a href="#cb9-17"></a><span class="st">              </span>l2.next=<span class="kw">self.mergeTwoLists</span>(l1,l2.next)</span>
-<span id="cb9-18"><a href="#cb9-18"></a>              return l2</span>
-<span id="cb9-19"><a href="#cb9-19"></a>              </span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Definition for singly-linked list.</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co"># class ListNode:</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#     def __init__(self, val=0, next=None):</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#         self.val = val</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#         self.next = next</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>class Solution<span class="op">:</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="st">    </span>def <span class="kw">mergeTwoLists</span>(self, l1<span class="op">:</span><span class="st"> </span>ListNode, l2<span class="op">:</span><span class="st"> </span>ListNode) -&gt;<span class="st"> </span>ListNode<span class="op">:</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="st">      </span><span class="cf">if</span> not l1<span class="op">:</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="st">          </span>return l2</span>
+<span id="cb13-10"><a href="#cb13-10"></a>      <span class="cf">if</span> not l2<span class="op">:</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="st">          </span>return l1<span class="op">:</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="st">      </span><span class="cf">while</span> l1 and l2<span class="op">:</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="st">          </span><span class="cf">if</span> l1.val<span class="op">&lt;=</span>l2.val<span class="op">:</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="st">              </span>l1.next=<span class="kw">self.mergeTwoLists</span>(l1.next,l2)</span>
+<span id="cb13-15"><a href="#cb13-15"></a>              return l1</span>
+<span id="cb13-16"><a href="#cb13-16"></a>          <span class="cf">else</span><span class="op">:</span><span class="st"> </span></span>
+<span id="cb13-17"><a href="#cb13-17"></a><span class="st">              </span>l2.next=<span class="kw">self.mergeTwoLists</span>(l1,l2.next)</span>
+<span id="cb13-18"><a href="#cb13-18"></a>              return l2</span>
+<span id="cb13-19"><a href="#cb13-19"></a>              </span></code></pre></div>
 </div>
-<div id="删除链表中的结点" class="section level2" number="1.7">
-<h2><span class="header-section-number">1.7</span> 删除链表中的结点</h2>
+<div id="删除链表中的结点" class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> 删除链表中的结点</h2>
 <p>请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。</p>
 <p>示例 1:</p>
 <p>输入: head = [4,5,1,9], node = 5
@@ -445,148 +537,138 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 输出: [4,5,9]
 解释: 给定你链表中值为1的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 5 -&gt; 9.</p>
 <p><strong>node是待删除的结点，因此就让指向node的指针指向node的下一个结点就好了</strong></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a></span>
-<span id="cb10-2"><a href="#cb10-2"></a>class Solution<span class="op">:</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="st">    </span>def <span class="kw">deleteNode</span>(self, node)<span class="op">:</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="st">        &quot;&quot;&quot;</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="st">        :type node: ListNode</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="st">        :rtype: void Do not return anything, modify node in-place instead.</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="st">        &quot;&quot;&quot;</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a>        node.val=node.next.val</span>
-<span id="cb10-9"><a href="#cb10-9"></a>        node.next=node.next.next</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a></span>
+<span id="cb14-2"><a href="#cb14-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="st">    </span>def <span class="kw">deleteNode</span>(self, node)<span class="op">:</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="st">        :type node: ListNode</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="st">        :rtype: void Do not return anything, modify node in-place instead.</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>        node.val=node.next.val</span>
+<span id="cb14-9"><a href="#cb14-9"></a>        node.next=node.next.next</span></code></pre></div>
 </div>
-<div id="判断链表中是否有环" class="section level2" number="1.8">
-<h2><span class="header-section-number">1.8</span> 判断链表中是否有环</h2>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="st">    </span>def <span class="kw">hasCycle</span>(self , head )<span class="op">:</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="st">        </span><span class="co"># head始终没有变</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="st">        </span>cur =<span class="st"> </span>head</span>
-<span id="cb11-6"><a href="#cb11-6"></a>        <span class="cf">while</span> cur<span class="op">:</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="st">            </span>cur_next =<span class="st"> </span>cur.next</span>
-<span id="cb11-8"><a href="#cb11-8"></a>            <span class="cf">if</span> cur_next is head<span class="op">:</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="st">                </span>return True</span>
-<span id="cb11-10"><a href="#cb11-10"></a>            cur.next =<span class="st"> </span>head</span>
-<span id="cb11-11"><a href="#cb11-11"></a>            cur =<span class="st"> </span>cur_next</span>
-<span id="cb11-12"><a href="#cb11-12"></a>        return False</span></code></pre></div>
-</div>
-<div id="链表中环的入口" class="section level2" number="1.9">
-<h2><span class="header-section-number">1.9</span> 链表中环的入口</h2>
-<p>给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，输出null。</p>
-<p>本质上也是快慢指针的思想，但是可以有简单一点的方法</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="co"># class ListNode:</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="co">#     def __init__(self, x):</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co">#         self.val = x</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="co">#         self.next = None</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a>class Solution<span class="op">:</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="st">    </span>def <span class="kw">EntryNodeOfLoop</span>(self, pHead)<span class="op">:</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="st">        </span><span class="cf">if</span> not pHead<span class="op">:</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a><span class="st">            </span>return None</span>
-<span id="cb12-11"><a href="#cb12-11"></a>        lst =<span class="st"> </span>[]</span>
-<span id="cb12-12"><a href="#cb12-12"></a>        <span class="cf">while</span> pHead<span class="op">:</span></span>
-<span id="cb12-13"><a href="#cb12-13"></a><span class="st">            </span><span class="cf">if</span> pHead <span class="cf">in</span> lst<span class="op">:</span></span>
-<span id="cb12-14"><a href="#cb12-14"></a><span class="st">                </span>return pHead</span>
-<span id="cb12-15"><a href="#cb12-15"></a>            <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb12-16"><a href="#cb12-16"></a><span class="st">                </span><span class="kw">lst.append</span>(pHead)</span>
-<span id="cb12-17"><a href="#cb12-17"></a>                pHead =<span class="st"> </span>pHead.next</span>
-<span id="cb12-18"><a href="#cb12-18"></a>        return None</span></code></pre></div>
-<ul>
-<li>方法二</li>
-</ul>
-<p>快慢指针的方式才是主流</p>
-<p>第一步：如何确定一个链表中包含环。
-定义两个指针，同时从链表的头节点出发，一个指针一次走一步，另一个一次走两步。如果走得快的指针走上了走的慢的指针，那么链表就包含环；如果走的快的指针走到了链表的末尾都没有追上第一个指针，那么链表就不包含环。</p>
-<p>第二步：如何找到环的入口。
-慢指针回到表头，快指针留在相遇点，二者同步往前直到相遇在入口结点。</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="co"># class ListNode:</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#     def __init__(self, x):</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#         self.val = x</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#         self.next = None</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a>class Solution<span class="op">:</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a><span class="st">    </span>def <span class="kw">detectCycle</span>(self, head<span class="op">:</span><span class="st"> </span>ListNode) -&gt;<span class="st"> </span>ListNode<span class="op">:</span></span>
-<span id="cb13-8"><a href="#cb13-8"></a><span class="st">        </span>slow, fast =<span class="st"> </span>head, head</span>
-<span id="cb13-9"><a href="#cb13-9"></a>        <span class="cf">while</span> fast and fast.next<span class="op">:</span></span>
-<span id="cb13-10"><a href="#cb13-10"></a><span class="st">            </span>slow =<span class="st"> </span>slow.next</span>
-<span id="cb13-11"><a href="#cb13-11"></a>            fast =<span class="st"> </span>fast.next.next</span>
-<span id="cb13-12"><a href="#cb13-12"></a>            <span class="co"># 如果相遇</span></span>
-<span id="cb13-13"><a href="#cb13-13"></a>            <span class="cf">if</span> slow <span class="op">==</span><span class="st"> </span>fast<span class="op">:</span></span>
-<span id="cb13-14"><a href="#cb13-14"></a><span class="st">                </span>p =<span class="st"> </span>head</span>
-<span id="cb13-15"><a href="#cb13-15"></a>                q =<span class="st"> </span>slow</span>
-<span id="cb13-16"><a href="#cb13-16"></a>                <span class="cf">while</span> p<span class="op">!=</span>q<span class="op">:</span></span>
-<span id="cb13-17"><a href="#cb13-17"></a><span class="st">                    </span>p =<span class="st"> </span>p.next</span>
-<span id="cb13-18"><a href="#cb13-18"></a>                    q =<span class="st"> </span>q.next</span>
-<span id="cb13-19"><a href="#cb13-19"></a>                <span class="co">#你也可以return q</span></span>
-<span id="cb13-20"><a href="#cb13-20"></a>                return p</span>
-<span id="cb13-21"><a href="#cb13-21"></a></span>
-<span id="cb13-22"><a href="#cb13-22"></a>        return None</span>
-<span id="cb13-23"><a href="#cb13-23"></a>        </span></code></pre></div>
-</div>
-<div id="两两交换链表的节点" class="section level2" number="1.10">
-<h2><span class="header-section-number">1.10</span> 两两交换链表的节点</h2>
+<div id="两两交换链表的节点" class="section level2" number="1.9">
+<h2><span class="header-section-number">1.9</span> 两两交换链表的节点</h2>
 <p>两两交换链表中的节点
 给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
 示例:
 给定 1-&gt;2-&gt;3-&gt;4, 你应该返回 2-&gt;1-&gt;4-&gt;3.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Definition for singly-linked list.</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>class <span class="kw">ListNode</span>(object)<span class="op">:</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="st">    </span>def <span class="kw">__init__</span>(self, x)<span class="op">:</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="st">        </span>self.val =<span class="st"> </span>x</span>
-<span id="cb14-5"><a href="#cb14-5"></a>        self.next =<span class="st"> </span>None</span>
-<span id="cb14-6"><a href="#cb14-6"></a>        </span>
-<span id="cb14-7"><a href="#cb14-7"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
-<span id="cb14-8"><a href="#cb14-8"></a><span class="st">    </span>def <span class="kw">swapPairs</span>(self, head)<span class="op">:</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a><span class="st">        &quot;&quot;&quot;</span></span>
-<span id="cb14-10"><a href="#cb14-10"></a><span class="st">        :type head: ListNode</span></span>
-<span id="cb14-11"><a href="#cb14-11"></a><span class="st">        :rtype: ListNode</span></span>
-<span id="cb14-12"><a href="#cb14-12"></a><span class="st">        &quot;&quot;&quot;</span></span>
-<span id="cb14-13"><a href="#cb14-13"></a></span>
-<span id="cb14-14"><a href="#cb14-14"></a>        <span class="co"># If the list has no node or has only one node left.</span></span>
-<span id="cb14-15"><a href="#cb14-15"></a>        <span class="cf">if</span> not head or not head.next<span class="op">:</span></span>
-<span id="cb14-16"><a href="#cb14-16"></a><span class="st">            </span>return head</span>
-<span id="cb14-17"><a href="#cb14-17"></a></span>
-<span id="cb14-18"><a href="#cb14-18"></a>        <span class="co"># Nodes to be swapped</span></span>
-<span id="cb14-19"><a href="#cb14-19"></a>        first_node =<span class="st"> </span>head</span>
-<span id="cb14-20"><a href="#cb14-20"></a>        second_node =<span class="st"> </span>head.next</span>
-<span id="cb14-21"><a href="#cb14-21"></a></span>
-<span id="cb14-22"><a href="#cb14-22"></a>        <span class="co"># Swapping</span></span>
-<span id="cb14-23"><a href="#cb14-23"></a>        first_node.next  =<span class="st"> </span><span class="kw">self.swapPairs</span>(second_node.next)</span>
-<span id="cb14-24"><a href="#cb14-24"></a>        second_node.next =<span class="st"> </span>first_node</span>
-<span id="cb14-25"><a href="#cb14-25"></a></span>
-<span id="cb14-26"><a href="#cb14-26"></a>        <span class="co"># Now the head is the second node</span></span>
-<span id="cb14-27"><a href="#cb14-27"></a>        return second_node</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Definition for singly-linked list.</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>class <span class="kw">ListNode</span>(object)<span class="op">:</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="st">    </span>def <span class="kw">__init__</span>(self, x)<span class="op">:</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="st">        </span>self.val =<span class="st"> </span>x</span>
+<span id="cb15-5"><a href="#cb15-5"></a>        self.next =<span class="st"> </span>None</span>
+<span id="cb15-6"><a href="#cb15-6"></a>        </span>
+<span id="cb15-7"><a href="#cb15-7"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="st">    </span>def <span class="kw">swapPairs</span>(self, head)<span class="op">:</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="st">        :type head: ListNode</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a><span class="st">        :rtype: ListNode</span></span>
+<span id="cb15-12"><a href="#cb15-12"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb15-13"><a href="#cb15-13"></a></span>
+<span id="cb15-14"><a href="#cb15-14"></a>        <span class="co"># If the list has no node or has only one node left.</span></span>
+<span id="cb15-15"><a href="#cb15-15"></a>        <span class="cf">if</span> not head or not head.next<span class="op">:</span></span>
+<span id="cb15-16"><a href="#cb15-16"></a><span class="st">            </span>return head</span>
+<span id="cb15-17"><a href="#cb15-17"></a></span>
+<span id="cb15-18"><a href="#cb15-18"></a>        <span class="co"># Nodes to be swapped</span></span>
+<span id="cb15-19"><a href="#cb15-19"></a>        first_node =<span class="st"> </span>head</span>
+<span id="cb15-20"><a href="#cb15-20"></a>        second_node =<span class="st"> </span>head.next</span>
+<span id="cb15-21"><a href="#cb15-21"></a></span>
+<span id="cb15-22"><a href="#cb15-22"></a>        <span class="co"># Swapping</span></span>
+<span id="cb15-23"><a href="#cb15-23"></a>        first_node.next  =<span class="st"> </span><span class="kw">self.swapPairs</span>(second_node.next)</span>
+<span id="cb15-24"><a href="#cb15-24"></a>        second_node.next =<span class="st"> </span>first_node</span>
+<span id="cb15-25"><a href="#cb15-25"></a></span>
+<span id="cb15-26"><a href="#cb15-26"></a>        <span class="co"># Now the head is the second node</span></span>
+<span id="cb15-27"><a href="#cb15-27"></a>        return second_node</span></code></pre></div>
 </div>
-<div id="链表相交并找出交点" class="section level2" number="1.11">
-<h2><span class="header-section-number">1.11</span> 链表相交并找出交点</h2>
+<div id="链表相交并找出交点" class="section level2" number="1.10">
+<h2><span class="header-section-number">1.10</span> 链表相交并找出交点</h2>
 <p>给定两个（单向）链表，判定它们是否相交并返回交点。请注意相交的定义基于节点的引用，而不是基于节点的值。换句话说，如果一个链表的第k个节点与另一个链表的第j个节点是同一节点（引用完全相同），则这两个链表相交。</p>
 <p>示例 1：</p>
 <p>输入：listA = [4,1,8,4,5], listB = [5,0,1,8,4,5]</p>
 <p>输出：Reference of the node with value = 8</p>
+<ul>
+<li>这个题的相交节点为什么不是1？</li>
+</ul>
 <p>输入解释：相交节点的值为 8 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</p>
 <p>这个题也是剑指offer上面的，和公共节点的题类似</p>
 <p>解题思路：
 <img src="../figs/lianbiao2.png" /></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a></span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="co"># class ListNode:</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="co">#     def __init__(self, x):</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="co">#         self.val = x</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a><span class="co">#         self.next = None</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a>class Solution<span class="op">:</span></span>
-<span id="cb15-8"><a href="#cb15-8"></a><span class="st">    </span>def <span class="kw">FindFirstCommonNode</span>(self, pHead1, pHead2)<span class="op">:</span></span>
-<span id="cb15-9"><a href="#cb15-9"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb15-10"><a href="#cb15-10"></a><span class="st">        </span><span class="cf">if</span> pHead1<span class="op">==</span><span class="st"> </span>None or pHead2 <span class="op">==</span><span class="st"> </span>None<span class="op">:</span></span>
-<span id="cb15-11"><a href="#cb15-11"></a><span class="st">            </span>return None</span>
-<span id="cb15-12"><a href="#cb15-12"></a>        p1 =<span class="st"> </span>pHead1</span>
-<span id="cb15-13"><a href="#cb15-13"></a>        p2 =<span class="st"> </span>pHead2</span>
-<span id="cb15-14"><a href="#cb15-14"></a>        <span class="cf">while</span>(p1<span class="op">!=</span>p2)<span class="op">:</span><span class="st">  </span></span>
-<span id="cb15-15"><a href="#cb15-15"></a><span class="st">            </span>p1 =<span class="st"> </span>pHead2 <span class="cf">if</span> p1 is None <span class="cf">else</span> p1.next</span>
-<span id="cb15-16"><a href="#cb15-16"></a>            <span class="co"># 由于若pHead2是pHead1的最后一个节点，，因此不能以p1.next==None作为判断条件。</span></span>
-<span id="cb15-17"><a href="#cb15-17"></a>            <span class="co"># 否则就会死循环。</span></span>
-<span id="cb15-18"><a href="#cb15-18"></a>            p2 =<span class="st"> </span>pHead1 <span class="cf">if</span> p2 is None <span class="cf">else</span> p2.next</span>
-<span id="cb15-19"><a href="#cb15-19"></a>        return p1</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="co"># class ListNode:</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="co">#     def __init__(self, x):</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="co">#         self.val = x</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="co">#         self.next = None</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="st">    </span>def <span class="kw">getIntersectionNode</span>(self, headA, headB)<span class="op">:</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a><span class="st">        将两个链表拼接在一起，p是headA-&gt;headB</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a><span class="st">        q是headB-&gt;headA</span></span>
+<span id="cb16-12"><a href="#cb16-12"></a><span class="st">        这样p和q的长度一致，会在相交节点相遇</span></span>
+<span id="cb16-13"><a href="#cb16-13"></a><span class="st">        要么就都返回None</span></span>
+<span id="cb16-14"><a href="#cb16-14"></a><span class="st">        :param headA: ListNode</span></span>
+<span id="cb16-15"><a href="#cb16-15"></a><span class="st">        :param headB: ListNode</span></span>
+<span id="cb16-16"><a href="#cb16-16"></a><span class="st">        :return: ListNode</span></span>
+<span id="cb16-17"><a href="#cb16-17"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb16-18"><a href="#cb16-18"></a>        p =<span class="st"> </span>headA</span>
+<span id="cb16-19"><a href="#cb16-19"></a>        q =<span class="st"> </span>headB</span>
+<span id="cb16-20"><a href="#cb16-20"></a>        <span class="co"># p 4,1,8,4,5-&gt;5,0,1,8,4,5</span></span>
+<span id="cb16-21"><a href="#cb16-21"></a>        <span class="co"># q 5,0,1,8,4,5-&gt;4,1,8,4,5</span></span>
+<span id="cb16-22"><a href="#cb16-22"></a></span>
+<span id="cb16-23"><a href="#cb16-23"></a>        <span class="cf">while</span> p is not q<span class="op">:</span></span>
+<span id="cb16-24"><a href="#cb16-24"></a><span class="st">            </span>p =<span class="st"> </span>p.next <span class="cf">if</span> p <span class="cf">else</span> headB</span>
+<span id="cb16-25"><a href="#cb16-25"></a>            q =<span class="st"> </span>q.next <span class="cf">if</span> q <span class="cf">else</span> headA</span>
+<span id="cb16-26"><a href="#cb16-26"></a>        return p</span></code></pre></div>
+<ul>
+<li>方法2 使用集合</li>
+</ul>
+<p>集合这个更巧妙一点</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>class <span class="kw">Solution</span>()<span class="op">:</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="st">    </span>def <span class="kw">getIntersectionNode</span>(self, headA, headB)<span class="op">:</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="st">        :param headA: ListNode</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="st">        :param headB: ListNode</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="st">        :return: ListNode</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a>        s =<span class="st"> </span><span class="kw">set</span>()</span>
+<span id="cb17-10"><a href="#cb17-10"></a>        h1 =<span class="st"> </span>headA</span>
+<span id="cb17-11"><a href="#cb17-11"></a>        h2 =<span class="st"> </span>headB</span>
+<span id="cb17-12"><a href="#cb17-12"></a>        <span class="cf">while</span> h1<span class="op">:</span></span>
+<span id="cb17-13"><a href="#cb17-13"></a><span class="st">            </span><span class="kw">s.add</span>(h1)</span>
+<span id="cb17-14"><a href="#cb17-14"></a>            h1 =<span class="st"> </span>h1.next</span>
+<span id="cb17-15"><a href="#cb17-15"></a>        <span class="cf">while</span> h2<span class="op">:</span></span>
+<span id="cb17-16"><a href="#cb17-16"></a><span class="st">            </span><span class="cf">if</span> h2 <span class="cf">in</span> s<span class="op">:</span></span>
+<span id="cb17-17"><a href="#cb17-17"></a><span class="st">                </span><span class="cf">break</span></span>
+<span id="cb17-18"><a href="#cb17-18"></a>            h2 =<span class="st"> </span>h2.next</span>
+<span id="cb17-19"><a href="#cb17-19"></a>        return h2</span></code></pre></div>
+</div>
+<div id="每k个节点反转链表" class="section level2" number="1.11">
+<h2><span class="header-section-number">1.11</span> 每k个节点反转链表</h2>
+<p>题目描述：
+给出一个链表，每k个节点一组进行翻转，并返回翻转后的链表。
+k是一个正整数，它的值小于或等于链表的长度。如果节点总数不是k的整数倍，那么将最后剩余节点保持原有顺序。</p>
+<p>第一行输入是链表的值
+第二行输入是K的值，K是大于或等于1的整数</p>
+<p>输入形式为：
+1 2 3 4 5
+当k = 2时，应当输出: 2 1 4 3 5</p>
+<p>当k = 3时，应当输出: 3 2 1 4 5</p>
+<p>当k=6时，应当输出： 1 2 3 4 5</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>def <span class="kw">reverseList_k</span>(head,k)<span class="op">:</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="st">    </span>cur =<span class="st"> </span>head</span>
+<span id="cb18-3"><a href="#cb18-3"></a>    cnt =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>    <span class="cf">while</span> cur and cnt <span class="op">!=</span><span class="st"> </span>k<span class="op">:</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="st">        </span>cur =<span class="st"> </span>cur.next</span>
+<span id="cb18-6"><a href="#cb18-6"></a>        cnt <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a>    <span class="cf">if</span> cnt <span class="op">==</span><span class="st"> </span>k<span class="op">:</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="st">        </span>cur =<span class="st"> </span><span class="kw">reverseList_k</span>(cur,k)</span>
+<span id="cb18-9"><a href="#cb18-9"></a>        <span class="cf">while</span> cnt<span class="op">:</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="st">            </span>head.next,cur,head =<span class="st"> </span>cur,head,head.next</span>
+<span id="cb18-11"><a href="#cb18-11"></a>            cnt <span class="op">-</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a>        head =<span class="st"> </span>cur</span>
+<span id="cb18-13"><a href="#cb18-13"></a>    return head</span></code></pre></div>
 </div>
 <div id="限制时间复杂度输出链表的中间值" class="section level2" number="1.12">
 <h2><span class="header-section-number">1.12</span> 限制时间复杂度输出链表的中间值</h2>
