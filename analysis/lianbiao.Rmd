@@ -267,10 +267,9 @@ class Solution:
 
 ```
 
+- 方法2
 
-**bug**
-
-我这个事件复杂度为o(n)的为啥报错
+时间复杂度是o(n)
 
 ```r
 class Solution:
