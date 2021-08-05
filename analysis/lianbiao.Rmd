@@ -107,7 +107,7 @@ class Solution:
         return res[-k]
 ```
 
-## 环形链表
+## 判断是否是环形链表
 
 ![](../figs/huanxinglianbiao.png)
 示例 3：
@@ -126,21 +126,110 @@ class Solution:
 
 - 其他情况又会怎样呢？例如，我们没有考虑快跑者在慢跑者之后两步或三步的情况。但其实不难想到，因为在下一次或者下下次迭代后，又会变成上面提到的情况 A。
 
-```r
-class Solution(object):
-    def hasCycle(self, head):
-        if(head == None or head.next == None):
-            return False
-        node1 = head #慢指针
-        node2 = head.next #快指针
-        while(node1 != node2):
-            if(node2 == None or node2.next == None):
-                return False
-            node1 = node1.next
-            node2 = node2.next.next
-            
-        return True #相遇的话返回true
 
+- 方法1 快慢指针法 
+- 参考[阿常呓语」](https://blog.csdn.net/u010339879/article/details/86664813)
+
+```r
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def hasCycle(self, head: ListNode) -> bool:
+        if head is None or  head.next is None:
+            return False 
+        
+        slow = head 
+        fast  =head.next 
+        while slow != fast:    
+            if fast is None or fast.next is None:
+                return False 
+            fast = fast.next.next 
+            slow = slow.next 
+
+        return True 
+
+```
+
+
+- 方法2 集合法
+```r
+class Solution02:
+    def hasCycle(self, head: ListNode) -> bool:
+        seen = set()
+        while head:
+            if head in seen:
+                return True
+            seen.add(head)
+            head = head.next
+        return False
+
+```
+
+## 链表中环的入口
+
+给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，输出null。
+
+本质上也是快慢指针的思想，但是可以有简单一点的方法
+
+```r
+# -*- coding:utf-8 -*-
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+class Solution:
+    def EntryNodeOfLoop(self, pHead):
+        # write code here
+        if not pHead:
+            return None
+        lst = []
+        while pHead:
+            if pHead in lst:
+                return pHead
+            else:
+                lst.append(pHead)
+                pHead = pHead.next
+        return None
+```
+
+- 方法二
+
+快慢指针的方式才是主流
+
+第一步：如何确定一个链表中包含环。
+定义两个指针，同时从链表的头节点出发，一个指针一次走一步，另一个一次走两步。如果走得快的指针走上了走的慢的指针，那么链表就包含环；如果走的快的指针走到了链表的末尾都没有追上第一个指针，那么链表就不包含环。
+
+第二步：如何找到环的入口。
+慢指针回到表头，快指针留在相遇点，二者同步往前直到相遇在入口结点。
+
+```r
+# -*- coding:utf-8 -*-
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+class Solution:
+    def detectCycle(self, head: ListNode) -> ListNode:
+        slow, fast = head, head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            # 如果相遇
+            if slow == fast:
+                p = head
+                q = slow
+                while p!=q:
+                    p = p.next
+                    q = q.next
+                #你也可以return q
+                return p
+
+        return None
+        
 ```
 
 ## 反转链表
@@ -385,112 +474,7 @@ class Solution:
         node.next=node.next.next
 ```
 
-## 判断链表中是否有环
 
-- 方法1 快慢指针法 
-- 参考[阿常呓语」](https://blog.csdn.net/u010339879/article/details/86664813)
-
-```r
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-
-class Solution:
-    def hasCycle(self, head: ListNode) -> bool:
-        if head is None or  head.next is None:
-            return False 
-        
-        slow = head 
-        fast  =head.next 
-        while slow != fast:    
-            if fast is None or fast.next is None:
-                return False 
-            fast = fast.next.next 
-            slow = slow.next 
-
-        return True 
-
-```
-
-
-- 方法2 集合法
-```r
-class Solution02:
-    def hasCycle(self, head: ListNode) -> bool:
-        seen = set()
-        while head:
-            if head in seen:
-                return True
-            seen.add(head)
-            head = head.next
-        return False
-
-```
-
-## 链表中环的入口
-
-给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，输出null。
-
-本质上也是快慢指针的思想，但是可以有简单一点的方法
-
-```r
-# -*- coding:utf-8 -*-
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-class Solution:
-    def EntryNodeOfLoop(self, pHead):
-        # write code here
-        if not pHead:
-            return None
-        lst = []
-        while pHead:
-            if pHead in lst:
-                return pHead
-            else:
-                lst.append(pHead)
-                pHead = pHead.next
-        return None
-```
-
-- 方法二
-
-快慢指针的方式才是主流
-
-第一步：如何确定一个链表中包含环。
-定义两个指针，同时从链表的头节点出发，一个指针一次走一步，另一个一次走两步。如果走得快的指针走上了走的慢的指针，那么链表就包含环；如果走的快的指针走到了链表的末尾都没有追上第一个指针，那么链表就不包含环。
-
-第二步：如何找到环的入口。
-慢指针回到表头，快指针留在相遇点，二者同步往前直到相遇在入口结点。
-
-```r
-# -*- coding:utf-8 -*-
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-class Solution:
-    def detectCycle(self, head: ListNode) -> ListNode:
-        slow, fast = head, head
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
-            # 如果相遇
-            if slow == fast:
-                p = head
-                q = slow
-                while p!=q:
-                    p = p.next
-                    q = q.next
-                #你也可以return q
-                return p
-
-        return None
-        
-```
 
 
 ## 两两交换链表的节点
