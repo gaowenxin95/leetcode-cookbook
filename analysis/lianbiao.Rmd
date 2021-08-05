@@ -32,12 +32,10 @@ bibliography: ../refs/add.bib
 
 - 可以考虑快慢指针来实现各种位置删除的链表
 
-
-
 能不能用1次遍历解决这个问题呢？这里我们运用到解决这类线性列表的数据结构题目一个高频技巧，双指针。
 为了方便，**在原有链表前面设置一个哑结点，哑结点的好处在于，因为这里我们是要删除一个结点，所以我们可以定位到被删除结点的前置结点，然后将前置结点的后续指针指向被删除结点的后续结点，则可完成删除。**
 
-**建立两个链表，l1先从第一个节点访问到第n个节点，然后l1和l2同时进行扫描，当l1扫描到链表尾时，l2到倒数第n个节点。**
+**建立两个指针，l1先从第一个节点访问到第n个节点，然后l1和l2同时进行扫描，当l1扫描到链表尾时，l2恰好到倒数第n个节点。**
 
 我们设置两个指针，两个指针初始状态都指向哑结点，指针fast 先走n步，然后指针fast和指针slow同步往前继续遍历链表，直至fast的后续结点为空，此时指针slow到达被删除结点的前置结点。[belinda](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/solution/chao-ke-ai-dong-hua-jiao-ni-ru-he-shan-chu-lian-bi/)
 
@@ -47,8 +45,6 @@ bibliography: ../refs/add.bib
 4.快慢指针一起走，直到快指针走到链表尾
 5.慢指针后一位链接为其后一位的后一位（实现截断连接）
 6.返回头结点的后一位结点。[Huster2018](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/solution/python3-shuang-zhi-zhen-20you-hua-ban-by-huster201/)
-
-
 ```r
 # Definition for singly-linked list.
 # class ListNode(object):
@@ -75,6 +71,23 @@ class Solution(object):
         slow.next = slow.next.next #指向删除节点的后续位置
         return Node.next
 
+```
+- 利用快指针fast和慢指针slow，先让快指针fast和慢指针slow都位于首节点，然后让快指针fast先走n-1步，随后慢指针slow开始走，当fast走到链表的尾节点时，slow此时正位于倒数第n个节点上。
+
+
+```r
+class Solution:
+    def getKthFromEnd(self,head,k):
+        fast=slow=head
+        if head==None or k<=0:
+            return None
+        while k>0 and fast !=None:
+            fast=fast.next
+            k-=1
+        while fast!=None:
+            fast=fast.next
+            slow=slow.next
+        return slow
 ```
 
 - 方法二
