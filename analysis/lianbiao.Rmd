@@ -541,6 +541,8 @@ class Solution(object):
 
 输出：Reference of the node with value = 8
 
+- 这个题的相交节点为什么不是1？
+
 输入解释：相交节点的值为 8 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。
 
 这个题也是剑指offer上面的，和公共节点的题类似
@@ -555,19 +557,51 @@ class Solution(object):
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
-class Solution:
-    def FindFirstCommonNode(self, pHead1, pHead2):
-        # write code here
-        if pHead1== None or pHead2 == None:
-            return None
-        p1 = pHead1
-        p2 = pHead2
-        while(p1!=p2):  
-            p1 = pHead2 if p1 is None else p1.next
-            # 由于若pHead2是pHead1的最后一个节点，，因此不能以p1.next==None作为判断条件。
-            # 否则就会死循环。
-            p2 = pHead1 if p2 is None else p2.next
-        return p1
+class Solution(object):
+    def getIntersectionNode(self, headA, headB):
+        """
+        将两个链表拼接在一起，p是headA->headB
+        q是headB->headA
+        这样p和q的长度一致，会在相交节点相遇
+        要么就都返回None
+        :param headA: ListNode
+        :param headB: ListNode
+        :return: ListNode
+        """
+        p = headA
+        q = headB
+        # p 4,1,8,4,5->5,0,1,8,4,5
+        # q 5,0,1,8,4,5->4,1,8,4,5
+
+        while p is not q:
+            p = p.next if p else headB
+            q = q.next if q else headA
+        return p
+
+```
+
+- 方法2 使用集合
+
+```r
+class Solution():
+    def getIntersectionNode(self, headA, headB):
+        """
+
+        :param headA: ListNode
+        :param headB: ListNode
+        :return: ListNode
+        """
+        s = set()
+        h1 = headA
+        h2 = headB
+        while h1:
+            s.add(h1)
+            h1 = h1.next
+        while h2:
+            if h2 in s:
+                break
+            h2 = h2.next
+        return h2
 ```
 
 ## 每k个节点反转链表
