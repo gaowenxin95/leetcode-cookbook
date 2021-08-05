@@ -77,6 +77,23 @@ class Solution(object):
 
 ```
 
+- 方法二
+
+list法
+
+```r
+class Solution:
+    def FindKthToTail(self, head, k):
+        # write code here
+        res=[]
+        while head:
+            res.append(head)
+            head=head.next
+        if k>len(res) or k<1:
+            return 
+        return res[-k]
+```
+
 ## 环形链表
 
 ![](../figs/huanxinglianbiao.png)
