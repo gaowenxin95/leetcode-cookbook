@@ -121,6 +121,7 @@ class Solution(object):
 
 输入: 1->2->3->4->5->NULL
 输出: 5->4->3->2->1->NULL
+[这个图解挺好的](https://blog.csdn.net/gongliming_/article/details/88712221)
 
 ```r
 # Definition for singly-linked list.
@@ -131,6 +132,8 @@ class Solution(object):
 
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
+        if head == None or head.next==None:  # 若链表为空或者仅一个数就直接返回
+        return head 
         rev,p=None,head
         while p:
           rev,rev.next,p=p,rev,p.next
@@ -371,6 +374,153 @@ class Solution:
         return False
 
 ```
+
+## 链表中环的入口
+
+给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，输出null。
+
+本质上也是快慢指针的思想，但是可以有简单一点的方法
+
+```r
+# -*- coding:utf-8 -*-
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+class Solution:
+    def EntryNodeOfLoop(self, pHead):
+        # write code here
+        if not pHead:
+            return None
+        lst = []
+        while pHead:
+            if pHead in lst:
+                return pHead
+            else:
+                lst.append(pHead)
+                pHead = pHead.next
+        return None
+```
+
+- 方法二
+
+快慢指针的方式才是主流
+
+第一步：如何确定一个链表中包含环。
+定义两个指针，同时从链表的头节点出发，一个指针一次走一步，另一个一次走两步。如果走得快的指针走上了走的慢的指针，那么链表就包含环；如果走的快的指针走到了链表的末尾都没有追上第一个指针，那么链表就不包含环。
+
+第二步：如何找到环的入口。
+慢指针回到表头，快指针留在相遇点，二者同步往前直到相遇在入口结点。
+
+```r
+# -*- coding:utf-8 -*-
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+class Solution:
+    def detectCycle(self, head: ListNode) -> ListNode:
+        slow, fast = head, head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            # 如果相遇
+            if slow == fast:
+                p = head
+                q = slow
+                while p!=q:
+                    p = p.next
+                    q = q.next
+                #你也可以return q
+                return p
+
+        return None
+        
+```
+
+
+## 两两交换链表的节点
+
+两两交换链表中的节点
+        给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
+        示例:
+        给定 1->2->3->4, 你应该返回 2->1->4->3.
+
+```r
+# Definition for singly-linked list.
+class ListNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+        
+class Solution(object):
+    def swapPairs(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+
+        # If the list has no node or has only one node left.
+        if not head or not head.next:
+            return head
+
+        # Nodes to be swapped
+        first_node = head
+        second_node = head.next
+
+        # Swapping
+        first_node.next  = self.swapPairs(second_node.next)
+        second_node.next = first_node
+
+        # Now the head is the second node
+        return second_node
+```
+
+## 链表相交并找出交点
+
+给定两个（单向）链表，判定它们是否相交并返回交点。请注意相交的定义基于节点的引用，而不是基于节点的值。换句话说，如果一个链表的第k个节点与另一个链表的第j个节点是同一节点（引用完全相同），则这两个链表相交。
+
+示例 1：
+
+输入：listA = [4,1,8,4,5], listB = [5,0,1,8,4,5]
+
+输出：Reference of the node with value = 8
+
+输入解释：相交节点的值为 8 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。
+
+这个题也是剑指offer上面的，和公共节点的题类似
+
+解题思路：
+![](../figs/lianbiao2.png)
+
+```r
+
+# -*- coding:utf-8 -*-
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+class Solution:
+    def FindFirstCommonNode(self, pHead1, pHead2):
+        # write code here
+        if pHead1== None or pHead2 == None:
+            return None
+        p1 = pHead1
+        p2 = pHead2
+        while(p1!=p2):  
+            p1 = pHead2 if p1 is None else p1.next
+            # 由于若pHead2是pHead1的最后一个节点，，因此不能以p1.next==None作为判断条件。
+            # 否则就会死循环。
+            p2 = pHead1 if p2 is None else p2.next
+        return p1
+```
+
+
+
+
+
+
+
 
 ## 限制时间复杂度输出链表的中间值
 
