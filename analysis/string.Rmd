@@ -213,3 +213,18 @@ class Solution:
 
 ```
 
+## 连续字符串计数
+string = "aaabbcc"
+输出：“ a3b2c2”
+```r
+
+coded = ''
+while string:
+    i = 0
+    while i < len(string) and string[0] == string[i]:
+        i += 1
+    coded += string[0]+str(i)
+    string = string[i:]
+
+print(coded)
+```
