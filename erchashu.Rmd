@@ -358,23 +358,20 @@ class Solution:
 - 构建根节点的右子树（依据：中序遍历，根节点的右侧为右子树）
 题目中，有个提示：【假设树中没有重复的元素】。依据这个提示，我们在前序遍历中找到的根节点元素，可根据元素值在中序遍历中定位它的位置。[「&quot;大梦三千秋」](https://blog.csdn.net/weixin_45642918/article/details/106282599)
 
-根据观察到的规律直接用递归，画个图就有规律了
+根据观察到的规律直接用递归
 
 ```r
-class Solution(object):
-	def buildTree(self, preorder, inorder):
-		if not (preorder and inorder):
-			return None
-		# 根据前序数组的第一个元素，就可以确定根节点	
-		root = TreeNode(preorder[0])
-		# 用preorder[0]去中序数组中查找对应的元素
-		mid_idx = inorder.index(preorder[0])
-		# 递归的处理前序数组的左边部分和中序数组的左边部分
-		# 递归处理前序数组右边部分和中序数组右边部分
-		root.left = self.buildTree(preorder[1:mid_idx+1],inorder[:mid_idx])
-		root.right = self.buildTree(preorder[mid_idx+1:],inorder[mid_idx+1:])
-		return root
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        if not preorder:return None
 
+        x = preorder.pop(0) #前序第一个为root
+        root = TreeNode(x)
+        i = inorder.index(x) #中序遍历 root 的index
+
+        root.left = self.buildTree(preorder[:i], inorder[:i])
+        root.right = self.buildTree(preorder[i:], inorder[i+1:])
+        return root
 ```
 
 ## 对称二叉树
@@ -536,23 +533,35 @@ class Solution(object):
 ![](figs/pinghengtree.png)
 
 **一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值小于1。**
+（AVL）平衡二叉树是一种二叉排序树，其中每个结点的左子树和右子树的高度差至多等于1。它是一种高度平衡的二叉排序树。意思是说，要么它是一棵空树，要么它的左子树和右子树都是平衡二叉树，且左子树和右子树的深度之差的绝对值不超过1。
+
+平衡二叉树是一种二叉排序树。也就是二叉排序树包含了平衡二叉排序树，其次它要满足后面的约束条件，就是每个结点的左子树和右子树的高度差不超过1
+
+所以递归遍历左右子树，比较左右子树的深度
 
 ```r
-class Solution(object):
-    def isBalanced(self, root):
+# -*- coding:utf-8 -*-
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 
-        if root == None:
-            return True
-        elif abs(self.height(root.left)-self.height(root.right))>1: #高度的绝对值之差大于1，不平衡
+class Solution:
+    def IsBalanced_Solution(self, pRoot):
+        # write code here
+        if not pRoot: 
+            return 1
+        left = self.IsBalanced_Solution(pRoot.left)
+        right = self.IsBalanced_Solution(pRoot.right)
+        if not left:
             return False
+        if not right:
+            return False
+        if abs(left-right)<2:
+            return 1+max(left,right)
         else:
-            return self.isBalanced(root.left) and self.isBalanced(root.right)
-    
-    def height(self,root): #判断是否为平衡
-        if root == None:
-            return 0
-        else:
-            return max(self.height(root.left),self.height(root.right))+ 1
+            return False
 ```
 
 ## 翻转二叉树
