@@ -4,7 +4,7 @@
 
 - [二叉树](https://gaowenxin95.github.io/leetcode-cookbook/二叉树专题.html)
 
-- [动态规划](https://gaowenxin95.github.io/leetcode-cookbook/analysis/DP.html)
+- [动态规划](https://gaowenxin95.github.io/leetcode-cookbook/analysis/动态规划问题.html)
 
 - [链表](https://gaowenxin95.github.io/leetcode-cookbook/analysis/链表问题.html)
 
