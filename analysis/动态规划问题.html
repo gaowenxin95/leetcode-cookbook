@@ -393,26 +393,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>动态规划法</li>
 </ul>
+<p>学习weiwei思路，很快就理解了，这里写下我的总结</p>
+<p>动态规划：填dp表、当前ij状态、过去ij状态、如何联合得到输出、边界条件</p>
+<p>定义状态：题目让我们求什么，就把什么设置为状态
+题目求s中最长的回文子串，那就判断所有子串是否为回文子串，选出最长的
+因此：dp[i][j]表示s[i:j+1]是否为回文子串（这里+1是为了构造闭区间）</p>
+<p>状态转移方程：对空间进行分类讨论（当前ij状态、过去ij状态 如何联合得到输出）
+当前ij状态：头尾必须相等（s[i]==s[j]）
+过去ij状态：去掉头尾之后还是一个回文（dp[i+1][j-1] is True）
+边界条件：只要是找过去ij状态的时候，就会涉及边界条件（即超出边界情况处理）
+当i==j时一定是回文
+j-1-(i+1)&lt;=0,即j-i&lt;=2时，只要当s[i]==s[j]时就是回文，不用判断dp[i+1][j-1]
+dp[i][j] 为截取的子串</p>
+<p>初始状态：这里已经直接判断j-i&lt;=2的情况了，因此用不到初始状态，可以不设</p>
+<p>输出内容：每次发现新回文都比较一下长度，记录i与长度</p>
+<p>优化空间提速</p>
+<p><a href="https://leetcode-cn.com/problems/longest-palindromic-substring/solution/5-zui-chang-hui-wen-zi-chuan-dong-tai-gu-p7uk/">：_Breiman</a></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a></span>
-<span id="cb8-2"><a href="#cb8-2"></a>k =<span class="st"> </span><span class="kw">len</span>(s)        <span class="co"># 计算字符串的长度</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>matrix =<span class="st"> </span>[[<span class="dv">0</span> <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(k)] <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(k)]    <span class="co"># 初始化n*n的列表</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>logestSubStr =<span class="st"> &quot;&quot;</span>        <span class="co"># 存储最长回文子串</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>logestLen =<span class="st"> </span><span class="dv">0</span>            <span class="co"># 最长回文子串的长度</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">0</span>, k)<span class="op">:</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="st">    </span><span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">0</span>, j<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="st">        </span><span class="cf">if</span> j <span class="op">-</span><span class="st"> </span>i <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="st">            </span><span class="cf">if</span> s[i] <span class="op">==</span><span class="st"> </span>s[j]<span class="op">:</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="st">                </span>matrix[i][j] =<span class="st"> </span><span class="dv">1</span>            <span class="co"># 此时f(i,j)置为true</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a>                <span class="cf">if</span> logestLen <span class="op">&lt;</span><span class="st"> </span>j <span class="op">-</span><span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="st">   </span><span class="co"># 将s[i:j]的长度与当前的回文子串的最长长度相比 </span></span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="st">                    </span>logestSubStr =<span class="st"> </span>s[i<span class="op">:</span>j<span class="op">+</span><span class="dv">1</span>] <span class="co"># 取当前的最长回文子串</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a>                    logestLen =<span class="st"> </span>j <span class="op">-</span><span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>   <span class="co"># 当前最长回文子串的长度</span></span>
-<span id="cb8-15"><a href="#cb8-15"></a>        <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb8-16"><a href="#cb8-16"></a><span class="st">            </span><span class="cf">if</span> s[i] <span class="op">==</span><span class="st"> </span>s[j] and matrix[i<span class="op">+</span><span class="dv">1</span>][j<span class="dv">-1</span>]<span class="op">:</span><span class="st">    </span><span class="co"># 判断</span></span>
-<span id="cb8-17"><a href="#cb8-17"></a><span class="st">                </span>matrix[i][j] =<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb8-18"><a href="#cb8-18"></a>                <span class="cf">if</span> logestLen <span class="op">&lt;</span><span class="st"> </span>j <span class="op">-</span><span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span></span>
-<span id="cb8-19"><a href="#cb8-19"></a><span class="st">                    </span>logestSubStr =<span class="st"> </span>s[i<span class="op">:</span>j<span class="op">+</span><span class="dv">1</span>]</span>
-<span id="cb8-20"><a href="#cb8-20"></a>                    logestLen =<span class="st"> </span>j <span class="op">-</span><span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+<span id="cb8-2"><a href="#cb8-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="st">    </span>def <span class="kw">longestPalindrome</span>(self, s<span class="op">:</span><span class="st"> </span>str) -&gt;<span class="st"> </span>str<span class="op">:</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="st">        </span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="st">        </span>size =<span class="st"> </span><span class="kw">len</span>(s)</span>
+<span id="cb8-6"><a href="#cb8-6"></a>        <span class="co"># 特殊处理</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>        <span class="cf">if</span> size <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="st">            </span>return s</span>
+<span id="cb8-9"><a href="#cb8-9"></a>        <span class="co"># 创建动态规划dynamic programing表</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>        dp =<span class="st"> </span>[[False <span class="cf">for</span> _ <span class="cf">in</span> <span class="kw">range</span>(size)] <span class="cf">for</span> _ <span class="cf">in</span> <span class="kw">range</span>(size)]</span>
+<span id="cb8-11"><a href="#cb8-11"></a>        <span class="co"># 初始长度为1，这样万一不存在回文，就返回第一个值（初始条件设置的时候一定要考虑输出）</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>        max_len =<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>        start =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a>        <span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>,size)<span class="op">:</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="st">            </span><span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(j)<span class="op">:</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a><span class="st">                </span><span class="co"># 边界条件：</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a><span class="st">                </span><span class="co"># 只要头尾相等（s[i]==s[j]）就能返回True</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a><span class="st">                </span><span class="cf">if</span> j<span class="op">-</span>i<span class="op">&lt;=</span><span class="dv">2</span><span class="op">:</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a><span class="st">                    </span><span class="cf">if</span> s[i]<span class="op">==</span>s[j]<span class="op">:</span></span>
+<span id="cb8-20"><a href="#cb8-20"></a><span class="st">                        </span>dp[i][j] =<span class="st"> </span>True</span>
+<span id="cb8-21"><a href="#cb8-21"></a>                        cur_len =<span class="st"> </span>j<span class="op">-</span>i<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a>                <span class="co"># 状态转移方程 </span></span>
+<span id="cb8-23"><a href="#cb8-23"></a>                <span class="co"># 当前dp[i][j]状态：头尾相等（s[i]==s[j]）</span></span>
+<span id="cb8-24"><a href="#cb8-24"></a>                <span class="co"># 过去dp[i][j]状态：去掉头尾之后还是一个回文（dp[i+1][j-1] is True）</span></span>
+<span id="cb8-25"><a href="#cb8-25"></a>                <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb8-26"><a href="#cb8-26"></a><span class="st">                    </span><span class="cf">if</span> s[i]<span class="op">==</span>s[j] and dp[i<span class="op">+</span><span class="dv">1</span>][j<span class="dv">-1</span>]<span class="op">:</span></span>
+<span id="cb8-27"><a href="#cb8-27"></a><span class="st">                        </span>dp[i][j] =<span class="st"> </span>True</span>
+<span id="cb8-28"><a href="#cb8-28"></a>                        cur_len =<span class="st"> </span>j<span class="op">-</span>i<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb8-29"><a href="#cb8-29"></a>                <span class="co"># 出现回文更新输出</span></span>
+<span id="cb8-30"><a href="#cb8-30"></a>                <span class="cf">if</span> dp[i][j]<span class="op">:</span></span>
+<span id="cb8-31"><a href="#cb8-31"></a><span class="st">                    </span><span class="cf">if</span> cur_len <span class="op">&gt;</span><span class="st"> </span>max_len<span class="op">:</span></span>
+<span id="cb8-32"><a href="#cb8-32"></a><span class="st">                        </span>max_len =<span class="st"> </span>cur_len</span>
+<span id="cb8-33"><a href="#cb8-33"></a>                        start =<span class="st"> </span>i</span>
+<span id="cb8-34"><a href="#cb8-34"></a></span>
+<span id="cb8-35"><a href="#cb8-35"></a>        return s[start<span class="op">:</span>start<span class="op">+</span>max_len]</span>
+<span id="cb8-36"><a href="#cb8-36"></a></span></code></pre></div>
 <ul>
 <li>双指真法</li>
 </ul>
@@ -438,43 +470,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb9-20"><a href="#cb9-20"></a><span class="st">                    </span>ans =<span class="st"> </span>s[i<span class="op">:</span>j<span class="op">+</span><span class="dv">1</span>]</span>
 <span id="cb9-21"><a href="#cb9-21"></a>        return ans</span>
 <span id="cb9-22"><a href="#cb9-22"></a></span></code></pre></div>
-<p>解法二：还有一个自底向上,还没看懂</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="st">    </span>def <span class="kw">longestPalindrome</span>(self, s<span class="op">:</span><span class="st"> </span>str) -&gt;<span class="st"> </span>str<span class="op">:</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="st">        </span>length =<span class="st"> </span><span class="kw">len</span>(s)</span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#dp用来做动态规划存储的</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a>        dp =<span class="st"> </span>[[<span class="dv">0</span>] <span class="op">*</span><span class="st"> </span>length <span class="cf">for</span> _ <span class="cf">in</span> <span class="kw">range</span>(length)]</span>
-<span id="cb10-6"><a href="#cb10-6"></a>        left, right =<span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span> <span class="co">#长度为1时</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>, length)<span class="op">:</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#因为最大长度为length，所以j+i&lt;=length，第二遍不需要遍历到length</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="st">             </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(length<span class="op">-</span>i)<span class="op">:</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#如j+1 &gt;= j+i-1是用来初始化0或者1的回文的，s[j] == s[j+i]  是楼主说的条件1 s[i] = s[j]，dp[j+1][j+i-1] 是楼主说的条件2 s[i+1:j-1] 是一个回文串</span></span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="st">                </span><span class="cf">if</span> s[j] <span class="op">==</span><span class="st"> </span>s[j<span class="op">+</span>i] <span class="kw">and</span> (j<span class="op">+</span><span class="dv">1</span> <span class="op">&gt;=</span><span class="st"> </span>j<span class="op">+</span>i<span class="dv">-1</span> or dp[j<span class="op">+</span><span class="dv">1</span>][j<span class="op">+</span>i<span class="dv">-1</span>])<span class="op">:</span></span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="co"># 因为同时满足条件1和条件2，所以更长的字符也是回文</span></span>
-<span id="cb10-13"><a href="#cb10-13"></a><span class="st">                    </span>dp[j][j<span class="op">+</span>i] =<span class="st"> </span><span class="dv">1</span> </span>
-<span id="cb10-14"><a href="#cb10-14"></a><span class="co">#记录左区间和右区间，用来返回的时候截取回文</span></span>
-<span id="cb10-15"><a href="#cb10-15"></a>                    left, right =<span class="st"> </span>j, j<span class="op">+</span>i</span>
-<span id="cb10-16"><a href="#cb10-16"></a>        return s[left<span class="op">:</span><span class="st"> </span>right<span class="op">+</span><span class="dv">1</span>]</span></code></pre></div>
-<p>解法三：</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="st">    </span>def <span class="kw">longestPalindrome</span>(self, s<span class="op">:</span><span class="st"> </span>str) -&gt;<span class="st"> </span>str<span class="op">:</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="st">        </span>res =<span class="st"> &#39;&#39;</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a>        temp =<span class="st"> </span>{}</span>
-<span id="cb11-5"><a href="#cb11-5"></a>        <span class="cf">if</span> <span class="kw">len</span>(s) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="st">            </span>res =<span class="st"> </span>s[<span class="dv">0</span>]</span>
-<span id="cb11-7"><a href="#cb11-7"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(s))<span class="op">:</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="st">            </span><span class="cf">if</span> s[i] not <span class="cf">in</span> temp<span class="op">:</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="st">                </span>temp[s[i]] =<span class="st"> </span>[]</span>
-<span id="cb11-10"><a href="#cb11-10"></a>                temp[s[i]]<span class="kw">.append</span>(i)</span>
-<span id="cb11-11"><a href="#cb11-11"></a>            <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a><span class="st">                </span>temp[s[i]]<span class="kw">.append</span>(i)</span>
-<span id="cb11-13"><a href="#cb11-13"></a>                <span class="cf">for</span> j <span class="cf">in</span> temp[s[i]]<span class="op">:</span></span>
-<span id="cb11-14"><a href="#cb11-14"></a><span class="st">                    </span>string =<span class="st"> </span>s[j<span class="op">:</span>i<span class="op">+</span><span class="dv">1</span>]</span>
-<span id="cb11-15"><a href="#cb11-15"></a>                    reverse =<span class="st"> </span>string[<span class="op">::-</span><span class="dv">1</span>]</span>
-<span id="cb11-16"><a href="#cb11-16"></a>                    <span class="cf">if</span> string <span class="op">==</span><span class="st"> </span>reverse and <span class="kw">len</span>(string) <span class="op">&gt;</span><span class="st"> </span><span class="kw">len</span>(res)<span class="op">:</span></span>
-<span id="cb11-17"><a href="#cb11-17"></a><span class="st">                        </span>res =<span class="st"> </span>string</span>
-<span id="cb11-18"><a href="#cb11-18"></a>                        <span class="cf">break</span></span>
-<span id="cb11-19"><a href="#cb11-19"></a>        return res</span></code></pre></div>
 </div>
 <div id="回文子字符串数量" class="section level2" number="1.8">
 <h2><span class="header-section-number">1.8</span> 回文子字符串数量</h2>
@@ -498,20 +493,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>情况一：下标i 与 j相同，同一个字符例如a，当然是回文子串
 情况二：下标i 与 j相差为1，例如aa，也是回文子串
 情况三：下标：i 与 j相差大于1的时候，例如cabac，此时s[i]与s[j]已经相同了，我们看i到j区间是不是回文子串就看aba是不是回文就可以了，那么aba的区间就是 i+1 与 j-1区间，这个区间是不是回文就看dp[i + 1][j - 1]是否为true。</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="st">    </span>def <span class="kw">countSubstrings</span>(self, s<span class="op">:</span><span class="st"> </span>str) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="st">        </span>dp =<span class="st"> </span>[[False] <span class="op">*</span><span class="st"> </span><span class="kw">len</span>(s) <span class="cf">for</span> _ <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(s))]</span>
-<span id="cb12-4"><a href="#cb12-4"></a>        result =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(s)<span class="op">-</span><span class="dv">1</span>, <span class="dv">-1</span>, <span class="dv">-1</span>)<span class="op">:</span><span class="st"> </span><span class="co">#注意遍历顺序，这个真的额是重点</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(i, <span class="kw">len</span>(s))<span class="op">:</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="st">                </span><span class="cf">if</span> s[i] <span class="op">==</span><span class="st"> </span>s[j]<span class="op">:</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="st">                    </span><span class="cf">if</span> j <span class="op">-</span><span class="st"> </span>i <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="co">#情况一 和 情况二</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="st">                        </span>result <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a>                        dp[i][j] =<span class="st"> </span>True</span>
-<span id="cb12-11"><a href="#cb12-11"></a>                    elif dp[i<span class="op">+</span><span class="dv">1</span>][j<span class="dv">-1</span>]<span class="op">:</span><span class="st"> </span><span class="co">#情况三</span></span>
-<span id="cb12-12"><a href="#cb12-12"></a><span class="st">                        </span>result <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb12-13"><a href="#cb12-13"></a>                        dp[i][j] =<span class="st"> </span>True</span>
-<span id="cb12-14"><a href="#cb12-14"></a>        return result</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="st">    </span>def <span class="kw">countSubstrings</span>(self, s<span class="op">:</span><span class="st"> </span>str) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="st">        </span>dp =<span class="st"> </span>[[False] <span class="op">*</span><span class="st"> </span><span class="kw">len</span>(s) <span class="cf">for</span> _ <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(s))]</span>
+<span id="cb10-4"><a href="#cb10-4"></a>        result =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(s)<span class="op">-</span><span class="dv">1</span>, <span class="dv">-1</span>, <span class="dv">-1</span>)<span class="op">:</span><span class="st"> </span><span class="co">#注意遍历顺序，这个真的额是重点</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(i, <span class="kw">len</span>(s))<span class="op">:</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="st">                </span><span class="cf">if</span> s[i] <span class="op">==</span><span class="st"> </span>s[j]<span class="op">:</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="st">                    </span><span class="cf">if</span> j <span class="op">-</span><span class="st"> </span>i <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="co">#情况一 和 情况二</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="st">                        </span>result <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>                        dp[i][j] =<span class="st"> </span>True</span>
+<span id="cb10-11"><a href="#cb10-11"></a>                    elif dp[i<span class="op">+</span><span class="dv">1</span>][j<span class="dv">-1</span>]<span class="op">:</span><span class="st"> </span><span class="co">#情况三</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="st">                        </span>result <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a>                        dp[i][j] =<span class="st"> </span>True</span>
+<span id="cb10-14"><a href="#cb10-14"></a>        return result</span></code></pre></div>
 </div>
 <div id="最大乘积和" class="section level2" number="1.9">
 <h2><span class="header-section-number">1.9</span> 最大乘积和</h2>
@@ -545,19 +540,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 负正为负</p>
 <p>但是看成是动态规划问题挺不好想的，只能多看几遍了</p>
 <p>时间复杂度是O(n)</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="st">    </span>def <span class="kw">maxProduct</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="st">        </span><span class="cf">if</span> not nums<span class="op">:</span><span class="st"> </span>return </span>
-<span id="cb13-4"><a href="#cb13-4"></a>        res =<span class="st"> </span>nums[<span class="dv">0</span>]</span>
-<span id="cb13-5"><a href="#cb13-5"></a>        pre_max =<span class="st"> </span>nums[<span class="dv">0</span>]</span>
-<span id="cb13-6"><a href="#cb13-6"></a>        pre_min =<span class="st"> </span>nums[<span class="dv">0</span>]</span>
-<span id="cb13-7"><a href="#cb13-7"></a>        <span class="cf">for</span> num <span class="cf">in</span> nums[<span class="dv">1</span><span class="op">:</span>]<span class="op">:</span></span>
-<span id="cb13-8"><a href="#cb13-8"></a><span class="st">            </span>cur_max =<span class="st"> </span><span class="kw">max</span>(pre_max <span class="op">*</span><span class="st"> </span>num, pre_min <span class="op">*</span><span class="st"> </span>num, num)<span class="co">#pre_max:之前的最大值</span></span>
-<span id="cb13-9"><a href="#cb13-9"></a>            cur_min =<span class="st"> </span><span class="kw">min</span>(pre_max <span class="op">*</span><span class="st"> </span>num, pre_min <span class="op">*</span><span class="st"> </span>num, num)<span class="co">#pre_min:之前的最小值，num:当前值</span></span>
-<span id="cb13-10"><a href="#cb13-10"></a>            res =<span class="st"> </span><span class="kw">max</span>(res, cur_max)</span>
-<span id="cb13-11"><a href="#cb13-11"></a>            pre_max =<span class="st"> </span>cur_max</span>
-<span id="cb13-12"><a href="#cb13-12"></a>            pre_min =<span class="st"> </span>cur_min</span>
-<span id="cb13-13"><a href="#cb13-13"></a>        return res</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="st">    </span>def <span class="kw">maxProduct</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="st">        </span><span class="cf">if</span> not nums<span class="op">:</span><span class="st"> </span>return </span>
+<span id="cb11-4"><a href="#cb11-4"></a>        res =<span class="st"> </span>nums[<span class="dv">0</span>]</span>
+<span id="cb11-5"><a href="#cb11-5"></a>        pre_max =<span class="st"> </span>nums[<span class="dv">0</span>]</span>
+<span id="cb11-6"><a href="#cb11-6"></a>        pre_min =<span class="st"> </span>nums[<span class="dv">0</span>]</span>
+<span id="cb11-7"><a href="#cb11-7"></a>        <span class="cf">for</span> num <span class="cf">in</span> nums[<span class="dv">1</span><span class="op">:</span>]<span class="op">:</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="st">            </span>cur_max =<span class="st"> </span><span class="kw">max</span>(pre_max <span class="op">*</span><span class="st"> </span>num, pre_min <span class="op">*</span><span class="st"> </span>num, num)<span class="co">#pre_max:之前的最大值</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>            cur_min =<span class="st"> </span><span class="kw">min</span>(pre_max <span class="op">*</span><span class="st"> </span>num, pre_min <span class="op">*</span><span class="st"> </span>num, num)<span class="co">#pre_min:之前的最小值，num:当前值</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>            res =<span class="st"> </span><span class="kw">max</span>(res, cur_max)</span>
+<span id="cb11-11"><a href="#cb11-11"></a>            pre_max =<span class="st"> </span>cur_max</span>
+<span id="cb11-12"><a href="#cb11-12"></a>            pre_min =<span class="st"> </span>cur_min</span>
+<span id="cb11-13"><a href="#cb11-13"></a>        return res</span></code></pre></div>
 </div>
 <div id="比特位计数" class="section level2" number="1.10">
 <h2><span class="header-section-number">1.10</span> 比特位计数</h2>
@@ -578,12 +573,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 2 = 10 4 = 100 8 = 1000
 3 = 11 6 = 110 12 = 1100
 另外，0 的 1 个数为 0，于是就可以根据奇偶性开始遍历计算了。</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="st">    </span>def <span class="kw">countBits</span>(self, num<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>List[int]<span class="op">:</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="st">        </span>ret =<span class="st"> </span>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span>
-<span id="cb14-4"><a href="#cb14-4"></a>        <span class="cf">for</span> n <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">3</span>, num<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="st">            </span><span class="kw">ret.append</span>(ret[<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span><span class="dv">1</span>) <span class="cf">if</span> n <span class="op">&amp;</span><span class="st"> </span><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="cf">else</span> <span class="kw">ret.append</span>(ret[n<span class="op">/</span><span class="er">/</span><span class="dv">2</span>])</span>
-<span id="cb14-6"><a href="#cb14-6"></a>        return ret[<span class="dv">0</span><span class="op">:</span>num<span class="op">+</span><span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="st">    </span>def <span class="kw">countBits</span>(self, num<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>List[int]<span class="op">:</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="st">        </span>ret =<span class="st"> </span>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb12-4"><a href="#cb12-4"></a>        <span class="cf">for</span> n <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">3</span>, num<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="st">            </span><span class="kw">ret.append</span>(ret[<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span><span class="dv">1</span>) <span class="cf">if</span> n <span class="op">&amp;</span><span class="st"> </span><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="cf">else</span> <span class="kw">ret.append</span>(ret[n<span class="op">/</span><span class="er">/</span><span class="dv">2</span>])</span>
+<span id="cb12-6"><a href="#cb12-6"></a>        return ret[<span class="dv">0</span><span class="op">:</span>num<span class="op">+</span><span class="dv">1</span>]</span></code></pre></div>
 </div>
 <div id="买卖股票专题" class="section level2" number="1.11">
 <h2><span class="header-section-number">1.11</span> 买卖股票专题</h2>
@@ -602,34 +597,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 输出: 0
 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</p>
 <p><strong>分析：</strong>第一题，相对简单，只能有一次交易。刚看到第一反应可能是遍历两次，找出所有的利润，选个最大的，意料之中，复杂度O（n^2）肯定超时。<strong>在一次遍历中，可以记录最小值，同时记录对应的利润即可。</strong></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="st">    </span>def <span class="kw">maxProfit</span>(self, prices)<span class="op">:</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="st">        &quot;&quot;&quot;</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="st">        :type prices: List[int]</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="st">        :rtype: int</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a><span class="st">        &quot;&quot;&quot;</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a>        <span class="cf">if</span> <span class="kw">len</span>(prices)<span class="op">&lt;</span><span class="dv">2</span><span class="op">:</span></span>
-<span id="cb15-8"><a href="#cb15-8"></a><span class="st">            </span>return <span class="dv">0</span></span>
-<span id="cb15-9"><a href="#cb15-9"></a>        profit =<span class="st"> </span><span class="dv">0</span> <span class="co">#最初的利润是0</span></span>
-<span id="cb15-10"><a href="#cb15-10"></a>        minprice =<span class="st"> </span>prices[<span class="dv">0</span>]</span>
-<span id="cb15-11"><a href="#cb15-11"></a>        <span class="cf">for</span> i <span class="cf">in</span> prices<span class="op">:</span></span>
-<span id="cb15-12"><a href="#cb15-12"></a><span class="st">            </span>minprice =<span class="st"> </span><span class="kw">min</span>(i,minprice)</span>
-<span id="cb15-13"><a href="#cb15-13"></a>            profit =<span class="st"> </span><span class="kw">max</span>(i<span class="op">-</span>minprice,profit) <span class="co">#找到最小的价格和最大的价格做差，与当前利润进行比较</span></span>
-<span id="cb15-14"><a href="#cb15-14"></a>        return profit</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="st">    </span>def <span class="kw">maxProfit</span>(self, prices)<span class="op">:</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="st">        :type prices: List[int]</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="st">        :rtype: int</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>        <span class="cf">if</span> <span class="kw">len</span>(prices)<span class="op">&lt;</span><span class="dv">2</span><span class="op">:</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="st">            </span>return <span class="dv">0</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>        profit =<span class="st"> </span><span class="dv">0</span> <span class="co">#最初的利润是0</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>        minprice =<span class="st"> </span>prices[<span class="dv">0</span>]</span>
+<span id="cb13-11"><a href="#cb13-11"></a>        <span class="cf">for</span> i <span class="cf">in</span> prices<span class="op">:</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="st">            </span>minprice =<span class="st"> </span><span class="kw">min</span>(i,minprice)</span>
+<span id="cb13-13"><a href="#cb13-13"></a>            profit =<span class="st"> </span><span class="kw">max</span>(i<span class="op">-</span>minprice,profit) <span class="co">#找到最小的价格和最大的价格做差，与当前利润进行比较</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a>        return profit</span></code></pre></div>
 <p>动态规划实现</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="st">    </span>def <span class="kw">maxProfit</span>(self, prices<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a><span class="st">        </span>n =<span class="st"> </span><span class="kw">len</span>(prices)</span>
-<span id="cb16-4"><a href="#cb16-4"></a>        <span class="cf">if</span> not n or n <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span><span class="op">:</span></span>
-<span id="cb16-5"><a href="#cb16-5"></a><span class="st">            </span>return <span class="dv">0</span></span>
-<span id="cb16-6"><a href="#cb16-6"></a>        dp =<span class="st"> </span>[[<span class="dv">0</span>,<span class="dv">0</span>] <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(n)]</span>
-<span id="cb16-7"><a href="#cb16-7"></a>        dp[<span class="dv">0</span>][<span class="dv">0</span>] =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb16-8"><a href="#cb16-8"></a>        dp[<span class="dv">0</span>][<span class="dv">1</span>] =<span class="st"> </span><span class="op">-</span>prices[<span class="dv">0</span>]</span>
-<span id="cb16-9"><a href="#cb16-9"></a></span>
-<span id="cb16-10"><a href="#cb16-10"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>,n)<span class="op">:</span></span>
-<span id="cb16-11"><a href="#cb16-11"></a><span class="st">            </span>dp[i][<span class="dv">0</span>] =<span class="st"> </span><span class="kw">max</span>(dp[i<span class="dv">-1</span>][<span class="dv">0</span>],dp[i<span class="dv">-1</span>][<span class="dv">1</span>]<span class="op">+</span>prices[i])</span>
-<span id="cb16-12"><a href="#cb16-12"></a>            dp[i][<span class="dv">1</span>] =<span class="st"> </span><span class="kw">max</span>(dp[i<span class="dv">-1</span>][<span class="dv">1</span>],<span class="op">-</span>prices[i])</span>
-<span id="cb16-13"><a href="#cb16-13"></a>        return dp[n<span class="dv">-1</span>][<span class="dv">0</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="st">    </span>def <span class="kw">maxProfit</span>(self, prices<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="st">        </span>n =<span class="st"> </span><span class="kw">len</span>(prices)</span>
+<span id="cb14-4"><a href="#cb14-4"></a>        <span class="cf">if</span> not n or n <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span><span class="op">:</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="st">            </span>return <span class="dv">0</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>        dp =<span class="st"> </span>[[<span class="dv">0</span>,<span class="dv">0</span>] <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(n)]</span>
+<span id="cb14-7"><a href="#cb14-7"></a>        dp[<span class="dv">0</span>][<span class="dv">0</span>] =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>        dp[<span class="dv">0</span>][<span class="dv">1</span>] =<span class="st"> </span><span class="op">-</span>prices[<span class="dv">0</span>]</span>
+<span id="cb14-9"><a href="#cb14-9"></a></span>
+<span id="cb14-10"><a href="#cb14-10"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>,n)<span class="op">:</span></span>
+<span id="cb14-11"><a href="#cb14-11"></a><span class="st">            </span>dp[i][<span class="dv">0</span>] =<span class="st"> </span><span class="kw">max</span>(dp[i<span class="dv">-1</span>][<span class="dv">0</span>],dp[i<span class="dv">-1</span>][<span class="dv">1</span>]<span class="op">+</span>prices[i])</span>
+<span id="cb14-12"><a href="#cb14-12"></a>            dp[i][<span class="dv">1</span>] =<span class="st"> </span><span class="kw">max</span>(dp[i<span class="dv">-1</span>][<span class="dv">1</span>],<span class="op">-</span>prices[i])</span>
+<span id="cb14-13"><a href="#cb14-13"></a>        return dp[n<span class="dv">-1</span>][<span class="dv">0</span>]</span></code></pre></div>
 <p><strong>买卖股票的最佳时机 II</strong></p>
 <p>无限次交易</p>
 <p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
@@ -651,21 +646,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 输出: 0
 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</p>
 <p>分析：<strong>不限制交易次数，其实看起来比还要简单，可以直接一次遍历，把后一项大于前一项时，两者差值相加即可。</strong></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="st">    </span>def <span class="kw">maxProfit</span>(self, prices)<span class="op">:</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="st">        &quot;&quot;&quot;</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="st">        :type prices: List[int]</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="st">        :rtype: int</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="st">        &quot;&quot;&quot;</span></span>
-<span id="cb17-7"><a href="#cb17-7"></a>        <span class="cf">if</span> not prices<span class="op">:</span></span>
-<span id="cb17-8"><a href="#cb17-8"></a><span class="st">            </span>return <span class="dv">0</span></span>
-<span id="cb17-9"><a href="#cb17-9"></a>        temp =<span class="st"> </span>prices[<span class="dv">0</span>]</span>
-<span id="cb17-10"><a href="#cb17-10"></a>        profit =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb17-11"><a href="#cb17-11"></a>        <span class="cf">for</span> i <span class="cf">in</span> prices<span class="op">:</span></span>
-<span id="cb17-12"><a href="#cb17-12"></a><span class="st">            </span><span class="cf">if</span> i <span class="op">&gt;</span><span class="st"> </span>temp<span class="op">:</span></span>
-<span id="cb17-13"><a href="#cb17-13"></a><span class="st">                </span>profit =<span class="st"> </span>profit <span class="op">+</span><span class="st"> </span>i <span class="op">-</span><span class="st"> </span>temp</span>
-<span id="cb17-14"><a href="#cb17-14"></a>            temp =<span class="st"> </span>i</span>
-<span id="cb17-15"><a href="#cb17-15"></a>        return profit</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="st">    </span>def <span class="kw">maxProfit</span>(self, prices)<span class="op">:</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="st">        :type prices: List[int]</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="st">        :rtype: int</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>        <span class="cf">if</span> not prices<span class="op">:</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="st">            </span>return <span class="dv">0</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a>        temp =<span class="st"> </span>prices[<span class="dv">0</span>]</span>
+<span id="cb15-10"><a href="#cb15-10"></a>        profit =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a>        <span class="cf">for</span> i <span class="cf">in</span> prices<span class="op">:</span></span>
+<span id="cb15-12"><a href="#cb15-12"></a><span class="st">            </span><span class="cf">if</span> i <span class="op">&gt;</span><span class="st"> </span>temp<span class="op">:</span></span>
+<span id="cb15-13"><a href="#cb15-13"></a><span class="st">                </span>profit =<span class="st"> </span>profit <span class="op">+</span><span class="st"> </span>i <span class="op">-</span><span class="st"> </span>temp</span>
+<span id="cb15-14"><a href="#cb15-14"></a>            temp =<span class="st"> </span>i</span>
+<span id="cb15-15"><a href="#cb15-15"></a>        return profit</span></code></pre></div>
 <p><strong>买卖股票的最佳时机 III</strong></p>
 <p>给定一个数组，它的第 i 个元素是一支给定的股票在第 i 天的价格。</p>
 <p>设计一个算法来计算你所能获取的最大利润。你最多可以完成 两笔 交易。</p>
@@ -686,29 +681,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 输出: 0
 解释: 在这个情况下, 没有交易完成, 所以最大利润为 0。</p>
 <p><strong>分析</strong>：此题加深了难度，限制了建议次数不大于2。最开始的想法是二分，遍历所有值作为二分点，分成左右两部分，分别求利润再求和，最后取最大，时间复杂度O(N^2)，结果在倒数第二个评测时超时。优化一下，可以先从前往后遍历，按照 I中的思路，将遍历到的每个值对应的最大利润存在一个列表中，然后从后往前遍历，在求此时的最大利润时，同时加上数组中的对应值，再取最大，即为所求。</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="st">    </span>def <span class="kw">maxProfit</span>(self, prices)<span class="op">:</span></span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="st">        &quot;&quot;&quot;</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a><span class="st">        :type prices: List[int]</span></span>
-<span id="cb18-5"><a href="#cb18-5"></a><span class="st">        :rtype: int</span></span>
-<span id="cb18-6"><a href="#cb18-6"></a><span class="st">        &quot;&quot;&quot;</span></span>
-<span id="cb18-7"><a href="#cb18-7"></a>        <span class="cf">if</span> <span class="kw">len</span>(prices)<span class="op">&lt;</span><span class="dv">2</span><span class="op">:</span></span>
-<span id="cb18-8"><a href="#cb18-8"></a><span class="st">            </span>return <span class="dv">0</span></span>
-<span id="cb18-9"><a href="#cb18-9"></a>        minprice =<span class="st"> </span>prices[<span class="dv">0</span>]</span>
-<span id="cb18-10"><a href="#cb18-10"></a>        maxprice =<span class="st"> </span>prices[<span class="kw">len</span>(prices)<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb18-11"><a href="#cb18-11"></a>        profit1 =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb18-12"><a href="#cb18-12"></a>        profit2 =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb18-13"><a href="#cb18-13"></a>        profit =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb18-14"><a href="#cb18-14"></a>        a =<span class="st"> </span>[]</span>
-<span id="cb18-15"><a href="#cb18-15"></a>        <span class="cf">for</span> m <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">0</span>,<span class="kw">len</span>(prices))<span class="op">:</span></span>
-<span id="cb18-16"><a href="#cb18-16"></a><span class="st">            </span>profit1 =<span class="st"> </span><span class="kw">max</span>(profit1,prices[m]<span class="op">-</span>minprice)</span>
-<span id="cb18-17"><a href="#cb18-17"></a>            minprice =<span class="st"> </span><span class="kw">min</span>(prices[m],minprice)</span>
-<span id="cb18-18"><a href="#cb18-18"></a>            <span class="kw">a.append</span>(profit1)</span>
-<span id="cb18-19"><a href="#cb18-19"></a>        <span class="cf">for</span> n <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(prices)<span class="op">-</span><span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb18-20"><a href="#cb18-20"></a><span class="st">            </span>maxprice =<span class="st"> </span><span class="kw">max</span>(prices[n],maxprice)</span>
-<span id="cb18-21"><a href="#cb18-21"></a>            profit2 =<span class="st"> </span><span class="kw">max</span>(profit2,maxprice<span class="op">-</span>prices[n])</span>
-<span id="cb18-22"><a href="#cb18-22"></a>            profit =<span class="st"> </span><span class="kw">max</span>(profit,a[n]<span class="op">+</span>profit2)</span>
-<span id="cb18-23"><a href="#cb18-23"></a>        return profit</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="st">    </span>def <span class="kw">maxProfit</span>(self, prices)<span class="op">:</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="st">        :type prices: List[int]</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="st">        :rtype: int</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a>        <span class="cf">if</span> <span class="kw">len</span>(prices)<span class="op">&lt;</span><span class="dv">2</span><span class="op">:</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="st">            </span>return <span class="dv">0</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a>        minprice =<span class="st"> </span>prices[<span class="dv">0</span>]</span>
+<span id="cb16-10"><a href="#cb16-10"></a>        maxprice =<span class="st"> </span>prices[<span class="kw">len</span>(prices)<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb16-11"><a href="#cb16-11"></a>        profit1 =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb16-12"><a href="#cb16-12"></a>        profit2 =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb16-13"><a href="#cb16-13"></a>        profit =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb16-14"><a href="#cb16-14"></a>        a =<span class="st"> </span>[]</span>
+<span id="cb16-15"><a href="#cb16-15"></a>        <span class="cf">for</span> m <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">0</span>,<span class="kw">len</span>(prices))<span class="op">:</span></span>
+<span id="cb16-16"><a href="#cb16-16"></a><span class="st">            </span>profit1 =<span class="st"> </span><span class="kw">max</span>(profit1,prices[m]<span class="op">-</span>minprice)</span>
+<span id="cb16-17"><a href="#cb16-17"></a>            minprice =<span class="st"> </span><span class="kw">min</span>(prices[m],minprice)</span>
+<span id="cb16-18"><a href="#cb16-18"></a>            <span class="kw">a.append</span>(profit1)</span>
+<span id="cb16-19"><a href="#cb16-19"></a>        <span class="cf">for</span> n <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(prices)<span class="op">-</span><span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb16-20"><a href="#cb16-20"></a><span class="st">            </span>maxprice =<span class="st"> </span><span class="kw">max</span>(prices[n],maxprice)</span>
+<span id="cb16-21"><a href="#cb16-21"></a>            profit2 =<span class="st"> </span><span class="kw">max</span>(profit2,maxprice<span class="op">-</span>prices[n])</span>
+<span id="cb16-22"><a href="#cb16-22"></a>            profit =<span class="st"> </span><span class="kw">max</span>(profit,a[n]<span class="op">+</span>profit2)</span>
+<span id="cb16-23"><a href="#cb16-23"></a>        return profit</span></code></pre></div>
 </div>
 <div id="完全平方数" class="section level2" number="1.12">
 <h2><span class="header-section-number">1.12</span> 完全平方数</h2>
@@ -731,13 +726,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 返回dp[n]</p>
 <p>因此时间复杂度是：O(n)
 空间复杂度：O(n)</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="st">    </span>def <span class="kw">numSquares</span>(self, n<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="st">        </span>dp=[i <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(n<span class="op">+</span><span class="dv">1</span>)]</span>
-<span id="cb19-4"><a href="#cb19-4"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">2</span>,n<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>,<span class="kw">int</span>(i<span class="op">**</span>(<span class="fl">0.5</span>))<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb19-6"><a href="#cb19-6"></a><span class="st">                </span>dp[i]=<span class="kw">min</span>(dp[i],dp[i<span class="op">-</span>j<span class="op">*</span>j]<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb19-7"><a href="#cb19-7"></a>        return dp[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="st">    </span>def <span class="kw">numSquares</span>(self, n<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="st">        </span>dp=[i <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(n<span class="op">+</span><span class="dv">1</span>)]</span>
+<span id="cb17-4"><a href="#cb17-4"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">2</span>,n<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>,<span class="kw">int</span>(i<span class="op">**</span>(<span class="fl">0.5</span>))<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="st">                </span>dp[i]=<span class="kw">min</span>(dp[i],dp[i<span class="op">-</span>j<span class="op">*</span>j]<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb17-7"><a href="#cb17-7"></a>        return dp[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
 </div>
 <div id="找零钱问题" class="section level2" number="1.13">
 <h2><span class="header-section-number">1.13</span> 找零钱问题</h2>
@@ -750,15 +745,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 示例 2:</p>
 <p>输入: coins = [2], amount = 3
 输出: -1</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="st">    </span>def <span class="kw">coinChange</span>(self, coins<span class="op">:</span><span class="st"> </span>List[int], amount<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="st">        </span>dp=[<span class="kw">float</span>(<span class="st">&#39;inf&#39;</span>)]<span class="op">*</span>(amount<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb20-4"><a href="#cb20-4"></a>        dp[<span class="dv">0</span>]=<span class="dv">0</span></span>
-<span id="cb20-5"><a href="#cb20-5"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>,amount<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb20-6"><a href="#cb20-6"></a><span class="st">            </span><span class="cf">for</span> coin <span class="cf">in</span> coins<span class="op">:</span></span>
-<span id="cb20-7"><a href="#cb20-7"></a><span class="st">                </span><span class="cf">if</span> i<span class="op">&gt;=</span>coin<span class="op">:</span></span>
-<span id="cb20-8"><a href="#cb20-8"></a><span class="st">                    </span>dp[i]=<span class="kw">min</span>(dp[i],dp[i<span class="op">-</span>coin]<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb20-9"><a href="#cb20-9"></a>        return dp[<span class="op">-</span><span class="dv">1</span>] <span class="cf">if</span>(dp[<span class="op">-</span><span class="dv">1</span>]<span class="op">!=</span><span class="kw">float</span>(<span class="st">&#39;inf&#39;</span>)) <span class="cf">else</span> <span class="dv">-1</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="st">    </span>def <span class="kw">coinChange</span>(self, coins<span class="op">:</span><span class="st"> </span>List[int], amount<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="st">        </span>dp=[<span class="kw">float</span>(<span class="st">&#39;inf&#39;</span>)]<span class="op">*</span>(amount<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb18-4"><a href="#cb18-4"></a>        dp[<span class="dv">0</span>]=<span class="dv">0</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>,amount<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="st">            </span><span class="cf">for</span> coin <span class="cf">in</span> coins<span class="op">:</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="st">                </span><span class="cf">if</span> i<span class="op">&gt;=</span>coin<span class="op">:</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="st">                    </span>dp[i]=<span class="kw">min</span>(dp[i],dp[i<span class="op">-</span>coin]<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb18-9"><a href="#cb18-9"></a>        return dp[<span class="op">-</span><span class="dv">1</span>] <span class="cf">if</span>(dp[<span class="op">-</span><span class="dv">1</span>]<span class="op">!=</span><span class="kw">float</span>(<span class="st">&#39;inf&#39;</span>)) <span class="cf">else</span> <span class="dv">-1</span></span></code></pre></div>
 <p>目前的时间复杂度O(amount*len(coins))</p>
 <p>有么有更快的方法？
 有的，回溯算法+dbf</p>
@@ -797,16 +792,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>返回 <span class="math inline">\(d p[n]\)</span></li>
 </ol>
 <p>问题不难，就是没想到用动态规划</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="st">    </span>def <span class="kw">wordBreak</span>(self, s<span class="op">:</span><span class="st"> </span>str, wordDict<span class="op">:</span><span class="st"> </span>List[str]) -&gt;<span class="st"> </span>bool<span class="op">:</span><span class="st">       </span></span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="st">        </span>n=<span class="kw">len</span>(s)</span>
-<span id="cb21-4"><a href="#cb21-4"></a>        dp=[False]<span class="op">*</span>(n<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb21-5"><a href="#cb21-5"></a>        dp[<span class="dv">0</span>]=True</span>
-<span id="cb21-6"><a href="#cb21-6"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(n)<span class="op">:</span></span>
-<span id="cb21-7"><a href="#cb21-7"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(i<span class="op">+</span><span class="dv">1</span>,n<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb21-8"><a href="#cb21-8"></a><span class="st">                </span><span class="cf">if</span>(dp[i] <span class="kw">and</span> (s[i<span class="op">:</span>j] <span class="cf">in</span> wordDict))<span class="op">:</span></span>
-<span id="cb21-9"><a href="#cb21-9"></a><span class="st">                    </span>dp[j]=True</span>
-<span id="cb21-10"><a href="#cb21-10"></a>        return dp[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="st">    </span>def <span class="kw">wordBreak</span>(self, s<span class="op">:</span><span class="st"> </span>str, wordDict<span class="op">:</span><span class="st"> </span>List[str]) -&gt;<span class="st"> </span>bool<span class="op">:</span><span class="st">       </span></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="st">        </span>n=<span class="kw">len</span>(s)</span>
+<span id="cb19-4"><a href="#cb19-4"></a>        dp=[False]<span class="op">*</span>(n<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb19-5"><a href="#cb19-5"></a>        dp[<span class="dv">0</span>]=True</span>
+<span id="cb19-6"><a href="#cb19-6"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(n)<span class="op">:</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(i<span class="op">+</span><span class="dv">1</span>,n<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="st">                </span><span class="cf">if</span>(dp[i] <span class="kw">and</span> (s[i<span class="op">:</span>j] <span class="cf">in</span> wordDict))<span class="op">:</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a><span class="st">                    </span>dp[j]=True</span>
+<span id="cb19-10"><a href="#cb19-10"></a>        return dp[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
 </div>
 <div id="打家劫舍专题" class="section level2" number="1.15">
 <h2><span class="header-section-number">1.15</span> 打家劫舍专题</h2>
@@ -817,32 +812,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 输出: 4
 解释: 偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。
   偷窃到的最高金额 = 1 + 3 = 4 。</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="st">    </span>def <span class="kw">rob</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a><span class="st">       </span>prev =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb22-4"><a href="#cb22-4"></a>       curr =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb22-5"><a href="#cb22-5"></a>    </span>
-<span id="cb22-6"><a href="#cb22-6"></a>     <span class="co"># 每次循环，计算“偷到当前房子为止的最大金额”</span></span>
-<span id="cb22-7"><a href="#cb22-7"></a>       <span class="cf">for</span> i <span class="cf">in</span> nums<span class="op">:</span></span>
-<span id="cb22-8"><a href="#cb22-8"></a><span class="st">        </span><span class="co"># 循环开始时，curr 表示 dp[k-1]，prev 表示 dp[k-2]</span></span>
-<span id="cb22-9"><a href="#cb22-9"></a><span class="st">        </span><span class="co"># dp[k] = max{ dp[k-1], dp[k-2] + i }</span></span>
-<span id="cb22-10"><a href="#cb22-10"></a><span class="st">           </span>prev, curr =<span class="st"> </span>curr, <span class="kw">max</span>(curr, prev <span class="op">+</span><span class="st"> </span>i)</span>
-<span id="cb22-11"><a href="#cb22-11"></a>        <span class="co"># 循环结束时，curr 表示 dp[k]，prev 表示 dp[k-1]</span></span>
-<span id="cb22-12"><a href="#cb22-12"></a></span>
-<span id="cb22-13"><a href="#cb22-13"></a>       return curr</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="st">    </span>def <span class="kw">rob</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="st">       </span>prev =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>       curr =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>    </span>
+<span id="cb20-6"><a href="#cb20-6"></a>     <span class="co"># 每次循环，计算“偷到当前房子为止的最大金额”</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a>       <span class="cf">for</span> i <span class="cf">in</span> nums<span class="op">:</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a><span class="st">        </span><span class="co"># 循环开始时，curr 表示 dp[k-1]，prev 表示 dp[k-2]</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="st">        </span><span class="co"># dp[k] = max{ dp[k-1], dp[k-2] + i }</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a><span class="st">           </span>prev, curr =<span class="st"> </span>curr, <span class="kw">max</span>(curr, prev <span class="op">+</span><span class="st"> </span>i)</span>
+<span id="cb20-11"><a href="#cb20-11"></a>        <span class="co"># 循环结束时，curr 表示 dp[k]，prev 表示 dp[k-1]</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a></span>
+<span id="cb20-13"><a href="#cb20-13"></a>       return curr</span></code></pre></div>
 <p>或者另一种写法,即动态规划，</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a></span>
-<span id="cb23-2"><a href="#cb23-2"></a>class Solution<span class="op">:</span></span>
-<span id="cb23-3"><a href="#cb23-3"></a><span class="st">    </span>def <span class="kw">rob</span>(self, nums)<span class="op">:</span></span>
-<span id="cb23-4"><a href="#cb23-4"></a><span class="st">        </span><span class="cf">if</span> not nums<span class="op">:</span></span>
-<span id="cb23-5"><a href="#cb23-5"></a><span class="st">            </span>return <span class="dv">0</span></span>
-<span id="cb23-6"><a href="#cb23-6"></a>        <span class="cf">if</span> <span class="kw">len</span>(nums)<span class="op">==</span><span class="dv">1</span><span class="op">:</span></span>
-<span id="cb23-7"><a href="#cb23-7"></a><span class="st">            </span>return nums[<span class="dv">0</span>]</span>
-<span id="cb23-8"><a href="#cb23-8"></a>        sumList =<span class="st"> </span>[nums[<span class="dv">0</span>]]      <span class="co">#存放盗窃的每一个房间的最大收益</span></span>
-<span id="cb23-9"><a href="#cb23-9"></a>        <span class="kw">sumList.append</span>(<span class="kw">max</span>(nums[<span class="dv">0</span>], nums[<span class="dv">1</span>]))</span>
-<span id="cb23-10"><a href="#cb23-10"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">2</span>,<span class="kw">len</span>(nums))<span class="op">:</span></span>
-<span id="cb23-11"><a href="#cb23-11"></a><span class="st">            </span><span class="kw">sumList.append</span>(<span class="kw">max</span>(sumList[i<span class="dv">-2</span>]<span class="op">+</span>nums[i], sumList[i<span class="dv">-1</span>]))</span>
-<span id="cb23-12"><a href="#cb23-12"></a>        return sumList[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a></span>
+<span id="cb21-2"><a href="#cb21-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="st">    </span>def <span class="kw">rob</span>(self, nums)<span class="op">:</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="st">        </span><span class="cf">if</span> not nums<span class="op">:</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="st">            </span>return <span class="dv">0</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a>        <span class="cf">if</span> <span class="kw">len</span>(nums)<span class="op">==</span><span class="dv">1</span><span class="op">:</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="st">            </span>return nums[<span class="dv">0</span>]</span>
+<span id="cb21-8"><a href="#cb21-8"></a>        sumList =<span class="st"> </span>[nums[<span class="dv">0</span>]]      <span class="co">#存放盗窃的每一个房间的最大收益</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a>        <span class="kw">sumList.append</span>(<span class="kw">max</span>(nums[<span class="dv">0</span>], nums[<span class="dv">1</span>]))</span>
+<span id="cb21-10"><a href="#cb21-10"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">2</span>,<span class="kw">len</span>(nums))<span class="op">:</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a><span class="st">            </span><span class="kw">sumList.append</span>(<span class="kw">max</span>(sumList[i<span class="dv">-2</span>]<span class="op">+</span>nums[i], sumList[i<span class="dv">-1</span>]))</span>
+<span id="cb21-12"><a href="#cb21-12"></a>        return sumList[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
 <p>问题2：环形房屋</p>
 <p>你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都围成一圈，这意味着第一个房屋和最后一个房屋是紧挨着的。同时，相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。</p>
 <p>给定一个代表每个房屋存放金额的非负整数数组，计算你在不触动警报装置的情况下，能够偷窃到的最高金额。</p>
@@ -856,26 +851,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 解释: 你可以先偷窃 1 号房屋（金额 = 1），然后偷窃 3 号房屋（金额 = 3）。
   偷窃到的最高金额 = 1 + 3 = 4 。</p>
 <p>解题思路：可以开辟2个队列保存结果嘛,第一个队列保存从[0,n-1]的结果，第二个队列保存从[1,n]的结果</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="st">    </span>def <span class="kw">rob</span>(self, nums)<span class="op">:</span></span>
-<span id="cb24-3"><a href="#cb24-3"></a><span class="st">        </span><span class="cf">if</span> not nums<span class="op">:</span></span>
-<span id="cb24-4"><a href="#cb24-4"></a><span class="st">            </span>return <span class="dv">0</span></span>
-<span id="cb24-5"><a href="#cb24-5"></a>        n =<span class="st"> </span><span class="kw">len</span>(nums)</span>
-<span id="cb24-6"><a href="#cb24-6"></a>        <span class="cf">if</span> n<span class="op">&lt;=</span><span class="dv">2</span><span class="op">:</span></span>
-<span id="cb24-7"><a href="#cb24-7"></a><span class="st">            </span>return <span class="kw">max</span>(nums)</span>
-<span id="cb24-8"><a href="#cb24-8"></a>        dp1 =<span class="st"> </span>[<span class="dv">0</span> <span class="cf">for</span> _ <span class="cf">in</span> <span class="kw">range</span>(n)]</span>
-<span id="cb24-9"><a href="#cb24-9"></a>        dp2 =<span class="st"> </span>[<span class="dv">0</span> <span class="cf">for</span> _ <span class="cf">in</span> <span class="kw">range</span>(n)]</span>
-<span id="cb24-10"><a href="#cb24-10"></a>        <span class="co"># 初始化两个dp数组，dp1是计算的是[1,end],dp2计算的是[0,end-1],这个比较好想</span></span>
-<span id="cb24-11"><a href="#cb24-11"></a>        dp1[<span class="dv">0</span>] =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb24-12"><a href="#cb24-12"></a>        dp1[<span class="dv">1</span>] =<span class="st"> </span>nums[<span class="dv">1</span>]</span>
-<span id="cb24-13"><a href="#cb24-13"></a>        dp2[<span class="dv">0</span>] =<span class="st"> </span>nums[<span class="dv">0</span>]</span>
-<span id="cb24-14"><a href="#cb24-14"></a>        dp2[<span class="dv">1</span>] =<span class="st"> </span><span class="kw">max</span>(nums[<span class="dv">0</span>],nums[<span class="dv">1</span>])</span>
-<span id="cb24-15"><a href="#cb24-15"></a>        <span class="co"># 按照【打家劫舍 I】的转移方式执行两遍</span></span>
-<span id="cb24-16"><a href="#cb24-16"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">2</span>,n)<span class="op">:</span></span>
-<span id="cb24-17"><a href="#cb24-17"></a><span class="st">            </span>dp1[i] =<span class="st"> </span><span class="kw">max</span>(dp1[i<span class="dv">-1</span>],dp1[i<span class="dv">-2</span>]<span class="op">+</span>nums[i])</span>
-<span id="cb24-18"><a href="#cb24-18"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">2</span>,n<span class="dv">-1</span>)<span class="op">:</span></span>
-<span id="cb24-19"><a href="#cb24-19"></a><span class="st">            </span>dp2[i] =<span class="st"> </span><span class="kw">max</span>(dp2[i<span class="dv">-1</span>],dp2[i<span class="dv">-2</span>]<span class="op">+</span>nums[i])</span>
-<span id="cb24-20"><a href="#cb24-20"></a>        return <span class="kw">max</span>(dp1[<span class="op">-</span><span class="dv">1</span>],dp2[<span class="op">-</span><span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="st">    </span>def <span class="kw">rob</span>(self, nums)<span class="op">:</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="st">        </span><span class="cf">if</span> not nums<span class="op">:</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="st">            </span>return <span class="dv">0</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a>        n =<span class="st"> </span><span class="kw">len</span>(nums)</span>
+<span id="cb22-6"><a href="#cb22-6"></a>        <span class="cf">if</span> n<span class="op">&lt;=</span><span class="dv">2</span><span class="op">:</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="st">            </span>return <span class="kw">max</span>(nums)</span>
+<span id="cb22-8"><a href="#cb22-8"></a>        dp1 =<span class="st"> </span>[<span class="dv">0</span> <span class="cf">for</span> _ <span class="cf">in</span> <span class="kw">range</span>(n)]</span>
+<span id="cb22-9"><a href="#cb22-9"></a>        dp2 =<span class="st"> </span>[<span class="dv">0</span> <span class="cf">for</span> _ <span class="cf">in</span> <span class="kw">range</span>(n)]</span>
+<span id="cb22-10"><a href="#cb22-10"></a>        <span class="co"># 初始化两个dp数组，dp1是计算的是[1,end],dp2计算的是[0,end-1],这个比较好想</span></span>
+<span id="cb22-11"><a href="#cb22-11"></a>        dp1[<span class="dv">0</span>] =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb22-12"><a href="#cb22-12"></a>        dp1[<span class="dv">1</span>] =<span class="st"> </span>nums[<span class="dv">1</span>]</span>
+<span id="cb22-13"><a href="#cb22-13"></a>        dp2[<span class="dv">0</span>] =<span class="st"> </span>nums[<span class="dv">0</span>]</span>
+<span id="cb22-14"><a href="#cb22-14"></a>        dp2[<span class="dv">1</span>] =<span class="st"> </span><span class="kw">max</span>(nums[<span class="dv">0</span>],nums[<span class="dv">1</span>])</span>
+<span id="cb22-15"><a href="#cb22-15"></a>        <span class="co"># 按照【打家劫舍 I】的转移方式执行两遍</span></span>
+<span id="cb22-16"><a href="#cb22-16"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">2</span>,n)<span class="op">:</span></span>
+<span id="cb22-17"><a href="#cb22-17"></a><span class="st">            </span>dp1[i] =<span class="st"> </span><span class="kw">max</span>(dp1[i<span class="dv">-1</span>],dp1[i<span class="dv">-2</span>]<span class="op">+</span>nums[i])</span>
+<span id="cb22-18"><a href="#cb22-18"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">2</span>,n<span class="dv">-1</span>)<span class="op">:</span></span>
+<span id="cb22-19"><a href="#cb22-19"></a><span class="st">            </span>dp2[i] =<span class="st"> </span><span class="kw">max</span>(dp2[i<span class="dv">-1</span>],dp2[i<span class="dv">-2</span>]<span class="op">+</span>nums[i])</span>
+<span id="cb22-20"><a href="#cb22-20"></a>        return <span class="kw">max</span>(dp1[<span class="op">-</span><span class="dv">1</span>],dp2[<span class="op">-</span><span class="dv">2</span>])</span></code></pre></div>
 <p>进阶题</p>
 <p>在上次打劫完一条街道之后和一圈房屋后，小偷又发现了一个新的可行窃的地区。这个地区只有一个入口，我们称之为“根”。 除了“根”之外，每栋房子有且只有一个“父“房子与之相连。一番侦察之后，聪明的小偷意识到“这个地方的所有房屋的排列类似于一棵二叉树”。 如果两个直接相连的房子在同一天晚上被打劫，房屋将自动报警。</p>
 <p>计算在不触动警报的情况下，小偷一晚能够盗取的最高金额。</p>
@@ -898,28 +893,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>输出: 9
 解释: 小偷一晚能够盗取的最高金额 = 4 + 5 = 9.</p>
 <p>哎，这个小偷太能想了==</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a></span>
-<span id="cb26-2"><a href="#cb26-2"></a><span class="co"># Definition for a binary tree node.</span></span>
-<span id="cb26-3"><a href="#cb26-3"></a><span class="co"># class TreeNode:</span></span>
-<span id="cb26-4"><a href="#cb26-4"></a><span class="co">#     def __init__(self, x):</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a><span class="co">#         self.val = x</span></span>
-<span id="cb26-6"><a href="#cb26-6"></a><span class="co">#         self.left = None</span></span>
-<span id="cb26-7"><a href="#cb26-7"></a><span class="co">#         self.right = None</span></span>
-<span id="cb26-8"><a href="#cb26-8"></a></span>
-<span id="cb26-9"><a href="#cb26-9"></a>class Solution<span class="op">:</span></span>
-<span id="cb26-10"><a href="#cb26-10"></a><span class="st">    </span>def <span class="kw">rob</span>(self, root<span class="op">:</span><span class="st"> </span>TreeNode) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
-<span id="cb26-11"><a href="#cb26-11"></a><span class="st">        </span>return <span class="kw">self.helper</span>(root)[<span class="dv">1</span>]</span>
-<span id="cb26-12"><a href="#cb26-12"></a>    </span>
-<span id="cb26-13"><a href="#cb26-13"></a>    <span class="co"># helper函数返回一个节点为根的最大值 = [当前节点不参与计算的最大收益，当前节点的最大收益(参与/不参与)]</span></span>
-<span id="cb26-14"><a href="#cb26-14"></a>    def <span class="kw">helper</span>(self, root)<span class="op">:</span></span>
-<span id="cb26-15"><a href="#cb26-15"></a><span class="st">        </span><span class="cf">if</span> root is None<span class="op">:</span></span>
-<span id="cb26-16"><a href="#cb26-16"></a><span class="st">            </span>return [<span class="dv">0</span>, <span class="dv">0</span>]</span>
-<span id="cb26-17"><a href="#cb26-17"></a>        left_amount =<span class="st"> </span><span class="kw">self.helper</span>(root.left)</span>
-<span id="cb26-18"><a href="#cb26-18"></a>        right_amount =<span class="st"> </span><span class="kw">self.helper</span>(root.right)</span>
-<span id="cb26-19"><a href="#cb26-19"></a>        withoutRoot =<span class="st"> </span>left_amount[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>right_amount[<span class="dv">1</span>]</span>
-<span id="cb26-20"><a href="#cb26-20"></a>        withRoot =<span class="st"> </span>root.val <span class="op">+</span><span class="st"> </span>left_amount[<span class="dv">0</span>] <span class="op">+</span><span class="st"> </span>right_amount[<span class="dv">0</span>]</span>
-<span id="cb26-21"><a href="#cb26-21"></a>        return [withoutRoot, <span class="kw">max</span>(withRoot, withoutRoot)]</span>
-<span id="cb26-22"><a href="#cb26-22"></a></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="co"># Definition for a binary tree node.</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="co"># class TreeNode:</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="co">#     def __init__(self, x):</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="co">#         self.val = x</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a><span class="co">#         self.left = None</span></span>
+<span id="cb24-7"><a href="#cb24-7"></a><span class="co">#         self.right = None</span></span>
+<span id="cb24-8"><a href="#cb24-8"></a></span>
+<span id="cb24-9"><a href="#cb24-9"></a>class Solution<span class="op">:</span></span>
+<span id="cb24-10"><a href="#cb24-10"></a><span class="st">    </span>def <span class="kw">rob</span>(self, root<span class="op">:</span><span class="st"> </span>TreeNode) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb24-11"><a href="#cb24-11"></a><span class="st">        </span>return <span class="kw">self.helper</span>(root)[<span class="dv">1</span>]</span>
+<span id="cb24-12"><a href="#cb24-12"></a>    </span>
+<span id="cb24-13"><a href="#cb24-13"></a>    <span class="co"># helper函数返回一个节点为根的最大值 = [当前节点不参与计算的最大收益，当前节点的最大收益(参与/不参与)]</span></span>
+<span id="cb24-14"><a href="#cb24-14"></a>    def <span class="kw">helper</span>(self, root)<span class="op">:</span></span>
+<span id="cb24-15"><a href="#cb24-15"></a><span class="st">        </span><span class="cf">if</span> root is None<span class="op">:</span></span>
+<span id="cb24-16"><a href="#cb24-16"></a><span class="st">            </span>return [<span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb24-17"><a href="#cb24-17"></a>        left_amount =<span class="st"> </span><span class="kw">self.helper</span>(root.left)</span>
+<span id="cb24-18"><a href="#cb24-18"></a>        right_amount =<span class="st"> </span><span class="kw">self.helper</span>(root.right)</span>
+<span id="cb24-19"><a href="#cb24-19"></a>        withoutRoot =<span class="st"> </span>left_amount[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>right_amount[<span class="dv">1</span>]</span>
+<span id="cb24-20"><a href="#cb24-20"></a>        withRoot =<span class="st"> </span>root.val <span class="op">+</span><span class="st"> </span>left_amount[<span class="dv">0</span>] <span class="op">+</span><span class="st"> </span>right_amount[<span class="dv">0</span>]</span>
+<span id="cb24-21"><a href="#cb24-21"></a>        return [withoutRoot, <span class="kw">max</span>(withRoot, withoutRoot)]</span>
+<span id="cb24-22"><a href="#cb24-22"></a></span></code></pre></div>
 </div>
 <div id="编辑距离" class="section level2" number="1.16">
 <h2><span class="header-section-number">1.16</span> 编辑距离</h2>
@@ -948,21 +943,21 @@ exention -&gt; exection (将 ‘n’ 替换为 ‘c’)
 exection -&gt; execution (插入 ‘u’)</p>
 <p>解题思路：</p>
 <p><img src="../figs/dp_1.png" /></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a></span>
-<span id="cb27-2"><a href="#cb27-2"></a>class Solution<span class="op">:</span></span>
-<span id="cb27-3"><a href="#cb27-3"></a><span class="st">    </span>def <span class="kw">minDistance</span>(self, word1<span class="op">:</span><span class="st"> </span>str, word2<span class="op">:</span><span class="st"> </span>str) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
-<span id="cb27-4"><a href="#cb27-4"></a><span class="st">        </span>dp =<span class="st"> </span>[[<span class="dv">0</span>] <span class="op">*</span><span class="st"> </span>(<span class="kw">len</span>(word2)<span class="op">+</span><span class="dv">1</span>) <span class="cf">for</span> _ <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(word1)<span class="op">+</span><span class="dv">1</span>)] <span class="co"># 二维数据的定义</span></span>
-<span id="cb27-5"><a href="#cb27-5"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(word1)<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb27-6"><a href="#cb27-6"></a><span class="st">            </span>dp[i][<span class="dv">0</span>] =<span class="st"> </span>i <span class="co"># word2不存在的时候</span></span>
-<span id="cb27-7"><a href="#cb27-7"></a>        <span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(word2)<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb27-8"><a href="#cb27-8"></a><span class="st">            </span>dp[<span class="dv">0</span>][j] =<span class="st"> </span>j <span class="co">#word1不存在的时候</span></span>
-<span id="cb27-9"><a href="#cb27-9"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>, <span class="kw">len</span>(word1)<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb27-10"><a href="#cb27-10"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>, <span class="kw">len</span>(word2)<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb27-11"><a href="#cb27-11"></a><span class="st">                </span><span class="cf">if</span> word1[i<span class="dv">-1</span>] <span class="op">==</span><span class="st"> </span>word2[j<span class="dv">-1</span>]<span class="op">:</span><span class="st"> </span><span class="co">#两个词的长度一样的时候</span></span>
-<span id="cb27-12"><a href="#cb27-12"></a><span class="st">                    </span>dp[i][j] =<span class="st"> </span>dp[i<span class="dv">-1</span>][j<span class="dv">-1</span>]</span>
-<span id="cb27-13"><a href="#cb27-13"></a>                <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb27-14"><a href="#cb27-14"></a><span class="st">                    </span>dp[i][j] =<span class="st"> </span><span class="kw">min</span>(dp[i<span class="dv">-1</span>][j<span class="dv">-1</span>], dp[i<span class="dv">-1</span>][j], dp[i][j<span class="dv">-1</span>]) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb27-15"><a href="#cb27-15"></a>        return dp[<span class="op">-</span><span class="dv">1</span>][<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a></span>
+<span id="cb25-2"><a href="#cb25-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="st">    </span>def <span class="kw">minDistance</span>(self, word1<span class="op">:</span><span class="st"> </span>str, word2<span class="op">:</span><span class="st"> </span>str) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="st">        </span>dp =<span class="st"> </span>[[<span class="dv">0</span>] <span class="op">*</span><span class="st"> </span>(<span class="kw">len</span>(word2)<span class="op">+</span><span class="dv">1</span>) <span class="cf">for</span> _ <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(word1)<span class="op">+</span><span class="dv">1</span>)] <span class="co"># 二维数据的定义</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(word1)<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a><span class="st">            </span>dp[i][<span class="dv">0</span>] =<span class="st"> </span>i <span class="co"># word2不存在的时候</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a>        <span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(word2)<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb25-8"><a href="#cb25-8"></a><span class="st">            </span>dp[<span class="dv">0</span>][j] =<span class="st"> </span>j <span class="co">#word1不存在的时候</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>, <span class="kw">len</span>(word1)<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb25-10"><a href="#cb25-10"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>, <span class="kw">len</span>(word2)<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb25-11"><a href="#cb25-11"></a><span class="st">                </span><span class="cf">if</span> word1[i<span class="dv">-1</span>] <span class="op">==</span><span class="st"> </span>word2[j<span class="dv">-1</span>]<span class="op">:</span><span class="st"> </span><span class="co">#两个词的长度一样的时候</span></span>
+<span id="cb25-12"><a href="#cb25-12"></a><span class="st">                    </span>dp[i][j] =<span class="st"> </span>dp[i<span class="dv">-1</span>][j<span class="dv">-1</span>]</span>
+<span id="cb25-13"><a href="#cb25-13"></a>                <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb25-14"><a href="#cb25-14"></a><span class="st">                    </span>dp[i][j] =<span class="st"> </span><span class="kw">min</span>(dp[i<span class="dv">-1</span>][j<span class="dv">-1</span>], dp[i<span class="dv">-1</span>][j], dp[i][j<span class="dv">-1</span>]) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb25-15"><a href="#cb25-15"></a>        return dp[<span class="op">-</span><span class="dv">1</span>][<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
 </div>
 <div id="鸡蛋掉落" class="section level2" number="1.17">
 <h2><span class="header-section-number">1.17</span> 鸡蛋掉落</h2>
@@ -996,16 +991,16 @@ exection -&gt; execution (插入 ‘u’)</p>
 当第j次摔落，鸡蛋破了，我们最多只能确定 dp[i -1][j -1] 层
 状态方程 d[i][j] = dp[i-1][j -1] + (dp[i][j -1] + 1) 最后的1表示本层
 <a href="https://blog.csdn.net/weixin_42077402/article/details/96475104">「小布归来了」</a></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a><span class="st">    </span>def <span class="kw">superEggDrop</span>(self, K, N)<span class="op">:</span></span>
-<span id="cb28-3"><a href="#cb28-3"></a><span class="st">        </span><span class="co"># 构建二维数组dp</span></span>
-<span id="cb28-4"><a href="#cb28-4"></a><span class="st">        </span>dp =<span class="st"> </span>[[<span class="dv">0</span> <span class="cf">for</span> _ <span class="cf">in</span> <span class="kw">range</span>(N <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)] <span class="cf">for</span> _ <span class="cf">in</span> <span class="kw">range</span>(K <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)]</span>
-<span id="cb28-5"><a href="#cb28-5"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>, K <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb28-6"><a href="#cb28-6"></a><span class="st">            </span><span class="cf">for</span> step <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>, N <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb28-7"><a href="#cb28-7"></a><span class="st">                </span>dp[i][step] =<span class="st"> </span>dp[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>][step <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>(dp[i][step <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb28-8"><a href="#cb28-8"></a>                <span class="cf">if</span> dp[K][step] <span class="op">&gt;=</span><span class="st"> </span>N<span class="op">:</span></span>
-<span id="cb28-9"><a href="#cb28-9"></a><span class="st">                    </span>return step</span>
-<span id="cb28-10"><a href="#cb28-10"></a>        return <span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="st">    </span>def <span class="kw">superEggDrop</span>(self, K, N)<span class="op">:</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="st">        </span><span class="co"># 构建二维数组dp</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="st">        </span>dp =<span class="st"> </span>[[<span class="dv">0</span> <span class="cf">for</span> _ <span class="cf">in</span> <span class="kw">range</span>(N <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)] <span class="cf">for</span> _ <span class="cf">in</span> <span class="kw">range</span>(K <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)]</span>
+<span id="cb26-5"><a href="#cb26-5"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>, K <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="st">            </span><span class="cf">for</span> step <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>, N <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a><span class="st">                </span>dp[i][step] =<span class="st"> </span>dp[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>][step <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>(dp[i][step <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb26-8"><a href="#cb26-8"></a>                <span class="cf">if</span> dp[K][step] <span class="op">&gt;=</span><span class="st"> </span>N<span class="op">:</span></span>
+<span id="cb26-9"><a href="#cb26-9"></a><span class="st">                    </span>return step</span>
+<span id="cb26-10"><a href="#cb26-10"></a>        return <span class="dv">0</span></span></code></pre></div>
 </div>
 </div>
             </section>

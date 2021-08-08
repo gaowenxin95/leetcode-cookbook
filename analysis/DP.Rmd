@@ -311,27 +311,67 @@ class Solution:
 
 - 动态规划法
 
+学习weiwei思路，很快就理解了，这里写下我的总结
+
+动态规划：填dp表、当前ij状态、过去ij状态、如何联合得到输出、边界条件
+
+定义状态：题目让我们求什么，就把什么设置为状态
+题目求s中最长的回文子串，那就判断所有子串是否为回文子串，选出最长的
+因此：dp[i][j]表示s[i:j+1]是否为回文子串（这里+1是为了构造闭区间）
+
+状态转移方程：对空间进行分类讨论（当前ij状态、过去ij状态 如何联合得到输出）
+当前ij状态：头尾必须相等（s[i]==s[j]）
+过去ij状态：去掉头尾之后还是一个回文（dp[i+1][j-1] is True）
+边界条件：只要是找过去ij状态的时候，就会涉及边界条件（即超出边界情况处理）
+当i==j时一定是回文
+j-1-(i+1)<=0,即j-i<=2时，只要当s[i]==s[j]时就是回文，不用判断dp[i+1][j-1]
+dp[i][j] 为截取的子串
+
+初始状态：这里已经直接判断j-i<=2的情况了，因此用不到初始状态，可以不设
+
+输出内容：每次发现新回文都比较一下长度，记录i与长度
+
+优化空间提速
+
+[：_Breiman](https://leetcode-cn.com/problems/longest-palindromic-substring/solution/5-zui-chang-hui-wen-zi-chuan-dong-tai-gu-p7uk/)
+
 ```r
 
-k = len(s)        # 计算字符串的长度
-matrix = [[0 for i in range(k)] for i in range(k)]    # 初始化n*n的列表
-logestSubStr = ""        # 存储最长回文子串
-logestLen = 0            # 最长回文子串的长度
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        
+        size = len(s)
+        # 特殊处理
+        if size == 1:
+            return s
+        # 创建动态规划dynamic programing表
+        dp = [[False for _ in range(size)] for _ in range(size)]
+        # 初始长度为1，这样万一不存在回文，就返回第一个值（初始条件设置的时候一定要考虑输出）
+        max_len = 1
+        start = 0
+        for j in range(1,size):
+            for i in range(j):
+                # 边界条件：
+                # 只要头尾相等（s[i]==s[j]）就能返回True
+                if j-i<=2:
+                    if s[i]==s[j]:
+                        dp[i][j] = True
+                        cur_len = j-i+1
+                # 状态转移方程 
+                # 当前dp[i][j]状态：头尾相等（s[i]==s[j]）
+                # 过去dp[i][j]状态：去掉头尾之后还是一个回文（dp[i+1][j-1] is True）
+                else:
+                    if s[i]==s[j] and dp[i+1][j-1]:
+                        dp[i][j] = True
+                        cur_len = j-i+1
+                # 出现回文更新输出
+                if dp[i][j]:
+                    if cur_len > max_len:
+                        max_len = cur_len
+                        start = i
 
-for j in range(0, k):
-    for i in range(0, j+1):
-        if j - i <= 1:
-            if s[i] == s[j]:
-                matrix[i][j] = 1            # 此时f(i,j)置为true
-                if logestLen < j - i + 1:   # 将s[i:j]的长度与当前的回文子串的最长长度相比 
-                    logestSubStr = s[i:j+1] # 取当前的最长回文子串
-                    logestLen = j - i + 1   # 当前最长回文子串的长度
-        else:
-            if s[i] == s[j] and matrix[i+1][j-1]:    # 判断
-                matrix[i][j] = 1
-                if logestLen < j - i + 1:
-                    logestSubStr = s[i:j+1]
-                    logestLen = j - i + 1
+        return s[start:start+max_len]
+
 
 ```
 
@@ -362,53 +402,6 @@ class Solution:
 
 
 ```
-
-解法二：还有一个自底向上,还没看懂
-
-```r
-class Solution:
-    def longestPalindrome(self, s: str) -> str:
-        length = len(s)
-#dp用来做动态规划存储的
-        dp = [[0] * length for _ in range(length)]
-        left, right = 0, 0 #长度为1时
-        for i in range(1, length):
-#因为最大长度为length，所以j+i<=length，第二遍不需要遍历到length
-             for j in range(length-i):
-#如j+1 >= j+i-1是用来初始化0或者1的回文的，s[j] == s[j+i]  是楼主说的条件1 s[i] = s[j]，dp[j+1][j+i-1] 是楼主说的条件2 s[i+1:j-1] 是一个回文串
-                if s[j] == s[j+i] and (j+1 >= j+i-1 or dp[j+1][j+i-1]):
-# 因为同时满足条件1和条件2，所以更长的字符也是回文
-                    dp[j][j+i] = 1 
-#记录左区间和右区间，用来返回的时候截取回文
-                    left, right = j, j+i
-        return s[left: right+1]
-```
-
-解法三：
-
-```r
-class Solution:
-    def longestPalindrome(self, s: str) -> str:
-        res = ''
-        temp = {}
-        if len(s) > 0:
-            res = s[0]
-        for i in range(len(s)):
-            if s[i] not in temp:
-                temp[s[i]] = []
-                temp[s[i]].append(i)
-            else:
-                temp[s[i]].append(i)
-                for j in temp[s[i]]:
-                    string = s[j:i+1]
-                    reverse = string[::-1]
-                    if string == reverse and len(string) > len(res):
-                        res = string
-                        break
-        return res
-```
-
-
 
 
 
