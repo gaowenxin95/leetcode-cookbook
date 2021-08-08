@@ -45,22 +45,29 @@ bibliography: ../refs/add.bib
 
 **[判断性继承思想](https://www.luogu.com.cn/blog/pks-LOVING/junior-dynamic-programming-dong-tai-gui-hua-chu-bu-ge-zhong-zi-xu-lie)**
 
+动态规划五部曲
+
+- 确定dp数组（dp table）以及下标的含义
+- 确定递推公式
+- dp数组如何初始化
+- 确定遍历顺序
+- 举例推导dp数组
+
 
 还有一个很重要的，对比递归，大量重复子问题中间结果的保存，dp可以有效的节省存储空间。
 
-动态规划问题解题思路
-
-感觉这个图没啥用，但是总结了好多题
+动态规划问题树，总结的非常全面
 
 ![动态规划问题解题思路](../figs/动态规划问题解题思路.png)
 
 综上其实动态规划大可分为如下几类问题
 常见关键词：最少，最多，最大，最小，最长，最短。。。 
 
--最优方法（路径）数：青蛙跳台，背包问题，机器人移动路径问题，
+-最优方法（路径）数/目标和：青蛙跳台，背包问题，机器人移动路径问题，
 - 最优路径和：最大子序和，机器人最小路径和
 
 **解题思路才是最关键的，而不是刷了多少题**
+今天看到一个问题，其实大部分问题都可以归为完全背包问题或者0|1背包问题，寻找到子问题是关键。
 
 ## 最大子序和问题
 
@@ -115,6 +122,42 @@ class Solution:
 
 ```
 
+## 最长上升子序列
+
+给定一个无序的整数数组，找到其中最长上升子序列的长度。
+
+示例:
+
+输入: [10,9,2,5,3,7,101,18]
+输出: 4
+解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。
+说明:
+
+可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。
+你算法的时间复杂度应该为 O(n2) 。
+**进阶: 你能将算法的时间复杂度降低到 O(n log n) 吗?**
+
+
+解题思路：枚举
+
+给个时间复杂度为$O(n^2)$
+
+```r
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        if nums==[]: return 0
+        length=len(nums)
+        # 暂存子序列长度，1 个字符显然是长度为 1 的上升子序列
+        dp=[1 for _ in range(length)]
+        for i in range(length):
+            for j in range(0,i):
+                if nums[i]>nums[j]:
+                    # 状态：dp[i] 表示以 nums[i] 结尾的「上升子序列」的长度
+                    # 当nums[i]前面存在小于nums[i]的nums[j],
+                    # 则暂存在dp[j]+1就是当前nums[i]的最长增长子序列的长度
+                    dp[i]=max(dp[i],dp[j]+1)
+        return max(dp)
+```
 
 
 
@@ -249,10 +292,8 @@ class Solution:
 
 
 ```
+## 最长回文字符串
 
-## 最长回文子字符串
-
-这个之前参加**蚂蚁笔试**遇到了
 
 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
 
@@ -266,22 +307,35 @@ class Solution:
 输入: "cbbd"
 输出: "bb"
 
-解题思路
 
-对于一个子串而言，如果它是回文串，并且长度大于 22，那么将它首尾的两个字母去除之后，它仍然是个回文串。例如对于字符串 “ababa”，如果我们已经知道 “bab” 是回文串，那么“ababa” 一定是回文串，这是因为它的首尾两个字母都是 “a”。
 
-因此得到一个递推的关系是
+- 动态规划法
 
-用 P(i,j) 表示字符串 s 的第 i到 j个字母组成的串（下文表示成 s[i:j]）是否为回文串：
+```r
 
-$$P(i, j)=\left\{\begin{array}{ll}\text { true, } & \text { 如果子串 } S_{i} \ldots S_{j} \text { 是回文串 } \\ \text { false }, & \text { 其它情况 }\end{array}\right.$$
-因此得到的状态转移方程是
+k = len(s)        # 计算字符串的长度
+matrix = [[0 for i in range(k)] for i in range(k)]    # 初始化n*n的列表
+logestSubStr = ""        # 存储最长回文子串
+logestLen = 0            # 最长回文子串的长度
 
-$P(i, j)=P(i+1, j-1) \wedge\left(S_{i}==S_{j}\right)$
+for j in range(0, k):
+    for i in range(0, j+1):
+        if j - i <= 1:
+            if s[i] == s[j]:
+                matrix[i][j] = 1            # 此时f(i,j)置为true
+                if logestLen < j - i + 1:   # 将s[i:j]的长度与当前的回文子串的最长长度相比 
+                    logestSubStr = s[i:j+1] # 取当前的最长回文子串
+                    logestLen = j - i + 1   # 当前最长回文子串的长度
+        else:
+            if s[i] == s[j] and matrix[i+1][j-1]:    # 判断
+                matrix[i][j] = 1
+                if logestLen < j - i + 1:
+                    logestSubStr = s[i:j+1]
+                    logestLen = j - i + 1
 
-只有s[i+1:j-1]是回文串，并且s的第i和j个字母相同时s[i:j]才会是回文串。
+```
 
-理解思路，然后手敲，目前的时间复杂度是$O(n^2)$
+- 双指真法
 
 ```r
 class Solution:
@@ -309,7 +363,7 @@ class Solution:
 
 ```
 
-还有一个自底向上,还没看懂
+解法二：还有一个自底向上,还没看懂
 
 ```r
 class Solution:
@@ -330,7 +384,7 @@ class Solution:
         return s[left: right+1]
 ```
 
-解法三
+解法三：
 
 ```r
 class Solution:
@@ -352,6 +406,66 @@ class Solution:
                         res = string
                         break
         return res
+```
+
+
+
+
+
+## 回文子字符串数量
+
+题目链接：https://leetcode-cn.com/problems/palindromic-substrings/
+
+给定一个字符串，你的任务是计算这个字符串中有多少个回文子串。
+
+具有不同开始位置或结束位置的子串，即使是由相同的字符组成，也会被视作不同的子串。
+
+示例 1：
+
+输入："abc" 输出：3 解释：三个回文子串: "a", "b", "c"
+
+示例 2：
+
+输入："aaa" 输出：6 解释：6个回文子串: "a", "a", "a", "aa", "aa", "aaa"
+
+提示：
+
+输入的字符串长度不会超过 1000 。
+
+
+动规五部曲：
+
+1.确定dp数组（dp table）以及下标的含义
+布尔类型的dp[i][j]：表示区间范围[i,j] （注意是左闭右闭）的子串是否是回文子串，如果是dp[i][j]为true，否则为false。
+
+2.确定递推公式
+在确定递推公式时，就要分析如下几种情况。
+
+整体上是两种，就是s[i]与s[j]相等，s[i]与s[j]不相等这两种。
+
+当s[i]与s[j]不相等，那没啥好说的了，dp[i][j]一定是false。
+
+当s[i]与s[j]相等时，这就复杂一些了，有如下三种情况
+
+情况一：下标i 与 j相同，同一个字符例如a，当然是回文子串
+情况二：下标i 与 j相差为1，例如aa，也是回文子串
+情况三：下标：i 与 j相差大于1的时候，例如cabac，此时s[i]与s[j]已经相同了，我们看i到j区间是不是回文子串就看aba是不是回文就可以了，那么aba的区间就是 i+1 与 j-1区间，这个区间是不是回文就看dp[i + 1][j - 1]是否为true。
+
+```r
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+        dp = [[False] * len(s) for _ in range(len(s))]
+        result = 0
+        for i in range(len(s)-1, -1, -1): #注意遍历顺序，这个真的额是重点
+            for j in range(i, len(s)):
+                if s[i] == s[j]:
+                    if j - i <= 1: #情况一 和 情况二
+                        result += 1
+                        dp[i][j] = True
+                    elif dp[i+1][j-1]: #情况三
+                        result += 1
+                        dp[i][j] = True
+        return result
 ```
 
 ## 最大乘积和
@@ -672,42 +786,7 @@ class Solution:
 ```
 
 
-## 最长上升子序列
 
-给定一个无序的整数数组，找到其中最长上升子序列的长度。
-
-示例:
-
-输入: [10,9,2,5,3,7,101,18]
-输出: 4
-解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。
-说明:
-
-可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。
-你算法的时间复杂度应该为 O(n2) 。
-**进阶: 你能将算法的时间复杂度降低到 O(n log n) 吗?**
-
-
-解题思路：枚举
-
-给个时间复杂度为$O(n^2)$
-
-```r
-class Solution:
-    def lengthOfLIS(self, nums: List[int]) -> int:
-        n = len(nums)
-        if n == 0: return 0
-        dp = [1] * n
-        ans = 1
-        for i in range(n):
-            for j in range(i):
-                if nums[i] > nums[j]:
-                    dp[i] = max(dp[i], dp[j] + 1)
-                    ans = max(ans, dp[i])
-        return  ans
-
-
-```
 
 ## 找零钱问题
 
@@ -1010,3 +1089,63 @@ class Solution:
         return dp[-1][-1]
 
 ```
+
+## 鸡蛋掉落
+
+- 背包问题
+
+
+给你 k 枚相同的鸡蛋，并可以使用一栋从第 1 层到第 n 层共有 n 层楼的建筑。
+
+已知存在楼层 f ，满足 0 <= f <= n ，任何从 高于 f 的楼层落下的鸡蛋都会碎，从 f 楼层或比它低的楼层落下的鸡蛋都不会破。
+
+每次操作，你可以取一枚没有碎的鸡蛋并把它从任一楼层 x 扔下（满足 1 <= x <= n）。如果鸡蛋碎了，你就不能再次使用它。如果某枚鸡蛋扔下后没有摔碎，则可以在之后的操作中 重复使用 这枚鸡蛋。
+
+请你计算并返回要确定 f 确切的值 的 最小操作次数 是多少？
+
+ 
+示例 1：
+
+输入：k = 1, n = 2
+输出：2
+解释：
+鸡蛋从 1 楼掉落。如果它碎了，肯定能得出 f = 0 。 
+否则，鸡蛋从 2 楼掉落。如果它碎了，肯定能得出 f = 1 。 
+如果它没碎，那么肯定能得出 f = 2 。 
+因此，在最坏的情况下我们需要移动 2 次以确定 f 是多少。 
+示例 2：
+
+输入：k = 2, n = 6
+输出：3
+示例 3：
+
+输入：k = 3, n = 14
+输出：4
+
+
+思路：此题来源是Google的算法面试题，是一个典型的动态规划问题。
+
+首先，根据题设，我们可以知道的是，鸡蛋在某一楼层摔破和没有摔破，可以提供的信息是：没有摔破，表示需要往上层找，直到找到一个摔破的楼层；谁摔破了需要往下层找，知道找到一个没有摔破的楼层。
+
+令二维数组dp[K][Step], K表示鸡蛋个数，Step表示第几次摔落。dp[i][j] 表示 i 个鸡蛋经过 j 次摔落最多可以确定多少层楼。
+
+显然 j <= N。求d[i][j]：
+当第j次摔落，鸡蛋不破，我们可以继续往上确定 dp[i][j -1] 层
+当第j次摔落，鸡蛋破了，我们最多只能确定 dp[i -1][j -1] 层
+状态方程 d[i][j] = dp[i-1][j -1] + (dp[i][j -1] + 1) 最后的1表示本层
+[「小布归来了」](https://blog.csdn.net/weixin_42077402/article/details/96475104)
+
+
+```r
+class Solution(object):
+    def superEggDrop(self, K, N):
+        # 构建二维数组dp
+        dp = [[0 for _ in range(N + 1)] for _ in range(K + 1)]
+        for i in range(1, K + 1):
+            for step in range(1, N + 1):
+                dp[i][step] = dp[i - 1][step - 1] + (dp[i][step - 1] + 1)
+                if dp[K][step] >= N:
+                    return step
+        return 0
+
+``` 
