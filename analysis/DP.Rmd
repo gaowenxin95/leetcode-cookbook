@@ -1286,3 +1286,53 @@ class Solution:
         return taraget == dp[taraget]
 
 ```
+
+## 最长公共子序列
+
+问题描述：
+
+给定两个字符串A和B，返回两个字符串的最长公共子序列，并记录最长公共子序列的长度。例如，两个字符串A、B分别为“1A2C3D4B56”和“B1D23CA45B6A”，则“123456”和“12C4B6”都是最长公共子序列，且最长公共子序列长度为6。（最长公共子序列可能不唯一，但长度唯一。）
+
+
+![](../figs/gonggongzixulie.jpg)
+
+
+难点在于想明白两种情况。
+
+np.zero()好用的
+
+## 最长重复子数组
+
+给两个整数数组 A 和 B ，返回两个数组中公共的、长度最长的子数组的长度。
+
+示例 1:
+
+输入:
+A: [1,2,3,2,1]
+B: [3,2,1,4,7]
+输出: 3
+解释:
+长度最长的公共子数组是 [3, 2, 1]。
+
+
+1 <= len(A), len(B) <= 1000
+0 <= A[i], B[i] < 100
+
+
+```r
+# 动态规划
+class Solution:
+    def findLength(self, A: List[int], B: List[int]) -> int:
+        #dp[i][j] = longest(A[:i],B[:j])
+        res = -float('inf')
+        dp = [[0 for j in range(len(B)+1)] for i in range(len(A)+1)]
+        for i in range(1,len(A)+1):
+            for j in range(1,len(B)+1):
+                if A[i-1] == B[j-1]:
+                    dp[i][j] = dp[i-1][j-1] + 1
+                else:
+                    dp[i][j] = 0
+                res = max(dp[i][j],res)
+        return res
+
+```
