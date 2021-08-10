@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2021-08-08" />
+<meta name="date" content="2021-08-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -148,6 +148,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.15" data-path=""><a href="#打家劫舍专题"><i class="fa fa-check"></i><b>1.15</b> 打家劫舍专题</a></li>
 <li class="chapter" data-level="1.16" data-path=""><a href="#编辑距离"><i class="fa fa-check"></i><b>1.16</b> 编辑距离</a></li>
 <li class="chapter" data-level="1.17" data-path=""><a href="#鸡蛋掉落"><i class="fa fa-check"></i><b>1.17</b> 鸡蛋掉落</a></li>
+<li class="chapter" data-level="1.18" data-path=""><a href="#整数拆分"><i class="fa fa-check"></i><b>1.18</b> 整数拆分</a></li>
+<li class="chapter" data-level="1.19" data-path=""><a href="#分割等和子集"><i class="fa fa-check"></i><b>1.19</b> 分割等和子集</a></li>
 </ul></li>
 </ul>
 
@@ -169,7 +171,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">动态规划专题</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2021-08-08</em></p>
+<p class="date"><em>2021-08-10</em></p>
 </div>
 <div id="动态规划问题" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> 动态规划问题</h1>
@@ -212,9 +214,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p class="caption">动态规划问题解题思路</p>
 </div>
 <p>综上其实动态规划大可分为如下几类问题
-常见关键词：最少，最多，最大，最小，最长，最短。。。</p>
+常见关键词：求。。方法数，集合数，路径数，返回。。长度，最少，最多，最大，最小，最长，最短。。。</p>
 <p>-最优方法（路径）数/目标和：青蛙跳台，背包问题，机器人移动路径问题，
-- 最优路径和：最大子序和，机器人最小路径和</p>
+- 最优路径和：最大子序和，机器人最小路径和
+- 背包问题有一维和二维</p>
 <p><strong>解题思路才是最关键的，而不是刷了多少题</strong>
 今天看到一个问题，其实大部分问题都可以归为完全背包问题或者0|1背包问题，寻找到子问题是关键。</p>
 </div>
@@ -986,10 +989,12 @@ exection -&gt; execution (插入 ‘u’)</p>
 <p>思路：此题来源是Google的算法面试题，是一个典型的动态规划问题。</p>
 <p>首先，根据题设，我们可以知道的是，鸡蛋在某一楼层摔破和没有摔破，可以提供的信息是：没有摔破，表示需要往上层找，直到找到一个摔破的楼层；谁摔破了需要往下层找，知道找到一个没有摔破的楼层。</p>
 <p>令二维数组dp[K][Step], K表示鸡蛋个数，Step表示第几次摔落。dp[i][j] 表示 i 个鸡蛋经过 j 次摔落最多可以确定多少层楼。</p>
-<p>显然 j &lt;= N。求d[i][j]：
-当第j次摔落，鸡蛋不破，我们可以继续往上确定 dp[i][j -1] 层
-当第j次摔落，鸡蛋破了，我们最多只能确定 dp[i -1][j -1] 层
-状态方程 d[i][j] = dp[i-1][j -1] + (dp[i][j -1] + 1) 最后的1表示本层
+<p>显然 j &lt;= N。求d[i][j]：</p>
+<ul>
+<li><p>当第j次摔落，鸡蛋不破，我们可以继续往上确定 dp[i][j -1] 层</p></li>
+<li><p>当第j次摔落，鸡蛋破了，我们最多只能确定 dp[i -1][j -1] 层</p></li>
+</ul>
+<p>状态方程 d[i][j] = dp[i-1][j -1] + (dp[i][j -1] + 1) 最后的1表示本层
 <a href="https://blog.csdn.net/weixin_42077402/article/details/96475104">「小布归来了」</a></p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
 <span id="cb26-2"><a href="#cb26-2"></a><span class="st">    </span>def <span class="kw">superEggDrop</span>(self, K, N)<span class="op">:</span></span>
@@ -1001,6 +1006,97 @@ exection -&gt; execution (插入 ‘u’)</p>
 <span id="cb26-8"><a href="#cb26-8"></a>                <span class="cf">if</span> dp[K][step] <span class="op">&gt;=</span><span class="st"> </span>N<span class="op">:</span></span>
 <span id="cb26-9"><a href="#cb26-9"></a><span class="st">                    </span>return step</span>
 <span id="cb26-10"><a href="#cb26-10"></a>        return <span class="dv">0</span></span></code></pre></div>
+</div>
+<div id="整数拆分" class="section level2" number="1.18">
+<h2><span class="header-section-number">1.18</span> 整数拆分</h2>
+<p>给定一个正整数 n，将其拆分为至少两个正整数的和，并使这些整数的乘积最大化。返回你可以获得的最大乘积。</p>
+<p>示例 1: 输入: 2
+输出: 1
+解释: 2 = 1 + 1, 1 × 1 = 1。</p>
+<p>示例 2:
+输入: 10
+输出: 36
+解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36。
+说明: 你可以假设 n 不小于 2 且不大于 58。</p>
+<p>这道题拿到很容易去想拆成3个还是4个，以下题解参考代码随想录</p>
+<p>动规五部曲，分析如下：</p>
+<p>确定dp数组（dp table）以及下标的含义
+dp[i]：分拆数字i，可以得到的最大乘积为dp[i]。</p>
+<p>dp[i]的定义讲贯彻整个解题过程，下面哪一步想不懂了，就想想dp[i]究竟表示的是啥！</p>
+<p>确定递推公式
+可以想 dp[i]最大乘积是怎么得到的呢？</p>
+<p>其实可以从1遍历j，然后有两种渠道得到dp[i].</p>
+<p>一个是j * (i - j) 直接相乘。</p>
+<p>一个是j * dp[i - j]，相当于是拆分(i - j)，对这个拆分不理解的话，可以回想dp数组的定义。</p>
+<p>那有同学问了，j怎么就不拆分呢？</p>
+<p>j是从1开始遍历，拆分j的情况，在遍历j的过程中其实都计算过了。</p>
+<p>那么从1遍历j，比较(i - j) * j和dp[i - j] * j 取最大的。</p>
+<p>递推公式：dp[i] = max(dp[i], max((i - j) * j, dp[i - j] * j));</p>
+<p>dp的初始化
+不少同学应该疑惑，dp[0] dp[1]应该初始化多少呢？</p>
+<p>有的题解里会给出dp[0] = 1，dp[1] = 1的初始化，但解释比较牵强，主要还是因为这么初始化可以把题目过了。</p>
+<p>严格从dp[i]的定义来说，dp[0] dp[1] 就不应该初始化，也就是没有意义的数值。</p>
+<p>拆分0和拆分1的最大乘积是多少？</p>
+<p>这是无解的。</p>
+<p>这里我只初始化dp[2] = 1，从dp[i]的定义来说，拆分数字2，得到的最大乘积是1，这个没有任何异议！</p>
+<p>确定遍历顺序
+确定遍历顺序，先来看看递归公式：dp[i] = max(dp[i], max((i - j) * j, dp[i - j] * j));</p>
+<p>dp[i] 是依靠 dp[i - j]的状态，所以遍历i一定是从前向后遍历，先有dp[i - j]再有dp[i]。</p>
+<p>枚举j的时候，是从1开始的。i是从3开始，这样dp[i - j]就是dp[2]正好可以通过我们初始化的数值求出来。</p>
+<p>创建数组dp，长度是n+1，dp[i]表示数字i拆分后加数最大乘积；将前两个数字初始化为0，因为零和1都不能拆分。</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="st">    </span>def <span class="kw">integerBreak</span>(self, n<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="st">        </span>dp =<span class="st"> </span>[<span class="dv">0</span>] <span class="op">*</span><span class="st"> </span>(n <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb27-4"><a href="#cb27-4"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">2</span>, n <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb27-5"><a href="#cb27-5"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(i)<span class="op">:</span></span>
+<span id="cb27-6"><a href="#cb27-6"></a><span class="st">                </span>dp[i] =<span class="st"> </span><span class="kw">max</span>(dp[i], j <span class="op">*</span><span class="st"> </span>(i <span class="op">-</span><span class="st"> </span>j), j <span class="op">*</span><span class="st"> </span>dp[i <span class="op">-</span><span class="st"> </span>j])</span>
+<span id="cb27-7"><a href="#cb27-7"></a>        return dp[n]</span></code></pre></div>
+</div>
+<div id="分割等和子集" class="section level2" number="1.19">
+<h2><span class="header-section-number">1.19</span> 分割等和子集</h2>
+<p>题目描述：</p>
+<p>给定一个只包含正整数的非空数组。是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。</p>
+<p>注意:
+每个数组中的元素不会超过 100
+数组的大小不会超过 200</p>
+<p>示例 1:
+输入: [1, 5, 11, 5]
+输出: true
+解释: 数组可以分割成 [1, 5, 5] 和 [11].
+示例 2:
+输入: [1, 2, 3, 5]
+输出: false
+解释: 数组不能分割成两个元素和相等的子集.</p>
+<p>解题思路：
+参考代码随想录：
+如果要是能拆分成两个等和子集，说明和等于“数组之和除以2”</p>
+<p>target=sum(ALL)//2动规五部曲分析如下：</p>
+<p>确定dp数组以及下标的含义
+01背包中，dp[i] 表示：容量为j的背包，所背的物品价值可以最大为dp[j]。</p>
+<p>套到本题，dp[i]表示 背包总容量是i，最大可以凑成i的子集总和为dp[i]。</p>
+<p>确定递推公式
+01背包的递推公式为：dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);</p>
+<p>本题，相当于背包里放入数值，那么物品i的重量是nums[i]，其价值也是nums[i]。</p>
+<p>所以递推公式：dp[j] = max(dp[j], dp[j - nums[i]] + nums[i]);</p>
+<p>dp数组如何初始化
+在01背包，一维dp如何初始化，已经讲过，</p>
+<p>从dp[j]的定义来看，首先dp[0]一定是0。</p>
+<p>如果如果题目给的价值都是正整数那么非0下标都初始化为0就可以了，如果题目给的价值有负数，那么非0下标就要初始化为负无穷。</p>
+<p>这样才能让dp数组在递归公式的过程中取的最大的价值，而不是被初始值覆盖了。</p>
+<p>本题题目中 只包含正整数的非空数组，所以非0下标的元素初始化为0就可以了。</p>
+<p>举例推导dp数组
+dp[i]的数值一定是小于等于i的。</p>
+<p>如果dp[i] == i 说明，集合中的子集总和正好可以凑成总和i，理解这一点很重要。</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="st">    </span>def <span class="kw">canPartition</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>bool<span class="op">:</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="st">        </span>taraget =<span class="st"> </span><span class="kw">sum</span>(nums)</span>
+<span id="cb28-4"><a href="#cb28-4"></a>        <span class="cf">if</span> taraget % <span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="st"> </span>return False</span>
+<span id="cb28-5"><a href="#cb28-5"></a>        taraget <span class="op">/</span><span class="er">/=</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb28-6"><a href="#cb28-6"></a>        dp =<span class="st"> </span>[<span class="dv">0</span>] <span class="op">*</span><span class="st"> </span><span class="dv">10001</span></span>
+<span id="cb28-7"><a href="#cb28-7"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(nums))<span class="op">:</span></span>
+<span id="cb28-8"><a href="#cb28-8"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(taraget, nums[i] <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">-1</span>)<span class="op">:</span></span>
+<span id="cb28-9"><a href="#cb28-9"></a><span class="st">                </span>dp[j] =<span class="st"> </span><span class="kw">max</span>(dp[j], dp[j <span class="op">-</span><span class="st"> </span>nums[i]] <span class="op">+</span><span class="st"> </span>nums[i])</span>
+<span id="cb28-10"><a href="#cb28-10"></a>        return taraget <span class="op">==</span><span class="st"> </span>dp[taraget]</span></code></pre></div>
 </div>
 </div>
             </section>
