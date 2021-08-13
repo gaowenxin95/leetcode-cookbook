@@ -8,6 +8,10 @@
 
 - [链表](https://gaowenxin95.github.io/leetcode-cookbook/analysis/链表问题.html)
 
+- [回溯](https://gaowenxin95.github.io/leetcode-cookbook/analysis/回溯专题.html)
+
+- [贪心](https://gaowenxin95.github.io/leetcode-cookbook/analysis/贪心专题.html)
+
 - [排序](https://gaowenxin95.github.io/leetcode-cookbook/analysis/sort.Rmd)
 
 - [字符串](https://gaowenxin95.github.io/leetcode-cookbook/analysis/string.html)
@@ -23,11 +27,5 @@
 持续更新。。。
 
 老铁们加油哇~
-本来觉得刷这个就是为了应付校招考试，但其实真的有用哇~
-之前子俊说的时候我还不信，果然亲身实践~~
-
-目前在社招里面，字节跳动和阿里也是会考一些算法题，数据结构算法不能丢啊！！！
-
-==========================================================================================================================================================
-
+算法八股文必考~
 基础不牢，地动山摇~

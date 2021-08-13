@@ -1,1 +1,13 @@
-## 回溯算法
+---
+title : 回溯专题
+author: 高文欣
+date: "`r Sys.Date()`"
+output: bookdown::gitbook
+bibliography: ../refs/add.bib
+---
+
+# 回溯专题
+
+## 定义
+
+

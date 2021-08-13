@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>贪心专题</title>
+  <meta name="description" content="贪心专题" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="贪心专题" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="贪心专题" />
+  
+  
+  
+
+<meta name="author" content="高文欣" />
+
+
+<meta name="date" content="2021-08-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path=""><a href="#贪心专题"><i class="fa fa-check"></i><b>1</b> 贪心专题</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#定义"><i class="fa fa-check"></i><b>1.1</b> 定义</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#分饼干"><i class="fa fa-check"></i><b>1.2</b> 分饼干</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#摆动序列"><i class="fa fa-check"></i><b>1.3</b> 摆动序列</a></li>
+<li class="chapter" data-level="1.4" data-path=""><a href="#跳跃游戏一"><i class="fa fa-check"></i><b>1.4</b> 跳跃游戏一</a></li>
+<li class="chapter" data-level="1.5" data-path=""><a href="#跳跃游戏二"><i class="fa fa-check"></i><b>1.5</b> 跳跃游戏二</a></li>
+<li class="chapter" data-level="1.6" data-path=""><a href="#k次取反后最大化的数组和"><i class="fa fa-check"></i><b>1.6</b> K次取反后最大化的数组和</a></li>
+<li class="chapter" data-level="1.7" data-path=""><a href="#加油站"><i class="fa fa-check"></i><b>1.7</b> 加油站</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">贪心专题</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">贪心专题</h1>
+<p class="author"><em>高文欣</em></p>
+<p class="date"><em>2021-08-13</em></p>
+</div>
+<div id="贪心专题" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> 贪心专题</h1>
+<p>参考github：代码随想录</p>
+<div id="定义" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> 定义</h2>
+<p>通过局部最优解，找到全局最优解。并不会像dp问题有较强的规律。所以，先找到局部最优解。
+贪心算法常见的题差不多20道，实在不行背一下吧，背熟了就是自己的了。（狗头保命）</p>
+</div>
+<div id="分饼干" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> 分饼干</h2>
+<ul>
+<li>题目描述</li>
+</ul>
+<p>假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。</p>
+<p>对每个孩子 i，都有一个胃口值 g[i]，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j，都有一个尺寸 s[j] 。如果 s[j] &gt;= g[i]，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。</p>
+<p>示例 1: 输入: g = [1,2,3], s = [1,1] 输出: 1 解释: 你有三个孩子和两块小饼干，3个孩子的胃口值分别是：1,2,3。 虽然你有两块小饼干，由于他们的尺寸都是1，你只能让胃口值是1的孩子满足。 所以你应该输出1。</p>
+<p>示例 2: 输入: g = [1,2], s = [1,2,3] 输出: 2 解释: 你有两个孩子和三块小饼干，2个孩子的胃口值分别是1,2。 你拥有的饼干数量和尺寸都足以让所有孩子满足。 所以你应该输出2.</p>
+<p>提示：</p>
+<p>1 &lt;= g.length &lt;= 3 * 10^4
+0 &lt;= s.length &lt;= 3 * 10^4
+1 &lt;= g[i], s[j] &lt;= 2^31 - 1</p>
+<ul>
+<li>思路分析：</li>
+</ul>
+<p>因为要尽可能满足多的孩子，所以小饼干给小孩，大饼干给大孩子。
+随意，第i块饼干当g[i]&lt;=s[i]时候就可以分发。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="st">    </span>def <span class="kw">findContentChildren</span>(self, g<span class="op">:</span><span class="st"> </span>List[int], s<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="st">        </span><span class="kw">g.sort</span>()</span>
+<span id="cb1-4"><a href="#cb1-4"></a>        <span class="kw">s.sort</span>()</span>
+<span id="cb1-5"><a href="#cb1-5"></a>        res =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(s))<span class="op">:</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="st">            </span><span class="cf">if</span> res <span class="op">&lt;</span><span class="kw">len</span>(g) and s[i] <span class="op">&gt;=</span><span class="st"> </span>g[res]<span class="op">:</span><span class="st">  </span><span class="co">#小饼干先喂饱小胃口</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="st">                </span>res <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>        return res</span></code></pre></div>
+<p>提到分吃的，笔者果然更有感觉，吃货本质暴漏了</p>
+</div>
+<div id="摆动序列" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> 摆动序列</h2>
+<ul>
+<li>题目描述</li>
+</ul>
+<p>如果连续数字之间的差严格地在正数和负数之间交替，则数字序列称为摆动序列。第一个差（如果存在的话）可能是正数或负数。少于两个元素的序列也是摆动序列。</p>
+<p>例如， [1,7,4,9,2,5] 是一个摆动序列，因为差值 (6,-3,5,-7,3) 是正负交替出现的。相反, [1,4,7,2,5] 和 [1,7,4,5,5] 不是摆动序列，第一个序列是因为它的前两个差值都是正数，第二个序列是因为它的最后一个差值为零。</p>
+<p>给定一个整数序列，返回作为摆动序列的最长子序列的长度。 通过从原始序列中删除一些（也可以不删除）元素来获得子序列，剩下的元素保持其原始顺序。</p>
+<p>示例</p>
+<p>输入: [1,17,5,10,13,15,10,5,16,8]
+输出: 7
+解释: 这个序列包含几个长度为 7 摆动序列，其中一个可为[1,17,10,13,10,16,8]。</p>
+<ul>
+<li>解题思路</li>
+</ul>
+<p>s表示前后两数之差</p>
+<p>正负交替出现：说明前后s[i]*s[i+1]&lt;0,s[i-1]*s[i]&lt;0</p>
+<p>差值为0时不算摆动，记得跳过</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="st">    </span>def <span class="kw">wiggleMaxLength</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="st">        </span>preC,curC,res =<span class="st"> </span><span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>  <span class="co">#题目里nums长度大于等于1，当长度为1时，其实到不了for循环里去，所以不用考虑nums长度</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(nums) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="st">            </span>curC =<span class="st"> </span>nums[i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>nums[i]</span>
+<span id="cb2-6"><a href="#cb2-6"></a>            <span class="cf">if</span> curC <span class="op">*</span><span class="st"> </span>preC <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span> and curC <span class="op">!=</span><span class="dv">0</span><span class="op">:</span><span class="st">  </span><span class="co">#差值为0时，不算摆动</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="st">                </span>res <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>                preC =<span class="st"> </span>curC  <span class="co">#如果当前差值和上一个差值为一正一负时，才需要用当前差值替代上一个差值</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>        return res</span></code></pre></div>
+<p>看完综上两道题，贪心算法告诉我们的道理就是别想太多。
+另外一个常见的贪心就是计数问题，满足条件继续，不满足跳过继续</p>
+</div>
+<div id="跳跃游戏一" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> 跳跃游戏一</h2>
+<ul>
+<li>题目描述</li>
+</ul>
+<p>给定一个非负整数数组，你最初位于数组的第一个位置。</p>
+<p>数组中的每个元素代表你在该位置可以跳跃的最大长度。</p>
+<p>判断你是否能够到达最后一个位置。</p>
+<p>示例 1: 输入: [2,3,1,1,4] 输出: true 解释: 我们可以先跳 1 步，从位置 0 到达 位置 1, 然后再从位置 1 跳 3 步到达最后一个位置。</p>
+<p>示例 2: 输入: [3,2,1,0,4] 输出: false 解释: 无论怎样，你总会到达索引为 3 的位置。但该位置的最大跳跃长度是 0 ， 所以你永远不可能到达最后一个位置。</p>
+<ul>
+<li>解题思路</li>
+</ul>
+<p>①假设当前能到达的最远位置为变量 max_position，并初始化为 0；
+②遍历数组 nums 中的元素，如果当前能到达的最远位置大于等于当前位置 i，并且当前位置 i 加上其对应元素 jump 能够达到的位置超过 max_position，那么更新 max_position；
+③如果当前能到达的最远位置变量 max_position 到不了当前位置 i ，直接返回 False 提前结束循环；如果当前能到达的最远位置变量 max_position 大于等于数组最远位置，直接返回 True 提前结束循环。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>def <span class="kw">test</span>(lis)<span class="op">:</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="st">    </span>max_position =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>    length_lis =<span class="st"> </span><span class="kw">len</span>(lis)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(length_lis<span class="dv">-1</span>)<span class="op">:</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="st">        </span>max_cur =<span class="st"> </span>i <span class="op">+</span><span class="st"> </span>lis[i]</span>
+<span id="cb3-6"><a href="#cb3-6"></a>        <span class="cf">if</span> max_cur <span class="op">&gt;</span><span class="st"> </span>max_position<span class="op">:</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="st">            </span>max_position =<span class="st"> </span>max_cur</span>
+<span id="cb3-8"><a href="#cb3-8"></a>    <span class="cf">if</span> max_position <span class="op">&gt;=</span><span class="st"> </span>(length_lis<span class="dv">-1</span>)<span class="op">:</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="st">        </span>return True</span>
+<span id="cb3-10"><a href="#cb3-10"></a>    return False</span></code></pre></div>
+</div>
+<div id="跳跃游戏二" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> 跳跃游戏二</h2>
+<p>进阶版</p>
+<ul>
+<li>题目描述</li>
+</ul>
+<p>给定一个非负整数数组，你最初位于数组的第一个位置。
+数组中的每个元素代表你在该位置可以跳跃的最大长度。
+你的目标是使用最少的跳跃次数到达数组的最后一个位置。</p>
+<p>示例:
+输入: [2,3,1,1,4]
+输出: 2
+解释:
+跳到最后一个位置的最小跳跃数是 2。
+从下标为 0 跳到下标为 1 的位置，跳
+1 步，然后跳 3 步到达数组的最
+后一个位置。</p>
+<ul>
+<li>解题思路</li>
+</ul>
+<p>cur_max表示跳i步能达到最远的坐标
+next_max表示在cur_max之前的位置跳一步能达到下一个最远的位置
+例如：
+[4,2,7,3,1,1,3,1,1,1]
+第一步从4开始，最远跳到数字1的位置，cur_max = 0+4=4
+那跳两步最远的位置为max(1+2, 2+7, 3+3, 4+1)中的一个，其中的加法操作是i+nums[i]。不难得出next_max=2+7=9
+遍历数组，当i==cur_max，step+1，因为上一次跳跃最远能到cur_max，要超过cur_max必须再跳一次，而再跳一次能达到的最远距离为next_max</p>
+<blockquote>
+<p>所以真正解题的时候，要从覆盖范围出发，不管怎么跳，覆盖范围内一定是可以跳到的，以最小的步数增加覆盖范围，覆盖范围一旦覆盖了终点，得到的就是最小步数！</p>
+</blockquote>
+<p>这里需要统计两个覆盖范围，当前这一步的最大覆盖和下一步最大覆盖。
+如果移动下标达到了当前这一步的最大覆盖最远距离了，还没有到终点的话，那么就必须再走一步来增加覆盖范围，直到覆盖范围覆盖了终点。</p>
+<p>看一个图，图片来源：代码随想录</p>
+<p><img src="../figs/tx_1.png" /></p>
+<blockquote>
+<p>图中覆盖范围的意义在于，只要红色的区域，最多两步一定可以到！（不用管具体怎么跳，反正一定可以跳到）</p>
+</blockquote>
+<p>从图中可以看出来，就是移动下标达到了当前覆盖的最远距离下标时，步数就要加一，来增加覆盖距离。最后的步数就是最少步数。</p>
+<p>这里还是有个特殊情况需要考虑，当移动下标达到了当前覆盖的最远距离下标时</p>
+<p>如果当前覆盖最远距离下标不是是集合终点，步数就加一，还需要继续走。
+如果当前覆盖最远距离下标就是是集合终点，步数不用加一，因为不能再往后走了。</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="st">    </span>def <span class="kw">jump</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="st">        </span><span class="cf">if</span> <span class="kw">len</span>(nums) <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="st"> </span>return <span class="dv">0</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>        ans =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>        curDistance =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>        nextDistance =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(nums))<span class="op">:</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="st">            </span>nextDistance =<span class="st"> </span><span class="kw">max</span>(i <span class="op">+</span><span class="st"> </span>nums[i], nextDistance)</span>
+<span id="cb4-9"><a href="#cb4-9"></a>            <span class="cf">if</span> i <span class="op">==</span><span class="st"> </span>curDistance<span class="op">:</span><span class="st"> </span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="st">                </span><span class="cf">if</span> curDistance <span class="op">!=</span><span class="st"> </span><span class="kw">len</span>(nums) <span class="op">-</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="st">                    </span>ans <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>                    curDistance =<span class="st"> </span>nextDistance</span>
+<span id="cb4-13"><a href="#cb4-13"></a>                    <span class="cf">if</span> nextDistance <span class="op">&gt;=</span><span class="st"> </span><span class="kw">len</span>(nums) <span class="op">-</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="cf">break</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>        return ans</span>
+<span id="cb4-15"><a href="#cb4-15"></a></span></code></pre></div>
+<p>理解的不是很好，多看几遍</p>
+</div>
+<div id="k次取反后最大化的数组和" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> K次取反后最大化的数组和</h2>
+<ul>
+<li>题目描述</li>
+</ul>
+<p>给定一个整数数组 A，我们只能用以下方法修改该数组：我们选择某个索引 i 并将 A[i] 替换为 -A[i]，然后总共重复这个过程 K 次。（我们可以多次选择同一个索引 i。）</p>
+<p>以这种方式修改数组后，返回数组可能的最大和。</p>
+<p>示例 1： 输入：A = [4,2,3], K = 1 输出：5 解释：选择索引 (1,) ，然后 A 变为 [4,-2,3]。</p>
+<p>示例 2： 输入：A = [3,-1,0,2], K = 3 输出：6 解释：选择索引 (1, 2, 2) ，然后 A 变为 [3,1,0,2]。</p>
+<p>示例 3： 输入：A = [2,-3,-1,5,-4], K = 2 输出：13 解释：选择索引 (1, 4) ，然后 A 变为 [2,3,-1,5,4]。</p>
+<p>提示：</p>
+<p>1 &lt;= A.length &lt;= 10000
+1 &lt;= K &lt;= 10000
+-100 &lt;= A[i] &lt;= 100</p>
+<ul>
+<li>解题思路</li>
+</ul>
+<p>挑正数绝对值小的，负数绝对值大的先反转
+&gt;
+本题思路其实比较好想了，如何可以让数组和最大呢？
+贪心的思路，局部最优：让绝对值大的负数变为正数，当前数值达到最大，整体最优：整个数组和达到最大。</p>
+<p>局部最优可以推出全局最优。</p>
+<p>那么如果将负数都转变为正数了，K依然大于0，此时的问题是一个有序正整数序列，如何转变K次正负，让 数组和达到最大。</p>
+<p>那么又是一个贪心：局部最优：只找数值最小的正整数进行反转，当前数值可以达到最大（例如正整数数组{5, 3, 1}，反转1 得到-1 比 反转5得到的-5 大多了），全局最优：整个数组和达到最大。</p>
+<p>那么本题的解题步骤为：</p>
+<p>第一步：将数组按照绝对值大小从大到小排序，注意要按照绝对值的大小
+第二步：从前向后遍历，遇到负数将其变为正数，同时K–
+第三步：如果K还大于0，那么反复转变数值最小的元素，将K用完
+第四步：求和</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="st">    </span>def <span class="kw">largestSumAfterKNegations</span>(self, A<span class="op">:</span><span class="st"> </span>List[int], K<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="st">        </span>A =<span class="st"> </span><span class="kw">sorted</span>(A, <span class="dt">key=</span>abs, <span class="dt">reverse=</span>True) <span class="co"># 将A按绝对值从大到小排列</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(A))<span class="op">:</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="st">            </span><span class="cf">if</span> K <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> and A[i] <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="st">                </span>A[i] <span class="op">*</span><span class="er">=</span><span class="st"> </span><span class="dv">-1</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>                K <span class="op">-</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>        <span class="cf">if</span> K <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="st">            </span>A[<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span><span class="er">=</span><span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>)<span class="op">**</span>K <span class="co">#取A最后一个数只需要写-1</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>        return <span class="kw">sum</span>(A)</span></code></pre></div>
+<ul>
+<li>原来sorted还可以按照绝对值进行排序，函数封装的不错</li>
+</ul>
+</div>
+<div id="加油站" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> 加油站</h2>
+<ul>
+<li>题目描述：</li>
+</ul>
+<p>在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 gas[i] 升。</p>
+<p>你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其中的一个加油站出发，开始时油箱为空。</p>
+<p>如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 -1。</p>
+<p>说明:</p>
+<p>如果题目有解，该答案即为唯一答案。
+输入数组均为非空数组，且长度相同。
+输入数组中的元素均为非负数。
+示例1：</p>
+<p>输入：</p>
+<p>gas = [1,2,3,4,5]</p>
+<p>cost = [3,4,5,1,2]</p>
+<p>输出：3</p>
+<p>```r</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>
