@@ -138,6 +138,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.5" data-path=""><a href="#跳跃游戏二"><i class="fa fa-check"></i><b>1.5</b> 跳跃游戏二</a></li>
 <li class="chapter" data-level="1.6" data-path=""><a href="#k次取反后最大化的数组和"><i class="fa fa-check"></i><b>1.6</b> K次取反后最大化的数组和</a></li>
 <li class="chapter" data-level="1.7" data-path=""><a href="#加油站"><i class="fa fa-check"></i><b>1.7</b> 加油站</a></li>
+<li class="chapter" data-level="1.8" data-path=""><a href="#分发糖果"><i class="fa fa-check"></i><b>1.8</b> 分发糖果</a></li>
+<li class="chapter" data-level="1.9" data-path=""><a href="#柠檬水找零"><i class="fa fa-check"></i><b>1.9</b> 柠檬水找零</a></li>
 </ul></li>
 </ul>
 
@@ -373,7 +375,123 @@ next_max表示在cur_max之前的位置跳一步能达到下一个最远的位�
 <p>gas = [1,2,3,4,5]</p>
 <p>cost = [3,4,5,1,2]</p>
 <p>输出：3</p>
-<p>```r</p>
+<ul>
+<li>解题思路</li>
+</ul>
+<p>如果总油量减去总消耗大于等于零那么一定可以跑完一圈，说明各个站点的加油站 剩油量rest[i]相加一定是大于等于零的。</p>
+<p>每个加油站的剩余量rest[i]为gas[i] - cost[i]。</p>
+<p>i从0开始累加rest[i]，和记为curSum，一旦curSum小于零，说明[0,i]区间都不能作为起始位置，起始位置从i+1算起，再从0计算curSum。</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="st">    </span>def <span class="kw">canCompleteCircuit</span>(self, gas<span class="op">:</span><span class="st"> </span>List[int], cost<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="st">        </span>start =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>        curSum =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>        totalSum =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(gas))<span class="op">:</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="st">            </span>curSum <span class="op">+</span><span class="er">=</span><span class="st"> </span>gas[i] <span class="op">-</span><span class="st"> </span>cost[i] <span class="co"># 剩余油量</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>            totalSum <span class="op">+</span><span class="er">=</span><span class="st"> </span>gas[i] <span class="op">-</span><span class="st"> </span>cost[i]</span>
+<span id="cb6-9"><a href="#cb6-9"></a>            <span class="cf">if</span> curSum <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="st">                </span>curSum =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>                start =<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="co"># 重新开始计数 </span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>        <span class="cf">if</span> totalSum <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="st"> </span>return <span class="dv">-1</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>        return start</span></code></pre></div>
+</div>
+<div id="分发糖果" class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> 分发糖果</h2>
+<ul>
+<li>题目描述</li>
+</ul>
+<p>老师想给孩子们分发糖果，有 N 个孩子站成了一条直线，老师会根据每个孩子的表现，预先给他们评分。</p>
+<p>你需要按照以下要求，帮助老师给这些孩子分发糖果：</p>
+<p>每个孩子至少分配到 1 个糖果。
+相邻的孩子中，评分高的孩子必须获得更多的糖果。
+那么这样下来，老师至少需要准备多少颗糖果呢？</p>
+<p>示例 1: 输入: [1,0,2] 输出: 5 解释: 你可以分别给这三个孩子分发 2、1、2 颗糖果。</p>
+<p>示例 2: 输入: [1,2,2] 输出: 4 解释: 你可以分别给这三个孩子分发 1、2、1 颗糖果。 第三个孩子只得到 1 颗糖果，这已满足上述两个条件。</p>
+<ul>
+<li>解题思路</li>
+</ul>
+<p>这道题目一定是要确定一边之后，再确定另一边，例如比较每一个孩子的左边，然后再比较右边，如果两边一起考虑一定会顾此失彼。</p>
+<p>先确定右边评分大于左边的情况（也就是从前向后遍历）</p>
+<p>此时局部最优：只要右得比左边孩子更多的糖果</p>
+<p>局部最优可以推出全局最优。</p>
+<p>如果ratings[i] &gt; ratings[i - 1] 那么[i]的糖 一定要比[i - 1]的糖多一个，所以贪心：candyVec[i] = candyVec[i - 1] + 1</p>
+<p>再确定左孩子大于右孩子的情况（从后向前遍历）</p>
+<p>遍历顺序这里有同学可能会有疑问，为什么不能从前向后遍历呢？</p>
+<p>因为如果从前向后遍历，根据 ratings[i + 1] 来确定 ratings[i] 对应的糖果，那么每次都不能利用上前一次的比较结果了。</p>
+<p>所以确定左孩子大于右孩子的情况一定要从后向前遍历！</p>
+<p>如果 ratings[i] &gt; ratings[i + 1]，此时candyVec[i]（第i个小孩的糖果数量）就有两个选择了，一个是candyVec[i + 1] + 1（从右边这个加1得到的糖果数量），一个是candyVec[i]（之前比较右孩子大于左孩子得到的糖果数量）。</p>
+<p>那么又要贪心了，局部最优：取candyVec[i + 1] + 1 和 candyVec[i] 最大的糖果数量，保证第i个小孩的糖果数量即大于左边的也大于右边的。全局最优：相邻的孩子中，评分高的孩子获得更多的糖果。</p>
+<p>局部最优可以推出全局最优。</p>
+<p>所以就取candyVec[i + 1] + 1 和 candyVec[i] 最大的糖果数量，candyVec[i]只有取最大的才能既保持对左边candyVec[i - 1]的糖果多，也比右边candyVec[i + 1]的糖果多。</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="st">    </span>def <span class="kw">candy</span>(self, ratings<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="st">        </span>candyVec =<span class="st"> </span>[<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span><span class="kw">len</span>(ratings)</span>
+<span id="cb7-4"><a href="#cb7-4"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>, <span class="kw">len</span>(ratings))<span class="op">:</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="st">            </span><span class="cf">if</span> ratings[i] <span class="op">&gt;</span><span class="st"> </span>ratings[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>]<span class="op">:</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="st">                </span>candyVec[i] =<span class="st"> </span>candyVec[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>        <span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(ratings) <span class="op">-</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">-1</span>, <span class="dv">-1</span>)<span class="op">:</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="st">            </span><span class="cf">if</span> ratings[j] <span class="op">&gt;</span><span class="st"> </span>ratings[j <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]<span class="op">:</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="st">                </span>candyVec[j] =<span class="st"> </span><span class="kw">max</span>(candyVec[j], candyVec[j <span class="op">+</span><span class="st"> </span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb7-10"><a href="#cb7-10"></a>        return <span class="kw">sum</span>(candyVec)</span></code></pre></div>
+<p>题本身不是难题，就是看看能否考虑清楚所有的可能性，没感觉有贪心的思想</p>
+</div>
+<div id="柠檬水找零" class="section level2" number="1.9">
+<h2><span class="header-section-number">1.9</span> 柠檬水找零</h2>
+<ul>
+<li>题目描述
+在柠檬水摊上，每一杯柠檬水的售价为 5 美元。</li>
+</ul>
+<p>顾客排队购买你的产品，（按账单 bills 支付的顺序）一次购买一杯。</p>
+<p>每位顾客只买一杯柠檬水，然后向你付 5 美元、10 美元或 20 美元。你必须给每个顾客正确找零，也就是说净交易是每位顾客向你支付 5 美元。</p>
+<p>注意，一开始你手头没有任何零钱。</p>
+<p>如果你能给每位顾客正确找零，返回 true ，否则返回 false 。</p>
+<p>示例 1： 输入：[5,5,5,10,20] 输出：true 解释： 前 3 位顾客那里，我们按顺序收取 3 张 5 美元的钞票。 第 4 位顾客那里，我们收取一张 10 美元的钞票，并返还 5 美元。 第 5 位顾客那里，我们找还一张 10 美元的钞票和一张 5 美元的钞票。 由于所有客户都得到了正确的找零，所以我们输出 true。</p>
+<p>示例 2： 输入：[5,5,10] 输出：true</p>
+<p>示例 3： 输入：[10,10] 输出：false</p>
+<p>示例 4： 输入：[5,5,10,10,20] 输出：false 解释： 前 2 位顾客那里，我们按顺序收取 2 张 5 美元的钞票。 对于接下来的 2 位顾客，我们收取一张 10 美元的钞票，然后返还 5 美元。 对于最后一位顾客，我们无法退回 15 美元，因为我们现在只有两张 10 美元的钞票。 由于不是每位顾客都得到了正确的找零，所以答案是 false。</p>
+<p>提示：</p>
+<p>0 &lt;= bills.length &lt;= 10000
+bills[i] 不是 5 就是 10 或是 20</p>
+<ul>
+<li>解题思路</li>
+</ul>
+<p>这是前几天的leetcode每日一题，感觉不错，给大家讲一下。</p>
+<p>这道题目刚一看，可能会有点懵，这要怎么找零才能保证完整全部账单的找零呢？</p>
+<p>但仔细一琢磨就会发现，可供我们做判断的空间非常少！</p>
+<p>只需要维护三种金额的数量，5，10和20。</p>
+<p>有如下三种情况：</p>
+<p>情况一：账单是5，直接收下。
+情况二：账单是10，消耗一个5，增加一个10
+情况三：账单是20，优先消耗一个10和一个5，如果不够，再消耗三个5
+此时大家就发现 情况一，情况二，都是固定策略，都不用我们来做分析了，而唯一不确定的其实在情况三。</p>
+<p>而情况三逻辑也不复杂甚至感觉纯模拟就可以了，其实情况三这里是有贪心的。</p>
+<p>账单是20的情况，为什么要优先消耗一个10和一个5呢？</p>
+<p>因为美元10只能给账单20找零，而美元5可以给账单10和账单20找零，美元5更万能！</p>
+<p>所以局部最优：遇到账单20，优先消耗美元10，完成本次找零。全局最优：完成全部账单的找零。</p>
+<p>局部最优可以推出全局最优，并找不出反例，那么就试试贪心算法</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a></span>
+<span id="cb8-2"><a href="#cb8-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="st">    </span>def <span class="kw">lemonadeChange</span>(self, bills<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>bool<span class="op">:</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="st">        </span>five, ten, twenty =<span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>        <span class="cf">for</span> bill <span class="cf">in</span> bills<span class="op">:</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="st">            </span><span class="cf">if</span> bill <span class="op">==</span><span class="st"> </span><span class="dv">5</span><span class="op">:</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="st">                </span>five <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>            elif bill <span class="op">==</span><span class="st"> </span><span class="dv">10</span><span class="op">:</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="st">                </span><span class="cf">if</span> five <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="st"> </span>return False</span>
+<span id="cb8-10"><a href="#cb8-10"></a>                five <span class="op">-</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>                ten <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>            <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="st">                </span><span class="cf">if</span> ten <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> and five <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="st">                    </span>ten <span class="op">-</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a>                    five <span class="op">-</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a>                    twenty <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a>                elif five <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span><span class="op">:</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a><span class="st">                    </span>five <span class="op">-</span><span class="er">=</span><span class="st"> </span><span class="dv">3</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a>                    twenty <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb8-20"><a href="#cb8-20"></a>                <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb8-21"><a href="#cb8-21"></a><span class="st">                    </span>return False</span>
+<span id="cb8-22"><a href="#cb8-22"></a>        return True</span></code></pre></div>
+<p>比较啰嗦的一个题</p>
 </div>
 </div>
             </section>
