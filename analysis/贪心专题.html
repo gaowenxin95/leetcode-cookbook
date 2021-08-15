@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2021-08-13" />
+<meta name="date" content="2021-08-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,6 +140,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.7" data-path=""><a href="#加油站"><i class="fa fa-check"></i><b>1.7</b> 加油站</a></li>
 <li class="chapter" data-level="1.8" data-path=""><a href="#分发糖果"><i class="fa fa-check"></i><b>1.8</b> 分发糖果</a></li>
 <li class="chapter" data-level="1.9" data-path=""><a href="#柠檬水找零"><i class="fa fa-check"></i><b>1.9</b> 柠檬水找零</a></li>
+<li class="chapter" data-level="1.10" data-path=""><a href="#根据身高重排队列"><i class="fa fa-check"></i><b>1.10</b> 根据身高重排队列</a></li>
+<li class="chapter" data-level="1.11" data-path=""><a href="#无重叠区间"><i class="fa fa-check"></i><b>1.11</b> 无重叠区间</a></li>
+<li class="chapter" data-level="1.12" data-path=""><a href="#合并区间"><i class="fa fa-check"></i><b>1.12</b> 合并区间</a></li>
+<li class="chapter" data-level="1.13" data-path=""><a href="#合并插入区间"><i class="fa fa-check"></i><b>1.13</b> 合并插入区间</a></li>
+<li class="chapter" data-level="1.14" data-path=""><a href="#单调递增的数字"><i class="fa fa-check"></i><b>1.14</b> 单调递增的数字</a></li>
 </ul></li>
 </ul>
 
@@ -161,7 +166,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">贪心专题</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2021-08-13</em></p>
+<p class="date"><em>2021-08-15</em></p>
 </div>
 <div id="贪心专题" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> 贪心专题</h1>
@@ -459,16 +464,14 @@ bills[i] 不是 5 就是 10 或是 20</p>
 <p>这道题目刚一看，可能会有点懵，这要怎么找零才能保证完整全部账单的找零呢？</p>
 <p>但仔细一琢磨就会发现，可供我们做判断的空间非常少！</p>
 <p>只需要维护三种金额的数量，5，10和20。</p>
-<p>有如下三种情况：</p>
-<p>情况一：账单是5，直接收下。
-情况二：账单是10，消耗一个5，增加一个10
-情况三：账单是20，优先消耗一个10和一个5，如果不够，再消耗三个5
-此时大家就发现 情况一，情况二，都是固定策略，都不用我们来做分析了，而唯一不确定的其实在情况三。</p>
-<p>而情况三逻辑也不复杂甚至感觉纯模拟就可以了，其实情况三这里是有贪心的。</p>
-<p>账单是20的情况，为什么要优先消耗一个10和一个5呢？</p>
-<p>因为美元10只能给账单20找零，而美元5可以给账单10和账单20找零，美元5更万能！</p>
-<p>所以局部最优：遇到账单20，优先消耗美元10，完成本次找零。全局最优：完成全部账单的找零。</p>
-<p>局部最优可以推出全局最优，并找不出反例，那么就试试贪心算法</p>
+<p>有如下三种情况：
+如果顾客支付了 5 美元钞票，那么我们就得到 5 美元的钞票。
+如果顾客支付了 10 美元钞票，我们必须找回一张 5 美元钞票。如果我们没有 5 美元的钞票，答案就是
+false，因为我们无法正确找零。
+如果顾客支付了 20 美元钞票，我们必须找回 15 美元。
+如果我们有一张 10 美元和一张 5 美元，那么我们总会更愿意这样找零，这比用三张 5 美元进行找零更有利。
+否则，如果我们有三张 5 美元的钞票，那么我们将这样找零。
+否则，我们将无法给出总面值为 15 美元的零钱，答案是 false。</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a></span>
 <span id="cb8-2"><a href="#cb8-2"></a>class Solution<span class="op">:</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="st">    </span>def <span class="kw">lemonadeChange</span>(self, bills<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>bool<span class="op">:</span></span>
@@ -491,7 +494,148 @@ bills[i] 不是 5 就是 10 或是 20</p>
 <span id="cb8-20"><a href="#cb8-20"></a>                <span class="cf">else</span><span class="op">:</span></span>
 <span id="cb8-21"><a href="#cb8-21"></a><span class="st">                    </span>return False</span>
 <span id="cb8-22"><a href="#cb8-22"></a>        return True</span></code></pre></div>
-<p>比较啰嗦的一个题</p>
+<p>比较啰嗦的一个题,没意思</p>
+</div>
+<div id="根据身高重排队列" class="section level2" number="1.10">
+<h2><span class="header-section-number">1.10</span> 根据身高重排队列</h2>
+<ul>
+<li>题目描述</li>
+</ul>
+<p>假设有打乱顺序的一群人站成一个队列。 每个人由一个整数对(h, k)表示，其中h是这个人的身高，k是排在这个人前面且身高大于或等于h的人数。 编写一个算法来重建这个队列。
+注意：总人数少于1100人。
+示例：</p>
+<p>输入:
+[[7,0], [4,4], [7,1], [5,0], [6,1], [5,2]]
+输出:
+[[5,0], [7,0], [5,2], [6,1], [4,4], [7,1]]</p>
+<ul>
+<li>解题思路</li>
+</ul>
+<p>先进行排序，对第一位降序，第二维升序。
+再对其进行模拟，因为长得高的看不见长得矮的，所以先确定高的，同样的身高里面先确定前面需要的人数少的。</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="st">    </span>def <span class="kw">reconstructQueue</span>(self, people<span class="op">:</span><span class="st"> </span>List[List[int]]) -&gt;<span class="st"> </span>List[List[int]]<span class="op">:</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="st">        </span><span class="kw">people.sort</span>(<span class="dt">key=</span>lambda x<span class="op">:</span>(<span class="op">-</span>x[<span class="dv">0</span>],x[<span class="dv">1</span>]))</span>
+<span id="cb9-4"><a href="#cb9-4"></a>        ans=[]</span>
+<span id="cb9-5"><a href="#cb9-5"></a>        <span class="cf">for</span> p <span class="cf">in</span> people<span class="op">:</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="st">            </span><span class="kw">ans.insert</span>(p[<span class="dv">1</span>],p)</span>
+<span id="cb9-7"><a href="#cb9-7"></a>        return ans</span></code></pre></div>
+<p>有点点难,sort是个好用的函数</p>
+</div>
+<div id="无重叠区间" class="section level2" number="1.11">
+<h2><span class="header-section-number">1.11</span> 无重叠区间</h2>
+<ul>
+<li>题目描述</li>
+</ul>
+<p>给定一个区间的集合，找到需要移除区间的最小数量，使剩余区间互不重叠。</p>
+<p>注意: 可以认为区间的终点总是大于它的起点。 区间 [1,2] 和 [2,3] 的边界相互“接触”，但没有相互重叠。</p>
+<p>示例 1: 输入: [ [1,2], [2,3], [3,4], [1,3] ] 输出: 1 解释: 移除 [1,3] 后，剩下的区间没有重叠。</p>
+<p>示例 2: 输入: [ [1,2], [1,2], [1,2] ] 输出: 2 解释: 你需要移除两个 [1,2] 来使剩下的区间没有重叠。</p>
+<p>示例 3: 输入: [ [1,2], [2,3] ] 输出: 0 解释: 你不需要移除任何区间，因为它们已经是无重叠的了。</p>
+<ul>
+<li>解题思路</li>
+</ul>
+<p>参考 <a href="https://github.com/youngyangyang04/leetcode-master/blob/master/problems/0435.%E6%97%A0%E9%87%8D%E5%8F%A0%E5%8C%BA%E9%97%B4.md" class="uri">https://github.com/youngyangyang04/leetcode-master/blob/master/problems/0435.%E6%97%A0%E9%87%8D%E5%8F%A0%E5%8C%BA%E9%97%B4.md</a></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="st">    </span>def <span class="kw">eraseOverlapIntervals</span>(self, intervals<span class="op">:</span><span class="st"> </span>List[List[int]]) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="st">        </span><span class="cf">if</span> <span class="kw">len</span>(intervals) <span class="op">==</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="st"> </span>return <span class="dv">0</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>        <span class="kw">intervals.sort</span>(<span class="dt">key=</span>lambda x<span class="op">:</span><span class="st"> </span>x[<span class="dv">1</span>])</span>
+<span id="cb10-5"><a href="#cb10-5"></a>        count =<span class="st"> </span><span class="dv">1</span> <span class="co"># 记录非交叉区间的个数</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>        end =<span class="st"> </span>intervals[<span class="dv">0</span>][<span class="dv">1</span>] <span class="co"># 记录区间分割点</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>, <span class="kw">len</span>(intervals))<span class="op">:</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="st">            </span><span class="cf">if</span> end <span class="op">&lt;=</span><span class="st"> </span>intervals[i][<span class="dv">0</span>]<span class="op">:</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="st">                </span>count <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>                end =<span class="st"> </span>intervals[i][<span class="dv">1</span>]</span>
+<span id="cb10-11"><a href="#cb10-11"></a>        return <span class="kw">len</span>(intervals) <span class="op">-</span><span class="st"> </span>count</span></code></pre></div>
+</div>
+<div id="合并区间" class="section level2" number="1.12">
+<h2><span class="header-section-number">1.12</span> 合并区间</h2>
+<ul>
+<li>题目：问题描述：</li>
+</ul>
+<p>给出一个区间的集合，请合并所有重叠的区间。</p>
+<p>示例 1:</p>
+<p>输入: [[1,3],[2,6],[8,10],[15,18]] 输出: [[1,6],[8,10],[15,18]] 解释:
+区间 [1,3] 和 [2,6] 重叠, 将它们合并为 [1,6]. 示例 2:</p>
+<p>输入: [[1,4],[4,5]] 输出: [[1,5]] 解释: 区间 [1,4] 和 [4,5]
+可被视为重叠区间。</p>
+<p><strong>画个图就就懂了，而且今天发现一个问题，leetcode就是用代码解决小学数学应用题，而小学数学应用题是我的死穴</strong></p>
+<p>核心：其实是贪心法的体现，关注于相邻的两个数组，那么就有两种情况，以[[1,3],[2,6],[8,10],[15,18]]为例。</p>
+<p>先对二维数组按一维数组的第0位进行排序，假设结果是res=[]。</p>
+<p>当res为空时先将[1,3]加入到res中，再遍历到[2,6]，此时有两种情况，如果当前数组的第0位大于res中最后一个数组的第1位，说明当前数组和res末尾的数组不会重叠，此时之间将当前数组加到res末尾。如果当前数组第0位小于或等于res末尾数组第1位，再判断当前数组第1位和res末尾数组第一位誰大，将其更新res末尾数组的第一位。依次类推。</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="st">    </span>def <span class="kw">merge</span>(self, intervals<span class="op">:</span><span class="st"> </span>List[List[int]]) -&gt;<span class="st"> </span>List[List[int]]<span class="op">:</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="st">        </span>res =<span class="st"> </span>[]</span>
+<span id="cb11-4"><a href="#cb11-4"></a>        <span class="kw">intervals.sort</span>() <span class="co"># 没太理解这个操作的含义，我甚至觉得不加这个也可以</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>        <span class="cf">for</span> i <span class="cf">in</span> intervals<span class="op">:</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="st">            </span><span class="cf">if</span> not res or res[<span class="op">-</span><span class="dv">1</span>][<span class="dv">1</span>]<span class="op">&lt;</span>i[<span class="dv">0</span>]<span class="op">:</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="st">                </span><span class="kw">res.append</span>(i)</span>
+<span id="cb11-8"><a href="#cb11-8"></a>            <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="st">                </span>res[<span class="op">-</span><span class="dv">1</span>][<span class="dv">1</span>] =<span class="st"> </span><span class="kw">max</span>(res[<span class="op">-</span><span class="dv">1</span>][<span class="dv">1</span>],i[<span class="dv">1</span>])</span>
+<span id="cb11-10"><a href="#cb11-10"></a>        return res</span>
+<span id="cb11-11"><a href="#cb11-11"></a>        </span></code></pre></div>
+<p><a href="https://www.cnblogs.com/xiximayou/p/12346966.html">参考</a></p>
+</div>
+<div id="合并插入区间" class="section level2" number="1.13">
+<h2><span class="header-section-number">1.13</span> 合并插入区间</h2>
+<p>问题描述：</p>
+<p>给出一个无重叠的 ，按照区间起始端点排序的区间列表。</p>
+<p>在列表中插入一个新的区间，你需要确保列表中的区间仍然有序且不重叠（如果有必要的话，可以合并区间）。</p>
+<p>示例 1:</p>
+<p>输入: intervals = [[1,3],[6,9]], newInterval = [2,5] 输出: [[1,5],[6,9]]
+示例 2:</p>
+<p>输入: intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval =
+[4,8] 输出: [[1,2],[3,10],[12,16]] 解释: 这是因为新的区间 [4,8] 与
+[3,5],[6,7],[8,10] 重叠。</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="st">    </span>def <span class="kw">insert</span>(self, intervals<span class="op">:</span><span class="st"> </span>List[List[int]], newInterval<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>List[List[int]]<span class="op">:</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="st">        </span>res =<span class="st"> </span>[]</span>
+<span id="cb12-4"><a href="#cb12-4"></a>        <span class="kw">intervals.append</span>(newInterval)</span>
+<span id="cb12-5"><a href="#cb12-5"></a>        <span class="kw">intervals.sort</span>()</span>
+<span id="cb12-6"><a href="#cb12-6"></a>        <span class="cf">for</span> i <span class="cf">in</span> intervals<span class="op">:</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="st">            </span><span class="cf">if</span> not res or res[<span class="op">-</span><span class="dv">1</span>][<span class="dv">1</span>]<span class="op">&lt;</span>i[<span class="dv">0</span>]<span class="op">:</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="st">                </span><span class="kw">res.append</span>(i)</span>
+<span id="cb12-9"><a href="#cb12-9"></a>            <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="st">                </span>res[<span class="op">-</span><span class="dv">1</span>][<span class="dv">1</span>]=<span class="kw">max</span>(res[<span class="op">-</span><span class="dv">1</span>][<span class="dv">1</span>],i[<span class="dv">1</span>])</span>
+<span id="cb12-11"><a href="#cb12-11"></a>        return res</span></code></pre></div>
+<p><a href="https://www.cnblogs.com/xiximayou/p/12347243.html">参考</a></p>
+</div>
+<div id="单调递增的数字" class="section level2" number="1.14">
+<h2><span class="header-section-number">1.14</span> 单调递增的数字</h2>
+<ul>
+<li>题目描述</li>
+</ul>
+<p>给定一个非负整数 N，找出小于或等于 N 的最大的整数，同时这个整数需要满足其各个位数上的数字是单调递增。</p>
+<p>（当且仅当每个相邻位数上的数字 x 和 y 满足 x &lt;= y 时，我们称这个整数是单调递增的。）</p>
+<p>示例 1: 输入: N = 10 输出: 9</p>
+<p>示例 2: 输入: N = 1234 输出: 1234</p>
+<p>示例 3: 输入: N = 332 输出: 299</p>
+<p>说明: N 是在 [0, 10^9] 范围内的一个整数</p>
+<ul>
+<li>解题思路</li>
+</ul>
+<p>题目要求小于等于N的最大单调递增的整数，那么拿一个两位的数字来举例。</p>
+<p>例如：98，一旦出现strNum[i - 1] &gt; strNum[i]的情况（非单调递增），首先想让strNum[i - 1]–，然后strNum[i]给为9，这样这个整数就是89，即小于98的最大的单调递增整数。</p>
+<p>这一点如果想清楚了，这道题就好办了。</p>
+<p>局部最优：遇到strNum[i - 1] &gt; strNum[i]的情况，让strNum[i - 1]–，然后strNum[i]给为9，可以保证这两位变成最大单调递增整数。</p>
+<p>全局最优：得到小于等于N的最大单调递增的整数。</p>
+<p>但这里局部最优推出全局最优，还需要其他条件，即遍历顺序，和标记从哪一位开始统一改成9。</p>
+<p>此时是从前向后遍历还是从后向前遍历呢？</p>
+<p>从前向后遍历的话，遇到strNum[i - 1] &gt; strNum[i]的情况，让strNum[i - 1]减一，但此时如果strNum[i - 1]减一了，可能又小于strNum[i - 2]。</p>
+<p>这么说有点抽象，举个例子，数字：332，从前向后遍历的话，那么就把变成了329，此时2又小于了第一位的3了，真正的结果应该是299。</p>
+<p>所以从前后向遍历会改变已经遍历过的结果！</p>
+<p>那么从后向前遍历，就可以重复利用上次比较得出的结果了，从后向前遍历332的数值变化为：332 -&gt; 329 -&gt; 299</p>
+<p>确定了遍历顺序之后，那么此时局部最优就可以推出全局，找不出反例，试试贪心。</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="st">    </span>def <span class="kw">monotoneIncreasingDigits</span>(self, n<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="st">        </span>a =<span class="st"> </span><span class="kw">list</span>(<span class="kw">str</span>(n))</span>
+<span id="cb13-4"><a href="#cb13-4"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(a)<span class="op">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">int</span>(a[i]) <span class="op">&lt;</span><span class="st"> </span><span class="kw">int</span>(a[i<span class="dv">-1</span>])<span class="op">:</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="st">                </span>a[i<span class="dv">-1</span>] =<span class="st"> </span><span class="kw">str</span>(<span class="kw">int</span>(a[i<span class="dv">-1</span>]) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb13-7"><a href="#cb13-7"></a>                a[i<span class="op">:</span>] =<span class="st"> &#39;9&#39;</span> <span class="op">*</span><span class="st"> </span>(<span class="kw">len</span>(a) <span class="op">-</span><span class="st"> </span>i)  <span class="co">#python不需要设置flag值，直接按长度给9就好了</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>        return <span class="kw">int</span>(<span class="st">&quot;&quot;</span><span class="kw">.join</span>(a)) </span></code></pre></div>
+<p>有点点难度</p>
+<p>以上就是贪心常考的问题，但是笔者赶紧还是不太能摸到门路，代码就是很直白</p>
 </div>
 </div>
             </section>
