@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2021-08-13" />
+<meta name="date" content="2021-08-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,6 +53,69 @@
 
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 </head>
 
@@ -69,6 +132,9 @@
 <li class="chapter" data-level="1" data-path=""><a href="#回溯专题"><i class="fa fa-check"></i><b>1</b> 回溯专题</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path=""><a href="#定义"><i class="fa fa-check"></i><b>1.1</b> 定义</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#解决方法"><i class="fa fa-check"></i><b>1.2</b> 解决方法</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#组合问题"><i class="fa fa-check"></i><b>1.3</b> 组合问题</a></li>
+<li class="chapter" data-level="1.4" data-path=""><a href="#组合总和"><i class="fa fa-check"></i><b>1.4</b> 组合总和</a></li>
 </ul></li>
 </ul>
 
@@ -90,12 +156,153 @@
 <div id="header">
 <h1 class="title">回溯专题</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2021-08-13</em></p>
+<p class="date"><em>2021-08-17</em></p>
 </div>
 <div id="回溯专题" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> 回溯专题</h1>
 <div id="定义" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> 定义</h2>
+<p>参考<a href="https://github.com/youngyangyang04/leetcode-master/blob/master/problems/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.md">【代码随想录】</a></p>
+<p>回溯是递归的副产品
+- 回溯法解决的问题</p>
+<ul>
+<li><p>组合问题：N个数里面按一定规则找出k个数的集合</p></li>
+<li><p>切割问题：一个字符串按一定规则有几种切割方式</p></li>
+<li><p>子集问题：一个N个数的集合里有多少符合条件的子集</p></li>
+<li><p>排列问题：N个数按一定规则全排列，有几种排列方式</p></li>
+<li><p>棋盘问题：N皇后，解数独等等</p></li>
+</ul>
+<p>另外，会有一些同学可能分不清什么是组合，什么是排列？</p>
+<p>组合是不强调元素顺序的，排列是强调元素顺序。</p>
+<p>例如：{1, 2} 和 {2, 1} 在组合上，就是一个集合，因为不强调顺序，而要是排列的话，{1, 2} 和 {2, 1} 就是两个集合了。</p>
+<p>记住组合无序，排列有序，就可以了。</p>
+<ul>
+<li>如何理解回溯法</li>
+</ul>
+<blockquote>
+<p>回溯法解决的问题都可以抽象为树形结构，因为回溯法解决的都是在集合中递归查找子集，集合的大小就构成了树的宽度，递归的深度，都构成的树的深度。递归就要有终止条件，所以必然是一颗高度有限的树（N叉树）。</p>
+</blockquote>
+<p>总之,一句话本质上还是递归，既包含二叉树的前序遍历又包含二叉树的后序遍历。</p>
+</div>
+<div id="解决方法" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> 解决方法</h2>
+<p>主要包含三个点</p>
+<ul>
+<li><p>定义路径</p></li>
+<li><p>出口条件</p></li>
+<li><p>做出选择</p></li>
+</ul>
+<p>一般基于模板的变形就是在出口条件和做出选择的地方进行变形</p>
+<p><strong>下面是一个组合问题，也是一个标准化的模板</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="st">    </span>def <span class="kw">permute</span>(self, nums)<span class="op">:</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="st">        :type nums: List[int]</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="st">        :rtype: List[List[int]]</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>        res=[]</span>
+<span id="cb1-8"><a href="#cb1-8"></a>        track=[] <span class="co">#路径</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>        def <span class="kw">backtrack</span>(track)<span class="op">:</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">len</span>(track)<span class="op">==</span><span class="kw">len</span>(nums)<span class="op">:</span><span class="co"># 出口条件</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="st">                </span><span class="kw">res.append</span>(<span class="kw">track.copy</span>()) <span class="co"># </span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>                return </span>
+<span id="cb1-13"><a href="#cb1-13"></a>            <span class="cf">for</span> i <span class="cf">in</span> nums<span class="op">:</span><span class="st"> </span><span class="co"># 做选择</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="st">                </span><span class="cf">if</span> i not <span class="cf">in</span> track<span class="op">:</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="st">                    </span><span class="kw">track.append</span>(i)</span>
+<span id="cb1-16"><a href="#cb1-16"></a>                    <span class="kw">backtrack</span>(track) <span class="co"># 递归</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>                    <span class="kw">track.pop</span>() <span class="co"># 退栈。回溯</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>        <span class="kw">backtrack</span>(track)</span>
+<span id="cb1-19"><a href="#cb1-19"></a>        return res</span>
+<span id="cb1-20"><a href="#cb1-20"></a>        </span></code></pre></div>
+</div>
+<div id="组合问题" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> 组合问题</h2>
+<ul>
+<li>题目描述
+给定两个整数 n 和 k，返回 1 … n 中所有可能的 k 个数的组合。</li>
+</ul>
+<p>示例:
+输入: n = 4, k = 2
+输出:
+[
+[2,4],
+[3,4],
+[2,3],
+[1,2],
+[1,3],
+[1,4],]</p>
+<ul>
+<li>解题思路
+回溯法的搜索过程就是一个树型结构的遍历过程，在如下图中，可以看出for循环用来横向遍历，递归的过程是纵向遍历。</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="st">    </span>def <span class="kw">combine</span>(self, n<span class="op">:</span><span class="st"> </span>int, k<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>List[List[int]]<span class="op">:</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="st">        </span>res=[]  <span class="co">#存放符合条件结果的集合</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>        path=[]  <span class="co">#用来存放符合条件结果</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>        def <span class="kw">backtrack</span>(n,k,startIndex)<span class="op">:</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">len</span>(path) <span class="op">==</span><span class="st"> </span>k<span class="op">:</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="st">                </span><span class="kw">res.append</span>(path[<span class="op">:</span>])</span>
+<span id="cb2-8"><a href="#cb2-8"></a>                return </span>
+<span id="cb2-9"><a href="#cb2-9"></a>            <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(startIndex,n<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="st">                </span><span class="kw">path.append</span>(i)  <span class="co">#处理节点 </span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>                <span class="kw">backtrack</span>(n,k,i<span class="op">+</span><span class="dv">1</span>)  <span class="co">#递归</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>                <span class="kw">path.pop</span>()  <span class="co">#回溯，撤销处理的节点</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>        <span class="kw">backtrack</span>(n,k,<span class="dv">1</span>)</span>
+<span id="cb2-14"><a href="#cb2-14"></a>        return res</span></code></pre></div>
+<ul>
+<li>copy</li>
+</ul>
+<p>这个是浅拷贝，是有关py的底层原理</p>
+<p>a=b此时a是拷贝了b的引用</p>
+</div>
+<div id="组合总和" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> 组合总和</h2>
+<ul>
+<li>题目描述</li>
+</ul>
+<p>给定一个无重复元素的正整数数组 candidates 和一个正整数 target ，找出 candidates 中所有可以使数字和为目标数 target 的唯一组合。</p>
+<p>candidates 中的数字可以无限制重复被选取。如果至少一个所选数字数量不同，则两种组合是唯一的。 </p>
+<p>对于给定的输入，保证和为 target 的唯一组合数少于 150 个。</p>
+<p>示例 1：</p>
+<p>输入: candidates = [2,3,6,7], target = 7
+输出: [[7],[2,2,3]]
+示例 2：</p>
+<p>输入: candidates = [2,3,5], target = 8
+输出: [[2,2,2,2],[2,3,3],[3,5]]
+示例 3：</p>
+<p>输入: candidates = [2], target = 1
+输出: []
+示例 4：</p>
+<p>输入: candidates = [1], target = 1
+输出: [[1]]
+示例 5：</p>
+<p>输入: candidates = [1], target = 2
+输出: [[1,1]]</p>
+<ul>
+<li>解题思路</li>
+</ul>
+<p>定义路径
+定义出口
+选择条件</p>
+<p>这道题主要就是在出口和选择条件处做的变形</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="st">    </span>def <span class="kw">combinationSum</span>(self, candidates<span class="op">:</span><span class="st"> </span>List[int], target<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>List[List[int]]<span class="op">:</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="st">        </span>res=[]</span>
+<span id="cb3-4"><a href="#cb3-4"></a>        track=[]</span>
+<span id="cb3-5"><a href="#cb3-5"></a>        def <span class="kw">backtrack</span>(track)<span class="op">:</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">sum</span>(track)<span class="op">==</span>target<span class="op">:</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="st">                </span><span class="kw">res.append</span>(<span class="kw">track.copy</span>())</span>
+<span id="cb3-8"><a href="#cb3-8"></a>                return </span>
+<span id="cb3-9"><a href="#cb3-9"></a>            <span class="cf">if</span> <span class="kw">sum</span>(track)<span class="op">&gt;</span>target<span class="op">:</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="st">                </span>return </span>
+<span id="cb3-11"><a href="#cb3-11"></a>            <span class="cf">for</span> i <span class="cf">in</span> candidates<span class="op">:</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="st">                </span><span class="cf">if</span> track and i <span class="op">&lt;</span><span class="st"> </span><span class="kw">max</span>(track)<span class="op">:</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="st">                    </span>continue</span>
+<span id="cb3-14"><a href="#cb3-14"></a>                <span class="kw">track.append</span>(i)</span>
+<span id="cb3-15"><a href="#cb3-15"></a>                <span class="kw">backtrack</span>(track)</span>
+<span id="cb3-16"><a href="#cb3-16"></a>                <span class="kw">track.pop</span>()</span>
+<span id="cb3-17"><a href="#cb3-17"></a>        <span class="kw">backtrack</span>(track)</span>
+<span id="cb3-18"><a href="#cb3-18"></a>        return res</span></code></pre></div>
 </div>
 </div>
             </section>

@@ -38,7 +38,45 @@ bibliography: ../refs/add.bib
 
 >回溯法解决的问题都可以抽象为树形结构，因为回溯法解决的都是在集合中递归查找子集，集合的大小就构成了树的宽度，递归的深度，都构成的树的深度。递归就要有终止条件，所以必然是一颗高度有限的树（N叉树）。
 
-总之,一句话本质上还是递归，而递归就是用来解决多层嵌套问题，想不通时就用树结构来解释回溯问题
+总之,一句话本质上还是递归，既包含二叉树的前序遍历又包含二叉树的后序遍历。
+
+
+## 解决方法
+
+主要包含三个点
+
+- 定义路径
+
+- 出口条件
+
+- 做出选择
+
+一般基于模板的变形就是在出口条件和做出选择的地方进行变形
+
+
+**下面是一个组合问题，也是一个标准化的模板**
+```r
+class Solution(object):
+    def permute(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        res=[]
+        track=[] #路径
+        def backtrack(track):
+            if len(track)==len(nums):# 出口条件
+                res.append(track.copy()) # 
+                return 
+            for i in nums: # 做选择
+                if i not in track:
+                    track.append(i)
+                    backtrack(track) # 递归
+                    track.pop() # 退栈。回溯
+        backtrack(track)
+        return res
+        
+```
 
 ## 组合问题
 
@@ -74,5 +112,72 @@ class Solution:
                 backtrack(n,k,i+1)  #递归
                 path.pop()  #回溯，撤销处理的节点
         backtrack(n,k,1)
+        return res
+```
+
+- copy
+
+这个是浅拷贝，是有关py的底层原理
+
+a=b此时a是拷贝了b的引用
+
+## 组合总和
+
+- 题目描述
+
+给定一个无重复元素的正整数数组 candidates 和一个正整数 target ，找出 candidates 中所有可以使数字和为目标数 target 的唯一组合。
+
+candidates 中的数字可以无限制重复被选取。如果至少一个所选数字数量不同，则两种组合是唯一的。 
+
+对于给定的输入，保证和为 target 的唯一组合数少于 150 个。
+
+示例 1：
+
+输入: candidates = [2,3,6,7], target = 7
+输出: [[7],[2,2,3]]
+示例 2：
+
+输入: candidates = [2,3,5], target = 8
+输出: [[2,2,2,2],[2,3,3],[3,5]]
+示例 3：
+
+输入: candidates = [2], target = 1
+输出: []
+示例 4：
+
+输入: candidates = [1], target = 1
+输出: [[1]]
+示例 5：
+
+输入: candidates = [1], target = 2
+输出: [[1,1]]
+
+- 解题思路
+
+定义路径
+定义出口
+选择条件
+
+这道题主要就是在出口和选择条件处做的变形
+
+
+```r
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        res=[]
+        track=[]
+        def backtrack(track):
+            if sum(track)==target:
+                res.append(track.copy())
+                return 
+            if sum(track)>target:
+                return 
+            for i in candidates:
+                if track and i < max(track):
+                    continue
+                track.append(i)
+                backtrack(track)
+                track.pop()
+        backtrack(track)
         return res
 ```
