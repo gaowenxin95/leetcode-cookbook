@@ -133,8 +133,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="1.1" data-path=""><a href="#定义"><i class="fa fa-check"></i><b>1.1</b> 定义</a></li>
 <li class="chapter" data-level="1.2" data-path=""><a href="#解决方法"><i class="fa fa-check"></i><b>1.2</b> 解决方法</a></li>
-<li class="chapter" data-level="1.3" data-path=""><a href="#组合问题"><i class="fa fa-check"></i><b>1.3</b> 组合问题</a></li>
-<li class="chapter" data-level="1.4" data-path=""><a href="#组合总和"><i class="fa fa-check"></i><b>1.4</b> 组合总和</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#全排列问题一"><i class="fa fa-check"></i><b>1.3</b> 全排列问题一</a></li>
+<li class="chapter" data-level="1.4" data-path=""><a href="#全部排列问题二"><i class="fa fa-check"></i><b>1.4</b> 全部排列问题二</a></li>
+<li class="chapter" data-level="1.5" data-path=""><a href="#组合总和一"><i class="fa fa-check"></i><b>1.5</b> 组合总和一</a></li>
+<li class="chapter" data-level="1.6" data-path=""><a href="#组合总和二"><i class="fa fa-check"></i><b>1.6</b> 组合总和二</a></li>
+<li class="chapter" data-level="1.7" data-path=""><a href="#组合总和三"><i class="fa fa-check"></i><b>1.7</b> 组合总和三</a></li>
+<li class="chapter" data-level="1.8" data-path=""><a href="#组合总和四"><i class="fa fa-check"></i><b>1.8</b> 组合总和四</a></li>
+<li class="chapter" data-level="1.9" data-path=""><a href="#分割回文字符串"><i class="fa fa-check"></i><b>1.9</b> 分割回文字符串</a></li>
 </ul></li>
 </ul>
 
@@ -193,70 +198,90 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>做出选择</p></li>
 </ul>
 <p>一般基于模板的变形就是在出口条件和做出选择的地方进行变形</p>
-<p><strong>下面是一个组合问题，也是一个标准化的模板</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="st">    </span>def <span class="kw">permute</span>(self, nums)<span class="op">:</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="st">        &quot;&quot;&quot;</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="st">        :type nums: List[int]</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="st">        :rtype: List[List[int]]</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="st">        &quot;&quot;&quot;</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>        res=[]</span>
-<span id="cb1-8"><a href="#cb1-8"></a>        track=[] <span class="co">#路径</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>        def <span class="kw">backtrack</span>(track)<span class="op">:</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">len</span>(track)<span class="op">==</span><span class="kw">len</span>(nums)<span class="op">:</span><span class="co"># 出口条件</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="st">                </span><span class="kw">res.append</span>(<span class="kw">track.copy</span>()) <span class="co"># </span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>                return </span>
-<span id="cb1-13"><a href="#cb1-13"></a>            <span class="cf">for</span> i <span class="cf">in</span> nums<span class="op">:</span><span class="st"> </span><span class="co"># 做选择</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="st">                </span><span class="cf">if</span> i not <span class="cf">in</span> track<span class="op">:</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="st">                    </span><span class="kw">track.append</span>(i)</span>
-<span id="cb1-16"><a href="#cb1-16"></a>                    <span class="kw">backtrack</span>(track) <span class="co"># 递归</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a>                    <span class="kw">track.pop</span>() <span class="co"># 退栈。回溯</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a>        <span class="kw">backtrack</span>(track)</span>
-<span id="cb1-19"><a href="#cb1-19"></a>        return res</span>
-<span id="cb1-20"><a href="#cb1-20"></a>        </span></code></pre></div>
+<ul>
+<li>下面是一个标准化的模板</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>res =<span class="st"> </span>[]</span>
+<span id="cb1-2"><a href="#cb1-2"></a>def <span class="kw">backtrack</span>(路径, 选择列表)<span class="op">:</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="st">    </span><span class="cf">if</span> 满足结束条件<span class="op">:</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="st">        </span><span class="kw">res.append</span>(路径)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>        return  </span>
+<span id="cb1-6"><a href="#cb1-6"></a>        </span>
+<span id="cb1-7"><a href="#cb1-7"></a>    <span class="cf">if</span> 满足剪枝条件：</span>
+<span id="cb1-8"><a href="#cb1-8"></a>        return</span>
+<span id="cb1-9"><a href="#cb1-9"></a>        </span>
+<span id="cb1-10"><a href="#cb1-10"></a>    <span class="cf">for</span> 选择 <span class="cf">in</span> 选择列表<span class="op">:</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="st">        </span>做选择</span>
+<span id="cb1-12"><a href="#cb1-12"></a>        <span class="kw">backtrack</span>(路径, 选择列表)</span>
+<span id="cb1-13"><a href="#cb1-13"></a>        撤销选择</span></code></pre></div>
 </div>
-<div id="组合问题" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> 组合问题</h2>
+<div id="全排列问题一" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> 全排列问题一</h2>
 <ul>
-<li>题目描述
-给定两个整数 n 和 k，返回 1 … n 中所有可能的 k 个数的组合。</li>
+<li>题目描述</li>
 </ul>
-<p>示例:
-输入: n = 4, k = 2
-输出:
-[
-[2,4],
-[3,4],
-[2,3],
-[1,2],
-[1,3],
-[1,4],]</p>
+<p>给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。</p>
+<p> </p>
+<p>示例 1：</p>
+<p>输入：nums = [1,1,2]
+输出：
+[[1,1,2],
+[1,2,1],
+[2,1,1]]
+示例 2：</p>
+<p>输入：nums = [1,2,3]
+输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]</p>
 <ul>
-<li>解题思路
-回溯法的搜索过程就是一个树型结构的遍历过程，在如下图中，可以看出for循环用来横向遍历，递归的过程是纵向遍历。</li>
+<li>解题思路</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="st">    </span>def <span class="kw">combine</span>(self, n<span class="op">:</span><span class="st"> </span>int, k<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>List[List[int]]<span class="op">:</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="st">        </span>res=[]  <span class="co">#存放符合条件结果的集合</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>        path=[]  <span class="co">#用来存放符合条件结果</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>        def <span class="kw">backtrack</span>(n,k,startIndex)<span class="op">:</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">len</span>(path) <span class="op">==</span><span class="st"> </span>k<span class="op">:</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="st">                </span><span class="kw">res.append</span>(path[<span class="op">:</span>])</span>
-<span id="cb2-8"><a href="#cb2-8"></a>                return </span>
-<span id="cb2-9"><a href="#cb2-9"></a>            <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(startIndex,n<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="st">                </span><span class="kw">path.append</span>(i)  <span class="co">#处理节点 </span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>                <span class="kw">backtrack</span>(n,k,i<span class="op">+</span><span class="dv">1</span>)  <span class="co">#递归</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a>                <span class="kw">path.pop</span>()  <span class="co">#回溯，撤销处理的节点</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a>        <span class="kw">backtrack</span>(n,k,<span class="dv">1</span>)</span>
-<span id="cb2-14"><a href="#cb2-14"></a>        return res</span></code></pre></div>
+<p>套模板</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="st">    </span>def <span class="kw">permute</span>(self, nums)<span class="op">:</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="st">        :type nums: List[int]</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="st">        :rtype: List[List[int]]</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>        res=[]</span>
+<span id="cb2-8"><a href="#cb2-8"></a>        track=[] <span class="co">#路径</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>        def <span class="kw">backtrack</span>(track)<span class="op">:</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">len</span>(track)<span class="op">==</span><span class="kw">len</span>(nums)<span class="op">:</span><span class="co"># 出口条件</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="st">                </span><span class="kw">res.append</span>(<span class="kw">track.copy</span>()) <span class="co"># </span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>                return </span>
+<span id="cb2-13"><a href="#cb2-13"></a>            <span class="cf">for</span> i <span class="cf">in</span> nums<span class="op">:</span><span class="st"> </span><span class="co"># 做选择</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="st">                </span><span class="cf">if</span> i not <span class="cf">in</span> track<span class="op">:</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="st">                    </span><span class="kw">track.append</span>(i)</span>
+<span id="cb2-16"><a href="#cb2-16"></a>                    <span class="kw">backtrack</span>(track) <span class="co"># 递归</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>                    <span class="kw">track.pop</span>() <span class="co"># 退栈。回溯</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>        <span class="kw">backtrack</span>(track)</span>
+<span id="cb2-19"><a href="#cb2-19"></a>        return res</span>
+<span id="cb2-20"><a href="#cb2-20"></a>        </span></code></pre></div>
 <ul>
 <li>copy</li>
 </ul>
 <p>这个是浅拷贝，是有关py的底层原理</p>
 <p>a=b此时a是拷贝了b的引用</p>
 </div>
-<div id="组合总和" class="section level2" number="1.4">
-<h2><span class="header-section-number">1.4</span> 组合总和</h2>
+<div id="全部排列问题二" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> 全部排列问题二</h2>
+<ul>
+<li>题目描述</li>
+</ul>
+<p>给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。</p>
+<p> </p>
+<p>示例 1：</p>
+<p>输入：nums = [1,1,2]
+输出：
+[[1,1,2],
+[1,2,1],
+[2,1,1]]
+示例 2：</p>
+<p>输入：nums = [1,2,3]
+输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+ </p>
+<p>解法略，同上</p>
+</div>
+<div id="组合总和一" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> 组合总和一</h2>
 <ul>
 <li>题目描述</li>
 </ul>
@@ -303,6 +328,175 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-16"><a href="#cb3-16"></a>                <span class="kw">track.pop</span>()</span>
 <span id="cb3-17"><a href="#cb3-17"></a>        <span class="kw">backtrack</span>(track)</span>
 <span id="cb3-18"><a href="#cb3-18"></a>        return res</span></code></pre></div>
+</div>
+<div id="组合总和二" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> 组合总和二</h2>
+<ul>
+<li>题目描述</li>
+</ul>
+<p>给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+candidates 中的每个数字在每个组合中只能使用一次。</p>
+<p>注意：解集不能包含重复的组合。 
+示例 1:</p>
+<p>输入: candidates = [10,1,2,7,6,1,5], target = 8,
+输出:
+[
+[1,1,6],
+[1,2,5],
+[1,7],
+[2,6]]
+示例 2:</p>
+<p>输入: candidates = [2,5,2,1,2], target = 5,
+输出:
+[
+[1,2,2],
+[5]]</p>
+<ul>
+<li>解题思路</li>
+</ul>
+<p>模板还是那个模板，只是题目稍作修改，增加了一个每个元素不重复</p>
+<p>思路不能变，但是需要增加辅助条件</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="st">    </span>def <span class="kw">combinationSum2</span>(self, candidates, target)<span class="op">:</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="st">        </span>res=[]</span>
+<span id="cb4-4"><a href="#cb4-4"></a>        track=[]</span>
+<span id="cb4-5"><a href="#cb4-5"></a>        <span class="kw">candidates.sort</span>() <span class="co"># 定义完路径增加一个排序</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>        def <span class="kw">backtrack</span>(j,track)<span class="op">:</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">sum</span>(track)<span class="op">==</span>target<span class="op">:</span><span class="st"> </span><span class="co"># 出口条件依然不变</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="st">                </span><span class="kw">res.append</span>(<span class="kw">track.copy</span>())</span>
+<span id="cb4-9"><a href="#cb4-9"></a>                return</span>
+<span id="cb4-10"><a href="#cb4-10"></a>            <span class="cf">if</span> <span class="kw">sum</span>(track)<span class="op">&gt;</span>target<span class="op">:</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="st">                </span>return</span>
+<span id="cb4-12"><a href="#cb4-12"></a>            <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(j,<span class="kw">len</span>(candidates))<span class="op">:</span><span class="st"> </span><span class="co"># 但是选择条件这里需要增加一个计数，保证选择的元素不重复，赶紧是一个指针的思想</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="st">                </span><span class="cf">if</span> i<span class="op">&gt;</span>j and candidates[i] <span class="op">==</span><span class="st"> </span>candidates[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">:</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="st">                    </span>continue</span>
+<span id="cb4-15"><a href="#cb4-15"></a>                </span>
+<span id="cb4-16"><a href="#cb4-16"></a>                <span class="kw">track.append</span>(candidates[i])</span>
+<span id="cb4-17"><a href="#cb4-17"></a>                <span class="kw">backtrack</span>(i<span class="op">+</span><span class="dv">1</span>,track)</span>
+<span id="cb4-18"><a href="#cb4-18"></a>                <span class="kw">track.pop</span>()</span>
+<span id="cb4-19"><a href="#cb4-19"></a>        <span class="kw">backtrack</span>(<span class="dv">0</span>,track)</span>
+<span id="cb4-20"><a href="#cb4-20"></a>        return res</span></code></pre></div>
+<ul>
+<li>仔细观察这个题，还是选择这里做出了一丢丢的改变</li>
+</ul>
+</div>
+<div id="组合总和三" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> 组合总和三</h2>
+<ul>
+<li>题目描述</li>
+</ul>
+<p>找出所有相加之和为 n 的 k 个数的组合。组合中只允许含有 1 - 9 的正整数，并且每种组合中不存在重复的数字。</p>
+<p>说明：
+所有数字都是正整数。
+解集不能包含重复的组合。
+示例 1:</p>
+<p>输入: k = 3, n = 7
+输出: [[1,2,4]]
+示例 2:</p>
+<p>输入: k = 3, n = 9
+输出: [[1,2,6], [1,3,5], [2,3,4]]</p>
+<ul>
+<li>解题思路</li>
+</ul>
+<p>修改出口-选择</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="st">    </span>def <span class="kw">combinationSum3</span>(self, k<span class="op">:</span><span class="st"> </span>int, n<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>List[List[int]]<span class="op">:</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="st">        </span>res=[]</span>
+<span id="cb5-4"><a href="#cb5-4"></a>        track=[]</span>
+<span id="cb5-5"><a href="#cb5-5"></a>        def <span class="kw">backtrack</span>(j,track)<span class="op">:</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">sum</span>(track)<span class="op">==</span>n and <span class="kw">len</span>(track)<span class="op">==</span>k<span class="op">:</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="st">                </span><span class="kw">res.append</span>(<span class="kw">track.copy</span>())</span>
+<span id="cb5-8"><a href="#cb5-8"></a>                return</span>
+<span id="cb5-9"><a href="#cb5-9"></a>            <span class="cf">if</span> <span class="kw">len</span>(track)<span class="op">==</span>k<span class="op">:</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="st">                </span>return</span>
+<span id="cb5-11"><a href="#cb5-11"></a>            <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(j,<span class="dv">10</span>)<span class="op">:</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="st">                </span><span class="kw">track.append</span>(i)</span>
+<span id="cb5-13"><a href="#cb5-13"></a>                <span class="kw">backtrack</span>(i<span class="op">+</span><span class="dv">1</span>,track)</span>
+<span id="cb5-14"><a href="#cb5-14"></a>                <span class="kw">track.pop</span>()</span>
+<span id="cb5-15"><a href="#cb5-15"></a>        <span class="kw">backtrack</span>(<span class="dv">1</span>,track)</span>
+<span id="cb5-16"><a href="#cb5-16"></a>        return res</span></code></pre></div>
+<p>找到感觉了，肝~</p>
+</div>
+<div id="组合总和四" class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> 组合总和四</h2>
+<ul>
+<li>题目描述</li>
+</ul>
+<p>给你一个由 不同 整数组成的数组 nums ，和一个目标整数 target 。请你从 nums 中找出并返回总和为 target 的元素组合的个数。</p>
+<p>题目数据保证答案符合 32 位整数范围。</p>
+<p> </p>
+<p>示例 1：</p>
+<p>输入：nums = [1,2,3], target = 4
+输出：7
+解释：
+所有可能的组合为：
+(1, 1, 1, 1)
+(1, 1, 2)
+(1, 2, 1)
+(1, 3)
+(2, 1, 1)
+(2, 2)
+(3, 1)
+请注意，顺序不同的序列被视作不同的组合。
+示例 2：</p>
+<p>输入：nums = [9], target = 3
+输出：0</p>
+<ul>
+<li>解题思路</li>
+</ul>
+<p>依然是套模板，不过这道题用回溯会超出时间限制</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="st">    </span>def <span class="kw">combinationSum4</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int], target<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="st">        </span>res=[]</span>
+<span id="cb6-4"><a href="#cb6-4"></a>        track=[]</span>
+<span id="cb6-5"><a href="#cb6-5"></a>        def <span class="kw">backtrack</span>(track)<span class="op">:</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">sum</span>(track)<span class="op">==</span>target<span class="op">:</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="st">                </span><span class="kw">res.append</span>(<span class="kw">track.copy</span>())</span>
+<span id="cb6-8"><a href="#cb6-8"></a>                return </span>
+<span id="cb6-9"><a href="#cb6-9"></a>            <span class="cf">if</span> <span class="kw">sum</span>(track)<span class="op">&gt;</span>target<span class="op">:</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="st">                </span>return</span>
+<span id="cb6-11"><a href="#cb6-11"></a>            <span class="cf">for</span> i <span class="cf">in</span> nums<span class="op">:</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="st">                </span><span class="kw">track.append</span>(i)</span>
+<span id="cb6-13"><a href="#cb6-13"></a>                <span class="kw">backtrack</span>(track)</span>
+<span id="cb6-14"><a href="#cb6-14"></a>                <span class="kw">track.pop</span>()</span>
+<span id="cb6-15"><a href="#cb6-15"></a>        <span class="kw">backtrack</span>(track)</span>
+<span id="cb6-16"><a href="#cb6-16"></a>        return <span class="kw">len</span>(res)</span></code></pre></div>
+<p>后面还是会把这个题写到dp里面</p>
+</div>
+<div id="分割回文字符串" class="section level2" number="1.9">
+<h2><span class="header-section-number">1.9</span> 分割回文字符串</h2>
+<ul>
+<li>题目描述</li>
+</ul>
+<p>给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是 回文串 。返回 s 所有可能的分割方案。</p>
+<p>回文串 是正着读和反着读都一样的字符串。</p>
+<p>示例 1：</p>
+<p>输入：s = “aab”
+输出：[[“a”,“a”,“b”],[“aa”,“b”]]
+示例 2：</p>
+<p>输入：s = “a”
+输出：[[“a”]]</p>
+<ul>
+<li>解题思路</li>
+</ul>
+<p>套模板</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="st">    </span>def <span class="kw">partition</span>(self, s<span class="op">:</span><span class="st"> </span>str) -&gt;<span class="st"> </span>List[List[str]]<span class="op">:</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="st">        </span>res =<span class="st"> </span>[]  </span>
+<span id="cb7-4"><a href="#cb7-4"></a>        track =<span class="st"> </span>[]  <span class="co">#放已经回文的子串</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>        def <span class="kw">backtrack</span>(s,startIndex)<span class="op">:</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="st">            </span><span class="cf">if</span> startIndex <span class="op">&gt;=</span><span class="st"> </span><span class="kw">len</span>(s)<span class="op">:</span><span class="st">  </span><span class="co">#如果起始位置已经大于s的大小，说明已经找到了一组分割方案了</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="st">                </span>return <span class="kw">res.append</span>(<span class="kw">track.copy</span>())</span>
+<span id="cb7-8"><a href="#cb7-8"></a>            <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(startIndex,<span class="kw">len</span>(s))<span class="op">:</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="st">                </span>p =<span class="st"> </span>s[startIndex<span class="op">:</span>i<span class="op">+</span><span class="dv">1</span>]  <span class="co">#获取[startIndex,i+1]在s中的子串</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>                <span class="cf">if</span> p <span class="op">==</span><span class="st"> </span>p[<span class="op">::-</span><span class="dv">1</span>]<span class="op">:</span><span class="st"> </span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="st">                    </span><span class="kw">track.append</span>(p)  <span class="co">#是回文子串</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>                <span class="cf">else</span><span class="op">:</span><span class="st"> </span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="st">                    </span>continue  <span class="co">#不是回文，跳过</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>                <span class="kw">backtrack</span>(s,i<span class="op">+</span><span class="dv">1</span>)  <span class="co">#寻找i+1为起始位置的子串</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>                <span class="kw">track.pop</span>()  <span class="co">#回溯过程，弹出本次已经填在path的子串</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a>        <span class="kw">backtrack</span>(s,<span class="dv">0</span>)</span>
+<span id="cb7-17"><a href="#cb7-17"></a>        return res</span></code></pre></div>
 </div>
 </div>
             </section>

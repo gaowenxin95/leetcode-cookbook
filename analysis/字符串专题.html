@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>字符串专题</title>
+  <meta name="description" content="字符串专题" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="字符串专题" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="字符串专题" />
+  
+  
+  
+
+<meta name="author" content="高文欣" />
+
+
+<meta name="date" content="2021-08-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path=""><a href="#字符串专题"><i class="fa fa-check"></i><b>1</b> 字符串专题</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#回文串"><i class="fa fa-check"></i><b>1.1</b> 回文串</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#无重复字符的最长子串"><i class="fa fa-check"></i><b>1.2</b> 无重复字符的最长子串</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#字符串转换整数atoi"><i class="fa fa-check"></i><b>1.3</b> 字符串转换整数atoi</a></li>
+<li class="chapter" data-level="1.4" data-path=""><a href="#最长公共前缀"><i class="fa fa-check"></i><b>1.4</b> 最长公共前缀</a></li>
+<li class="chapter" data-level="1.5" data-path=""><a href="#z形树或者n形树问题"><i class="fa fa-check"></i><b>1.5</b> z形树或者N形树问题</a></li>
+<li class="chapter" data-level="1.6" data-path=""><a href="#连续字符串计数"><i class="fa fa-check"></i><b>1.6</b> 连续字符串计数</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">字符串专题</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">字符串专题</h1>
+<p class="author"><em>高文欣</em></p>
+<p class="date"><em>2021-08-17</em></p>
+</div>
+<div id="字符串专题" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> 字符串专题</h1>
+<div id="回文串" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> 回文串</h2>
+<p>见DP专题</p>
+</div>
+<div id="无重复字符的最长子串" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> 无重复字符的最长子串</h2>
+<p>给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。</p>
+<p>示例 1:</p>
+<p>输入: “abcabcbb”
+输出: 3
+解释: 因为无重复字符的最长子串是 “abc”，所以其长度为 3。
+示例 2:</p>
+<p>输入: “bbbbb”
+输出: 1
+解释: 因为无重复字符的最长子串是 “b”，所以其长度为 1。
+示例 3:</p>
+<p>输入: “pwwkew”
+输出: 3
+解释: 因为无重复字符的最长子串是 “wke”，所以其长度为 3。
+  请注意，你的答案必须是 子串 的长度，“pwke” 是一个子序列，不是子串。</p>
+<p><strong>分析</strong>：切割大法好</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="st">    </span>def <span class="kw">lengthOfLongestSubstring</span>(self, s<span class="op">:</span><span class="st"> </span>str) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="st">        </span>L =<span class="st"> </span>[]</span>
+<span id="cb1-4"><a href="#cb1-4"></a>        lenth =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>        <span class="cf">for</span> i <span class="cf">in</span> s<span class="op">:</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="st">            </span><span class="co">#如果字符不在列表中，追加该字符并计算列表长度</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="st">            </span><span class="cf">if</span> i not <span class="cf">in</span> L<span class="op">:</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="st">                </span><span class="kw">L.append</span>(i)</span>
+<span id="cb1-9"><a href="#cb1-9"></a>            <span class="co">#如果字符在列表中，从字符所在位置切分列表</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>            <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="st">                </span>idx =<span class="st"> </span><span class="kw">L.index</span>(i)</span>
+<span id="cb1-12"><a href="#cb1-12"></a>                L =<span class="st"> </span>L[idx<span class="op">+</span><span class="dv">1</span><span class="op">:</span>]</span>
+<span id="cb1-13"><a href="#cb1-13"></a>                <span class="co">#切分之后将字符追加入列表</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>                <span class="kw">L.append</span>(i)</span>
+<span id="cb1-15"><a href="#cb1-15"></a>            current =<span class="st"> </span><span class="kw">len</span>(L)</span>
+<span id="cb1-16"><a href="#cb1-16"></a>            lenth =<span class="st"> </span><span class="kw">max</span>(current,lenth)</span>
+<span id="cb1-17"><a href="#cb1-17"></a>        return lenth</span></code></pre></div>
+</div>
+<div id="字符串转换整数atoi" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> 字符串转换整数atoi</h2>
+<p>使用正则表达式：</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="op">^</span>：匹配字符串开头</span>
+<span id="cb2-3"><a href="#cb2-3"></a>[\<span class="op">+</span>\<span class="op">-</span>]：代表一个<span class="op">+</span>字符或<span class="op">-</span>字符</span>
+<span id="cb2-4"><a href="#cb2-4"></a>?：前面一个字符可有可无</span>
+<span id="cb2-5"><a href="#cb2-5"></a>\d：一个数字</span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="op">+</span>：前面一个字符的一个或多个</span>
+<span id="cb2-7"><a href="#cb2-7"></a>\D：一个非数字字符</span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="op">*</span>：前面一个字符的0个或多个</span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="kw">max</span>(<span class="kw">min</span>(数字, <span class="dv">2</span><span class="op">**</span><span class="dv">31</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>), <span class="dv">-2</span><span class="op">**</span><span class="dv">31</span>) 用来防止结果越界</span></code></pre></div>
+<p>为什么可以使用正则表达式？如果整数过大溢出怎么办？</p>
+<p>题目中描述： 假设我们的环境只能存储 32 位大小的有符号整数</p>
+<p>首先，这个假设对于 Python 不成立，Python 不存在 32 位的 int 类型。其次，即使搜索到的字符串转32位整数可能导致溢出，我们也可以直接通过字符串判断是否存在溢出的情况（比如 try 函数 或 判断字符串长度 + 字符串比较），</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="st">    </span>def <span class="kw">myAtoi</span>(self, s<span class="op">:</span><span class="st"> </span>str) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="st">        </span>return <span class="kw">max</span>(<span class="kw">min</span>(<span class="kw">int</span>(<span class="op">*</span><span class="kw">re.findall</span>(<span class="st">&#39;^[\+\-]?\d+&#39;</span>, <span class="kw">s.lstrip</span>())), <span class="dv">2</span><span class="op">**</span><span class="dv">31</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>), <span class="dv">-2</span><span class="op">**</span><span class="dv">31</span>)</span></code></pre></div>
+<p>正则真的好方便啊啊啊啊~</p>
+</div>
+<div id="最长公共前缀" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> 最长公共前缀</h2>
+<p>编写一个函数来查找字符串数组中的最长公共前缀。</p>
+<p>如果不存在公共前缀，返回空字符串 ""。</p>
+<p>示例 1:</p>
+<p>输入: [“flower”,“flow”,“flight”]
+输出: “fl”
+示例 2:</p>
+<p>输入: [“dog”,“racecar”,“car”]
+输出: ""
+解释: 输入不存在公共前缀。
+说明:</p>
+<p>所有输入只包含小写字母 a-z 。</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a> ascii 码思路，字母是可以比较大小的</span>
+<span id="cb4-2"><a href="#cb4-2"></a> </span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#  1、利用python的max()和min()，在Python里字符串是可以比较的，按照ascII值排，举例abb， aba，abac，最大为abb，最小为aba。所以只需要比较最大最小的公共前缀就是整个数组的公共前缀</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>class Solution<span class="op">:</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="st">    </span>def <span class="kw">longestCommonPrefix</span>(self, strs<span class="op">:</span><span class="st"> </span>List[str]) -&gt;<span class="st"> </span>str<span class="op">:</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="st">        </span><span class="cf">if</span> not strs<span class="op">:</span><span class="st"> </span>return <span class="st">&quot;&quot;</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>        s1=<span class="kw">min</span>(strs)</span>
+<span id="cb4-8"><a href="#cb4-8"></a>        s2=<span class="kw">max</span>(strs)</span>
+<span id="cb4-9"><a href="#cb4-9"></a>        <span class="cf">for</span> k,v <span class="cf">in</span> <span class="kw">enumerate</span>(s1)<span class="op">:</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="st">            </span><span class="cf">if</span> v <span class="op">!=</span>s2[k]<span class="op">:</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="st">                </span>return s2[<span class="op">:</span>k]</span>
+<span id="cb4-12"><a href="#cb4-12"></a>        return s1</span>
+<span id="cb4-13"><a href="#cb4-13"></a></span>
+<span id="cb4-14"><a href="#cb4-14"></a></span>
+<span id="cb4-15"><a href="#cb4-15"></a>解题思路：</span>
+<span id="cb4-16"><a href="#cb4-16"></a>使用 zip 根据字符串下标合并成数组，</span>
+<span id="cb4-17"><a href="#cb4-17"></a>判断合并后数组里元素是否都相同</span>
+<span id="cb4-18"><a href="#cb4-18"></a>复杂度分析：</span>
+<span id="cb4-19"><a href="#cb4-19"></a>时间复杂度 <span class="kw">O</span>(N)<span class="kw">O</span>(N) ，NN 表示数组中最短字符串长度</span>
+<span id="cb4-20"><a href="#cb4-20"></a>空间复杂度 <span class="kw">O</span>(<span class="dv">1</span>)<span class="kw">O</span>(<span class="dv">1</span>) ，使用的变量为自然数个</span>
+<span id="cb4-21"><a href="#cb4-21"></a></span>
+<span id="cb4-22"><a href="#cb4-22"></a></span>
+<span id="cb4-23"><a href="#cb4-23"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a><span class="st">    </span>def <span class="kw">longestCommonPrefix</span>(self, strs)<span class="op">:</span></span>
+<span id="cb4-25"><a href="#cb4-25"></a><span class="st">        </span>ans =<span class="st"> &#39;&#39;</span></span>
+<span id="cb4-26"><a href="#cb4-26"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">zip</span>(<span class="op">*</span>strs)<span class="op">:</span></span>
+<span id="cb4-27"><a href="#cb4-27"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">len</span>(<span class="kw">set</span>(i)) <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span></span>
+<span id="cb4-28"><a href="#cb4-28"></a><span class="st">                </span>ans <span class="op">+</span><span class="er">=</span><span class="st"> </span>i[<span class="dv">0</span>]</span>
+<span id="cb4-29"><a href="#cb4-29"></a>            <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb4-30"><a href="#cb4-30"></a><span class="st">                </span><span class="cf">break</span></span>
+<span id="cb4-31"><a href="#cb4-31"></a>        return ans</span></code></pre></div>
+</div>
+<div id="z形树或者n形树问题" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> z形树或者N形树问题</h2>
+<p>将一个给定字符串根据给定的行数，以从上往下、从左到右进行 Z 字形排列。</p>
+<p>比如输入字符串为 “LEETCODEISHIRING” 行数为 3 时，排列如下：</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2"></a>L   C   I   R</span>
+<span id="cb5-3"><a href="#cb5-3"></a>E T O E S I I G</span>
+<span id="cb5-4"><a href="#cb5-4"></a>E   D   H   N</span></code></pre></div>
+<p>之后，你的输出需要从左往右逐行读取，产生出一个新的字符串，比如：“LCIRETOESIIGEDHN”。</p>
+<p>请你实现这个将字符串进行指定行数变换的函数：</p>
+<p>string convert(string s, int numRows);
+示例 1:</p>
+<p>输入: s = “LEETCODEISHIRING”, numRows = 3
+输出: “LCIRETOESIIGEDHN”
+示例 2:</p>
+<p>输入: s = “LEETCODEISHIRING”, numRows = 4
+输出: “LDREOEIIECIHNTSG”
+解释:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>L     D     R</span>
+<span id="cb6-2"><a href="#cb6-2"></a>E   O E   I I</span>
+<span id="cb6-3"><a href="#cb6-3"></a>E C   I H   N</span>
+<span id="cb6-4"><a href="#cb6-4"></a>T     S     G</span></code></pre></div>
+<p>分析：</p>
+<p>解题思路：
+题目理解:
+。字符串 <span class="math inline">\(\quad s \quad\)</span> 是以 <span class="math inline">\(Z\)</span> 字形为顺序存储的字符串, 目标是按行打印。
+<span class="math inline">\(\circ\)</span> 设 numRows 行字符串分别为 <span class="math inline">\(s_{1}, s_{2}, \ldots, s_{n},\)</span> 则容易发现：按顺序遍历字符串 <span class="math inline">\(s\)</span> 时, 每个字符 <span class="math inline">\(\quad\)</span> c 在 <span class="math inline">\(Z\)</span> 字形中对应的 行索引 先从 <span class="math inline">\(s_{1}\)</span> 增大至 <span class="math inline">\(s_{n},\)</span> 再从 <span class="math inline">\(s_{n}\)</span> 减小至 <span class="math inline">\(s_{1} \ldots \ldots\)</span> 如此反复。 因此, 解决方案为：模拟这个行索引的变化, 在遍历 <span class="math inline">\(s\)</span> 中把每个字符填到正确的行 res[i]
+算法流程：按顺序遍历字符串 <span class="math inline">\(\quad s\)</span>;
+1. res[i] += c : 把每个字符 <span class="math inline">\(c\)</span> 填入对应行 <span class="math inline">\(s_{i}\)</span>
+2. i += flag : 更新当前字符 c 对应的行索引;
+3. flag = - flag : 在达到 Z 字形转折点时，执行反向。
+复杂度分析：
+。时间复杂度 <span class="math inline">\(O(N):\)</span> 遍历一遍字符串 <span class="math inline">\(s\)</span>;
+<span class="math inline">\(\circ\)</span> 空间复杂度 <span class="math inline">\(O(N):\)</span> 各行字符串共占用 <span class="math inline">\(O(N)\)</span> 额外空间。</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="st">    </span>def <span class="kw">convert</span>(self, s<span class="op">:</span><span class="st"> </span>str, numRows<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>str<span class="op">:</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="st">        </span><span class="cf">if</span> numRows<span class="op">&lt;</span><span class="dv">2</span><span class="op">:</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="st">            </span>return s</span>
+<span id="cb7-6"><a href="#cb7-6"></a>        res=[<span class="st">&quot;&quot;</span> <span class="cf">for</span> _ <span class="cf">in</span> <span class="kw">range</span>(numRows)]</span>
+<span id="cb7-7"><a href="#cb7-7"></a>        i,flag=<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>        <span class="cf">for</span> c <span class="cf">in</span> s<span class="op">:</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="st">            </span>res[i] <span class="op">+</span><span class="er">=</span><span class="st"> </span>c</span>
+<span id="cb7-10"><a href="#cb7-10"></a>            <span class="cf">if</span> i <span class="op">==</span><span class="dv">0</span> or i <span class="op">==</span><span class="st"> </span>numRows<span class="dv">-1</span><span class="op">:</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="st">                </span>flag=<span class="op">-</span>flag</span>
+<span id="cb7-12"><a href="#cb7-12"></a></span>
+<span id="cb7-13"><a href="#cb7-13"></a>                i<span class="op">+</span><span class="er">=</span>flag</span>
+<span id="cb7-14"><a href="#cb7-14"></a>            return <span class="st">&quot;&quot;</span><span class="kw">.join</span>(res)</span>
+<span id="cb7-15"><a href="#cb7-15"></a></span></code></pre></div>
+</div>
+<div id="连续字符串计数" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> 连续字符串计数</h2>
+<p>string = “aaabbcc”
+输出：“ a3b2c2”</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a></span>
+<span id="cb8-2"><a href="#cb8-2"></a>coded =<span class="st"> &#39;&#39;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="cf">while</span> string<span class="op">:</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="st">    </span>i =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>    <span class="cf">while</span> i <span class="op">&lt;</span><span class="st"> </span><span class="kw">len</span>(string) and string[<span class="dv">0</span>] <span class="op">==</span><span class="st"> </span>string[i]<span class="op">:</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="st">        </span>i <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>    coded <span class="op">+</span><span class="er">=</span><span class="st"> </span>string[<span class="dv">0</span>]<span class="op">+</span><span class="kw">str</span>(i)</span>
+<span id="cb8-8"><a href="#cb8-8"></a>    string =<span class="st"> </span>string[i<span class="op">:</span>]</span>
+<span id="cb8-9"><a href="#cb8-9"></a></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="kw">print</span>(coded)</span></code></pre></div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

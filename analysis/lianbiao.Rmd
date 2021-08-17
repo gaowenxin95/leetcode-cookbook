@@ -622,11 +622,54 @@ def reverseList_k(head,k):
     return head
 ```
 
-## 限制时间复杂度输出链表的中间值
+## 两数相加
 
-主要思想是快慢指针
+- 题目描述
 
-快指针先走2步，那慢指针走一步，当快指针走到末尾的时候，慢指针刚好走到中间。
+先将l1和l2头节点的值加起来赋值给新链表的头节点
+遍历两个链表，只要有一个链表还没有遍历到末尾，就继续遍历
+每次遍历生成一个当前节点cur的下一个节点，其值为两链表对应节点的和再加上当前节点cur产生的进位
+更新进位后的当前节点cur的值
+循环结束后，因为首位可能产生进位，因此如果cur.val是两位数的话，新增一个节点
+返回头节点
+
+输入：l1 = [2,4,3], l2 = [5,6,4]
+输出：[7,0,8]
+解释：342 + 465 = 807.
+示例 2：
+
+输入：l1 = [0], l2 = [0]
+输出：[0]
+示例 3：
+
+输入：l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+输出：[8,9,9,9,0,0,0,1]
+
+
+- 解题思路
+
+是典型的链表指针解题，可以考虑递归
+
+根据题意可知链表数字位数是从小到大的
+
+**因为两个数字相加会产生进位，所以使用i来保存进位。**
+则当前位的值为(l1.val + l2.val + i) % 10
+则进位值为(l1.val + l2.val + i) / 10
+建立新node，然后将进位传入下一层。
+
+
+```r
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        def dfs(l, r, i):
+            if not l and not r and not i: return None
+            s = (l.val if l else 0) + (r.val if r else 0) + i
+            node = ListNode(s % 10)
+            node.next = dfs(l.next if l else None, r.next if r else None, s // 10)
+            return node
+        return dfs(l1, l2, 0)
+
+```
 
 
 

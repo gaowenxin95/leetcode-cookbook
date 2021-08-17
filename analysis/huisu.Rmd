@@ -53,8 +53,49 @@ bibliography: ../refs/add.bib
 
 一般基于模板的变形就是在出口条件和做出选择的地方进行变形
 
+- 下面是一个标准化的模板
+```r
+res = []
+def backtrack(路径, 选择列表):
+    if 满足结束条件:
+        res.append(路径)
+        return  
+        
+    if 满足剪枝条件：
+    	return
+    	
+    for 选择 in 选择列表:
+        做选择
+        backtrack(路径, 选择列表)
+        撤销选择
 
-**下面是一个组合问题，也是一个标准化的模板**
+``` 
+
+## 全排列问题一
+
+- 题目描述
+
+给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。
+
+ 
+
+示例 1：
+
+输入：nums = [1,1,2]
+输出：
+[[1,1,2],
+ [1,2,1],
+ [2,1,1]]
+示例 2：
+
+输入：nums = [1,2,3]
+输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+
+- 解题思路
+
+套模板
+
+
 ```r
 class Solution(object):
     def permute(self, nums):
@@ -78,50 +119,37 @@ class Solution(object):
         
 ```
 
-## 组合问题
-
-- 题目描述
-给定两个整数 n 和 k，返回 1 ... n 中所有可能的 k 个数的组合。
-
-示例:
-输入: n = 4, k = 2
-输出:
-[
-[2,4],
-[3,4],
-[2,3],
-[1,2],
-[1,3],
-[1,4],
-]
-
-- 解题思路
-回溯法的搜索过程就是一个树型结构的遍历过程，在如下图中，可以看出for循环用来横向遍历，递归的过程是纵向遍历。
-
-```r
-class Solution:
-    def combine(self, n: int, k: int) -> List[List[int]]:
-        res=[]  #存放符合条件结果的集合
-        path=[]  #用来存放符合条件结果
-        def backtrack(n,k,startIndex):
-            if len(path) == k:
-                res.append(path[:])
-                return 
-            for i in range(startIndex,n+1):
-                path.append(i)  #处理节点 
-                backtrack(n,k,i+1)  #递归
-                path.pop()  #回溯，撤销处理的节点
-        backtrack(n,k,1)
-        return res
-```
-
 - copy
 
 这个是浅拷贝，是有关py的底层原理
 
 a=b此时a是拷贝了b的引用
 
-## 组合总和
+## 全部排列问题二
+
+- 题目描述
+
+给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。
+
+ 
+
+示例 1：
+
+输入：nums = [1,1,2]
+输出：
+[[1,1,2],
+ [1,2,1],
+ [2,1,1]]
+示例 2：
+
+输入：nums = [1,2,3]
+输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+ 
+
+解法略，同上
+
+
+## 组合总和一
 
 - 题目描述
 
@@ -181,3 +209,206 @@ class Solution:
         backtrack(track)
         return res
 ```
+
+## 组合总和二
+
+- 题目描述
+
+给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+candidates 中的每个数字在每个组合中只能使用一次。
+
+注意：解集不能包含重复的组合。 
+示例 1:
+
+输入: candidates = [10,1,2,7,6,1,5], target = 8,
+输出:
+[
+[1,1,6],
+[1,2,5],
+[1,7],
+[2,6]
+]
+示例 2:
+
+输入: candidates = [2,5,2,1,2], target = 5,
+输出:
+[
+[1,2,2],
+[5]
+]
+
+- 解题思路
+
+模板还是那个模板，只是题目稍作修改，增加了一个每个元素不重复
+
+思路不能变，但是需要增加辅助条件
+
+```r
+class Solution:
+    def combinationSum2(self, candidates, target):
+        res=[]
+        track=[]
+        candidates.sort() # 定义完路径增加一个排序
+        def backtrack(j,track):
+            if sum(track)==target: # 出口条件依然不变
+                res.append(track.copy())
+                return
+            if sum(track)>target:
+                return
+            for i in range(j,len(candidates)): # 但是选择条件这里需要增加一个计数，保证选择的元素不重复，赶紧是一个指针的思想
+                if i>j and candidates[i] == candidates[i - 1] :
+                    continue
+                
+                track.append(candidates[i])
+                backtrack(i+1,track)
+                track.pop()
+        backtrack(0,track)
+        return res
+```
+
+- 仔细观察这个题，还是选择这里做出了一丢丢的改变
+
+## 组合总和三
+
+- 题目描述
+
+找出所有相加之和为 n 的 k 个数的组合。组合中只允许含有 1 - 9 的正整数，并且每种组合中不存在重复的数字。
+
+说明：
+所有数字都是正整数。
+解集不能包含重复的组合。 
+示例 1:
+
+输入: k = 3, n = 7
+输出: [[1,2,4]]
+示例 2:
+
+输入: k = 3, n = 9
+输出: [[1,2,6], [1,3,5], [2,3,4]]
+
+- 解题思路
+
+修改出口-选择
+
+```r
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        res=[]
+        track=[]
+        def backtrack(j,track):
+            if sum(track)==n and len(track)==k:
+                res.append(track.copy())
+                return
+            if len(track)==k:
+                return
+            for i in range(j,10):
+                track.append(i)
+                backtrack(i+1,track)
+                track.pop()
+        backtrack(1,track)
+        return res
+```
+
+找到感觉了，肝~
+
+## 组合总和四
+
+- 题目描述
+
+给你一个由 不同 整数组成的数组 nums ，和一个目标整数 target 。请你从 nums 中找出并返回总和为 target 的元素组合的个数。
+
+题目数据保证答案符合 32 位整数范围。
+
+ 
+
+示例 1：
+
+输入：nums = [1,2,3], target = 4
+输出：7
+解释：
+所有可能的组合为：
+(1, 1, 1, 1)
+(1, 1, 2)
+(1, 2, 1)
+(1, 3)
+(2, 1, 1)
+(2, 2)
+(3, 1)
+请注意，顺序不同的序列被视作不同的组合。
+示例 2：
+
+输入：nums = [9], target = 3
+输出：0
+
+- 解题思路
+
+依然是套模板，不过这道题用回溯会超出时间限制
+
+```r
+class Solution:
+    def combinationSum4(self, nums: List[int], target: int) -> int:
+        res=[]
+        track=[]
+        def backtrack(track):
+            if sum(track)==target:
+                res.append(track.copy())
+                return 
+            if sum(track)>target:
+                return
+            for i in nums:
+                track.append(i)
+                backtrack(track)
+                track.pop()
+        backtrack(track)
+        return len(res)
+```
+
+后面还是会把这个题写到dp里面
+
+## 分割回文字符串
+
+- 题目描述
+
+给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是 回文串 。返回 s 所有可能的分割方案。
+
+回文串 是正着读和反着读都一样的字符串。
+
+示例 1：
+
+输入：s = "aab"
+输出：[["a","a","b"],["aa","b"]]
+示例 2：
+
+输入：s = "a"
+输出：[["a"]]
+
+- 解题思路
+
+套模板
+
+```r
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        res = []  
+        track = []  #放已经回文的子串
+        def backtrack(s,startIndex):
+            if startIndex >= len(s):  #如果起始位置已经大于s的大小，说明已经找到了一组分割方案了
+                return res.append(track.copy())
+            for i in range(startIndex,len(s)):
+                p = s[startIndex:i+1]  #获取[startIndex,i+1]在s中的子串
+                if p == p[::-1]: 
+                    track.append(p)  #是回文子串
+                else: 
+                    continue  #不是回文，跳过
+                backtrack(s,i+1)  #寻找i+1为起始位置的子串
+                track.pop()  #回溯过程，弹出本次已经填在path的子串
+        backtrack(s,0)
+        return res
+```
+
+
+
+
+
+
+
