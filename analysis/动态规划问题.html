@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2021-08-16" />
+<meta name="date" content="2021-08-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -178,7 +178,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">动态规划专题</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2021-08-16</em></p>
+<p class="date"><em>2021-08-18</em></p>
 </div>
 <div id="动态规划问题" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> 动态规划问题</h1>
@@ -1303,14 +1303,14 @@ dp[j]表示容量（这里说容量更形象，其实就是重量）为j的背�
 <p>接下来就是如何初始化dp[j]呢，因为重量都不会是负数，所以dp[j]都初始化为0就可以了，这样在递归公式dp[j] = max(dp[j], dp[j - stones[i]] + stones[i])中dp[j]才不会初始值所覆盖。</p>
 <p>有了递推公式，就很简单了</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb35-2"><a href="#cb35-2"></a><span class="st">    </span>def <span class="kw">canPartition</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>bool<span class="op">:</span></span>
-<span id="cb35-3"><a href="#cb35-3"></a><span class="st">        </span>taraget =<span class="st"> </span><span class="kw">sum</span>(nums)</span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="st">    </span>def <span class="kw">canPartition</span>(self, stones<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>bool<span class="op">:</span></span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="st">        </span>taraget =<span class="st"> </span><span class="kw">sum</span>(stones)</span>
 <span id="cb35-4"><a href="#cb35-4"></a>        sum=<span class="dv">0</span></span>
 <span id="cb35-5"><a href="#cb35-5"></a>        <span class="cf">if</span> taraget % <span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="st"> </span>return False</span>
 <span id="cb35-6"><a href="#cb35-6"></a>        taraget <span class="op">/</span><span class="er">/=</span><span class="st"> </span><span class="dv">2</span></span>
 <span id="cb35-7"><a href="#cb35-7"></a>        dp =<span class="st"> </span>[<span class="dv">0</span>] <span class="op">*</span><span class="st"> </span><span class="dv">10001</span></span>
-<span id="cb35-8"><a href="#cb35-8"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(nums))<span class="op">:</span></span>
-<span id="cb35-9"><a href="#cb35-9"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(taraget, nums[i] <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">-1</span>)<span class="op">:</span></span>
+<span id="cb35-8"><a href="#cb35-8"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(stones))<span class="op">:</span></span>
+<span id="cb35-9"><a href="#cb35-9"></a><span class="st">            </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(taraget, stones[i] <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">-1</span>)<span class="op">:</span></span>
 <span id="cb35-10"><a href="#cb35-10"></a><span class="st">                </span>dp[j] =<span class="st"> </span><span class="kw">max</span>(dp[j], dp[j <span class="op">-</span><span class="st"> </span>stones[i]] <span class="op">+</span><span class="st"> </span>stones[i])</span>
 <span id="cb35-11"><a href="#cb35-11"></a>        return sum <span class="op">-</span><span class="st"> </span>dp[target] <span class="op">-</span><span class="st"> </span>dp[target]</span></code></pre></div>
 </div>

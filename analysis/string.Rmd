@@ -8,47 +8,94 @@ bibliography: ../refs/add.bib
 
 # 字符串专题
 
+## 反转字符串一
 
-## 滑动窗口模版
+- 题目描述
+
+编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。
+
+不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。
+
+你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。
+
+示例 1：
+输入：["h","e","l","l","o"]
+输出：["o","l","l","e","h"]
+
+示例 2：
+输入：["H","a","n","n","a","h"]
+输出：["h","a","n","n","a","H"]
+
+- 解题思路
+
+其实一个库函数就能完成的reverse or [::-1]，但是不能这样
 
 ```r
-初始化窗口端点L，R，一般L为0，R为1
-    初始化最优值
-    while R < len(Array):
-        while R < len(Array):
-            R += 1              #移动右端点
-            if R < len(Array):
-                更新状态        
-            if 状态满足条件:
-                可选的更新最优值的位置
-                break           #一旦满足条件即跳出
-        if R == len(Array):     # 若循环是由于移动到数组末尾结束，则停止整个程序。因为之后已经不再有可能的解
-            break
-        while L < R:
-            更新状态    # 移动左端点，需要更新状态
-            L += 1
-            if 状态满足条件：
-                可选的更新最优值的位置
-            else：  # 一旦窗口所在区间不再满足条件即跳出，去移动右端点
-                break
-        可选的对于L，R端点的后续处理
-    return 最优值
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        """
+        Do not return anything, modify s in-place instead.
+        """
+        left, right = 0, len(s) - 1
+        while(left < right):
+            s[left], s[right] = s[right], s[left]
+            left += 1
+            right -= 1
 ```
 
-没有什么比理解题意直接套模版更爽的，字符串这里很多题毁用到滑动窗口
+## 反转字符串二
 
-## 
+- 题目描述
 
-## 回文串
+给定一个字符串 s 和一个整数 k，你需要对从字符串开头算起的**每隔 2k 个字符的前 k 个字符进行反转。**
 
-见DP专题
+如果剩余字符少于 k 个，则将剩余字符全部反转。
+
+如果剩余字符小于 2k 但大于或等于 k 个，则反转前 k 个字符，其余字符保持原样。
+
+示例:
+
+输入: s = "abcdefg", k = 2
+输出: "bacdfeg"
+
+- 解题思路
+
+每隔2k个字符反转，某年天眼查的面试题，根基还是反转字符串
+
+```r
+
+class Solution(object):
+    def reverseStr(self, s, k):
+        from functools import reduce
+        s = list(s) # 先把字符串变成list
+        # a另一种方法 a[::-1]
+        def reverse(s): # 这个就是反转字符串
+            left, right = 0, len(s) - 1
+            while left < right:
+                s[left], s[right] = s[right], s[left]
+                left += 1
+                right -= 1
+            return s
+        
+        # make sure we reverse each 2k elements 
+        for i in range(0, len(s), 2*k): # 选择条件是每隔2k个
+            s[i:(i+k)] = reverse(s[i:(i+k)]) # 递归
+        
+        # combine list into str.
+        return reduce(lambda a, b: a+b, s) # 最后拼成字符串
+        
+
+
+```
+
+
 
 
 ## 无重复字符的最长子串
 
-给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+给定一个字符串，请你找出其中不含有重复字符的最长子串的长度。
 
-示例 1:
+示例1:
 
 输入: "abcabcbb"
 输出: 3 
@@ -62,15 +109,15 @@ bibliography: ../refs/add.bib
 
 输入: "pwwkew"
 输出: 3
-解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
-     请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
+解释: 因为无重复字符的最长子串是"wke"，所以其长度为 3。
+请注意，你的答案必须是子串的长度，"pwke"是一个子序列，不是子串。
 
 **分析**：切割大法好
 
 ```r
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        L = []
+        L = [] # 定义一个空的列表用来存字串
         lenth = 0
         for i in s:
             #如果字符不在列表中，追加该字符并计算列表长度
@@ -78,18 +125,106 @@ class Solution:
                 L.append(i)
             #如果字符在列表中，从字符所在位置切分列表
             else:
-                idx = L.index(i)
+                idx = L.index(i) # 获得索引的一种方式
                 L = L[idx+1:]
-                #切分之后将字符追加入列表
-                L.append(i)
+                L.append(i)#切分之后将字符追加入列表
             current = len(L)
             lenth = max(current,lenth)
         return lenth
 ```
 
+## 替换空格
 
-## 字符串转换整数atoi
+- 题目描述
 
+请实现一个函数，把字符串 s 中的每个空格替换成"%20"。
+
+示例 1： 输入：s = "We are happy."
+输出："We%20are%20happy."
+
+- 解题思路
+
+其实一个replace就能搞定，但是不能这么干
+
+```r
+# -*- coding:utf-8 -*-
+class Solution:
+    # s 源字符串
+    def replaceSpace(self, s):
+        # write code here
+        s = list(s)
+        for i in range(len(s)):
+            if s[i] == ' ':
+                s[i] = '%20'
+        return ''.join(s)
+```
+
+## 反转字符串里面的单词
+
+- 题目描述
+给定一个字符串，逐个翻转字符串中的每个单词。
+
+示例 1：
+输入: "the sky is blue"
+输出: "blue is sky the"
+
+示例 2：
+输入: "  hello world!  "
+输出: "world! hello"
+解释: 输入字符串可以在前面或者后面包含多余的空格，但是反转后的字符不能包括。
+
+示例 3：
+输入: "a good   example"
+输出: "example good a"
+解释: 如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。
+
+只是交换单词的顺序，但是单词还是原来的单词
+
+- 解题思路
+
+```r
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        return " ".join(s.strip().split()[::-1])   
+```
+
+## 左旋字符串
+
+- 题目描述
+
+字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。比如，输入字符串"abcdefg"和数字2，该函数将返回左旋转两位得到的结果"cdefgab"。
+
+示例 1：
+输入: s = "abcdefg", k = 2
+输出: "cdefgab"
+
+示例 2：
+输入: s = "lrloseumgh", k = 6
+输出: "umghlrlose"
+
+限制：
+1 <= k < s.length <= 10000
+
+限制条件，不额外开辟空间
+
+- 解题思路
+
+```r
+class Solution:
+    def reverseLeftWords(self, s: str, n: int) -> str:
+        return s[n:] + s[0:n]
+    
+```
+
+## 字符串转换整数
+
+- 题目描述
+
+将字符串转化成为整数
+
+例子
+s="1234"
+转化后：ss=[1,2,3,4]
 
 使用正则表达式：
 
@@ -245,6 +380,7 @@ class Solution:
 ```
 
 ## 连续字符串计数
+
 string = "aaabbcc"
 输出：“ a3b2c2”
 ```r
@@ -260,5 +396,34 @@ while string:
 print(coded)
 ```
 
+## 滑动窗口模版
+
+就感觉这个模板有点复杂
+
+```r
+初始化窗口端点L，R，一般L为0，R为1
+    初始化最优值
+    while R < len(Array):
+        while R < len(Array):
+            R += 1              #移动右端点
+            if R < len(Array):
+                更新状态        
+            if 状态满足条件:
+                可选的更新最优值的位置
+                break           #一旦满足条件即跳出
+        if R == len(Array):     # 若循环是由于移动到数组末尾结束，则停止整个程序。因为之后已经不再有可能的解
+            break
+        while L < R:
+            更新状态    # 移动左端点，需要更新状态
+            L += 1
+            if 状态满足条件：
+                可选的更新最优值的位置
+            else：  # 一旦窗口所在区间不再满足条件即跳出，去移动右端点
+                break
+        可选的对于L，R端点的后续处理
+    return 最优值
+```
+
+没有什么比理解题意直接套模版更爽的，字符串这里很多题会用到滑动窗口
 
 

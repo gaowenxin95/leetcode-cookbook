@@ -1552,14 +1552,14 @@ dp数组如何初始化
 
 ```r
 class Solution:
-    def canPartition(self, nums: List[int]) -> bool:
-        taraget = sum(nums)
+    def canPartition(self, stones: List[int]) -> bool:
+        taraget = sum(stones)
         sum=0
         if taraget % 2 == 1: return False
         taraget //= 2
         dp = [0] * 10001
-        for i in range(len(nums)):
-            for j in range(taraget, nums[i] - 1, -1):
+        for i in range(len(stones)):
+            for j in range(taraget, stones[i] - 1, -1):
                 dp[j] = max(dp[j], dp[j - stones[i]] + stones[i])
         return sum - dp[target] - dp[target]
 
