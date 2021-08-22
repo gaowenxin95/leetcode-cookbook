@@ -279,6 +279,53 @@ class Solution:
 
 ```
 
+```r
+# 前序遍历-递归-LC144_二叉树的前序遍历
+class Solution:
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        # 保存结果
+        result = []
+        
+        def traversal(root: TreeNode):
+            if root == None:
+                return
+            result.append(root.val) # 前序
+            traversal(root.left)    # 左
+            traversal(root.right)   # 右
+
+        traversal(root)
+        return result
+
+# 中序遍历-递归-LC94_二叉树的中序遍历
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        result = []
+
+        def traversal(root: TreeNode):
+            if root == None:
+                return
+            traversal(root.left)    # 左
+            result.append(root.val) # 中序
+            traversal(root.right)   # 右
+
+        traversal(root)
+        return result
+
+# 后序遍历-递归-LC145_二叉树的后序遍历
+class Solution:
+    def postorderTraversal(self, root: TreeNode) -> List[int]:
+        result = []
+
+        def traversal(root: TreeNode):
+            if root == None:
+                return
+            traversal(root.left)    # 左
+            traversal(root.right)   # 右
+            result.append(root.val) # 后序
+
+        traversal(root)
+        return result
+```
 ## 二叉树遍历迭代法
 
 ```r
@@ -364,17 +411,23 @@ class Solution:
 根据观察到的规律直接用递归
 
 ```r
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
-        if not preorder:return None
-
-        x = preorder.pop(0) #前序第一个为root
-        root = TreeNode(x)
-        i = inorder.index(x) #中序遍历 root 的index
-
-        root.left = self.buildTree(preorder[:i], inorder[:i])
-        root.right = self.buildTree(preorder[i:], inorder[i+1:])
+        if len(preorder) == 0:
+            return None
+        root = TreeNode(preorder[0])
+        mid = inorder.index(preorder[0])
+        root.left = self.buildTree(preorder[1:mid + 1], inorder[:mid])
+        root.right = self.buildTree(preorder[mid + 1:], inorder[mid + 1:])
         return root
+
 ```
 
 ## 对称二叉树

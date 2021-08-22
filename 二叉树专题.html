@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2021-08-05" />
+<meta name="date" content="2021-08-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -171,7 +171,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">二叉树专题</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2021-08-05</em></p>
+<p class="date"><em>2021-08-19</em></p>
 </div>
 <div id="二叉树专题" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> 二叉树专题</h1>
@@ -391,55 +391,100 @@ left,right就是位置</p>
 <span id="cb11-47"><a href="#cb11-47"></a>        res =<span class="st"> </span>[]</span>
 <span id="cb11-48"><a href="#cb11-48"></a>        <span class="kw">dfs</span>(root)</span>
 <span id="cb11-49"><a href="#cb11-49"></a>        return res</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># 前序遍历-递归-LC144_二叉树的前序遍历</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="st">    </span>def <span class="kw">preorderTraversal</span>(self, root<span class="op">:</span><span class="st"> </span>TreeNode) -&gt;<span class="st"> </span>List[int]<span class="op">:</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="st">        </span><span class="co"># 保存结果</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="st">        </span>result =<span class="st"> </span>[]</span>
+<span id="cb12-6"><a href="#cb12-6"></a>        </span>
+<span id="cb12-7"><a href="#cb12-7"></a>        def <span class="kw">traversal</span>(root<span class="op">:</span><span class="st"> </span>TreeNode)<span class="op">:</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="st">            </span><span class="cf">if</span> root <span class="op">==</span><span class="st"> </span>None<span class="op">:</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="st">                </span>return</span>
+<span id="cb12-10"><a href="#cb12-10"></a>            <span class="kw">result.append</span>(root.val) <span class="co"># 前序</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>            <span class="kw">traversal</span>(root.left)    <span class="co"># 左</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a>            <span class="kw">traversal</span>(root.right)   <span class="co"># 右</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a></span>
+<span id="cb12-14"><a href="#cb12-14"></a>        <span class="kw">traversal</span>(root)</span>
+<span id="cb12-15"><a href="#cb12-15"></a>        return result</span>
+<span id="cb12-16"><a href="#cb12-16"></a></span>
+<span id="cb12-17"><a href="#cb12-17"></a><span class="co"># 中序遍历-递归-LC94_二叉树的中序遍历</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a>class Solution<span class="op">:</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a><span class="st">    </span>def <span class="kw">inorderTraversal</span>(self, root<span class="op">:</span><span class="st"> </span>TreeNode) -&gt;<span class="st"> </span>List[int]<span class="op">:</span></span>
+<span id="cb12-20"><a href="#cb12-20"></a><span class="st">        </span>result =<span class="st"> </span>[]</span>
+<span id="cb12-21"><a href="#cb12-21"></a></span>
+<span id="cb12-22"><a href="#cb12-22"></a>        def <span class="kw">traversal</span>(root<span class="op">:</span><span class="st"> </span>TreeNode)<span class="op">:</span></span>
+<span id="cb12-23"><a href="#cb12-23"></a><span class="st">            </span><span class="cf">if</span> root <span class="op">==</span><span class="st"> </span>None<span class="op">:</span></span>
+<span id="cb12-24"><a href="#cb12-24"></a><span class="st">                </span>return</span>
+<span id="cb12-25"><a href="#cb12-25"></a>            <span class="kw">traversal</span>(root.left)    <span class="co"># 左</span></span>
+<span id="cb12-26"><a href="#cb12-26"></a>            <span class="kw">result.append</span>(root.val) <span class="co"># 中序</span></span>
+<span id="cb12-27"><a href="#cb12-27"></a>            <span class="kw">traversal</span>(root.right)   <span class="co"># 右</span></span>
+<span id="cb12-28"><a href="#cb12-28"></a></span>
+<span id="cb12-29"><a href="#cb12-29"></a>        <span class="kw">traversal</span>(root)</span>
+<span id="cb12-30"><a href="#cb12-30"></a>        return result</span>
+<span id="cb12-31"><a href="#cb12-31"></a></span>
+<span id="cb12-32"><a href="#cb12-32"></a><span class="co"># 后序遍历-递归-LC145_二叉树的后序遍历</span></span>
+<span id="cb12-33"><a href="#cb12-33"></a>class Solution<span class="op">:</span></span>
+<span id="cb12-34"><a href="#cb12-34"></a><span class="st">    </span>def <span class="kw">postorderTraversal</span>(self, root<span class="op">:</span><span class="st"> </span>TreeNode) -&gt;<span class="st"> </span>List[int]<span class="op">:</span></span>
+<span id="cb12-35"><a href="#cb12-35"></a><span class="st">        </span>result =<span class="st"> </span>[]</span>
+<span id="cb12-36"><a href="#cb12-36"></a></span>
+<span id="cb12-37"><a href="#cb12-37"></a>        def <span class="kw">traversal</span>(root<span class="op">:</span><span class="st"> </span>TreeNode)<span class="op">:</span></span>
+<span id="cb12-38"><a href="#cb12-38"></a><span class="st">            </span><span class="cf">if</span> root <span class="op">==</span><span class="st"> </span>None<span class="op">:</span></span>
+<span id="cb12-39"><a href="#cb12-39"></a><span class="st">                </span>return</span>
+<span id="cb12-40"><a href="#cb12-40"></a>            <span class="kw">traversal</span>(root.left)    <span class="co"># 左</span></span>
+<span id="cb12-41"><a href="#cb12-41"></a>            <span class="kw">traversal</span>(root.right)   <span class="co"># 右</span></span>
+<span id="cb12-42"><a href="#cb12-42"></a>            <span class="kw">result.append</span>(root.val) <span class="co"># 后序</span></span>
+<span id="cb12-43"><a href="#cb12-43"></a></span>
+<span id="cb12-44"><a href="#cb12-44"></a>        <span class="kw">traversal</span>(root)</span>
+<span id="cb12-45"><a href="#cb12-45"></a>        return result</span></code></pre></div>
 </div>
 <div id="二叉树遍历迭代法" class="section level2" number="1.11">
 <h2><span class="header-section-number">1.11</span> 二叉树遍历迭代法</h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># 时间复杂度：O(n)，n为节点数，访问每个节点恰好一次。</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="co"># 空间复杂度：O(h)，h为树的高度。取决于树的结构，最坏情况存储整棵树，即O(n)</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a></span>
-<span id="cb12-4"><a href="#cb12-4"></a></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="co"># 层序遍历最常用模板</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a>class Solution<span class="op">:</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="st">    </span>def <span class="kw">levelOrder</span>(self, root<span class="op">:</span><span class="st"> </span>TreeNode) -&gt;<span class="st"> </span>List[List[int]]<span class="op">:</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="st">        </span><span class="cf">if</span> not root<span class="op">:</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="st">            </span>return []</span>
-<span id="cb12-10"><a href="#cb12-10"></a>        cur, res =<span class="st"> </span>[root], []</span>
-<span id="cb12-11"><a href="#cb12-11"></a>        <span class="cf">while</span> cur<span class="op">:</span></span>
-<span id="cb12-12"><a href="#cb12-12"></a><span class="st">            </span>lay, layval =<span class="st"> </span>[], []</span>
-<span id="cb12-13"><a href="#cb12-13"></a>            <span class="cf">for</span> node <span class="cf">in</span> cur<span class="op">:</span></span>
-<span id="cb12-14"><a href="#cb12-14"></a><span class="st">                </span><span class="kw">layval.append</span>(node.val)</span>
-<span id="cb12-15"><a href="#cb12-15"></a>                <span class="cf">if</span> node.left<span class="op">:</span><span class="st"> </span><span class="kw">lay.append</span>(node.left)</span>
-<span id="cb12-16"><a href="#cb12-16"></a>                <span class="cf">if</span> node.right<span class="op">:</span><span class="st"> </span><span class="kw">lay.append</span>(node.right)</span>
-<span id="cb12-17"><a href="#cb12-17"></a>            cur =<span class="st"> </span>lay</span>
-<span id="cb12-18"><a href="#cb12-18"></a>            <span class="kw">res.append</span>(layval)</span>
-<span id="cb12-19"><a href="#cb12-19"></a>        return res</span>
-<span id="cb12-20"><a href="#cb12-20"></a>        </span>
-<span id="cb12-21"><a href="#cb12-21"></a><span class="co"># 前、中、后序遍历通用模板,考察栈的</span></span>
-<span id="cb12-22"><a href="#cb12-22"></a>class Solution<span class="op">:</span></span>
-<span id="cb12-23"><a href="#cb12-23"></a><span class="st">    </span>def <span class="kw">preorderTraversal</span>(self, root<span class="op">:</span><span class="st"> </span>TreeNode) -&gt;<span class="st"> </span>List[int]<span class="op">:</span></span>
-<span id="cb12-24"><a href="#cb12-24"></a><span class="st">        </span><span class="cf">if</span> not root<span class="op">:</span></span>
-<span id="cb12-25"><a href="#cb12-25"></a><span class="st">            </span>return []        </span>
-<span id="cb12-26"><a href="#cb12-26"></a>        res =<span class="st"> </span>[]</span>
-<span id="cb12-27"><a href="#cb12-27"></a>        stack =<span class="st"> </span>[root]</span>
-<span id="cb12-28"><a href="#cb12-28"></a>        <span class="co"># # 前序迭代模板：最常用的二叉树DFS迭代遍历模板(栈是后进先出,注意压入栈的顺序,先压入右孩子，再压入左孩子)</span></span>
-<span id="cb12-29"><a href="#cb12-29"></a>        <span class="cf">while</span> stack<span class="op">:</span></span>
-<span id="cb12-30"><a href="#cb12-30"></a><span class="st">            </span>cur =<span class="st"> </span><span class="kw">stack.pop</span>()</span>
-<span id="cb12-31"><a href="#cb12-31"></a>            <span class="kw">res.append</span>(cur.val)</span>
-<span id="cb12-32"><a href="#cb12-32"></a>            <span class="cf">if</span> cur.right<span class="op">:</span></span>
-<span id="cb12-33"><a href="#cb12-33"></a><span class="st">                </span><span class="kw">stack.append</span>(cur.right)</span>
-<span id="cb12-34"><a href="#cb12-34"></a>            <span class="cf">if</span> cur.left<span class="op">:</span></span>
-<span id="cb12-35"><a href="#cb12-35"></a><span class="st">                </span><span class="kw">stack.append</span>(cur.left)</span>
-<span id="cb12-36"><a href="#cb12-36"></a>        return res</span>
-<span id="cb12-37"><a href="#cb12-37"></a>        <span class="co"># # 后序迭代，相同模板：将前序迭代进栈顺序稍作修改，最后得到的结果反转</span></span>
-<span id="cb12-38"><a href="#cb12-38"></a>        <span class="co"># 先压栈顺序按照来左孩子-右孩子-根节点压栈,这样最后结果 取相反就是后序遍历</span></span>
-<span id="cb12-39"><a href="#cb12-39"></a>        <span class="co"># while stack:</span></span>
-<span id="cb12-40"><a href="#cb12-40"></a>        <span class="co">#     cur = stack.pop()</span></span>
-<span id="cb12-41"><a href="#cb12-41"></a>        <span class="co">#     if cur.left:</span></span>
-<span id="cb12-42"><a href="#cb12-42"></a>        <span class="co">#         stack.append(cur.left)</span></span>
-<span id="cb12-43"><a href="#cb12-43"></a>        <span class="co">#     if cur.right:</span></span>
-<span id="cb12-44"><a href="#cb12-44"></a>        <span class="co">#         stack.append(cur.right)</span></span>
-<span id="cb12-45"><a href="#cb12-45"></a>        <span class="co">#     res.append(cur.val)</span></span>
-<span id="cb12-46"><a href="#cb12-46"></a>        <span class="co"># return res[::-1]</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># 时间复杂度：O(n)，n为节点数，访问每个节点恰好一次。</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co"># 空间复杂度：O(h)，h为树的高度。取决于树的结构，最坏情况存储整棵树，即O(n)</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co"># 层序遍历最常用模板</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>class Solution<span class="op">:</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="st">    </span>def <span class="kw">levelOrder</span>(self, root<span class="op">:</span><span class="st"> </span>TreeNode) -&gt;<span class="st"> </span>List[List[int]]<span class="op">:</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="st">        </span><span class="cf">if</span> not root<span class="op">:</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="st">            </span>return []</span>
+<span id="cb13-10"><a href="#cb13-10"></a>        cur, res =<span class="st"> </span>[root], []</span>
+<span id="cb13-11"><a href="#cb13-11"></a>        <span class="cf">while</span> cur<span class="op">:</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="st">            </span>lay, layval =<span class="st"> </span>[], []</span>
+<span id="cb13-13"><a href="#cb13-13"></a>            <span class="cf">for</span> node <span class="cf">in</span> cur<span class="op">:</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="st">                </span><span class="kw">layval.append</span>(node.val)</span>
+<span id="cb13-15"><a href="#cb13-15"></a>                <span class="cf">if</span> node.left<span class="op">:</span><span class="st"> </span><span class="kw">lay.append</span>(node.left)</span>
+<span id="cb13-16"><a href="#cb13-16"></a>                <span class="cf">if</span> node.right<span class="op">:</span><span class="st"> </span><span class="kw">lay.append</span>(node.right)</span>
+<span id="cb13-17"><a href="#cb13-17"></a>            cur =<span class="st"> </span>lay</span>
+<span id="cb13-18"><a href="#cb13-18"></a>            <span class="kw">res.append</span>(layval)</span>
+<span id="cb13-19"><a href="#cb13-19"></a>        return res</span>
+<span id="cb13-20"><a href="#cb13-20"></a>        </span>
+<span id="cb13-21"><a href="#cb13-21"></a><span class="co"># 前、中、后序遍历通用模板,考察栈的</span></span>
+<span id="cb13-22"><a href="#cb13-22"></a>class Solution<span class="op">:</span></span>
+<span id="cb13-23"><a href="#cb13-23"></a><span class="st">    </span>def <span class="kw">preorderTraversal</span>(self, root<span class="op">:</span><span class="st"> </span>TreeNode) -&gt;<span class="st"> </span>List[int]<span class="op">:</span></span>
+<span id="cb13-24"><a href="#cb13-24"></a><span class="st">        </span><span class="cf">if</span> not root<span class="op">:</span></span>
+<span id="cb13-25"><a href="#cb13-25"></a><span class="st">            </span>return []        </span>
+<span id="cb13-26"><a href="#cb13-26"></a>        res =<span class="st"> </span>[]</span>
+<span id="cb13-27"><a href="#cb13-27"></a>        stack =<span class="st"> </span>[root]</span>
+<span id="cb13-28"><a href="#cb13-28"></a>        <span class="co"># # 前序迭代模板：最常用的二叉树DFS迭代遍历模板(栈是后进先出,注意压入栈的顺序,先压入右孩子，再压入左孩子)</span></span>
+<span id="cb13-29"><a href="#cb13-29"></a>        <span class="cf">while</span> stack<span class="op">:</span></span>
+<span id="cb13-30"><a href="#cb13-30"></a><span class="st">            </span>cur =<span class="st"> </span><span class="kw">stack.pop</span>()</span>
+<span id="cb13-31"><a href="#cb13-31"></a>            <span class="kw">res.append</span>(cur.val)</span>
+<span id="cb13-32"><a href="#cb13-32"></a>            <span class="cf">if</span> cur.right<span class="op">:</span></span>
+<span id="cb13-33"><a href="#cb13-33"></a><span class="st">                </span><span class="kw">stack.append</span>(cur.right)</span>
+<span id="cb13-34"><a href="#cb13-34"></a>            <span class="cf">if</span> cur.left<span class="op">:</span></span>
+<span id="cb13-35"><a href="#cb13-35"></a><span class="st">                </span><span class="kw">stack.append</span>(cur.left)</span>
+<span id="cb13-36"><a href="#cb13-36"></a>        return res</span>
+<span id="cb13-37"><a href="#cb13-37"></a>        <span class="co"># # 后序迭代，相同模板：将前序迭代进栈顺序稍作修改，最后得到的结果反转</span></span>
+<span id="cb13-38"><a href="#cb13-38"></a>        <span class="co"># 先压栈顺序按照来左孩子-右孩子-根节点压栈,这样最后结果 取相反就是后序遍历</span></span>
+<span id="cb13-39"><a href="#cb13-39"></a>        <span class="co"># while stack:</span></span>
+<span id="cb13-40"><a href="#cb13-40"></a>        <span class="co">#     cur = stack.pop()</span></span>
+<span id="cb13-41"><a href="#cb13-41"></a>        <span class="co">#     if cur.left:</span></span>
+<span id="cb13-42"><a href="#cb13-42"></a>        <span class="co">#         stack.append(cur.left)</span></span>
+<span id="cb13-43"><a href="#cb13-43"></a>        <span class="co">#     if cur.right:</span></span>
+<span id="cb13-44"><a href="#cb13-44"></a>        <span class="co">#         stack.append(cur.right)</span></span>
+<span id="cb13-45"><a href="#cb13-45"></a>        <span class="co">#     res.append(cur.val)</span></span>
+<span id="cb13-46"><a href="#cb13-46"></a>        <span class="co"># return res[::-1]</span></span></code></pre></div>
 </div>
 <div id="前序遍历和中序遍历构造二叉树" class="section level2" number="1.12">
 <h2><span class="header-section-number">1.12</span> 前序遍历和中序遍历构造二叉树</h2>
@@ -448,77 +493,84 @@ left,right就是位置</p>
 前序遍历 preorder = [3,9,20,15,7]
 中序遍历 inorder = [9,3,15,20,7]</p>
 <p>根据前序和中序,可以还原出来二叉树</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>    <span class="dv">3</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>   <span class="op">/</span><span class="st"> </span>\</span>
-<span id="cb13-3"><a href="#cb13-3"></a>  <span class="dv">9</span>  <span class="dv">20</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a>    <span class="op">/</span><span class="st">  </span>\</span>
-<span id="cb13-5"><a href="#cb13-5"></a>   <span class="dv">15</span>   <span class="dv">7</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>    <span class="dv">3</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>   <span class="op">/</span><span class="st"> </span>\</span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="dv">9</span>  <span class="dv">20</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>    <span class="op">/</span><span class="st">  </span>\</span>
+<span id="cb14-5"><a href="#cb14-5"></a>   <span class="dv">15</span>   <span class="dv">7</span></span></code></pre></div>
 <blockquote>
 <p>在这个例子当中，前序遍历 preorder 的第一个元素 3 即是根节点，再看中序遍历， inorder 中 3 的左边 [9] 即是左子树，而右边 [15, 20, 7] 即是右子树。根据这个思路，就能构造出完整的二叉树。
 这里说下具体的思路：
-- 首先找到根节点（依据：前序遍历顺序，先遍历根节点）
-- 构建根节点的左子树（依据：中序遍历，根节点的左侧为左子树）
-- 构建根节点的右子树（依据：中序遍历，根节点的右侧为右子树）
-题目中，有个提示：【假设树中没有重复的元素】。依据这个提示，我们在前序遍历中找到的根节点元素，可根据元素值在中序遍历中定位它的位置。<a href="https://blog.csdn.net/weixin_45642918/article/details/106282599">「"大梦三千秋」</a></p>
+- 首先找到根节点（依据：前序遍历顺序，先遍历根节点）</p>
 </blockquote>
+<ul>
+<li><p>构建根节点的左子树（依据：中序遍历，根节点的左侧为左子树）</p></li>
+<li><p>构建根节点的右子树（依据：中序遍历，根节点的右侧为右子树）</p></li>
+</ul>
+<p>题目中，有个提示：【假设树中没有重复的元素】。依据这个提示，我们在前序遍历中找到的根节点元素，可根据元素值在中序遍历中定位它的位置。<a href="https://blog.csdn.net/weixin_45642918/article/details/106282599">「"大梦三千秋」</a></p>
 <p>根据观察到的规律直接用递归</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="st">    </span>def <span class="kw">buildTree</span>(self, preorder<span class="op">:</span><span class="st"> </span>List[int], inorder<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>TreeNode<span class="op">:</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="st">        </span><span class="cf">if</span> not preorder<span class="op">:</span>return None</span>
-<span id="cb14-4"><a href="#cb14-4"></a></span>
-<span id="cb14-5"><a href="#cb14-5"></a>        x =<span class="st"> </span><span class="kw">preorder.pop</span>(<span class="dv">0</span>) <span class="co">#前序第一个为root</span></span>
-<span id="cb14-6"><a href="#cb14-6"></a>        root =<span class="st"> </span><span class="kw">TreeNode</span>(x)</span>
-<span id="cb14-7"><a href="#cb14-7"></a>        i =<span class="st"> </span><span class="kw">inorder.index</span>(x) <span class="co">#中序遍历 root 的index</span></span>
-<span id="cb14-8"><a href="#cb14-8"></a></span>
-<span id="cb14-9"><a href="#cb14-9"></a>        root.left =<span class="st"> </span><span class="kw">self.buildTree</span>(preorder[<span class="op">:</span>i], inorder[<span class="op">:</span>i])</span>
-<span id="cb14-10"><a href="#cb14-10"></a>        root.right =<span class="st"> </span><span class="kw">self.buildTree</span>(preorder[i<span class="op">:</span>], inorder[i<span class="op">+</span><span class="dv">1</span><span class="op">:</span>])</span>
-<span id="cb14-11"><a href="#cb14-11"></a>        return root</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Definition for a binary tree node.</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="co"># class TreeNode:</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="co">#     def __init__(self, x):</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co">#         self.val = x</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="co">#         self.left = None</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="co">#         self.right = None</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a></span>
+<span id="cb15-8"><a href="#cb15-8"></a>class Solution<span class="op">:</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a><span class="st">    </span>def <span class="kw">buildTree</span>(self, preorder<span class="op">:</span><span class="st"> </span>List[int], inorder<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>TreeNode<span class="op">:</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="st">        </span><span class="cf">if</span> <span class="kw">len</span>(preorder) <span class="op">==</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a><span class="st">            </span>return None</span>
+<span id="cb15-12"><a href="#cb15-12"></a>        root =<span class="st"> </span><span class="kw">TreeNode</span>(preorder[<span class="dv">0</span>])</span>
+<span id="cb15-13"><a href="#cb15-13"></a>        mid =<span class="st"> </span><span class="kw">inorder.index</span>(preorder[<span class="dv">0</span>])</span>
+<span id="cb15-14"><a href="#cb15-14"></a>        root.left =<span class="st"> </span><span class="kw">self.buildTree</span>(preorder[<span class="dv">1</span><span class="op">:</span>mid <span class="op">+</span><span class="st"> </span><span class="dv">1</span>], inorder[<span class="op">:</span>mid])</span>
+<span id="cb15-15"><a href="#cb15-15"></a>        root.right =<span class="st"> </span><span class="kw">self.buildTree</span>(preorder[mid <span class="op">+</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span>], inorder[mid <span class="op">+</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span>])</span>
+<span id="cb15-16"><a href="#cb15-16"></a>        return root</span></code></pre></div>
 </div>
 <div id="对称二叉树" class="section level2" number="1.13">
 <h2><span class="header-section-number">1.13</span> 对称二叉树</h2>
 <blockquote>
 <p>首先判断头结点是否为空。然后<strong>将根节点的左右两个节点假设成两个独立的树</strong>，如果左右两个树都为空，返回True。然后看左子树的左结点和右子树的右结点、左子树的右结点和右子树的左结点是否相同，都相同返回True.</p>
 </blockquote>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="st">    </span>def <span class="kw">isSymmetric</span>(self, root)<span class="op">:</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="st">        </span><span class="cf">if</span> root is None<span class="op">:</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="st">            </span>return True</span>
-<span id="cb15-6"><a href="#cb15-6"></a>        return <span class="kw">self.isSymmetricTree</span>(root.left,root.right)</span>
-<span id="cb15-7"><a href="#cb15-7"></a>    def <span class="kw">isSymmetricTree</span>(self,left,right)<span class="op">:</span></span>
-<span id="cb15-8"><a href="#cb15-8"></a><span class="st">        </span><span class="cf">if</span> left is None and right is None<span class="op">:</span></span>
-<span id="cb15-9"><a href="#cb15-9"></a><span class="st">            </span>return True</span>
-<span id="cb15-10"><a href="#cb15-10"></a>        <span class="cf">if</span> left is None or right is None or left.val <span class="op">!=</span><span class="st"> </span>right.val<span class="op">:</span></span>
-<span id="cb15-11"><a href="#cb15-11"></a><span class="st">            </span>return False</span>
-<span id="cb15-12"><a href="#cb15-12"></a>        return <span class="kw">self.isSymmetricTree</span>(left.left,right.right) and <span class="kw">self.isSymmetricTree</span>(left.right,right.left)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="st">    </span>def <span class="kw">isSymmetric</span>(self, root)<span class="op">:</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="st">        </span><span class="cf">if</span> root is None<span class="op">:</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="st">            </span>return True</span>
+<span id="cb16-6"><a href="#cb16-6"></a>        return <span class="kw">self.isSymmetricTree</span>(root.left,root.right)</span>
+<span id="cb16-7"><a href="#cb16-7"></a>    def <span class="kw">isSymmetricTree</span>(self,left,right)<span class="op">:</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="st">        </span><span class="cf">if</span> left is None and right is None<span class="op">:</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="st">            </span>return True</span>
+<span id="cb16-10"><a href="#cb16-10"></a>        <span class="cf">if</span> left is None or right is None or left.val <span class="op">!=</span><span class="st"> </span>right.val<span class="op">:</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a><span class="st">            </span>return False</span>
+<span id="cb16-12"><a href="#cb16-12"></a>        return <span class="kw">self.isSymmetricTree</span>(left.left,right.right) and <span class="kw">self.isSymmetricTree</span>(left.right,right.left)</span></code></pre></div>
 </div>
 <div id="判断是否是完全二叉树" class="section level2" number="1.14">
 <h2><span class="header-section-number">1.14</span> 判断是否是完全二叉树</h2>
 <p>什么是完全二叉树:若设二叉树的深度为k，除第 k 层外，其它各层 (1～k-1) 的结点数都达到最大个数，第k 层所有的结点都连续集中在最左边，这就是完全二叉树。</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"></code></pre></div>
 </div>
 <div id="最低公共祖先" class="section level2" number="1.15">
 <h2><span class="header-section-number">1.15</span> 最低公共祖先</h2>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="st">    </span>def <span class="kw">lowestCommonAncestor</span>(self, root, p, q)<span class="op">:</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="st">        &quot;&quot;&quot;</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="st">        :type root: TreeNode</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="st">        :type p: TreeNode</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="st">        :type q: TreeNode</span></span>
-<span id="cb17-7"><a href="#cb17-7"></a><span class="st">        :rtype: TreeNode</span></span>
-<span id="cb17-8"><a href="#cb17-8"></a><span class="st">        &quot;&quot;&quot;</span></span>
-<span id="cb17-9"><a href="#cb17-9"></a>        <span class="cf">if</span> not root<span class="op">:</span></span>
-<span id="cb17-10"><a href="#cb17-10"></a><span class="st">            </span>return None</span>
-<span id="cb17-11"><a href="#cb17-11"></a>        <span class="cf">if</span> q <span class="op">==</span><span class="st"> </span>root or p <span class="op">==</span><span class="st"> </span>root<span class="op">:</span><span class="st"> </span><span class="co"># 如果找到了某一个点 则当前节点为答案</span></span>
-<span id="cb17-12"><a href="#cb17-12"></a><span class="st">            </span>return root</span>
-<span id="cb17-13"><a href="#cb17-13"></a>        left =<span class="st"> </span><span class="kw">self.lowestCommonAncestor</span>(root.left, p, q)</span>
-<span id="cb17-14"><a href="#cb17-14"></a>        right =<span class="st"> </span><span class="kw">self.lowestCommonAncestor</span>(root.right, p, q)</span>
-<span id="cb17-15"><a href="#cb17-15"></a>        <span class="cf">if</span> left and right<span class="op">:</span><span class="st"> </span><span class="co"># 如果左子树中可以找到其公共祖先 右子树也可以 则说明当前节点就是答案</span></span>
-<span id="cb17-16"><a href="#cb17-16"></a><span class="st">            </span>return root</span>
-<span id="cb17-17"><a href="#cb17-17"></a>        <span class="cf">if</span> not left<span class="op">:</span><span class="st"> </span><span class="co"># 左边找不到了 那就是右子树的答案</span></span>
-<span id="cb17-18"><a href="#cb17-18"></a><span class="st">            </span>return right</span>
-<span id="cb17-19"><a href="#cb17-19"></a>        elif not right<span class="op">:</span><span class="st"> </span><span class="co"># 右边亦然</span></span>
-<span id="cb17-20"><a href="#cb17-20"></a><span class="st">            </span>return left</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="st">    </span>def <span class="kw">lowestCommonAncestor</span>(self, root, p, q)<span class="op">:</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="st">        :type root: TreeNode</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="st">        :type p: TreeNode</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="st">        :type q: TreeNode</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="st">        :rtype: TreeNode</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a>        <span class="cf">if</span> not root<span class="op">:</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="st">            </span>return None</span>
+<span id="cb18-11"><a href="#cb18-11"></a>        <span class="cf">if</span> q <span class="op">==</span><span class="st"> </span>root or p <span class="op">==</span><span class="st"> </span>root<span class="op">:</span><span class="st"> </span><span class="co"># 如果找到了某一个点 则当前节点为答案</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a><span class="st">            </span>return root</span>
+<span id="cb18-13"><a href="#cb18-13"></a>        left =<span class="st"> </span><span class="kw">self.lowestCommonAncestor</span>(root.left, p, q)</span>
+<span id="cb18-14"><a href="#cb18-14"></a>        right =<span class="st"> </span><span class="kw">self.lowestCommonAncestor</span>(root.right, p, q)</span>
+<span id="cb18-15"><a href="#cb18-15"></a>        <span class="cf">if</span> left and right<span class="op">:</span><span class="st"> </span><span class="co"># 如果左子树中可以找到其公共祖先 右子树也可以 则说明当前节点就是答案</span></span>
+<span id="cb18-16"><a href="#cb18-16"></a><span class="st">            </span>return root</span>
+<span id="cb18-17"><a href="#cb18-17"></a>        <span class="cf">if</span> not left<span class="op">:</span><span class="st"> </span><span class="co"># 左边找不到了 那就是右子树的答案</span></span>
+<span id="cb18-18"><a href="#cb18-18"></a><span class="st">            </span>return right</span>
+<span id="cb18-19"><a href="#cb18-19"></a>        elif not right<span class="op">:</span><span class="st"> </span><span class="co"># 右边亦然</span></span>
+<span id="cb18-20"><a href="#cb18-20"></a><span class="st">            </span>return left</span></code></pre></div>
 </div>
 <div id="判断是否是二叉搜索树" class="section level2" number="1.16">
 <h2><span class="header-section-number">1.16</span> 判断是否是二叉搜索树</h2>
@@ -528,42 +580,42 @@ left,right就是位置</p>
 <p>节点的左子树只包含小于当前节点的数。
 节点的右子树只包含大于当前节点的数。
 所有左子树和右子树自身必须也是二叉搜索树。</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>示例1<span class="op">:</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a></span>
-<span id="cb18-3"><a href="#cb18-3"></a>输入<span class="op">:</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a><span class="st">    </span><span class="dv">2</span></span>
-<span id="cb18-5"><a href="#cb18-5"></a>   <span class="op">/</span><span class="st"> </span>\</span>
-<span id="cb18-6"><a href="#cb18-6"></a>  <span class="dv">1</span>   <span class="dv">3</span></span>
-<span id="cb18-7"><a href="#cb18-7"></a>输出<span class="op">:</span><span class="st"> </span>true</span>
-<span id="cb18-8"><a href="#cb18-8"></a>示例2<span class="op">:</span></span>
-<span id="cb18-9"><a href="#cb18-9"></a></span>
-<span id="cb18-10"><a href="#cb18-10"></a>输入<span class="op">:</span></span>
-<span id="cb18-11"><a href="#cb18-11"></a><span class="st">   </span><span class="dv">5</span></span>
-<span id="cb18-12"><a href="#cb18-12"></a>  <span class="op">/</span><span class="st"> </span>\</span>
-<span id="cb18-13"><a href="#cb18-13"></a>  <span class="dv">1</span>  <span class="dv">4</span></span>
-<span id="cb18-14"><a href="#cb18-14"></a>    <span class="op">/</span><span class="st"> </span>\</span>
-<span id="cb18-15"><a href="#cb18-15"></a>   <span class="dv">3</span>   <span class="dv">6</span></span>
-<span id="cb18-16"><a href="#cb18-16"></a>输出<span class="op">:</span><span class="st"> </span>false</span>
-<span id="cb18-17"><a href="#cb18-17"></a>解释<span class="op">:</span><span class="st"> </span>输入为<span class="op">:</span><span class="st"> </span>[<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">4</span>,null,null,<span class="dv">3</span>,<span class="dv">6</span>]。</span>
-<span id="cb18-18"><a href="#cb18-18"></a>    根节点的值为 <span class="dv">5</span> ，但是其右子节点值为 <span class="dv">4</span> 。</span>
-<span id="cb18-19"><a href="#cb18-19"></a></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>示例1<span class="op">:</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a></span>
+<span id="cb19-3"><a href="#cb19-3"></a>输入<span class="op">:</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="st">    </span><span class="dv">2</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>   <span class="op">/</span><span class="st"> </span>\</span>
+<span id="cb19-6"><a href="#cb19-6"></a>  <span class="dv">1</span>   <span class="dv">3</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a>输出<span class="op">:</span><span class="st"> </span>true</span>
+<span id="cb19-8"><a href="#cb19-8"></a>示例2<span class="op">:</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a></span>
+<span id="cb19-10"><a href="#cb19-10"></a>输入<span class="op">:</span></span>
+<span id="cb19-11"><a href="#cb19-11"></a><span class="st">   </span><span class="dv">5</span></span>
+<span id="cb19-12"><a href="#cb19-12"></a>  <span class="op">/</span><span class="st"> </span>\</span>
+<span id="cb19-13"><a href="#cb19-13"></a>  <span class="dv">1</span>  <span class="dv">4</span></span>
+<span id="cb19-14"><a href="#cb19-14"></a>    <span class="op">/</span><span class="st"> </span>\</span>
+<span id="cb19-15"><a href="#cb19-15"></a>   <span class="dv">3</span>   <span class="dv">6</span></span>
+<span id="cb19-16"><a href="#cb19-16"></a>输出<span class="op">:</span><span class="st"> </span>false</span>
+<span id="cb19-17"><a href="#cb19-17"></a>解释<span class="op">:</span><span class="st"> </span>输入为<span class="op">:</span><span class="st"> </span>[<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">4</span>,null,null,<span class="dv">3</span>,<span class="dv">6</span>]。</span>
+<span id="cb19-18"><a href="#cb19-18"></a>    根节点的值为 <span class="dv">5</span> ，但是其右子节点值为 <span class="dv">4</span> 。</span>
+<span id="cb19-19"><a href="#cb19-19"></a></span></code></pre></div>
 <blockquote>
 <p>思路简单：将中序遍历的值一个个存入一个list中。理解二叉搜索树后，明白二叉搜索树中序遍历后是个递增序列。最后判断list是否为一个递增序列即可。</p>
 </blockquote>
 <p>二叉树的中序遍历是一个递增的序列</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>class Solution<span class="op">:</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="st">    </span>def <span class="kw">isValidBST</span>(self, root)<span class="op">:</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="st">        </span></span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="st">        </span>def <span class="kw">BFS</span>(root, left, right)<span class="op">:</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a><span class="st">            </span><span class="cf">if</span> root is None<span class="op">:</span><span class="co"># 判断根节点是否存在</span></span>
-<span id="cb19-6"><a href="#cb19-6"></a><span class="st">                </span>return True</span>
-<span id="cb19-7"><a href="#cb19-7"></a>            </span>
-<span id="cb19-8"><a href="#cb19-8"></a>            <span class="cf">if</span> left <span class="op">&lt;</span><span class="st"> </span>root.val <span class="op">&lt;</span><span class="st"> </span>right<span class="op">:</span><span class="st"> </span><span class="co"># 左节点的值小于根节点小于右子树</span></span>
-<span id="cb19-9"><a href="#cb19-9"></a><span class="st">                </span>return <span class="kw">BFS</span>(root.left, left, root.val) and <span class="kw">BFS</span>(root.right, root.val, right)</span>
-<span id="cb19-10"><a href="#cb19-10"></a>            <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb19-11"><a href="#cb19-11"></a><span class="st">                </span>return False</span>
-<span id="cb19-12"><a href="#cb19-12"></a></span>
-<span id="cb19-13"><a href="#cb19-13"></a>        return <span class="kw">BFS</span>(root, <span class="op">-</span><span class="kw">float</span>(<span class="st">&#39;inf&#39;</span>), <span class="kw">float</span>(<span class="st">&#39;inf&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="st">    </span>def <span class="kw">isValidBST</span>(self, root)<span class="op">:</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="st">        </span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="st">        </span>def <span class="kw">BFS</span>(root, left, right)<span class="op">:</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="st">            </span><span class="cf">if</span> root is None<span class="op">:</span><span class="co"># 判断根节点是否存在</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="st">                </span>return True</span>
+<span id="cb20-7"><a href="#cb20-7"></a>            </span>
+<span id="cb20-8"><a href="#cb20-8"></a>            <span class="cf">if</span> left <span class="op">&lt;</span><span class="st"> </span>root.val <span class="op">&lt;</span><span class="st"> </span>right<span class="op">:</span><span class="st"> </span><span class="co"># 左节点的值小于根节点小于右子树</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="st">                </span>return <span class="kw">BFS</span>(root.left, left, root.val) and <span class="kw">BFS</span>(root.right, root.val, right)</span>
+<span id="cb20-10"><a href="#cb20-10"></a>            <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a><span class="st">                </span>return False</span>
+<span id="cb20-12"><a href="#cb20-12"></a></span>
+<span id="cb20-13"><a href="#cb20-13"></a>        return <span class="kw">BFS</span>(root, <span class="op">-</span><span class="kw">float</span>(<span class="st">&#39;inf&#39;</span>), <span class="kw">float</span>(<span class="st">&#39;inf&#39;</span>))</span></code></pre></div>
 </div>
 <div id="路径总和问题" class="section level2" number="1.17">
 <h2><span class="header-section-number">1.17</span> 路径总和问题</h2>
@@ -573,14 +625,14 @@ left,right就是位置</p>
 <p>题目描述:
 <img src="figs/lujingzonghe.png" /></p>
 <p>不会解题的时候相递归</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="st">    </span>def <span class="kw">hasPathSum</span>(self, root, sum)<span class="op">:</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="st">        </span><span class="cf">if</span> root is None<span class="op">:</span></span>
-<span id="cb20-4"><a href="#cb20-4"></a><span class="st">            </span>return False</span>
-<span id="cb20-5"><a href="#cb20-5"></a>        <span class="cf">if</span> root.left is None and root.right is None and root.val<span class="op">==</span>sum<span class="op">:</span></span>
-<span id="cb20-6"><a href="#cb20-6"></a><span class="st">            </span>return True</span>
-<span id="cb20-7"><a href="#cb20-7"></a>        <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb20-8"><a href="#cb20-8"></a><span class="st">            </span>return <span class="kw">self.hasPathSum</span>(root.left,sum<span class="op">-</span>root.val) or <span class="kw">self.hasPathSum</span>(root.right,sum<span class="op">-</span>root.val)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="st">    </span>def <span class="kw">hasPathSum</span>(self, root, sum)<span class="op">:</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="st">        </span><span class="cf">if</span> root is None<span class="op">:</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="st">            </span>return False</span>
+<span id="cb21-5"><a href="#cb21-5"></a>        <span class="cf">if</span> root.left is None and root.right is None and root.val<span class="op">==</span>sum<span class="op">:</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="st">            </span>return True</span>
+<span id="cb21-7"><a href="#cb21-7"></a>        <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="st">            </span>return <span class="kw">self.hasPathSum</span>(root.left,sum<span class="op">-</span>root.val) or <span class="kw">self.hasPathSum</span>(root.right,sum<span class="op">-</span>root.val)</span></code></pre></div>
 <ul>
 <li>路径总和2</li>
 </ul>
@@ -590,52 +642,62 @@ left,right就是位置</p>
 </div>
 <p>利用递归，当root为None时，返回False，当root的值等于sum且root为叶节点时，返回true，如果不相等，往下递归，只要左子树和右子树有一条路径即可返回True</p>
 <p>这个代码的思路非常巧妙，nice</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="st">    </span>def <span class="kw">pathSum</span>(self, root, sum)<span class="op">:</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="st">        &quot;&quot;&quot;</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a><span class="st">        :type root: TreeNode</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a><span class="st">        :type sum: int</span></span>
-<span id="cb21-6"><a href="#cb21-6"></a><span class="st">        :rtype: int</span></span>
-<span id="cb21-7"><a href="#cb21-7"></a><span class="st">        &quot;&quot;&quot;</span></span>
-<span id="cb21-8"><a href="#cb21-8"></a>        <span class="cf">if</span> not root<span class="op">:</span></span>
-<span id="cb21-9"><a href="#cb21-9"></a><span class="st">            </span>return <span class="dv">0</span></span>
-<span id="cb21-10"><a href="#cb21-10"></a>        return <span class="kw">self.pathSumFrom</span>(root, sum) <span class="op">+</span><span class="st"> </span><span class="kw">self.pathSum</span>(root.left, sum) <span class="op">+</span><span class="st"> </span><span class="kw">self.pathSum</span>(root.right, sum)</span>
-<span id="cb21-11"><a href="#cb21-11"></a></span>
-<span id="cb21-12"><a href="#cb21-12"></a>    def <span class="kw">pathSumFrom</span>(self, node, sum)<span class="op">:</span></span>
-<span id="cb21-13"><a href="#cb21-13"></a><span class="st">        </span><span class="cf">if</span> not node<span class="op">:</span></span>
-<span id="cb21-14"><a href="#cb21-14"></a><span class="st">            </span>return <span class="dv">0</span></span>
-<span id="cb21-15"><a href="#cb21-15"></a>        <span class="kw">return</span> (<span class="dv">1</span> <span class="cf">if</span> node.val <span class="op">==</span><span class="st"> </span>sum <span class="cf">else</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="kw">self.pathSumFrom</span>(node.left, sum <span class="op">-</span><span class="st"> </span>node.val) <span class="op">+</span><span class="st"> </span><span class="kw">self.pathSumFrom</span>(node.right, sum <span class="op">-</span><span class="st"> </span>node.val) </span>
-<span id="cb21-16"><a href="#cb21-16"></a>        </span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="st">    </span>def <span class="kw">pathSum</span>(self, root, sum)<span class="op">:</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="st">        :type root: TreeNode</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="st">        :type sum: int</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="st">        :rtype: int</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="st">        &quot;&quot;&quot;</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a>        <span class="cf">if</span> not root<span class="op">:</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a><span class="st">            </span>return <span class="dv">0</span></span>
+<span id="cb22-10"><a href="#cb22-10"></a>        return <span class="kw">self.pathSumFrom</span>(root, sum) <span class="op">+</span><span class="st"> </span><span class="kw">self.pathSum</span>(root.left, sum) <span class="op">+</span><span class="st"> </span><span class="kw">self.pathSum</span>(root.right, sum)</span>
+<span id="cb22-11"><a href="#cb22-11"></a></span>
+<span id="cb22-12"><a href="#cb22-12"></a>    def <span class="kw">pathSumFrom</span>(self, node, sum)<span class="op">:</span></span>
+<span id="cb22-13"><a href="#cb22-13"></a><span class="st">        </span><span class="cf">if</span> not node<span class="op">:</span></span>
+<span id="cb22-14"><a href="#cb22-14"></a><span class="st">            </span>return <span class="dv">0</span></span>
+<span id="cb22-15"><a href="#cb22-15"></a>        <span class="kw">return</span> (<span class="dv">1</span> <span class="cf">if</span> node.val <span class="op">==</span><span class="st"> </span>sum <span class="cf">else</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="kw">self.pathSumFrom</span>(node.left, sum <span class="op">-</span><span class="st"> </span>node.val) <span class="op">+</span><span class="st"> </span><span class="kw">self.pathSumFrom</span>(node.right, sum <span class="op">-</span><span class="st"> </span>node.val) </span>
+<span id="cb22-16"><a href="#cb22-16"></a>        </span></code></pre></div>
 </div>
 <div id="平衡二叉树" class="section level2" number="1.18">
 <h2><span class="header-section-number">1.18</span> 平衡二叉树</h2>
 <p><img src="figs/pinghengtree.png" /></p>
-<p><strong>一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值小于1。</strong></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="st">    </span>def <span class="kw">isBalanced</span>(self, root)<span class="op">:</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a></span>
-<span id="cb22-4"><a href="#cb22-4"></a><span class="st">        </span><span class="cf">if</span> root <span class="op">==</span><span class="st"> </span>None<span class="op">:</span></span>
-<span id="cb22-5"><a href="#cb22-5"></a><span class="st">            </span>return True</span>
-<span id="cb22-6"><a href="#cb22-6"></a>        elif <span class="kw">abs</span>(<span class="kw">self.height</span>(root.left)<span class="op">-</span><span class="kw">self.height</span>(root.right))<span class="op">&gt;</span><span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="co">#高度的绝对值之差大于1，不平衡</span></span>
-<span id="cb22-7"><a href="#cb22-7"></a><span class="st">            </span>return False</span>
-<span id="cb22-8"><a href="#cb22-8"></a>        <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb22-9"><a href="#cb22-9"></a><span class="st">            </span>return <span class="kw">self.isBalanced</span>(root.left) and <span class="kw">self.isBalanced</span>(root.right)</span>
-<span id="cb22-10"><a href="#cb22-10"></a>    </span>
-<span id="cb22-11"><a href="#cb22-11"></a>    def <span class="kw">height</span>(self,root)<span class="op">:</span><span class="st"> </span><span class="co">#判断是否为平衡</span></span>
-<span id="cb22-12"><a href="#cb22-12"></a><span class="st">        </span><span class="cf">if</span> root <span class="op">==</span><span class="st"> </span>None<span class="op">:</span></span>
-<span id="cb22-13"><a href="#cb22-13"></a><span class="st">            </span>return <span class="dv">0</span></span>
-<span id="cb22-14"><a href="#cb22-14"></a>        <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb22-15"><a href="#cb22-15"></a><span class="st">            </span>return <span class="kw">max</span>(<span class="kw">self.height</span>(root.left),<span class="kw">self.height</span>(root.right))<span class="op">+</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+<p><strong>一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值小于1。</strong>
+（AVL）平衡二叉树是一种二叉排序树，其中每个结点的左子树和右子树的高度差至多等于1。它是一种高度平衡的二叉排序树。意思是说，要么它是一棵空树，要么它的左子树和右子树都是平衡二叉树，且左子树和右子树的深度之差的绝对值不超过1。</p>
+<p>平衡二叉树是一种二叉排序树。也就是二叉排序树包含了平衡二叉排序树，其次它要满足后面的约束条件，就是每个结点的左子树和右子树的高度差不超过1</p>
+<p>所以递归遍历左右子树，比较左右子树的深度</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="co"># class TreeNode:</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="co">#     def __init__(self, x):</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="co">#         self.val = x</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="co">#         self.left = None</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a><span class="co">#         self.right = None</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a></span>
+<span id="cb23-8"><a href="#cb23-8"></a>class Solution<span class="op">:</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a><span class="st">    </span>def <span class="kw">IsBalanced_Solution</span>(self, pRoot)<span class="op">:</span></span>
+<span id="cb23-10"><a href="#cb23-10"></a><span class="st">        </span><span class="co"># write code here</span></span>
+<span id="cb23-11"><a href="#cb23-11"></a><span class="st">        </span><span class="cf">if</span> not pRoot<span class="op">:</span><span class="st"> </span></span>
+<span id="cb23-12"><a href="#cb23-12"></a><span class="st">            </span>return <span class="dv">1</span></span>
+<span id="cb23-13"><a href="#cb23-13"></a>        left =<span class="st"> </span><span class="kw">self.IsBalanced_Solution</span>(pRoot.left)</span>
+<span id="cb23-14"><a href="#cb23-14"></a>        right =<span class="st"> </span><span class="kw">self.IsBalanced_Solution</span>(pRoot.right)</span>
+<span id="cb23-15"><a href="#cb23-15"></a>        <span class="cf">if</span> not left<span class="op">:</span></span>
+<span id="cb23-16"><a href="#cb23-16"></a><span class="st">            </span>return False</span>
+<span id="cb23-17"><a href="#cb23-17"></a>        <span class="cf">if</span> not right<span class="op">:</span></span>
+<span id="cb23-18"><a href="#cb23-18"></a><span class="st">            </span>return False</span>
+<span id="cb23-19"><a href="#cb23-19"></a>        <span class="cf">if</span> <span class="kw">abs</span>(left<span class="op">-</span>right)<span class="op">&lt;</span><span class="dv">2</span><span class="op">:</span></span>
+<span id="cb23-20"><a href="#cb23-20"></a><span class="st">            </span>return <span class="dv">1</span><span class="op">+</span><span class="kw">max</span>(left,right)</span>
+<span id="cb23-21"><a href="#cb23-21"></a>        <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb23-22"><a href="#cb23-22"></a><span class="st">            </span>return False</span></code></pre></div>
 </div>
 <div id="翻转二叉树" class="section level2" number="1.19">
 <h2><span class="header-section-number">1.19</span> 翻转二叉树</h2>
 <p><img src="figs/fanzhuantree.png" /></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a><span class="st">    </span>def <span class="kw">invertTree</span>(self, root)<span class="op">:</span></span>
-<span id="cb23-3"><a href="#cb23-3"></a></span>
-<span id="cb23-4"><a href="#cb23-4"></a><span class="st">        </span><span class="cf">if</span> root is not None<span class="op">:</span></span>
-<span id="cb23-5"><a href="#cb23-5"></a><span class="st">            </span>root.left,root.right =<span class="st"> </span><span class="kw">self.invertTree</span>(root.right),<span class="kw">self.invertTree</span>(root.left)</span>
-<span id="cb23-6"><a href="#cb23-6"></a>        return root</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="st">    </span>def <span class="kw">invertTree</span>(self, root)<span class="op">:</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a></span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="st">        </span><span class="cf">if</span> root is not None<span class="op">:</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="st">            </span>root.left,root.right =<span class="st"> </span><span class="kw">self.invertTree</span>(root.right),<span class="kw">self.invertTree</span>(root.left)</span>
+<span id="cb24-6"><a href="#cb24-6"></a>        return root</span></code></pre></div>
 </div>
 </div>
             </section>
