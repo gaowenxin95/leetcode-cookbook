@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2021-08-21" />
+<meta name="date" content="2021-08-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -149,14 +149,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.16" data-path=""><a href="#找零钱问题"><i class="fa fa-check"></i><b>1.16</b> 找零钱问题</a></li>
 <li class="chapter" data-level="1.17" data-path=""><a href="#单词切分"><i class="fa fa-check"></i><b>1.17</b> 单词切分</a></li>
 <li class="chapter" data-level="1.18" data-path=""><a href="#打家劫舍专题"><i class="fa fa-check"></i><b>1.18</b> 打家劫舍专题</a></li>
-<li class="chapter" data-level="1.19" data-path=""><a href="#鸡蛋掉落"><i class="fa fa-check"></i><b>1.19</b> 鸡蛋掉落</a></li>
-<li class="chapter" data-level="1.20" data-path=""><a href="#整数拆分"><i class="fa fa-check"></i><b>1.20</b> 整数拆分</a></li>
-<li class="chapter" data-level="1.21" data-path=""><a href="#分割等和子集"><i class="fa fa-check"></i><b>1.21</b> 分割等和子集</a></li>
-<li class="chapter" data-level="1.22" data-path=""><a href="#最大正方形"><i class="fa fa-check"></i><b>1.22</b> 最大正方形</a></li>
-<li class="chapter" data-level="1.23" data-path=""><a href="#一和零"><i class="fa fa-check"></i><b>1.23</b> 一和零</a></li>
-<li class="chapter" data-level="1.24" data-path=""><a href="#最后一块石头一"><i class="fa fa-check"></i><b>1.24</b> 最后一块石头一</a></li>
-<li class="chapter" data-level="1.25" data-path=""><a href="#最后一块石头二"><i class="fa fa-check"></i><b>1.25</b> 最后一块石头二</a></li>
-<li class="chapter" data-level="1.26" data-path=""><a href="#总结"><i class="fa fa-check"></i><b>1.26</b> 总结</a></li>
+<li class="chapter" data-level="1.19" data-path=""><a href="#编辑距离"><i class="fa fa-check"></i><b>1.19</b> 编辑距离</a></li>
+<li class="chapter" data-level="1.20" data-path=""><a href="#鸡蛋掉落"><i class="fa fa-check"></i><b>1.20</b> 鸡蛋掉落</a></li>
+<li class="chapter" data-level="1.21" data-path=""><a href="#整数拆分"><i class="fa fa-check"></i><b>1.21</b> 整数拆分</a></li>
+<li class="chapter" data-level="1.22" data-path=""><a href="#分割等和子集"><i class="fa fa-check"></i><b>1.22</b> 分割等和子集</a></li>
+<li class="chapter" data-level="1.23" data-path=""><a href="#最大正方形"><i class="fa fa-check"></i><b>1.23</b> 最大正方形</a></li>
+<li class="chapter" data-level="1.24" data-path=""><a href="#一和零"><i class="fa fa-check"></i><b>1.24</b> 一和零</a></li>
+<li class="chapter" data-level="1.25" data-path=""><a href="#最后一块石头一"><i class="fa fa-check"></i><b>1.25</b> 最后一块石头一</a></li>
+<li class="chapter" data-level="1.26" data-path=""><a href="#戳气球问题"><i class="fa fa-check"></i><b>1.26</b> 戳气球问题</a></li>
+<li class="chapter" data-level="1.27" data-path=""><a href="#最后一块石头二"><i class="fa fa-check"></i><b>1.27</b> 最后一块石头二</a></li>
+<li class="chapter" data-level="1.28" data-path=""><a href="#总结"><i class="fa fa-check"></i><b>1.28</b> 总结</a></li>
 </ul></li>
 </ul>
 
@@ -178,7 +180,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">动态规划专题</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2021-08-21</em></p>
+<p class="date"><em>2021-08-22</em></p>
 </div>
 <div id="动态规划问题" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> 动态规划问题</h1>
@@ -945,7 +947,9 @@ dp[i][j] 为截取的子串</p>
 <span id="cb26-20"><a href="#cb26-20"></a>        withRoot =<span class="st"> </span>root.val <span class="op">+</span><span class="st"> </span>left_amount[<span class="dv">0</span>] <span class="op">+</span><span class="st"> </span>right_amount[<span class="dv">0</span>]</span>
 <span id="cb26-21"><a href="#cb26-21"></a>        return [withoutRoot, <span class="kw">max</span>(withRoot, withoutRoot)]</span>
 <span id="cb26-22"><a href="#cb26-22"></a></span></code></pre></div>
-<p>## 编辑距离</p>
+</div>
+<div id="编辑距离" class="section level2" number="1.19">
+<h2><span class="header-section-number">1.19</span> 编辑距离</h2>
 <blockquote>
 <p>给你两个单词word1 和word2，请你计算出将word1转换成word2 所使用的最少操作数。</p>
 </blockquote>
@@ -987,8 +991,8 @@ exection -&gt; execution (插入 ‘u’)</p>
 <span id="cb27-14"><a href="#cb27-14"></a><span class="st">                    </span>dp[i][j] =<span class="st"> </span><span class="kw">min</span>(dp[i<span class="dv">-1</span>][j<span class="dv">-1</span>], dp[i<span class="dv">-1</span>][j], dp[i][j<span class="dv">-1</span>]) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
 <span id="cb27-15"><a href="#cb27-15"></a>        return dp[<span class="op">-</span><span class="dv">1</span>][<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
 </div>
-<div id="鸡蛋掉落" class="section level2" number="1.19">
-<h2><span class="header-section-number">1.19</span> 鸡蛋掉落</h2>
+<div id="鸡蛋掉落" class="section level2" number="1.20">
+<h2><span class="header-section-number">1.20</span> 鸡蛋掉落</h2>
 <ul>
 <li>背包问题</li>
 </ul>
@@ -1032,8 +1036,8 @@ exection -&gt; execution (插入 ‘u’)</p>
 <span id="cb28-9"><a href="#cb28-9"></a><span class="st">                    </span>return step</span>
 <span id="cb28-10"><a href="#cb28-10"></a>        return <span class="dv">0</span></span></code></pre></div>
 </div>
-<div id="整数拆分" class="section level2" number="1.20">
-<h2><span class="header-section-number">1.20</span> 整数拆分</h2>
+<div id="整数拆分" class="section level2" number="1.21">
+<h2><span class="header-section-number">1.21</span> 整数拆分</h2>
 <p>给定一个正整数 n，将其拆分为至少两个正整数的和，并使这些整数的乘积最大化。返回你可以获得的最大乘积。</p>
 <p>示例 1: 输入: 2
 输出: 1
@@ -1077,8 +1081,8 @@ dp[i]：分拆数字i，可以得到的最大乘积为dp[i]。</p>
 <span id="cb29-6"><a href="#cb29-6"></a><span class="st">                </span>dp[i] =<span class="st"> </span><span class="kw">max</span>(dp[i], j <span class="op">*</span><span class="st"> </span>(i <span class="op">-</span><span class="st"> </span>j), j <span class="op">*</span><span class="st"> </span>dp[i <span class="op">-</span><span class="st"> </span>j])</span>
 <span id="cb29-7"><a href="#cb29-7"></a>        return dp[n]</span></code></pre></div>
 </div>
-<div id="分割等和子集" class="section level2" number="1.21">
-<h2><span class="header-section-number">1.21</span> 分割等和子集</h2>
+<div id="分割等和子集" class="section level2" number="1.22">
+<h2><span class="header-section-number">1.22</span> 分割等和子集</h2>
 <p>题目描述：</p>
 <p>给定一个只包含正整数的非空数组。是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。</p>
 <p>注意:
@@ -1123,8 +1127,8 @@ dp[i]的数值一定是小于等于i的。</p>
 <span id="cb30-9"><a href="#cb30-9"></a><span class="st">                </span>dp[j] =<span class="st"> </span><span class="kw">max</span>(dp[j], dp[j <span class="op">-</span><span class="st"> </span>nums[i]] <span class="op">+</span><span class="st"> </span>nums[i])</span>
 <span id="cb30-10"><a href="#cb30-10"></a>        return taraget <span class="op">==</span><span class="st"> </span>dp[taraget]</span></code></pre></div>
 </div>
-<div id="最大正方形" class="section level2" number="1.22">
-<h2><span class="header-section-number">1.22</span> 最大正方形</h2>
+<div id="最大正方形" class="section level2" number="1.23">
+<h2><span class="header-section-number">1.23</span> 最大正方形</h2>
 <p>在一个由 0 和 1 组成的二维矩阵内，找到只包含 1 的最大正方形，并返回其面积</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>输入<span class="op">:</span><span class="st"> </span></span>
 <span id="cb31-2"><a href="#cb31-2"></a></span>
@@ -1161,8 +1165,8 @@ dp[i]的数值一定是小于等于i的。</p>
 <span id="cb32-22"><a href="#cb32-22"></a>        square =<span class="st"> </span>max_side <span class="op">**</span><span class="st"> </span><span class="dv">2</span></span>
 <span id="cb32-23"><a href="#cb32-23"></a>        return square</span></code></pre></div>
 </div>
-<div id="一和零" class="section level2" number="1.23">
-<h2><span class="header-section-number">1.23</span> 一和零</h2>
+<div id="一和零" class="section level2" number="1.24">
+<h2><span class="header-section-number">1.24</span> 一和零</h2>
 <ul>
 <li>题目描述</li>
 </ul>
@@ -1216,8 +1220,8 @@ dp[i][j] 可以由前一个strs里的字符串推导出来，strs里的字符串
 <span id="cb33-12"><a href="#cb33-12"></a><span class="st">                    </span>dp[i][j] =<span class="st"> </span><span class="kw">max</span>(dp[i][j], dp[i <span class="op">-</span><span class="st"> </span>zeros][j <span class="op">-</span><span class="st"> </span>ones] <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</span>
 <span id="cb33-13"><a href="#cb33-13"></a>        return dp[m][n]</span></code></pre></div>
 </div>
-<div id="最后一块石头一" class="section level2" number="1.24">
-<h2><span class="header-section-number">1.24</span> 最后一块石头一</h2>
+<div id="最后一块石头一" class="section level2" number="1.25">
+<h2><span class="header-section-number">1.25</span> 最后一块石头一</h2>
 <ul>
 <li>题目描述
 每一回合，从中选出任意两块石头，然后将它们一起粉碎。假设石头的重量分别为 x 和 y，且 x &lt;= y。那么粉碎的可能结果如下：</li>
@@ -1270,12 +1274,43 @@ dp[j]表示容量（这里说容量更形象，其实就是重量）为j的背�
 <span id="cb34-10"><a href="#cb34-10"></a><span class="st">                </span>dp[j] =<span class="st"> </span><span class="kw">max</span>(dp[j], dp[j <span class="op">-</span><span class="st"> </span>stones[i]] <span class="op">+</span><span class="st"> </span>stones[i])</span>
 <span id="cb34-11"><a href="#cb34-11"></a>        return sum <span class="op">-</span><span class="st"> </span>dp[target] <span class="op">-</span><span class="st"> </span>dp[target]</span></code></pre></div>
 </div>
-<div id="最后一块石头二" class="section level2" number="1.25">
-<h2><span class="header-section-number">1.25</span> 最后一块石头二</h2>
+<div id="戳气球问题" class="section level2" number="1.26">
+<h2><span class="header-section-number">1.26</span> 戳气球问题</h2>
+<ul>
+<li>题目描述</li>
+</ul>
+<p>有 n 个气球，编号为0 到 n-1，每个气球上都标有一个数字，这些数字存在数组 nums 中。</p>
+<p>现在要求你戳破所有的气球。每当你戳破一个气球 i 时，你可以获得 nums[left] * nums[i] * nums[right] 个硬币。 这里的 left 和 right 代表和 i 相邻的两个气球的序号。注意当你戳破了气球 i 后，气球 left 和气球 right 就变成了相邻的气球。</p>
+<p><strong>求所能获得硬币的最大数量</strong></p>
+<p>输入: [3,1,5,8]
+输出: 167
+解释:
+nums = [3,1,5,8] –&gt; [3,5,8] –&gt; [3,8] –&gt; [8] –&gt; [ ]
+coins = 3<em>1</em>5 + 3<em>5</em>8 + 1<em>3</em>8 + 1<em>8</em>1 = 167</p>
+<ul>
+<li>解题思路</li>
+</ul>
+<p>设dp[i][j]表示错破i到j之间的气球能得到的最大硬币数量。
+假设k是最后一个被戳破的气球，i&lt;k&lt;j ,于是乎，如果我们从k处把序列断开为(i,k)和(k,j)
+那么 dp[i][j] = max(dp[i][k]+dp[k][j] + nums[i]<em>nums[k]</em>nums[j])</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>def <span class="kw">maxCoins</span>(iNums)<span class="op">:</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="st">    </span>nums =<span class="st"> </span>[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>[i <span class="cf">for</span> i <span class="cf">in</span> iNums <span class="cf">if</span> i <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>] <span class="op">+</span><span class="st"> </span>[<span class="dv">1</span>]</span>
+<span id="cb35-3"><a href="#cb35-3"></a>    n =<span class="st"> </span><span class="kw">len</span>(nums)</span>
+<span id="cb35-4"><a href="#cb35-4"></a>    dp =<span class="st"> </span>[[<span class="dv">0</span>]<span class="op">*</span>n <span class="cf">for</span> _ <span class="cf">in</span> <span class="kw">range</span>(n)]</span>
+<span id="cb35-5"><a href="#cb35-5"></a></span>
+<span id="cb35-6"><a href="#cb35-6"></a>    <span class="cf">for</span> k <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">2</span>, n)<span class="op">:</span></span>
+<span id="cb35-7"><a href="#cb35-7"></a><span class="st">        </span><span class="cf">for</span> left <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">0</span>, n <span class="op">-</span><span class="st"> </span>k)<span class="op">:</span></span>
+<span id="cb35-8"><a href="#cb35-8"></a><span class="st">            </span>right =<span class="st"> </span>left <span class="op">+</span><span class="st"> </span>k</span>
+<span id="cb35-9"><a href="#cb35-9"></a>            <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(left <span class="op">+</span><span class="st"> </span><span class="dv">1</span>,right)<span class="op">:</span></span>
+<span id="cb35-10"><a href="#cb35-10"></a><span class="st">                </span>dp[left][right] =<span class="st"> </span><span class="kw">max</span>(dp[left][right], nums[left] <span class="op">*</span><span class="st"> </span>nums[i] <span class="op">*</span><span class="st"> </span>nums[right] <span class="op">+</span><span class="st"> </span>dp[left][i] <span class="op">+</span><span class="st"> </span>dp[i][right])</span>
+<span id="cb35-11"><a href="#cb35-11"></a>    return dp[<span class="dv">0</span>][n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>]</span></code></pre></div>
+</div>
+<div id="最后一块石头二" class="section level2" number="1.27">
+<h2><span class="header-section-number">1.27</span> 最后一块石头二</h2>
 <p>有时间再看</p>
 </div>
-<div id="总结" class="section level2" number="1.26">
-<h2><span class="header-section-number">1.26</span> 总结</h2>
+<div id="总结" class="section level2" number="1.28">
+<h2><span class="header-section-number">1.28</span> 总结</h2>
 <div class="figure">
 <img src="../figs/动态规划问题解题思路.png" alt="" />
 <p class="caption">动态规划问题解题思路</p>
