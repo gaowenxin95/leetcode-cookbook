@@ -14,9 +14,9 @@
 
 - [排序](https://gaowenxin95.github.io/leetcode-cookbook/analysis/sort.Rmd)
 
-- [字符串](https://gaowenxin95.github.io/leetcode-cookbook/analysis/string.html)
+- [字符串](https://gaowenxin95.github.io/leetcode-cookbook/analysis/字符串专题.html)
 
-- [数组](https://gaowenxin95.github.io/leetcode-cookbook/analysis/array.html)
+- [数组](https://gaowenxin95.github.io/leetcode-cookbook/analysis/数组专题.html)
 
 - [必会10大排序算法](https://github.com/gaowenxin95/leetcode-cookbook/blob/master/analysis/sort.py)
 

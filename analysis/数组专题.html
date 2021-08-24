@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>数组专题</title>
+  <meta name="description" content="数组专题" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="数组专题" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="数组专题" />
+  
+  
+  
+
+<meta name="author" content="高文欣" />
+
+
+<meta name="date" content="2021-08-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path=""><a href="#数组专题"><i class="fa fa-check"></i><b>1</b> 数组专题</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#长度最小的子数组"><i class="fa fa-check"></i><b>1.1</b> 长度最小的子数组</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#两个数组的交集"><i class="fa fa-check"></i><b>1.2</b> 两个数组的交集</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#旋转数组"><i class="fa fa-check"></i><b>1.3</b> 旋转数组</a></li>
+<li class="chapter" data-level="1.4" data-path=""><a href="#移除元素"><i class="fa fa-check"></i><b>1.4</b> 移除元素</a></li>
+<li class="chapter" data-level="1.5" data-path=""><a href="#加一"><i class="fa fa-check"></i><b>1.5</b> 加一</a></li>
+<li class="chapter" data-level="1.6" data-path=""><a href="#两数之和"><i class="fa fa-check"></i><b>1.6</b> 两数之和</a></li>
+<li class="chapter" data-level="1.7" data-path=""><a href="#三数之和"><i class="fa fa-check"></i><b>1.7</b> 三数之和</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">数组专题</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">数组专题</h1>
+<p class="author"><em>高文欣</em></p>
+<p class="date"><em>2021-08-24</em></p>
+</div>
+<div id="数组专题" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> 数组专题</h1>
+<div id="长度最小的子数组" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> 长度最小的子数组</h2>
+<ul>
+<li>题目描述</li>
+</ul>
+<p>给定一个含有 n 个正整数的数组和一个正整数 target 。</p>
+<p>找出该数组中满足其和 ≥ target 的长度最小的 连续子数组 [numsl, numsl+1, …, numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0 。</p>
+<ul>
+<li>解题思路</li>
+</ul>
+<p>比较典型的滑动窗口</p>
+<p>主要确定如下三点：</p>
+<ul>
+<li>窗口内是什么？</li>
+<li>如何移动窗口的起始位置？</li>
+<li>如何移动窗口的结束位置？</li>
+</ul>
+<blockquote>
+<p>窗口就是 满足其和 ≥ s 的长度最小的连续子数组。
+窗口的起始位置如何移动：如果当前窗口的值大于s了，窗口就要向前移动了（也就是该缩小了）。
+窗口的结束位置如何移动：窗口的结束位置就是遍历数组的指针，窗口的起始位置设置为数组的起始位置就可以了。
+解题的关键在于 窗口的起始位置如何移动，如图所示：</p>
+</blockquote>
+<p><img src="../figs/array_1.png" /></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="st">    </span>def <span class="kw">minSubArrayLen</span>(self, s<span class="op">:</span><span class="st"> </span>int, nums<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="st">        </span><span class="co"># 定义一个无限大的数</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="st">        </span>res =<span class="st"> </span><span class="kw">float</span>(<span class="st">&quot;inf&quot;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>        Sum =<span class="st"> </span><span class="dv">0</span> <span class="co"># 当前总和</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>        index =<span class="st"> </span><span class="dv">0</span> <span class="co"># 当前索引</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(nums))<span class="op">:</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="st">            </span>Sum <span class="op">+</span><span class="er">=</span><span class="st"> </span>nums[i]</span>
+<span id="cb1-9"><a href="#cb1-9"></a>            <span class="cf">while</span> Sum <span class="op">&gt;=</span><span class="st"> </span>s<span class="op">:</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="st">                </span>res =<span class="st"> </span><span class="kw">min</span>(res, i<span class="op">-</span>index<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb1-11"><a href="#cb1-11"></a>                Sum <span class="op">-</span><span class="er">=</span><span class="st"> </span>nums[index] <span class="co"># 滑动窗口的精髓，不断变更index</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>                index <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>        return <span class="dv">0</span> <span class="cf">if</span> res<span class="op">==</span><span class="kw">float</span>(<span class="st">&quot;inf&quot;</span>) <span class="cf">else</span> res</span></code></pre></div>
+</div>
+<div id="两个数组的交集" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> 两个数组的交集</h2>
+<ul>
+<li>题目描述</li>
+</ul>
+<p>给定两个数组，编写一个函数来计算它们的交集。
+输入: nums1 = [1,2,2,1], nums2 = [2,2]
+输出: [2,2]</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>res=[]</span>
+<span id="cb2-2"><a href="#cb2-2"></a>def <span class="kw">jiaoji</span>(nums1,nums2)<span class="op">:</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="st">   </span><span class="cf">for</span> k <span class="cf">in</span> nums2<span class="op">:</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="st">       </span><span class="cf">if</span> k <span class="cf">in</span> nums1<span class="op">:</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="st">           </span><span class="kw">res.append</span>(k)</span>
+<span id="cb2-6"><a href="#cb2-6"></a>           <span class="kw">nums1.remove</span>(k)</span>
+<span id="cb2-7"><a href="#cb2-7"></a>   return res</span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="kw">print</span>(<span class="kw">jiaoji</span>(nums1,nums2))</span></code></pre></div>
+</div>
+<div id="旋转数组" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> 旋转数组</h2>
+<ul>
+<li>题目描述</li>
+</ul>
+<p>给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。
+示例 1:
+输入: [1,2,3,4,5,6,7] 和 k = 3
+输出: [5,6,7,1,2,3,4]</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>arr=[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>]</span>
+<span id="cb3-2"><a href="#cb3-2"></a>def <span class="kw">xz</span>(nums,k)<span class="op">:</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="st">    </span>return nums[k<span class="op">:</span>]<span class="op">+</span>nums[<span class="op">:</span>k]</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">print</span>(<span class="kw">xz</span>(arr,<span class="dv">3</span>))</span></code></pre></div>
+</div>
+<div id="移除元素" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> 移除元素</h2>
+<ul>
+<li>题目描述
+&gt;
+#给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。</li>
+</ul>
+<p>不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并原地修改输入数组。</p>
+<p>元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
+<p>示例 1: 给定 nums = [3,2,2,3], val = 3, 函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。 你不需要考虑数组中超出新长度后面的元素。</p>
+<p>示例 2: 给定 nums = [0,1,2,2,3,0,4,2], val = 2, 函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。</p>
+<p>你不需要考虑数组中超出新长度后面的元素。</p>
+<ul>
+<li>解题思路</li>
+</ul>
+<p>还是指针</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="st">    </span>def <span class="kw">removeElement</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int], val<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="st">        </span>i,n =<span class="st"> </span><span class="dv">0</span>,<span class="kw">len</span>(nums)</span>
+<span id="cb4-5"><a href="#cb4-5"></a>        <span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(n)<span class="op">:</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="st">            </span><span class="cf">if</span> nums[j] <span class="op">!=</span><span class="st"> </span>val<span class="op">:</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="st">                </span>nums[i] =<span class="st"> </span>nums[j]</span>
+<span id="cb4-8"><a href="#cb4-8"></a>                i <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>        return i</span></code></pre></div>
+</div>
+<div id="加一" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> 加一</h2>
+<ul>
+<li>题目描述</li>
+</ul>
+<p>给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。</p>
+<p>最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。</p>
+<p>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
+<p>示例 1:</p>
+<p>输入: [1,2,3]
+输出: [1,2,4]
+解释: 输入数组表示数字 123。
+示例 2:</p>
+<p>输入: [4,3,2,1]
+输出: [4,3,2,2]
+解释: 输入数组表示数字 4321。</p>
+<p>解题思路是转化为数字加完了再转化为数组</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>s=[<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>]</span>
+<span id="cb5-2"><a href="#cb5-2"></a>def <span class="kw">jiayi</span>(s)<span class="op">:</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="st">    </span>nus=[v<span class="op">*</span><span class="dv">10</span><span class="op">**</span>index <span class="cf">for</span> index,v <span class="cf">in</span> <span class="kw">enumerate</span>(s[<span class="op">::-</span><span class="dv">1</span>])]</span>
+<span id="cb5-4"><a href="#cb5-4"></a>    newv=<span class="kw">sum</span>(nus)<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>    return [<span class="kw">int</span>(x) <span class="cf">for</span> x <span class="cf">in</span> <span class="kw">str</span>(newv)]</span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="kw">print</span>(<span class="kw">jiayi</span>(s))</span></code></pre></div>
+</div>
+<div id="两数之和" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> 两数之和</h2>
+<p>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
+你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。</p>
+<p>示例:</p>
+<p>给定 nums = [2, 7, 11, 15], target = 9
+因为 nums[0] + nums[1] = 2 + 7 = 9
+所以返回 [0, 1]</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2"></a>def <span class="kw">twoSum</span>(nums, target) <span class="op">:</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="st">    </span>d =<span class="st"> </span>{}</span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="cf">for</span> k, v <span class="cf">in</span> <span class="kw">enumerate</span>(nums)<span class="op">:</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="st">        </span><span class="cf">if</span> target <span class="op">-</span><span class="st"> </span>v <span class="cf">in</span> d<span class="op">:</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="st">            </span>return [d[target <span class="op">-</span><span class="st"> </span>v], k]</span>
+<span id="cb6-7"><a href="#cb6-7"></a>        d[v] =<span class="st"> </span>k</span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="kw">print</span>(<span class="kw">twoSum</span>(nums,target))</span></code></pre></div>
+</div>
+<div id="三数之和" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> 三数之和</h2>
+<p>给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c
+，使得 a + b + c = 0 ？请你找出所有满足条件且不重复的三元组。</p>
+<p>注意：答案中不可以包含重复的三元组。</p>
+<p> </p>
+<p>示例：</p>
+<p>给定数组 nums = [-1, 0, 1, 2, -1, -4]，</p>
+<p>满足要求的三元组集合为： [ [-1, 0, 1], [-1, -1, 2]]</p>
+<ul>
+<li>解题思路</li>
+</ul>
+<p>这个题，哎只能想到贼暴力的解法，看了大佬们的解法，只能惊叹！！牛逼的太多了</p>
+<p>排序 + 双指针 本题的难点在于如何去除重复解。 算法流程：
+1.特判，对于数组长度 <span class="math inline">\(n,\)</span> 如果数组为 <span class="math inline">\(n u l l\)</span> 或者数组长度小于 <span class="math inline">\(3,\)</span> 返回
+[]<span class="math inline">\(.\)</span>
+2. 对数组进行排序。
+3. 遍历排序后数组。若 <span class="math inline">\(n u m s[i]&gt;0:\)</span>
+因为已经排序好, 所以后面不可能有三个数加和等于 0，直接返回结果。
+对于重复元素：跳过, 避免出现重复解 令左指针 <span class="math inline">\(L=i+1,\)</span> 右指针 <span class="math inline">\(R=n-1,\)</span> 当
+<span class="math inline">\(L&lt;R\)</span> 时, 执行循环:</p>
+<ul>
+<li><p>当<span class="math inline">\(\operatorname{nums}[i]+\operatorname{nums}[L]+\operatorname{nums}[R]==0\)</span>,
+执行循环，判断左界和右界是否和下一位置重 复, 去除重复解。并同时将 <span class="math inline">\(L, R\)</span>
+移到下一位置，寻找新的解 若和大于 <span class="math inline">\(0,\)</span> 说明 <span class="math inline">\(n u m s[R]\)</span> 太大, <span class="math inline">\(\quad R\)</span>
+左移</p></li>
+<li><p>若和小于 <span class="math inline">\(0,\)</span> 说明 <span class="math inline">\(n u m s[L]\)</span> 太小， <span class="math inline">\(L\)</span> 右移 复杂度分析</p></li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="st">    </span>def <span class="kw">threeSum</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>List[List[int]]<span class="op">:</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="st">        </span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="st">        </span>n=<span class="kw">len</span>(nums)</span>
+<span id="cb7-5"><a href="#cb7-5"></a>        res=[]</span>
+<span id="cb7-6"><a href="#cb7-6"></a>        <span class="cf">if</span>(not nums or n<span class="op">&lt;</span><span class="dv">3</span>)<span class="op">:</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="st">            </span>return []</span>
+<span id="cb7-8"><a href="#cb7-8"></a>        <span class="kw">nums.sort</span>() <span class="co"># 先排序</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>        res=[] <span class="co"># 定义一个结果list</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(n)<span class="op">:</span><span class="st"> </span><span class="co"># 如果元素都大于0，无解</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="st">            </span><span class="cf">if</span>(nums[i]<span class="op">&gt;</span><span class="dv">0</span>)<span class="op">:</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="st">                </span>return res</span>
+<span id="cb7-13"><a href="#cb7-13"></a>            <span class="cf">if</span>(i<span class="op">&gt;</span><span class="dv">0</span> and nums[i]<span class="op">==</span>nums[i<span class="dv">-1</span>])<span class="op">:</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="st">                </span>continue</span>
+<span id="cb7-15"><a href="#cb7-15"></a>            L=i<span class="op">+</span><span class="dv">1</span> <span class="co"># 明显的滑动窗口</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a>            R=n<span class="dv">-1</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a>            <span class="cf">while</span>(L<span class="op">&lt;</span>R)<span class="op">:</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="st">                </span><span class="cf">if</span>(nums[i]<span class="op">+</span>nums[L]<span class="op">+</span>nums[R]<span class="op">==</span><span class="dv">0</span>)<span class="op">:</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="st">                    </span><span class="kw">res.append</span>([nums[i],nums[L],nums[R]])</span>
+<span id="cb7-20"><a href="#cb7-20"></a>                    <span class="cf">while</span>(L<span class="op">&lt;</span>R and nums[L]<span class="op">==</span>nums[L<span class="op">+</span><span class="dv">1</span>])<span class="op">:</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="st">                        </span>L=L<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a>                    <span class="cf">while</span>(L<span class="op">&lt;</span>R and nums[R]<span class="op">==</span>nums[R<span class="dv">-1</span>])<span class="op">:</span></span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="st">                        </span>R=R<span class="dv">-1</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a>                    L=L<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb7-25"><a href="#cb7-25"></a>                    R=R<span class="dv">-1</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a>                <span class="kw">elif</span>(nums[i]<span class="op">+</span>nums[L]<span class="op">+</span>nums[R]<span class="op">&gt;</span><span class="dv">0</span>)<span class="op">:</span></span>
+<span id="cb7-27"><a href="#cb7-27"></a><span class="st">                    </span>R=R<span class="dv">-1</span></span>
+<span id="cb7-28"><a href="#cb7-28"></a>                <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb7-29"><a href="#cb7-29"></a><span class="st">                    </span>L=L<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb7-30"><a href="#cb7-30"></a>        return res</span>
+<span id="cb7-31"><a href="#cb7-31"></a></span></code></pre></div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
