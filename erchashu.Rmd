@@ -43,12 +43,18 @@ class TreeNode(object):
 ![](figs/deepth.png)
 
 ```r
-def maxDeath(node):
-	if not node:
-		return 0
-	left = maxDeath(node.left)
-	right = maxDeath(node.right)
-	return max(left, right) + 1
+class Solution:
+    """
+    递归法
+    """
+    def maxDepth(self, root):
+        def max_depth(root):                        # 计算以root为根节点的二叉树的最大深度
+            if not root:
+                return 0
+            max_left = max_depth(root.left)         # 左子树最大深度
+            max_right = max_depth(root.right)       # 右子树最大深度
+            return max(max_left, max_right) + 1     # 加上根节点，返回当前子树最大深度
+        return max_depth(root) # 递归
 ```
 
 ## 树的最小深度
@@ -128,15 +134,15 @@ class Solution:
     # 返回从上到下每个节点值列表，例：[1,2,3]
     def PrintFromTopToBottom(self, root):
         # write code here
-        outList=[]
-        queue=[root]
+        outList=[] # 结果集
+        queue=[root] # 
         while queue!=[] and root:
-            outList.append(queue[0].val)
-            if queue[0].left!=None:
+            outList.append(queue[0].val) # 根
+            if queue[0].left!=None: # 左
                 queue.append(queue[0].left)
-            if queue[0].right!=None:
+            if queue[0].right!=None: #右
                 queue.append(queue[0].right)
-            queue.pop(0)
+            queue.pop(0) # 退队列
         return outList
 ```
 
@@ -596,28 +602,26 @@ class Solution(object):
 所以递归遍历左右子树，比较左右子树的深度
 
 ```r
-# -*- coding:utf-8 -*-
+# Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, x):
 #         self.val = x
 #         self.left = None
 #         self.right = None
-
+ 
 class Solution:
-    def IsBalanced_Solution(self, pRoot):
-        # write code here
-        if not pRoot: 
-            return 1
-        left = self.IsBalanced_Solution(pRoot.left)
-        right = self.IsBalanced_Solution(pRoot.right)
-        if not left:
+    def isBalanced(self, root: TreeNode) -> bool:
+        def treeDepth(root):
+            if not root:
+                return 0
+            return max(treeDepth(root.left),treeDepth(root.right))+1
+        if not root:
+            return True
+        leftTreeDepth=treeDepth(root.left)
+        rightTreeDepth=treeDepth(root.right)
+        if abs(leftTreeDepth-rightTreeDepth)>1:
             return False
-        if not right:
-            return False
-        if abs(left-right)<2:
-            return 1+max(left,right)
-        else:
-            return False
+        return self.isBalanced(root.left) and self.isBalanced(root.right)
 ```
 
 ## 翻转二叉树

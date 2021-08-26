@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2021-08-19" />
+<meta name="date" content="2021-08-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -171,7 +171,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">二叉树专题</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2021-08-19</em></p>
+<p class="date"><em>2021-08-26</em></p>
 </div>
 <div id="二叉树专题" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> 二叉树专题</h1>
@@ -199,12 +199,18 @@ left,right就是位置</p>
 <div id="树的最大深度" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> 树的最大深度</h2>
 <p><img src="figs/deepth.png" /></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>def <span class="kw">maxDeath</span>(node)<span class="op">:</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="st">    </span><span class="cf">if</span> not node<span class="op">:</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="st">        </span>return <span class="dv">0</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>    left =<span class="st"> </span><span class="kw">maxDeath</span>(node.left)</span>
-<span id="cb2-5"><a href="#cb2-5"></a>    right =<span class="st"> </span><span class="kw">maxDeath</span>(node.right)</span>
-<span id="cb2-6"><a href="#cb2-6"></a>    return <span class="kw">max</span>(left, right) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="st">    &quot;&quot;&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="st">    递归法</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="st">    &quot;&quot;&quot;</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>    def <span class="kw">maxDepth</span>(self, root)<span class="op">:</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="st">        </span>def <span class="kw">max_depth</span>(root)<span class="op">:</span><span class="st">                        </span><span class="co"># 计算以root为根节点的二叉树的最大深度</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="st">            </span><span class="cf">if</span> not root<span class="op">:</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="st">                </span>return <span class="dv">0</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>            max_left =<span class="st"> </span><span class="kw">max_depth</span>(root.left)         <span class="co"># 左子树最大深度</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>            max_right =<span class="st"> </span><span class="kw">max_depth</span>(root.right)       <span class="co"># 右子树最大深度</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>            return <span class="kw">max</span>(max_left, max_right) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>     <span class="co"># 加上根节点，返回当前子树最大深度</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>        return <span class="kw">max_depth</span>(root) <span class="co"># 递归</span></span></code></pre></div>
 </div>
 <div id="树的最小深度" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> 树的最小深度</h2>
@@ -266,15 +272,15 @@ left,right就是位置</p>
 <span id="cb7-8"><a href="#cb7-8"></a><span class="st">    </span><span class="co"># 返回从上到下每个节点值列表，例：[1,2,3]</span></span>
 <span id="cb7-9"><a href="#cb7-9"></a><span class="st">    </span>def <span class="kw">PrintFromTopToBottom</span>(self, root)<span class="op">:</span></span>
 <span id="cb7-10"><a href="#cb7-10"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="st">        </span>outList=[]</span>
-<span id="cb7-12"><a href="#cb7-12"></a>        queue=[root]</span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="st">        </span>outList=[] <span class="co"># 结果集</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>        queue=[root] <span class="co"># </span></span>
 <span id="cb7-13"><a href="#cb7-13"></a>        <span class="cf">while</span> queue<span class="op">!=</span>[] and root<span class="op">:</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a><span class="st">            </span><span class="kw">outList.append</span>(queue[<span class="dv">0</span>].val)</span>
-<span id="cb7-15"><a href="#cb7-15"></a>            <span class="cf">if</span> queue[<span class="dv">0</span>].left<span class="op">!=</span>None<span class="op">:</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="st">            </span><span class="kw">outList.append</span>(queue[<span class="dv">0</span>].val) <span class="co"># 根</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>            <span class="cf">if</span> queue[<span class="dv">0</span>].left<span class="op">!=</span>None<span class="op">:</span><span class="st"> </span><span class="co"># 左</span></span>
 <span id="cb7-16"><a href="#cb7-16"></a><span class="st">                </span><span class="kw">queue.append</span>(queue[<span class="dv">0</span>].left)</span>
-<span id="cb7-17"><a href="#cb7-17"></a>            <span class="cf">if</span> queue[<span class="dv">0</span>].right<span class="op">!=</span>None<span class="op">:</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a>            <span class="cf">if</span> queue[<span class="dv">0</span>].right<span class="op">!=</span>None<span class="op">:</span><span class="st"> </span><span class="co">#右</span></span>
 <span id="cb7-18"><a href="#cb7-18"></a><span class="st">                </span><span class="kw">queue.append</span>(queue[<span class="dv">0</span>].right)</span>
-<span id="cb7-19"><a href="#cb7-19"></a>            <span class="kw">queue.pop</span>(<span class="dv">0</span>)</span>
+<span id="cb7-19"><a href="#cb7-19"></a>            <span class="kw">queue.pop</span>(<span class="dv">0</span>) <span class="co"># 退队列</span></span>
 <span id="cb7-20"><a href="#cb7-20"></a>        return outList</span></code></pre></div>
 </div>
 <div id="二叉树的前序遍历" class="section level2" number="1.8">
@@ -666,28 +672,26 @@ left,right就是位置</p>
 （AVL）平衡二叉树是一种二叉排序树，其中每个结点的左子树和右子树的高度差至多等于1。它是一种高度平衡的二叉排序树。意思是说，要么它是一棵空树，要么它的左子树和右子树都是平衡二叉树，且左子树和右子树的深度之差的绝对值不超过1。</p>
 <p>平衡二叉树是一种二叉排序树。也就是二叉排序树包含了平衡二叉排序树，其次它要满足后面的约束条件，就是每个结点的左子树和右子树的高度差不超过1</p>
 <p>所以递归遍历左右子树，比较左右子树的深度</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Definition for a binary tree node.</span></span>
 <span id="cb23-2"><a href="#cb23-2"></a><span class="co"># class TreeNode:</span></span>
 <span id="cb23-3"><a href="#cb23-3"></a><span class="co">#     def __init__(self, x):</span></span>
 <span id="cb23-4"><a href="#cb23-4"></a><span class="co">#         self.val = x</span></span>
 <span id="cb23-5"><a href="#cb23-5"></a><span class="co">#         self.left = None</span></span>
 <span id="cb23-6"><a href="#cb23-6"></a><span class="co">#         self.right = None</span></span>
-<span id="cb23-7"><a href="#cb23-7"></a></span>
+<span id="cb23-7"><a href="#cb23-7"></a> </span>
 <span id="cb23-8"><a href="#cb23-8"></a>class Solution<span class="op">:</span></span>
-<span id="cb23-9"><a href="#cb23-9"></a><span class="st">    </span>def <span class="kw">IsBalanced_Solution</span>(self, pRoot)<span class="op">:</span></span>
-<span id="cb23-10"><a href="#cb23-10"></a><span class="st">        </span><span class="co"># write code here</span></span>
-<span id="cb23-11"><a href="#cb23-11"></a><span class="st">        </span><span class="cf">if</span> not pRoot<span class="op">:</span><span class="st"> </span></span>
-<span id="cb23-12"><a href="#cb23-12"></a><span class="st">            </span>return <span class="dv">1</span></span>
-<span id="cb23-13"><a href="#cb23-13"></a>        left =<span class="st"> </span><span class="kw">self.IsBalanced_Solution</span>(pRoot.left)</span>
-<span id="cb23-14"><a href="#cb23-14"></a>        right =<span class="st"> </span><span class="kw">self.IsBalanced_Solution</span>(pRoot.right)</span>
-<span id="cb23-15"><a href="#cb23-15"></a>        <span class="cf">if</span> not left<span class="op">:</span></span>
-<span id="cb23-16"><a href="#cb23-16"></a><span class="st">            </span>return False</span>
-<span id="cb23-17"><a href="#cb23-17"></a>        <span class="cf">if</span> not right<span class="op">:</span></span>
-<span id="cb23-18"><a href="#cb23-18"></a><span class="st">            </span>return False</span>
-<span id="cb23-19"><a href="#cb23-19"></a>        <span class="cf">if</span> <span class="kw">abs</span>(left<span class="op">-</span>right)<span class="op">&lt;</span><span class="dv">2</span><span class="op">:</span></span>
-<span id="cb23-20"><a href="#cb23-20"></a><span class="st">            </span>return <span class="dv">1</span><span class="op">+</span><span class="kw">max</span>(left,right)</span>
-<span id="cb23-21"><a href="#cb23-21"></a>        <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb23-22"><a href="#cb23-22"></a><span class="st">            </span>return False</span></code></pre></div>
+<span id="cb23-9"><a href="#cb23-9"></a><span class="st">    </span>def <span class="kw">isBalanced</span>(self, root<span class="op">:</span><span class="st"> </span>TreeNode) -&gt;<span class="st"> </span>bool<span class="op">:</span></span>
+<span id="cb23-10"><a href="#cb23-10"></a><span class="st">        </span>def <span class="kw">treeDepth</span>(root)<span class="op">:</span></span>
+<span id="cb23-11"><a href="#cb23-11"></a><span class="st">            </span><span class="cf">if</span> not root<span class="op">:</span></span>
+<span id="cb23-12"><a href="#cb23-12"></a><span class="st">                </span>return <span class="dv">0</span></span>
+<span id="cb23-13"><a href="#cb23-13"></a>            return <span class="kw">max</span>(<span class="kw">treeDepth</span>(root.left),<span class="kw">treeDepth</span>(root.right))<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb23-14"><a href="#cb23-14"></a>        <span class="cf">if</span> not root<span class="op">:</span></span>
+<span id="cb23-15"><a href="#cb23-15"></a><span class="st">            </span>return True</span>
+<span id="cb23-16"><a href="#cb23-16"></a>        leftTreeDepth=<span class="kw">treeDepth</span>(root.left)</span>
+<span id="cb23-17"><a href="#cb23-17"></a>        rightTreeDepth=<span class="kw">treeDepth</span>(root.right)</span>
+<span id="cb23-18"><a href="#cb23-18"></a>        <span class="cf">if</span> <span class="kw">abs</span>(leftTreeDepth<span class="op">-</span>rightTreeDepth)<span class="op">&gt;</span><span class="dv">1</span><span class="op">:</span></span>
+<span id="cb23-19"><a href="#cb23-19"></a><span class="st">            </span>return False</span>
+<span id="cb23-20"><a href="#cb23-20"></a>        return <span class="kw">self.isBalanced</span>(root.left) and <span class="kw">self.isBalanced</span>(root.right)</span></code></pre></div>
 </div>
 <div id="翻转二叉树" class="section level2" number="1.19">
 <h2><span class="header-section-number">1.19</span> 翻转二叉树</h2>
