@@ -1,6 +1,5 @@
 # leetcode-cookbook
 
-- [基本数据结构一览](https://gaowenxin95.github.io/leetcode-cookbook/analysis/base_kg.html)
 
 - [二叉树](https://gaowenxin95.github.io/leetcode-cookbook/二叉树专题.html)
 
