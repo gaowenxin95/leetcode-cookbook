@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>排序专题</title>
+  <meta name="description" content="排序专题" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="排序专题" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="排序专题" />
+  
+  
+  
+
+<meta name="author" content="高文欣" />
+
+
+<meta name="date" content="2021-08-31" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path=""><a href="#十大经典排序"><i class="fa fa-check"></i><b>1</b> 十大经典排序</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#快速排序写法一"><i class="fa fa-check"></i><b>1.1</b> 快速排序写法一</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#快速排序写法二"><i class="fa fa-check"></i><b>1.2</b> 快速排序写法二</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#归并排序"><i class="fa fa-check"></i><b>1.3</b> 归并排序</a></li>
+<li class="chapter" data-level="1.4" data-path=""><a href="#冒泡排序"><i class="fa fa-check"></i><b>1.4</b> 冒泡排序</a></li>
+<li class="chapter" data-level="1.5" data-path=""><a href="#选择排序"><i class="fa fa-check"></i><b>1.5</b> 选择排序</a></li>
+<li class="chapter" data-level="1.6" data-path=""><a href="#插入排序"><i class="fa fa-check"></i><b>1.6</b> 插入排序</a></li>
+<li class="chapter" data-level="1.7" data-path=""><a href="#拓扑排序"><i class="fa fa-check"></i><b>1.7</b> 拓扑排序</a></li>
+<li class="chapter" data-level="1.8" data-path=""><a href="#希尔排序"><i class="fa fa-check"></i><b>1.8</b> 希尔排序</a></li>
+<li class="chapter" data-level="1.9" data-path=""><a href="#计数排序"><i class="fa fa-check"></i><b>1.9</b> 计数排序</a></li>
+<li class="chapter" data-level="1.10" data-path=""><a href="#桶排序"><i class="fa fa-check"></i><b>1.10</b> 桶排序</a></li>
+<li class="chapter" data-level="1.11" data-path=""><a href="#基数排序"><i class="fa fa-check"></i><b>1.11</b> 基数排序</a></li>
+<li class="chapter" data-level="1.12" data-path=""><a href="#堆排序"><i class="fa fa-check"></i><b>1.12</b> 堆排序</a></li>
+<li class="chapter" data-level="1.13" data-path=""><a href="#二分查找"><i class="fa fa-check"></i><b>1.13</b> 二分查找</a></li>
+<li class="chapter" data-level="1.14" data-path=""><a href="#排序算法时间复杂度分析"><i class="fa fa-check"></i><b>1.14</b> 排序算法时间复杂度分析</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">排序专题</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">排序专题</h1>
+<p class="author"><em>高文欣</em></p>
+<p class="date"><em>2021-08-31</em></p>
+</div>
+<div id="十大经典排序" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> 十大经典排序</h1>
+<div id="快速排序写法一" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> 快速排序写法一</h2>
+<p>基准大法</p>
+<p>基准左边的都不大于它，基准右边的都不小于它
+左右两边一起搜索交换<a href="https://www.jianshu.com/p/55ab254586bf">jianzhu</a></p>
+<p>从左边开始找到一个比它大的数，从右边往左找到一个比它小的数，交换位置</p>
+<blockquote>
+<p>冒泡排序的特点是每次都比较相邻的两个数字，每次位置互换，也只能换一个跨度。 快速排序之所比较快，因为相比冒泡排序，每次交换是跳跃式的。每次排序的时候设置一个基准点，将小于等于基准点的数全部放到基准点的左边，将大于等于基准点的数全部放到基准点的右边。这样在每次交换的时候就不会像冒泡排序一样每次只能在相邻的数之间进行交换，交换的距离就大的多了。因此总的比较和交换次数就少了，速度自然就提高了。当然在最坏的情况下，仍可能是相邻的两个数进行了交换。</p>
+</blockquote>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">def</span> quickSort(arr, left<span class="op">=</span><span class="va">None</span>, right<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb1-2"><a href="#cb1-2"></a>    left <span class="op">=</span> <span class="dv">0</span> <span class="cf">if</span> <span class="kw">not</span> <span class="bu">isinstance</span>(left,(<span class="bu">int</span>, <span class="bu">float</span>)) <span class="cf">else</span> left</span>
+<span id="cb1-3"><a href="#cb1-3"></a>    right <span class="op">=</span> <span class="bu">len</span>(arr)<span class="op">-</span><span class="dv">1</span> <span class="cf">if</span> <span class="kw">not</span> <span class="bu">isinstance</span>(right,(<span class="bu">int</span>, <span class="bu">float</span>)) <span class="cf">else</span> right</span>
+<span id="cb1-4"><a href="#cb1-4"></a>    <span class="cf">if</span> left <span class="op">&lt;</span> right:</span>
+<span id="cb1-5"><a href="#cb1-5"></a>        partitionIndex <span class="op">=</span> partition(arr, left, right)</span>
+<span id="cb1-6"><a href="#cb1-6"></a>        quickSort(arr, left, partitionIndex<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a>        quickSort(arr, partitionIndex<span class="op">+</span><span class="dv">1</span>, right)</span>
+<span id="cb1-8"><a href="#cb1-8"></a>    <span class="cf">return</span> arr</span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="kw">def</span> partition(arr, left, right):</span>
+<span id="cb1-11"><a href="#cb1-11"></a>    pivot <span class="op">=</span> left</span>
+<span id="cb1-12"><a href="#cb1-12"></a>    index <span class="op">=</span> pivot<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>    i <span class="op">=</span> index</span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="cf">while</span>  i <span class="op">&lt;=</span> right:</span>
+<span id="cb1-15"><a href="#cb1-15"></a>        <span class="cf">if</span> arr[i] <span class="op">&lt;</span> arr[pivot]:</span>
+<span id="cb1-16"><a href="#cb1-16"></a>            swap(arr, i, index)</span>
+<span id="cb1-17"><a href="#cb1-17"></a>            index<span class="op">+=</span><span class="dv">1</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>        i<span class="op">+=</span><span class="dv">1</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>    swap(arr,pivot,index<span class="op">-</span><span class="dv">1</span>)<span class="co">#left往右，index往左，就是这里要理解</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>    <span class="cf">return</span> index<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a></span>
+<span id="cb1-22"><a href="#cb1-22"></a><span class="kw">def</span> swap(arr, i, j):</span>
+<span id="cb1-23"><a href="#cb1-23"></a>    arr[i], arr[j] <span class="op">=</span> arr[j], arr[i]</span></code></pre></div>
+</div>
+<div id="快速排序写法二" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> 快速排序写法二</h2>
+<ul>
+<li><strong>这个方法更好理解，也简单一些</strong></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>def <span class="kw">quick_sort</span>(data)<span class="op">:</span><span class="st">    </span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="st">    &quot;&quot;&quot;快速排序&quot;&quot;&quot;</span>    </span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="cf">if</span> <span class="kw">len</span>(data) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span><span class="op">:</span><span class="st">  </span><span class="co"># 递归入口及出口        </span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="st">        </span>mid =<span class="st"> </span>data[<span class="kw">len</span>(data)<span class="op">/</span><span class="er">/</span><span class="dv">2</span>]  <span class="co"># 选取基准值，也可以选取第一个或最后一个元素        </span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>        left, right =<span class="st"> </span>[], []  <span class="co"># 定义基准值左右两侧的列表        </span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>        <span class="kw">data.remove</span>(mid)  <span class="co"># 从原始数组中移除基准值        </span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>        <span class="cf">for</span> num <span class="cf">in</span> data<span class="op">:</span><span class="st">            </span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="st">            </span><span class="cf">if</span> num <span class="op">&gt;=</span><span class="st"> </span>mid<span class="op">:</span><span class="st">                </span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="st">                </span><span class="kw">right.append</span>(num)            </span>
+<span id="cb2-10"><a href="#cb2-10"></a>            <span class="cf">else</span><span class="op">:</span><span class="st">                </span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="st">                </span><span class="kw">left.append</span>(num)        </span>
+<span id="cb2-12"><a href="#cb2-12"></a>        return <span class="kw">quick_sort</span>(left) <span class="op">+</span><span class="st"> </span>[mid] <span class="op">+</span><span class="st"> </span><span class="kw">quick_sort</span>(right)    </span>
+<span id="cb2-13"><a href="#cb2-13"></a>    <span class="cf">else</span><span class="op">:</span><span class="st">        </span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="st">        </span>return data</span></code></pre></div>
+<p>快速排序的一次划分算法从两头交替搜索，直到low和high重合，因此其时间复杂度是O(n)；而整个快速排序算法的时间复杂度与划分的趟数有关。
+理想的情况是，每次划分所选择的中间数恰好将当前序列几乎等分，经过log2n趟划分，便可得到长度为1的子表。这样，整个算法的时间复杂度为O(nlog2n)。
+最坏的情况是，每次所选的中间数是当前序列中的最大或最小元素，这使得每次划分所得的子表中一个为空表，另一子表的长度为原表的长度-1。这样，长度为n的数据表的快速排序需要经过n趟划分，使得整个排序算法的时间复杂度为O(n2)。
+为改善最坏情况下的时间性能，可采用其他方法选取中间数。通常采用“三者值取中”方法，即比较H-&gt;r[low].key、H-&gt;r[high].key与H-&gt;r[(10w+high)/2].key，取三者中关键字为中值的元素为中间数。
+可以证明，快速排序的平均时间复杂度也是O(nlog2n)。因此，该排序方法被认为是目前最好的一种内部排序方法。
+从空间性能上看，尽管快速排序只需要一个元素的辅助空间，但快速排序需要一个栈空间来实现递归。最好的情况下，即快速排序的每一趟排序都将元素序列均匀地分割成长度相近的两个子表，所需栈的最大深度为log2(n+1)；但最坏的情况下，栈的最大深度为n。这样，快速排序的空间复杂度为O(log2n))</p>
+<ul>
+<li>isinstance</li>
+</ul>
+<blockquote>
+<p>The isinstance() function checks if the object (first argument) is an instance or subclass of classinfo class (second argument).</p>
+</blockquote>
+<p>判断第一个参数变量是否是第二个参数的类型</p>
+</div>
+<div id="归并排序" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> 归并排序</h2>
+<p>分而治之</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">def</span> mergeSort(arr):</span>
+<span id="cb3-2"><a href="#cb3-2"></a>    <span class="im">import</span> math</span>
+<span id="cb3-3"><a href="#cb3-3"></a>    <span class="cf">if</span>(<span class="bu">len</span>(arr)<span class="op">&lt;</span><span class="dv">2</span>):</span>
+<span id="cb3-4"><a href="#cb3-4"></a>        <span class="cf">return</span> arr</span>
+<span id="cb3-5"><a href="#cb3-5"></a>    middle <span class="op">=</span> math.floor(<span class="bu">len</span>(arr)<span class="op">/</span><span class="dv">2</span>)</span>
+<span id="cb3-6"><a href="#cb3-6"></a>    left, right <span class="op">=</span> arr[<span class="dv">0</span>:middle], arr[middle:]</span>
+<span id="cb3-7"><a href="#cb3-7"></a>    <span class="cf">return</span> merge(mergeSort(left), mergeSort(right))</span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="kw">def</span> merge(left,right):</span>
+<span id="cb3-10"><a href="#cb3-10"></a>    result <span class="op">=</span> [] <span class="co">#定义一个空列表追加元素</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>    <span class="cf">while</span> left <span class="kw">and</span> right:</span>
+<span id="cb3-12"><a href="#cb3-12"></a>        <span class="cf">if</span> left[<span class="dv">0</span>] <span class="op">&lt;=</span> right[<span class="dv">0</span>]:</span>
+<span id="cb3-13"><a href="#cb3-13"></a>            result.append(left.pop(<span class="dv">0</span>))<span class="op">;</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>        <span class="cf">else</span>:</span>
+<span id="cb3-15"><a href="#cb3-15"></a>            result.append(right.pop(<span class="dv">0</span>))<span class="op">;</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a>    <span class="cf">while</span> left:</span>
+<span id="cb3-17"><a href="#cb3-17"></a>        result.append(left.pop(<span class="dv">0</span>))<span class="op">;</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a>    <span class="cf">while</span> right:</span>
+<span id="cb3-19"><a href="#cb3-19"></a>        result.append(right.pop(<span class="dv">0</span>))<span class="op">;</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a>    <span class="cf">return</span> result</span></code></pre></div>
+</div>
+<div id="冒泡排序" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> 冒泡排序</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>def <span class="kw">bub</span>(arr)<span class="op">:</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="st">    </span><span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(arr))<span class="op">:</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="st">        </span><span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(i<span class="op">+</span><span class="dv">1</span>,<span class="kw">len</span>(arr))<span class="op">:</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="st">            </span><span class="cf">if</span> arr[i]<span class="op">&gt;</span>arr[j]<span class="op">:</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="st">                </span>arr[j],arr[i]=arr[i],arr[j]</span>
+<span id="cb4-6"><a href="#cb4-6"></a>    return arr</span>
+<span id="cb4-7"><a href="#cb4-7"></a>l=<span class="kw">bub</span>(arr)</span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="kw">print</span>(l)</span></code></pre></div>
+</div>
+<div id="选择排序" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> 选择排序</h2>
+<p>选择排序
+1. 算法步骤
+首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置</p>
+<p>再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。</p>
+<p>重复第二步，直到所有元素均排序完毕</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a>def <span class="kw">select</span>(arr)<span class="op">:</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="st">    </span><span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(arr)<span class="op">-</span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="st">        </span>minidx=i <span class="co">#当前是最小的索引</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>        <span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(i<span class="op">+</span><span class="dv">1</span>,<span class="kw">len</span>(arr))<span class="op">:</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="st">            </span><span class="cf">if</span> arr[minidx]<span class="op">&gt;</span>arr[j]<span class="op">:</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="st">                </span>minidx=j</span>
+<span id="cb5-10"><a href="#cb5-10"></a>        <span class="cf">if</span> i<span class="op">!=</span>minidx<span class="op">:</span><span class="st"> </span><span class="co">#当i不是最小值的时候和最小值交换</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="st">            </span>arr[i],arr[minidx]=arr[minidx],arr[i]</span>
+<span id="cb5-12"><a href="#cb5-12"></a>    return arr</span>
+<span id="cb5-13"><a href="#cb5-13"></a></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="kw">print</span>(<span class="kw">select</span>(arr))</span></code></pre></div>
+</div>
+<div id="插入排序" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> 插入排序</h2>
+<p>插入排序</p>
+<p>将第一待排序序列第一个元素看做一个有序序列，把第二个元素到最后一个元素当成是未排序序列。</p>
+<p>从头到尾依次扫描未排序序列，将扫描到的每个元素插入有序序列的适当位置。
+（如果待插入的元素与有序序列中的某个元素相等，则将待插入元素插入到相等元素的后面。）</p>
+<p>适用场景，小规模数据集或者数据基本有序的时候</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a>def <span class="kw">insertsort</span>(arr)<span class="op">:</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="st">    </span><span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">1</span>,<span class="kw">len</span>(arr))<span class="op">:</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="st">        </span>pre=i<span class="dv">-1</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>        cur=arr[i]</span>
+<span id="cb6-7"><a href="#cb6-7"></a>        <span class="cf">while</span> pre<span class="op">&gt;=</span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="st">            </span><span class="cf">if</span> arr[pre]<span class="op">&gt;</span>cur<span class="op">:</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="st">                </span>arr[pre<span class="op">+</span><span class="dv">1</span>]=arr[pre]</span>
+<span id="cb6-10"><a href="#cb6-10"></a>                arr[pre]=cur</span>
+<span id="cb6-11"><a href="#cb6-11"></a>            pre<span class="op">-</span><span class="er">=</span><span class="dv">1</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>    return arr</span>
+<span id="cb6-13"><a href="#cb6-13"></a></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="kw">print</span>(<span class="kw">insertsort</span>(arr))</span></code></pre></div>
+</div>
+<div id="拓扑排序" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> 拓扑排序</h2>
+<p>遍历一个有向无环图
+<em>入度</em>:指向该顶点的边
+<em>出度</em>:从该顶点发出的边</p>
+<p>最经典的例子:先修课</p>
+<p>拓扑排序，维持一个入度为0的队列即可。</p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzA3MjU5NjU2NA==&amp;mid=2455502896&amp;idx=1&amp;sn=df6f2c86e0f1de823f79087ba9e8eb33&amp;chksm=88b34d0bbfc4c41d863b4b6d78309e6ae01e766b1a7826b4c326246dd2489df9d684e8091ece&amp;scene=21#wechat_redirect">拓扑排序</a></p>
+<p>参考<a href="https://mp.weixin.qq.com/s/Yp1hD2Bbmj3pRrLYjfwfEw">10大经典排序python实现</a></p>
+</div>
+<div id="希尔排序" class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> 希尔排序</h2>
+<p>适用于大规模无序的，因为每个小的分组上，插入排序的效率比较高，因为小规模的插入排序效率比较高，因此把大规模的变成小规模的</p>
+<p>时间复杂度<span class="math inline">\(O^{1.3-2}\)</span></p>
+<p>步骤
+选择一个增量序列 t1，t2，……，tk，其中 ti &gt; tj, tk = 1；</p>
+<p>按增量序列个数 k，对序列进行 k 趟排序；</p>
+<p>每趟排序，根据对应的增量 ti，将待排序列分割成若干长度为 m 的子序列，分别对各子表进行直接插入排序。
+仅增量因子为 1 时，整个序列作为一个表来处理，表长度即为整个序列的长度。</p>
+<p>不行，还是没有很懂</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2"></a>list=[<span class="dv">91</span>,<span class="dv">9</span>,<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">6</span>,<span class="dv">78</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>]</span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a>def <span class="kw">shell_sort</span>(list)<span class="op">:</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="st">    </span>n =<span class="st"> </span><span class="kw">len</span>(list)</span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="co"># 初始步长</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>    gap =<span class="st"> </span>n <span class="op">/</span><span class="er">/</span><span class="st"> </span><span class="dv">2</span> <span class="co">#这里的步长是随机分为gap/2组了，步长</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="cf">while</span> gap <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="st">        </span><span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(gap, n)<span class="op">:</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="st">            </span><span class="co"># 每个步长进行插入排序</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="st">            </span>temp =<span class="st"> </span>list[i]</span>
+<span id="cb7-12"><a href="#cb7-12"></a>            j =<span class="st"> </span>i</span>
+<span id="cb7-13"><a href="#cb7-13"></a>            <span class="co"># 插入排序</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>            <span class="cf">while</span> j <span class="op">&gt;=</span><span class="st"> </span>gap and list[j <span class="op">-</span><span class="st"> </span>gap] <span class="op">&gt;</span><span class="st"> </span>temp<span class="op">:</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="st">                </span>list[j] =<span class="st"> </span>list[j <span class="op">-</span><span class="st"> </span>gap]</span>
+<span id="cb7-16"><a href="#cb7-16"></a>                j <span class="op">-</span><span class="er">=</span><span class="st"> </span>gap</span>
+<span id="cb7-17"><a href="#cb7-17"></a>            list[j] =<span class="st"> </span>temp</span>
+<span id="cb7-18"><a href="#cb7-18"></a>        <span class="co"># 得到新的步长</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a>        gap =<span class="st"> </span>gap <span class="op">/</span><span class="er">/</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a>    return list</span>
+<span id="cb7-21"><a href="#cb7-21"></a></span>
+<span id="cb7-22"><a href="#cb7-22"></a><span class="kw">print</span>(<span class="kw">shell_sort</span>(list))</span></code></pre></div>
+<p>参考： <a href="https://zhuanlan.zhihu.com/p/21839027" class="uri">https://zhuanlan.zhihu.com/p/21839027</a></p>
+</div>
+<div id="计数排序" class="section level2" number="1.9">
+<h2><span class="header-section-number">1.9</span> 计数排序</h2>
+<p>计数排序的核心在于将输入的数据值转化为键存储在额外开辟的数组空间中。
+作为一种线性时间复杂度的排序，计数排序要求输入的数据必须是有确定范围的整数。</p>
+<p>找出原数组中元素值最大的，记为max。</p>
+<p>创建一个新数组count，其长度是max加1，其元素默认值都为0。</p>
+<p>遍历原数组中的元素，以原数组中的元素作为count数组的索引，以原数组中的元素出现次数作为count数组的元素值。</p>
+<p>创建结果数组result，起始索引index。</p>
+<p>遍历count数组，找出其中元素值大于0的元素，将其对应的索引作为元素值填充到result数组中去，每处理一次，count中的该元素值减1，直到该元素值不大于0，依次处理count中剩下的元素。</p>
+<p>返回结果数组result。</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a></span>
+<span id="cb8-2"><a href="#cb8-2"></a>def <span class="kw">countingSort</span>(arr, maxValue)<span class="op">:</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="st">    </span>bucketLen =<span class="st"> </span>maxValue<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>    bucket =<span class="st"> </span>[<span class="dv">0</span>]<span class="op">*</span>bucketLen</span>
+<span id="cb8-5"><a href="#cb8-5"></a>    sortedIndex =<span class="dv">0</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>    arrLen =<span class="st"> </span><span class="kw">len</span>(arr)</span>
+<span id="cb8-7"><a href="#cb8-7"></a>    <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(arrLen)<span class="op">:</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="st">        </span><span class="cf">if</span> not bucket[arr[i]]<span class="op">:</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="st">            </span>bucket[arr[i]]=<span class="dv">0</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>        bucket[arr[i]]<span class="op">+</span><span class="er">=</span><span class="dv">1</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>    <span class="cf">for</span> j <span class="cf">in</span> <span class="kw">range</span>(bucketLen)<span class="op">:</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="st">        </span><span class="cf">while</span> bucket[j]<span class="op">&gt;</span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="st">            </span>arr[sortedIndex] =<span class="st"> </span>j</span>
+<span id="cb8-14"><a href="#cb8-14"></a>            sortedIndex<span class="op">+</span><span class="er">=</span><span class="dv">1</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a>            bucket[j]<span class="op">-</span><span class="er">=</span><span class="dv">1</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a>    return arr</span></code></pre></div>
+</div>
+<div id="桶排序" class="section level2" number="1.10">
+<h2><span class="header-section-number">1.10</span> 桶排序</h2>
+<p>桶排序是
+计数排序的升级版。它利用了函数的映射关系，高效与否的关键就在于这个映射函数的确定。为了使桶排序更加高效，我们需要做到这两点：</p>
+<p>在额外空间充足的情况下，尽量增大桶的数量
+使用的映射函数能够将输入的 N 个数据均匀的分配到 K 个桶中
+同时，对于桶中元素的排序，选择何种比较排序算法对于性能的影响至关重要。</p>
+<ol style="list-style-type: decimal">
+<li><p>什么时候最快
+当输入的数据可以均匀的分配到每一个桶中。</p></li>
+<li><p>什么时候最慢
+当输入的数据被分配到了同一个桶中。</p></li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>def <span class="kw">Bucket_Sort</span>(array, bucketsize)<span class="op">:</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="st">    </span>minValue =<span class="st"> </span><span class="kw">min</span>(array)</span>
+<span id="cb9-3"><a href="#cb9-3"></a>    maxValue =<span class="st"> </span><span class="kw">max</span>(array)</span>
+<span id="cb9-4"><a href="#cb9-4"></a>    res =<span class="st"> </span>[]</span>
+<span id="cb9-5"><a href="#cb9-5"></a>    bucketcount =<span class="st"> </span>(maxValue <span class="op">-</span><span class="st"> </span>minValue <span class="op">+</span><span class="st"> </span><span class="dv">1</span>) <span class="op">/</span><span class="er">/</span><span class="st"> </span>bucketsize</span>
+<span id="cb9-6"><a href="#cb9-6"></a>    bucket_lists =<span class="st"> </span>[[] <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(bucketcount)]</span>
+<span id="cb9-7"><a href="#cb9-7"></a></span>
+<span id="cb9-8"><a href="#cb9-8"></a>    <span class="cf">for</span> i <span class="cf">in</span> array<span class="op">:</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="st">        </span>bucket_index =<span class="st"> </span>(i <span class="op">-</span><span class="st"> </span>minValue) <span class="op">/</span><span class="er">/</span><span class="st"> </span>bucketsize</span>
+<span id="cb9-10"><a href="#cb9-10"></a>        bucket_lists[bucket_index]<span class="kw">.append</span>(i)</span>
+<span id="cb9-11"><a href="#cb9-11"></a>    <span class="co"># 桶内排序</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>    <span class="cf">for</span> j <span class="cf">in</span> bucket_lists<span class="op">:</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="st">        </span><span class="kw">Quick_Sort_2</span>(j, <span class="dv">0</span>, <span class="kw">len</span>(j) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb9-14"><a href="#cb9-14"></a></span>
+<span id="cb9-15"><a href="#cb9-15"></a>    <span class="cf">for</span> j <span class="cf">in</span> bucket_lists<span class="op">:</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="st">        </span><span class="cf">if</span> <span class="kw">len</span>(j) <span class="op">!=</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="st">            </span><span class="kw">res.extend</span>(j)</span>
+<span id="cb9-18"><a href="#cb9-18"></a>    return res</span></code></pre></div>
+</div>
+<div id="基数排序" class="section level2" number="1.11">
+<h2><span class="header-section-number">1.11</span> 基数排序</h2>
+<p>基数排序是一种非比较型整数排序算法，其原理是将整数按位数切割成不同的数字，然后按每个位数分别比较
+。由于整数也可以表达字符串（比如名字或日期）和特定格式的浮点数，所以基数排序也不是只能使用于整数。</p>
+<p>基数排序有两种方法：</p>
+<p>这三种排序算法都利用了桶的概念，但对桶的使用方法上有明显差异案例看大家发的：</p>
+<p>基数排序：根据键值的每位数字来分配桶；
+计数排序：每个桶只存储单一键值；
+桶排序：每个桶存储一定范围的数值；</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a></span>
+<span id="cb10-2"><a href="#cb10-2"></a>def <span class="kw">radix_sort</span>(s)<span class="op">:</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="st">    &quot;&quot;&quot;基数排序&quot;&quot;&quot;</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>    i =<span class="st"> </span><span class="dv">0</span> <span class="co"># 记录当前正在排拿一位，最低位为1</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>    max_num =<span class="st"> </span><span class="kw">max</span>(s)  <span class="co"># 最大值</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>    j =<span class="st"> </span><span class="kw">len</span>(<span class="kw">str</span>(max_num))  <span class="co"># 记录最大值的位数</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>    <span class="cf">while</span> i <span class="op">&lt;</span><span class="st"> </span>j<span class="op">:</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="st">        </span>bucket_list =[[] <span class="cf">for</span> _ <span class="cf">in</span> <span class="kw">range</span>(<span class="dv">10</span>)] <span class="co">#初始化桶数组</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>        <span class="cf">for</span> x <span class="cf">in</span> s<span class="op">:</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="st">            </span>bucket_list[<span class="kw">int</span>(x <span class="op">/</span><span class="st"> </span>(<span class="dv">10</span><span class="op">**</span>i)) % <span class="dv">10</span>]<span class="kw">.append</span>(x) <span class="co"># 找到位置放入桶数组</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a>        <span class="kw">print</span>(bucket_list)</span>
+<span id="cb10-12"><a href="#cb10-12"></a>        <span class="kw">s.clear</span>()</span>
+<span id="cb10-13"><a href="#cb10-13"></a>        <span class="cf">for</span> x <span class="cf">in</span> bucket_list<span class="op">:</span><span class="st">   </span><span class="co"># 放回原序列</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="st">            </span><span class="cf">for</span> y <span class="cf">in</span> x<span class="op">:</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="st">                </span><span class="kw">s.append</span>(y)</span>
+<span id="cb10-16"><a href="#cb10-16"></a>        i <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="st">`</span></span></code></pre></div>
+</div>
+<div id="堆排序" class="section level2" number="1.12">
+<h2><span class="header-section-number">1.12</span> 堆排序</h2>
+<p>堆排序（Heapsort）是指利用堆这种数据结构所设计的一种排序算法。堆积是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点。堆排序可以说是一种利用堆的概念来排序的选择排序。分为两种方法：</p>
+<p>大顶堆：每个节点的值都大于或等于其子节点的值，在堆排序算法中用于升序排列；
+小顶堆：每个节点的值都小于或等于其子节点的值，在堆排序算法中用于降序排列；
+堆排序的平均时间复杂度为 Ο(nlogn)。</p>
+<p>算法步骤
+将待排序序列构建成一个堆 H[0……n-1]，根据（升序降序需求）选择大顶堆或小顶堆；</p>
+<p>把堆首（最大值）和堆尾互换；</p>
+<p>把堆的尺寸缩小 1，并调用 shift_down(0)，目的是把新的数组顶端数据调整到相应位置；</p>
+<p>重复步骤 2，直到堆的尺寸为 1。</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>def <span class="kw">buildMaxHeap</span>(arr)<span class="op">:</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="st">    </span>import math</span>
+<span id="cb11-3"><a href="#cb11-3"></a>    <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">math.floor</span>(<span class="kw">len</span>(arr)<span class="op">/</span><span class="dv">2</span>),<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="st">        </span><span class="kw">heapify</span>(arr,i)</span>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a>def <span class="kw">heapify</span>(arr, i)<span class="op">:</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="st">    </span>left =<span class="st"> </span><span class="dv">2</span><span class="op">*</span>i<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>    right =<span class="st"> </span><span class="dv">2</span><span class="op">*</span>i<span class="op">+</span><span class="dv">2</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>    largest =<span class="st"> </span>i</span>
+<span id="cb11-10"><a href="#cb11-10"></a>    <span class="cf">if</span> left <span class="op">&lt;</span><span class="st"> </span>arrLen and arr[left] <span class="op">&gt;</span><span class="st"> </span>arr[largest]<span class="op">:</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="st">        </span>largest =<span class="st"> </span>left</span>
+<span id="cb11-12"><a href="#cb11-12"></a>    <span class="cf">if</span> right <span class="op">&lt;</span><span class="st"> </span>arrLen and arr[right] <span class="op">&gt;</span><span class="st"> </span>arr[largest]<span class="op">:</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="st">        </span>largest =<span class="st"> </span>right</span>
+<span id="cb11-14"><a href="#cb11-14"></a></span>
+<span id="cb11-15"><a href="#cb11-15"></a>    <span class="cf">if</span> largest <span class="op">!=</span><span class="st"> </span>i<span class="op">:</span></span>
+<span id="cb11-16"><a href="#cb11-16"></a><span class="st">        </span><span class="kw">swap</span>(arr, i, largest)</span>
+<span id="cb11-17"><a href="#cb11-17"></a>        <span class="kw">heapify</span>(arr, largest)</span>
+<span id="cb11-18"><a href="#cb11-18"></a></span>
+<span id="cb11-19"><a href="#cb11-19"></a>def <span class="kw">swap</span>(arr, i, j)<span class="op">:</span></span>
+<span id="cb11-20"><a href="#cb11-20"></a><span class="st">    </span>arr[i], arr[j] =<span class="st"> </span>arr[j], arr[i]</span>
+<span id="cb11-21"><a href="#cb11-21"></a></span>
+<span id="cb11-22"><a href="#cb11-22"></a>def <span class="kw">heapSort</span>(arr)<span class="op">:</span></span>
+<span id="cb11-23"><a href="#cb11-23"></a><span class="st">    </span>global arrLen</span>
+<span id="cb11-24"><a href="#cb11-24"></a>    arrLen =<span class="st"> </span><span class="kw">len</span>(arr)</span>
+<span id="cb11-25"><a href="#cb11-25"></a>    <span class="kw">buildMaxHeap</span>(arr)</span>
+<span id="cb11-26"><a href="#cb11-26"></a>    <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(arr)<span class="op">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span>)<span class="op">:</span></span>
+<span id="cb11-27"><a href="#cb11-27"></a><span class="st">        </span><span class="kw">swap</span>(arr,<span class="dv">0</span>,i)</span>
+<span id="cb11-28"><a href="#cb11-28"></a>        arrLen <span class="op">-</span><span class="er">=</span><span class="dv">1</span></span>
+<span id="cb11-29"><a href="#cb11-29"></a>        <span class="kw">heapify</span>(arr, <span class="dv">0</span>)</span>
+<span id="cb11-30"><a href="#cb11-30"></a>    return arr</span></code></pre></div>
+</div>
+<div id="二分查找" class="section level2" number="1.13">
+<h2><span class="header-section-number">1.13</span> 二分查找</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a></span>
+<span id="cb12-2"><a href="#cb12-2"></a>def <span class="kw">binary_search</span>(lis, left, right, num)<span class="op">:</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="st">        </span><span class="cf">if</span> left <span class="op">&gt;</span><span class="st"> </span>right<span class="op">:</span><span class="st"> </span><span class="co">#递归结束条件</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="st">            </span>return <span class="dv">-1</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>        mid =<span class="st"> </span>(left <span class="op">+</span><span class="st"> </span>right) <span class="op">/</span><span class="er">/</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>        <span class="cf">if</span> num <span class="op">&lt;</span><span class="st"> </span>lis[mid]<span class="op">:</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="st">            </span>right =<span class="st"> </span>mid <span class="dv">-1</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a>        elif num <span class="op">&gt;</span><span class="st"> </span>lis[mid]<span class="op">:</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="st">            </span>left =<span class="st"> </span>mid <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>        <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="st">            </span>return mid</span>
+<span id="cb12-13"><a href="#cb12-13"></a>        return <span class="kw">binary_search</span>(lis, left, right, num)</span>
+<span id="cb12-14"><a href="#cb12-14"></a>        <span class="co">#这里之所以会有return是因为必须要接收值，不然返回None</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a>        <span class="co">#回溯到最后一层的时候，如果没有return，那么将会返回None</span></span></code></pre></div>
+</div>
+<div id="排序算法时间复杂度分析" class="section level2" number="1.14">
+<h2><span class="header-section-number">1.14</span> 排序算法时间复杂度分析</h2>
+<p>稳定：如果a原本在b前面，而a=b，排序之后a仍然在b的前面。
+不稳定：如果a原本在b的前面，而a=b，排序之后 a 可能会出现在 b 的后面。
+时间复杂度：对排序数据的总的操作次数。反映当n变化时，操作次数呈现什么规律。
+空间复杂度：是指算法在计算机</p>
+<div class="figure">
+<img src="../figs/时间复杂度与空间复杂度.jpg" alt="" />
+<p class="caption">时间复杂度与空间复杂度</p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
