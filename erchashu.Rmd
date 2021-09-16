@@ -636,3 +636,17 @@ class Solution(object):
             root.left,root.right = self.invertTree(root.right),self.invertTree(root.left)
         return root
 ```
+
+## 判断两颗二叉树是否相同
+
+```r
+def isSameTree(p, q):
+    if p == None and q == None:
+        return True
+    elif p and q :
+        return p.val == q.val and isSameTree(p.left,q.left) and isSameTree(p.right,q.right)
+    else :
+        return False
+```
+
+非常easy的一个题，但是就突然短路了。

@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2021-08-27" />
+<meta name="date" content="2021-09-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -150,6 +150,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.17" data-path=""><a href="#路径总和问题"><i class="fa fa-check"></i><b>1.17</b> 路径总和问题</a></li>
 <li class="chapter" data-level="1.18" data-path=""><a href="#平衡二叉树"><i class="fa fa-check"></i><b>1.18</b> 平衡二叉树</a></li>
 <li class="chapter" data-level="1.19" data-path=""><a href="#翻转二叉树"><i class="fa fa-check"></i><b>1.19</b> 翻转二叉树</a></li>
+<li class="chapter" data-level="1.20" data-path=""><a href="#判断两颗二叉树是否相同"><i class="fa fa-check"></i><b>1.20</b> 判断两颗二叉树是否相同</a></li>
 </ul></li>
 </ul>
 
@@ -171,7 +172,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">二叉树专题</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2021-08-27</em></p>
+<p class="date"><em>2021-09-16</em></p>
 </div>
 <div id="二叉树专题" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> 二叉树专题</h1>
@@ -702,6 +703,17 @@ left,right就是位置</p>
 <span id="cb24-4"><a href="#cb24-4"></a><span class="st">        </span><span class="cf">if</span> root is not None<span class="op">:</span></span>
 <span id="cb24-5"><a href="#cb24-5"></a><span class="st">            </span>root.left,root.right =<span class="st"> </span><span class="kw">self.invertTree</span>(root.right),<span class="kw">self.invertTree</span>(root.left)</span>
 <span id="cb24-6"><a href="#cb24-6"></a>        return root</span></code></pre></div>
+</div>
+<div id="判断两颗二叉树是否相同" class="section level2" number="1.20">
+<h2><span class="header-section-number">1.20</span> 判断两颗二叉树是否相同</h2>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>def <span class="kw">isSameTree</span>(p, q)<span class="op">:</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="st">    </span><span class="cf">if</span> p <span class="op">==</span><span class="st"> </span>None and q <span class="op">==</span><span class="st"> </span>None<span class="op">:</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="st">        </span>return True</span>
+<span id="cb25-4"><a href="#cb25-4"></a>    elif p and q <span class="op">:</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="st">        </span>return p.val <span class="op">==</span><span class="st"> </span>q.val and <span class="kw">isSameTree</span>(p.left,q.left) and <span class="kw">isSameTree</span>(p.right,q.right)</span>
+<span id="cb25-6"><a href="#cb25-6"></a>    <span class="cf">else</span> <span class="op">:</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a><span class="st">        </span>return False</span></code></pre></div>
+<p>非常easy的一个题，但是就突然短路了。</p>
 </div>
 </div>
             </section>
