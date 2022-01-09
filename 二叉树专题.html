@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2021-09-16" />
+<meta name="date" content="2022-01-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -172,7 +172,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">二叉树专题</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2021-09-16</em></p>
+<p class="date"><em>2022-01-09</em></p>
 </div>
 <div id="二叉树专题" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> 二叉树专题</h1>
@@ -216,15 +216,24 @@ left,right就是位置</p>
 <div id="树的最小深度" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> 树的最小深度</h2>
 <p>最小深度是从根节点到最近叶子节点的最短路径上的节点数量。</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="st">    </span>def <span class="kw">minDepth</span>(self, root)<span class="op">:</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="st">       </span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="st">        </span><span class="cf">if</span> root is None<span class="op">:</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="st">            </span>return <span class="dv">0</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a>        <span class="cf">if</span> root.left and root.right<span class="op">:</span><span class="st"> </span><span class="co"># 左右节点都存在的时候</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="st">            </span>return <span class="kw">min</span>(<span class="kw">self.minDepth</span>(root.left),<span class="kw">self.minDepth</span>(root.right))<span class="op">+</span><span class="dv">1</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a>        <span class="cf">else</span><span class="op">:</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="st">            </span>return <span class="kw">max</span>(<span class="kw">self.minDepth</span>(root.left),<span class="kw">self.minDepth</span>(root.right))<span class="op">+</span><span class="dv">1</span> <span class="co">#根节点只有一个节点的时候</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Definition for a binary tree node.</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># class TreeNode:</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#     def __init__(self, val=0, left=None, right=None):</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#         self.val = val</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#         self.left = left</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#         self.right = right</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>class Solution<span class="op">:</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="st">    </span>def <span class="kw">minDepth</span>(self, root<span class="op">:</span><span class="st"> </span>TreeNode) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="st">        </span><span class="cf">if</span> not root<span class="op">:</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="st">            </span>return <span class="dv">0</span> </span>
+<span id="cb3-11"><a href="#cb3-11"></a>        <span class="cf">if</span> root.left and root.right<span class="op">:</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="st">            </span>return <span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">min</span>(<span class="kw">self.minDepth</span>(root.left),<span class="kw">self.minDepth</span>(root.right))</span>
+<span id="cb3-13"><a href="#cb3-13"></a>        elif root.left<span class="op">:</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="st">            </span>return <span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">self.minDepth</span>(root.left)</span>
+<span id="cb3-15"><a href="#cb3-15"></a>        elif root.right<span class="op">:</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="st">            </span>return <span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">self.minDepth</span>(root.right)</span>
+<span id="cb3-17"><a href="#cb3-17"></a>        <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="st">            </span>return <span class="dv">1</span></span></code></pre></div>
 </div>
 <div id="二叉树中节点的个数" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> 二叉树中节点的个数</h2>

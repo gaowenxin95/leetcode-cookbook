@@ -62,15 +62,24 @@ class Solution:
 最小深度是从根节点到最近叶子节点的最短路径上的节点数量。
 
 ```r
-class Solution(object):
-    def minDepth(self, root):
-       
-        if root is None:
-            return 0
-        if root.left and root.right: # 左右节点都存在的时候
-            return min(self.minDepth(root.left),self.minDepth(root.right))+1
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def minDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0 
+        if root.left and root.right:
+            return 1 + min(self.minDepth(root.left),self.minDepth(root.right))
+        elif root.left:
+            return 1 + self.minDepth(root.left)
+        elif root.right:
+            return 1 + self.minDepth(root.right)
         else:
-            return max(self.minDepth(root.left),self.minDepth(root.right))+1 #根节点只有一个节点的时候
+            return 1
 ```
 
 ## 二叉树中节点的个数
