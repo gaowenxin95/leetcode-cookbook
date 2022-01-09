@@ -132,6 +132,11 @@ def numsOfkLevelTreeNode(root, k):
 
 要知道层次遍历的本质是在考**队列**:其思路就是将二叉树的节点加入队列，出队的同时将其非空左右孩子依次入队，出队到队列为空即完成遍历。
 
+队列的定义：
+最先进去的数据最先被取来，即先进先出的结构，我们称为 First In First Out，简称 FIFO。
+
+与栈类似，队列中可以操作数据的位置也有一定的限制。在栈中，数据的添加和删除都在同一端进行，而在队列中则分别是在两端进行的。**队列也不能直接访问位于中间的数据，必须通过出队操作将目标数据变成首位后才能访问**   。详细可以参考：[什么是队列](https://zhuanlan.zhihu.com/p/106694923)
+
 ```r
 # -*- coding:utf-8 -*-
 # class TreeNode:
@@ -151,7 +156,7 @@ class Solution:
                 queue.append(queue[0].left)
             if queue[0].right!=None: #右
                 queue.append(queue[0].right)
-            queue.pop(0) # 退队列
+            queue.pop(0) # 退队列（访问值）
         return outList
 ```
 
@@ -467,9 +472,31 @@ class Solution(object):
 ## 判断是否是完全二叉树
 
 什么是完全二叉树:若设二叉树的深度为k，除第 k 层外，其它各层 (1～k-1) 的结点数都达到最大个数，第k 层所有的结点都连续集中在最左边，这就是完全二叉树。
+![](figs/wanquan_tree.png)
 
 
 ```r
+class Solution:
+    def judgeIt(self , root ):
+        
+        def search(root,lower,higher): #二叉搜索树判断
+            if not root:
+                return True
+            val = root.val
+            if val<=lower or val>=higher:
+                return False
+            if not search(root.left, lower, val):
+                return False
+            if not search(root.right, val, higher):
+                return False
+            return True
+        def complete(root): #完全二叉树判断
+            if not root:
+                return True
+            if root.right and not root.left:
+                return False
+            return complete(root.left) and complete(root.right)
+        return [search(root, float('-inf'), float('inf')),[complete(root)]]
 ```
 
 ## 最低公共祖先

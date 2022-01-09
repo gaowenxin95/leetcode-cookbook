@@ -272,6 +272,9 @@ left,right就是位置</p>
 <p><img src="figs/cengcibianli.png" /></p>
 <p><strong>也叫二叉树的广度优先搜索~</strong></p>
 <p>要知道层次遍历的本质是在考<strong>队列</strong>:其思路就是将二叉树的节点加入队列，出队的同时将其非空左右孩子依次入队，出队到队列为空即完成遍历。</p>
+<p>队列的定义：
+最先进去的数据最先被取来，即先进先出的结构，我们称为 First In First Out，简称 FIFO。</p>
+<p>与栈类似，队列中可以操作数据的位置也有一定的限制。在栈中，数据的添加和删除都在同一端进行，而在队列中则分别是在两端进行的。<strong>队列也不能直接访问位于中间的数据，必须通过出队操作将目标数据变成首位后才能访问</strong> 。详细可以参考：<a href="https://zhuanlan.zhihu.com/p/106694923">什么是队列</a></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># -*- coding:utf-8 -*-</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="co"># class TreeNode:</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="co">#     def __init__(self, x):</span></span>
@@ -290,7 +293,7 @@ left,right就是位置</p>
 <span id="cb7-16"><a href="#cb7-16"></a><span class="st">                </span><span class="kw">queue.append</span>(queue[<span class="dv">0</span>].left)</span>
 <span id="cb7-17"><a href="#cb7-17"></a>            <span class="cf">if</span> queue[<span class="dv">0</span>].right<span class="op">!=</span>None<span class="op">:</span><span class="st"> </span><span class="co">#右</span></span>
 <span id="cb7-18"><a href="#cb7-18"></a><span class="st">                </span><span class="kw">queue.append</span>(queue[<span class="dv">0</span>].right)</span>
-<span id="cb7-19"><a href="#cb7-19"></a>            <span class="kw">queue.pop</span>(<span class="dv">0</span>) <span class="co"># 退队列</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a>            <span class="kw">queue.pop</span>(<span class="dv">0</span>) <span class="co"># 退队列（访问值）</span></span>
 <span id="cb7-20"><a href="#cb7-20"></a>        return outList</span></code></pre></div>
 </div>
 <div id="二叉树的前序遍历" class="section level2" number="1.8">
@@ -562,8 +565,29 @@ left,right就是位置</p>
 </div>
 <div id="判断是否是完全二叉树" class="section level2" number="1.14">
 <h2><span class="header-section-number">1.14</span> 判断是否是完全二叉树</h2>
-<p>什么是完全二叉树:若设二叉树的深度为k，除第 k 层外，其它各层 (1～k-1) 的结点数都达到最大个数，第k 层所有的结点都连续集中在最左边，这就是完全二叉树。</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"></code></pre></div>
+<p>什么是完全二叉树:若设二叉树的深度为k，除第 k 层外，其它各层 (1～k-1) 的结点数都达到最大个数，第k 层所有的结点都连续集中在最左边，这就是完全二叉树。
+<img src="figs/wanquan_tree.png" /></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="st">    </span>def <span class="kw">judgeIt</span>(self , root )<span class="op">:</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="st">        </span></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="st">        </span>def <span class="kw">search</span>(root,lower,higher)<span class="op">:</span><span class="st"> </span><span class="co">#二叉搜索树判断</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="st">            </span><span class="cf">if</span> not root<span class="op">:</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="st">                </span>return True</span>
+<span id="cb17-7"><a href="#cb17-7"></a>            val =<span class="st"> </span>root.val</span>
+<span id="cb17-8"><a href="#cb17-8"></a>            <span class="cf">if</span> val<span class="op">&lt;=</span>lower or val<span class="op">&gt;=</span>higher<span class="op">:</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a><span class="st">                </span>return False</span>
+<span id="cb17-10"><a href="#cb17-10"></a>            <span class="cf">if</span> not <span class="kw">search</span>(root.left, lower, val)<span class="op">:</span></span>
+<span id="cb17-11"><a href="#cb17-11"></a><span class="st">                </span>return False</span>
+<span id="cb17-12"><a href="#cb17-12"></a>            <span class="cf">if</span> not <span class="kw">search</span>(root.right, val, higher)<span class="op">:</span></span>
+<span id="cb17-13"><a href="#cb17-13"></a><span class="st">                </span>return False</span>
+<span id="cb17-14"><a href="#cb17-14"></a>            return True</span>
+<span id="cb17-15"><a href="#cb17-15"></a>        def <span class="kw">complete</span>(root)<span class="op">:</span><span class="st"> </span><span class="co">#完全二叉树判断</span></span>
+<span id="cb17-16"><a href="#cb17-16"></a><span class="st">            </span><span class="cf">if</span> not root<span class="op">:</span></span>
+<span id="cb17-17"><a href="#cb17-17"></a><span class="st">                </span>return True</span>
+<span id="cb17-18"><a href="#cb17-18"></a>            <span class="cf">if</span> root.right and not root.left<span class="op">:</span></span>
+<span id="cb17-19"><a href="#cb17-19"></a><span class="st">                </span>return False</span>
+<span id="cb17-20"><a href="#cb17-20"></a>            return <span class="kw">complete</span>(root.left) and <span class="kw">complete</span>(root.right)</span>
+<span id="cb17-21"><a href="#cb17-21"></a>        return [<span class="kw">search</span>(root, <span class="kw">float</span>(<span class="st">&#39;-inf&#39;</span>), <span class="kw">float</span>(<span class="st">&#39;inf&#39;</span>)),[<span class="kw">complete</span>(root)]]</span></code></pre></div>
 </div>
 <div id="最低公共祖先" class="section level2" number="1.15">
 <h2><span class="header-section-number">1.15</span> 最低公共祖先</h2>
