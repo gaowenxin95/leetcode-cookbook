@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2021-08-17" />
+<meta name="date" content="2023-07-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,6 +140,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.7" data-path=""><a href="#组合总和三"><i class="fa fa-check"></i><b>1.7</b> 组合总和三</a></li>
 <li class="chapter" data-level="1.8" data-path=""><a href="#组合总和四"><i class="fa fa-check"></i><b>1.8</b> 组合总和四</a></li>
 <li class="chapter" data-level="1.9" data-path=""><a href="#分割回文字符串"><i class="fa fa-check"></i><b>1.9</b> 分割回文字符串</a></li>
+<li class="chapter" data-level="1.10" data-path=""><a href="#括号生成"><i class="fa fa-check"></i><b>1.10</b> 括号生成</a></li>
+<li class="chapter" data-level="1.11" data-path=""><a href="#单词搜索"><i class="fa fa-check"></i><b>1.11</b> 单词搜索</a></li>
+<li class="chapter" data-level="1.12" data-path=""><a href="#电话号码的字母组合"><i class="fa fa-check"></i><b>1.12</b> 电话号码的字母组合</a></li>
+<li class="chapter" data-level="1.13" data-path=""><a href="#n皇后"><i class="fa fa-check"></i><b>1.13</b> N皇后</a></li>
 </ul></li>
 </ul>
 
@@ -161,7 +165,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">回溯专题</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2021-08-17</em></p>
+<p class="date"><em>2023-07-21</em></p>
 </div>
 <div id="回溯专题" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> 回溯专题</h1>
@@ -497,6 +501,46 @@ candidates 中的每个数字在每个组合中只能使用一次。</p>
 <span id="cb7-15"><a href="#cb7-15"></a>                <span class="kw">track.pop</span>()  <span class="co">#回溯过程，弹出本次已经填在path的子串</span></span>
 <span id="cb7-16"><a href="#cb7-16"></a>        <span class="kw">backtrack</span>(s,<span class="dv">0</span>)</span>
 <span id="cb7-17"><a href="#cb7-17"></a>        return res</span></code></pre></div>
+</div>
+<div id="括号生成" class="section level2" number="1.10">
+<h2><span class="header-section-number">1.10</span> 括号生成</h2>
+</div>
+<div id="单词搜索" class="section level2" number="1.11">
+<h2><span class="header-section-number">1.11</span> 单词搜索</h2>
+</div>
+<div id="电话号码的字母组合" class="section level2" number="1.12">
+<h2><span class="header-section-number">1.12</span> 电话号码的字母组合</h2>
+<p>题目描述</p>
+<p><img src="../figs/dhhmzh.png" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="st">    </span>def <span class="kw">letterCombinations</span>(self, digits<span class="op">:</span><span class="st"> </span>str) -&gt;<span class="st"> </span>List[str]<span class="op">:</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="st">        </span>dic =<span class="st"> </span>{<span class="st">&#39;2&#39;</span><span class="op">:</span><span class="st">&#39;abc&#39;</span>, <span class="st">&#39;3&#39;</span><span class="op">:</span><span class="st">&#39;def&#39;</span>, <span class="st">&#39;4&#39;</span><span class="op">:</span><span class="st">&#39;ghi&#39;</span>, <span class="st">&#39;5&#39;</span><span class="op">:</span><span class="st">&#39;jkl&#39;</span>, <span class="st">&#39;6&#39;</span><span class="op">:</span><span class="st">&#39;mno&#39;</span>, <span class="st">&#39;7&#39;</span><span class="op">:</span><span class="st">&#39;pqrs&#39;</span>,<span class="st">&#39;8&#39;</span><span class="op">:</span><span class="st">&#39;tuv&#39;</span>,<span class="st">&#39;9&#39;</span><span class="op">:</span><span class="st">&#39;wxyz&#39;</span>} <span class="co">#首先定义一个哈希表，把相应的数字和字母对应起来</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>        n =<span class="st"> </span><span class="kw">len</span>(digits) <span class="co">#计算给定字符串中数字的长度</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>        <span class="cf">if</span> n <span class="op">==</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="st">            </span>return []</span>
+<span id="cb8-7"><a href="#cb8-7"></a></span>
+<span id="cb8-8"><a href="#cb8-8"></a>        def <span class="kw">dfs</span>(index)<span class="op">:</span><span class="st"> </span><span class="co">#定义递归回溯函数</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="st">            </span><span class="cf">if</span> index <span class="op">==</span><span class="st"> </span>n<span class="op">:</span><span class="st"> </span><span class="co">#如果此时递归到了字符串中最后一个数字，则表示第一层深度搜索结束，将结果存储起来</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="st">                </span><span class="kw">res.append</span>(<span class="st">&#39;&#39;</span><span class="kw">.join</span>(tmp)) <span class="co">#注意一下这边存储的时候要把多个字符串组合成一个字符串，利用</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>                <span class="co">#join函数，这边还要注意的是后面会把tmp中的最上面字符弹出，这边利用join函数也同时避免</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>                <span class="co">#了tmp弹出时影响res的目的，不然全部返回空字符串</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>            <span class="cf">else</span><span class="op">:</span><span class="st"> </span><span class="co">#如果这个时候没搜索到最后一层，则</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="st">                </span><span class="cf">for</span> i <span class="cf">in</span> dic[digits[index]]<span class="op">:</span><span class="st"> </span><span class="co">#逐个遍历当前数字对应的字母</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="st">                    </span><span class="kw">tmp.append</span>(i) <span class="co">#将这个字母加到tmp中</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a>                    <span class="kw">dfs</span>(index <span class="op">+</span><span class="st"> </span><span class="dv">1</span>) <span class="co">#因为要把下一个数字对应的字母继续加进去，所以这边index + 1，函数传递下一个位置</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a>                    <span class="kw">tmp.pop</span>() <span class="co">#因为还需要把最后一个数字的字母逐个加进去，所以这边要把最后一个弹出，</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a>                    <span class="co">#因为上一行的dfs函数遇到结束条件，才回向下执行，所以这边已经完成一次深度的搜索，此时要把最后一个字母弹出，实现下一轮遍历</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a>        </span>
+<span id="cb8-20"><a href="#cb8-20"></a></span>
+<span id="cb8-21"><a href="#cb8-21"></a>        res =<span class="st"> </span>[] <span class="co">#初始化返回结果数组</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a>        tmp =<span class="st"> </span>[] <span class="co">#初始化过渡数组</span></span>
+<span id="cb8-23"><a href="#cb8-23"></a>        <span class="kw">dfs</span>(<span class="dv">0</span>) <span class="co">#首先执行index = 0，因为都是从第一个字母开始组合</span></span>
+<span id="cb8-24"><a href="#cb8-24"></a>        return res <span class="co">#返回结果函数</span></span>
+<span id="cb8-25"><a href="#cb8-25"></a></span></code></pre></div>
+<p><a href="https://leetcode.cn/problems/letter-combinations-of-a-phone-number/solution/17-dian-hua-hao-ma-de-zi-mu-zu-he-di-gui-tcxk/">：a-jun-bao-1234</a></p>
+</div>
+<div id="n皇后" class="section level2" number="1.13">
+<h2><span class="header-section-number">1.13</span> N皇后</h2>
 </div>
 </div>
             </section>

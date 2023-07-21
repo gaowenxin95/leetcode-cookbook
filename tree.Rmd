@@ -1,10 +1,12 @@
 ---
-title : tree_topic
+title : 二叉树专题
 author: 高文欣
 date: "`r Sys.Date()`"
 output: bookdown::gitbook
 bibliography: refs/add.bib
 ---
+
+# 二叉树专题
 
 
 懵逼树上懵逼果，懵逼树下只有我。。。
@@ -43,15 +45,17 @@ class TreeNode(object):
 
 [知乎](https://zhuanlan.zhihu.com/p/63419145)
 
-### 相同的树问题
+## 相同的树问题
 
 ![相同的树](figs/xaingtongtree.png)
 
 判断两个树是否为相同的树
 
-解题思路：两个树的结构相同，节点相同则相同,或者都为空也相同
+解题思路：递归：两个树的结构相同，节点相同则相同,或者都为空也相同
 递归
 假入有2棵树p,q
+
+
 
 ```r
 class Solution(object):
@@ -64,7 +68,7 @@ class Solution(object):
         return False
 ```
 
-### 对称二叉树
+## 对称二叉树
 
 ![对称的树](figs/duichentree.png)
 
@@ -85,7 +89,7 @@ class Solution(object):
         return self.isSymmetricTree(left.left,right.right) and self.isSymmetricTree(left.right,right.left)
 ```
 
-### 二叉树的最大深度
+## 二叉树的最大深度
 
 ![相同的树](figs/deepth.png)
 
@@ -101,7 +105,7 @@ class Solution(object):
             return max(self.maxDepth(root.left),self.maxDepth(root.right))+1
 ```
 
-### 二叉树的最小深度
+## 二叉树的最小深度
 
 最小深度是从根节点到最近叶子节点的最短路径上的节点数量。
 
@@ -117,38 +121,50 @@ class Solution(object):
             return max(self.minDepth(root.left),self.minDepth(root.right))+1 #根节点只有一个节点的时候
 ```
 
-### 二叉树的层次遍历
+## 二叉树的层次遍历
 
 ![层次遍历](figs/cengcibianli.png)
+
 给定一个二叉树，返回其节点值自底向上的层次遍历。（即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）
 
 定义两个数组，一个level的，一个level装节点的
 
 ```r
-class Solution(object):
-    def levelOrderBottom(self, root):
-
-        if root is None: #根节点不为空
-            return []
+# 定义levelOrderBottom方法，传入参数root
+def levelOrderBottom(self, root):
+    
+    # 如果根节点为空，返回空列表
+    if root is None:
+        return []
+    
+    # 初始化两个列表result和current，并将根节点放到current列表中
+    result,current = [],[root]
+    
+    # 循环直到current列表为空
+    while current:
         
-        result,current = [],[root] #当前节点在root
+        # 定义变量next_level和vals，并清空它们
+        next_level,vals = [], []
         
-        while current:
-            next_level,vals = [], []
-            for node in current:
-                vals.append(node.val)
-                if node.left:
-                    next_level.append(node.left)
-                if node.right:
-                    next_level.append(node.right)
-            current = next_level
-            result.append(vals)
-        return result[::-1] #从低向上
+        # 遍历当前层的所有节点，将节点值添加到vals列表中，并将该节点所对应的子节点，如果不为空，添加到下一层节点列表中
+        for node in current:
+            vals.append(node.val)
+            if node.left:
+                next_level.append(node.left)
+            if node.right:
+                next_level.append(node.right)
+        
+        # 将下一层节点列表赋值给current列表，并将本次循环中得到的vals列表添加到结果列表result中
+        current = next_level
+        result.append(vals)
+    
+    # 返回result列表的反转形式，即自底向上的遍历结果
+    return result[::-1]
 ```
 
 
 
-### 序数组转化为二叉树
+## 序数组转化为二叉树
 
 ![将有序数组转化为二叉树](figs/youxushuzuzhuantree.png)
 
@@ -167,7 +183,7 @@ class Solution:
             return r
 ```
 
-### 平衡二叉树
+## 平衡二叉树
 
 ![](figs/pinghengtree.png)
 **一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值小于1。**
@@ -190,7 +206,7 @@ class Solution(object):
             return max(self.height(root.left),self.height(root.right))+ 1
 ```
 
-### 路径总和一
+## 路径总和一
 
 ![](figs/lujingzonghe.png)
 给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。
@@ -209,7 +225,77 @@ class Solution(object):
             return self.hasPathSum(root.left,sum-root.val) or self.hasPathSum(root.right,sum-root.val)
 ```
 
-### 翻转二叉树
+## 路径总和二
+
+![路径总和](figs/路径总和.png)
+
+利用递归，当root为None时，返回False，当root的值等于sum且root为叶节点时，返回true，如果不相等，往下递归，只要左子树和右子树有一条路径即可返回True
+
+```r
+class Solution(object):
+    def pathSum(self, root, sum):
+        """
+        :type root: TreeNode
+        :type sum: int
+        :rtype: int
+        """
+        if not root:
+            return 0
+        return self.pathSumFrom(root, sum) + self.pathSum(root.left, sum) + self.pathSum(root.right, sum)
+
+    def pathSumFrom(self, node, sum):
+        if not node:
+            return 0
+        return (1 if node.val == sum else 0) + self.pathSumFrom(node.left, sum - node.val) + self.pathSumFrom(node.right, sum - node.val)
+        
+        
+```
+
+
+## 路径总和三
+
+![](figs/ljzh3.png)
+解题思路
+
+判断输入的二叉树是否为空树，如果是空树，则直接返回零，因为树中没有任何路径；
+
+判断二叉树的根节点的值（node.val）是否为目标值，如果是目标值，则设置临时变量count为1，否则为零；
+
+寻找左子树和右子树中和为（sum-node.val）的路径数目，该过程通过调用本函数实现，那么输入的二叉树中和为目标值的路径数由三部分组成：
+（1）临时变量count；
+（2）左子树中和为sum-node.val的路径数；
+（3）右子树中和为sum-node.val的路径数；
+最终函数返回以上三部分之和。[【玖月晴】](https://www.jianshu.com/p/157e3c24a758)
+
+
+```r
+class Solution:
+    def pathSum(self, root, sum):
+
+        def dfs(node, sum):
+            """
+            查找结点node下所有和为sum的路径总个数
+            :param node: 
+            :param sum: 
+            :return: 
+            """
+            if not node:                            # 如果输入是空树
+                return 0                            # 不论sum是多少，路径数目是零
+
+            count = 1 if node.val == sum else 0     # 如果输入树的根节点的值恰好等于sum目标值，那么路径数目加一
+            
+            # 三条路线的数量和
+            return count + dfs(node.left, sum - node.val) + dfs(node.right, sum - node.val)
+
+        if not root:                                # 如果输入为空树
+            return 0                                # 返回零
+        
+        # 三条路线的和
+        return self.pathSum(root.left, sum) + self.pathSum(root.right, sum) + dfs(root, sum)
+```        
+
+
+## 翻转二叉树
 
 ![](figs/fanzhuantree.png)
 
@@ -226,7 +312,7 @@ class Solution(object):
         return root
 ```
 
-### 公共祖先
+## 公共祖先
 
 二叉搜索树的最近公共祖先
 
@@ -262,82 +348,8 @@ class Solution(object):
                 return pointer
 ```
 
-### 二叉树的所有路径
 
-![所有路径](figs/所有路径.png)
 
-```r
-class Solution(object):
-    def binaryTreePaths(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[str]
-        """
-        result = list()
-        if root == None:
-            return result
-
-        if root.left == None and root.right == None:
-            result.append(str(root.val))
-            return result # 保存根节点的值
-
-        left = self.binaryTreePaths(root.left)
-        for i in range(len(left)):
-            result.append(str(root.val) + '->' + left[i]) #遍历一遍左节点
-
-        right = self.binaryTreePaths(root.right) #遍历一遍右节点
-        for i in range(len(right)):
-            result.append(str(root.val) + '->' + right[i])
-
-        return result
-```
-
-### 左叶子之和
-
-![左叶子之和](figs/左叶子之和.png)
-
-也就是左子树的叶子节点的值与右子树左叶子叶子节点的值
-
-```r
-class Solution(object):
-    def sumOfLeftLeaves(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
-        result = 0
-        if not root:
-            return 0      
-        if root.left and not root.left.left and not root.left.right:
-            result += root.left.val
-        return result+self.sumOfLeftLeaves(root.left)+self.sumOfLeftLeaves(root.right) 
-```
-
-### 路径总和二
-
-![路径总和](figs/路径总和.png)
-
-利用递归，当root为None时，返回False，当root的值等于sum且root为叶节点时，返回true，如果不相等，往下递归，只要左子树和右子树有一条路径即可返回True
-
-```r
-class Solution(object):
-    def pathSum(self, root, sum):
-        """
-        :type root: TreeNode
-        :type sum: int
-        :rtype: int
-        """
-        if not root:
-            return 0
-        return self.pathSumFrom(root, sum) + self.pathSum(root.left, sum) + self.pathSum(root.right, sum)
-
-    def pathSumFrom(self, node, sum):
-        if not node:
-            return 0
-        return (1 if node.val == sum else 0) + self.pathSumFrom(node.left, sum - node.val) + self.pathSumFrom(node.right, sum - node.val)
-        
-        
-```
 
 ## 二叉树的遍历
 
@@ -780,4 +792,6 @@ class Solution:
         return res
 
 ```
+
+
 

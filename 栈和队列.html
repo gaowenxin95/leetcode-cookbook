@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>栈和队列</title>
+  <meta name="description" content="栈和队列" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="栈和队列" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="栈和队列" />
+  
+  
+  
+
+<meta name="author" content="高文欣" />
+
+
+<meta name="date" content="2023-05-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path=""><a href="#栈和队列"><i class="fa fa-check"></i><b>1</b> 栈和队列</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#栈与递归的关系"><i class="fa fa-check"></i><b>1.1</b> 栈与递归的关系</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">栈和队列</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">栈和队列</h1>
+<p class="author"><em>高文欣</em></p>
+<p class="date"><em>2023-05-18</em></p>
+</div>
+<div id="栈和队列" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> 栈和队列</h1>
+<div id="栈与递归的关系" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> 栈与递归的关系</h2>
+<p>通常,当在一个函数的运行期间调用另一个函数时,在运行被调用函数之前,系统要做三件事:</p>
+<ul>
+<li>将所有的实参,返回地址等信息调用传递给被调用函数保存;</li>
+<li>为被调用函数的局部变量分配存储空间;</li>
+<li>将控制权转移到被调用函数入口;</li>
+</ul>
+<p>一个递归函数的运行过程类似多个函数的嵌套调用,只是调用函数和被调用函数都是同一个函数,因此,每次调用本身时,就会产生一个调用相关的一个重要概念就是递归函数运行的“层次”.假设调用该递归函数的主函数为第0层,则从主函数调用递归函数进入到第一层,从第i层递归调用本函数进入下一层为第i+1层,反之退出第i层递归函数返回上一层为第i-1层;
+为了保证递归函数正确执行,系统需要设立一个“递归工作栈”作为整个递归函数运行期间使用的数据存储区,每一层递归所需信息构成一个工作记录,其中包括所有实参,所有局部变量以及上一层的返回地址.每进入一层递归,就产生一个新的工作记录压入栈顶,每退出一个递归,就从栈顶弹出一个工作记录,则当前执行层的工作记录必须是递归工作栈栈顶的工作记录,此称为“活动记录”;<a href="https://www.jianshu.com/p/0d62fc267520">【ChaosHeart】</a></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

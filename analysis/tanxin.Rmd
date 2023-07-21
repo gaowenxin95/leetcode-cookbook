@@ -144,50 +144,22 @@ def test(lis):
 后一个位置。
 
 - 解题思路
+顺藤摸瓜
 
-cur_max表示跳i步能达到最远的坐标
-next_max表示在cur_max之前的位置跳一步能达到下一个最远的位置
-例如：
-[4,2,7,3,1,1,3,1,1,1]
-第一步从4开始，最远跳到数字1的位置，cur_max = 0+4=4
-那跳两步最远的位置为max(1+2, 2+7, 3+3, 4+1)中的一个，其中的加法操作是i+nums[i]。不难得出next_max=2+7=9
-遍历数组，当i==cur_max，step+1，因为上一次跳跃最远能到cur_max，要超过cur_max必须再跳一次，而再跳一次能达到的最远距离为next_max
+![](../figs/tyyx2.png)
 
->所以真正解题的时候，要从覆盖范围出发，不管怎么跳，覆盖范围内一定是可以跳到的，以最小的步数增加覆盖范围，覆盖范围一旦覆盖了终点，得到的就是最小步数！
-
-这里需要统计两个覆盖范围，当前这一步的最大覆盖和下一步最大覆盖。
-如果移动下标达到了当前这一步的最大覆盖最远距离了，还没有到终点的话，那么就必须再走一步来增加覆盖范围，直到覆盖范围覆盖了终点。
-
-看一个图，图片来源：代码随想录
-
-![](../figs/tx_1.png)
-
->图中覆盖范围的意义在于，只要红色的区域，最多两步一定可以到！（不用管具体怎么跳，反正一定可以跳到）
-
-从图中可以看出来，就是移动下标达到了当前覆盖的最远距离下标时，步数就要加一，来增加覆盖距离。最后的步数就是最少步数。
-
-这里还是有个特殊情况需要考虑，当移动下标达到了当前覆盖的最远距离下标时
-
-如果当前覆盖最远距离下标不是是集合终点，步数就加一，还需要继续走。
-如果当前覆盖最远距离下标就是是集合终点，步数不用加一，因为不能再往后走了。
-
+总结：每次找局部最优，最后达到全局最优
 
 ```r
 class Solution:
     def jump(self, nums: List[int]) -> int:
-        if len(nums) == 1: return 0
-        ans = 0
-        curDistance = 0
-        nextDistance = 0
-        for i in range(len(nums)):
-            nextDistance = max(i + nums[i], nextDistance)
-            if i == curDistance: 
-                if curDistance != len(nums) - 1:
-                    ans += 1
-                    curDistance = nextDistance
-                    if nextDistance >= len(nums) - 1: break
-        return ans
-
+        n, step, end, maxPosition = len(nums), 0, 0, 0
+        for i in range(n-1):
+            maxPosition = max(maxPosition, nums[i] + i)
+            if i == end:
+                end = maxPosition
+                step += 1
+        return step
 
 ```
 

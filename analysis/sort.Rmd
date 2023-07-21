@@ -422,3 +422,35 @@ def binary_search(lis, left, right, num):
 空间复杂度：是指算法在计算机
 
 ![时间复杂度与空间复杂度](../figs/时间复杂度与空间复杂度.jpg)
+
+## 实现sqrt
+
+问题可以等效与求解 $f(x)=x^2-n u m$ 的零点
+泰勒一阶展开: $f(x)=f\left(x_0\right)+f^{\prime}\left(x_0\right)\left(x-x_0\right)$
+
+令 $\mathrm{f}(\mathrm{x})=0$,有 $x=x_0-f\left(x_0\right) / f^{\prime}\left(x_0\right)$
+
+对于 $\mathrm{f}(\mathrm{x})$ ，导数为 $2 \mathrm{x}$ ，求得: $x=\frac{1}{2}\left(x_0+\frac{n}{x_0}\right)$
+
+每次按照上面的公式更新x即可
+
+解题思路：牛顿法
+
+```r
+def sqrt_newton(num, p):
+    """
+    num为待开方数字
+    p为给定的精度，例如1e-5
+    """
+    if num == 0:
+        return 0
+    x = num / 2
+    while abs(x ** 2 - num) > p:
+        x = (x + num / x) / 2
+    return x
+ 
+num = 0.16
+p = 1e-5
+print(sqrt_newton(num, p))
+
+```

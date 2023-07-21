@@ -116,6 +116,9 @@ class Solution:
 
 给定两个字符串A和B，返回两个字符串的最长公共子序列，并记录最长公共子序列的长度。例如，两个字符串A、B分别为“1A2C3D4B56”和“B1D23CA45B6A”，则“123456”和“12C4B6”都是最长公共子序列，且最长公共子序列长度为6。（最长公共子序列可能不唯一，但长度唯一。）
 
+maxl_mat[i][j]表示解之到A的第i个字符和截止到B的第j个字符
+初始化一个二维数组：初始化一个二维数组，行数为A的大小，列数为B的大小
+
 
 ![](../figs/gonggongzixulie.jpg)
 
@@ -143,6 +146,7 @@ B: [3,2,1,4,7]
 1 <= len(A), len(B) <= 1000
 0 <= A[i], B[i] < 100
 
+和最长公共子序列长度的题类似，这类都是二维数组
 
 ```r
 # 动态规划
@@ -172,7 +176,7 @@ class Solution:
 
 输入:
 [
-  [1,3,1],
+ [1,3,1],
   [1,5,1],
   [4,2,1]
 ]
@@ -907,6 +911,8 @@ class Solution:
 
 ## 打家劫舍专题
 
+### 打家劫舍一
+
 你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
 
 给定一个代表每个房屋存放金额的非负整数数组，计算你在不触动警报装置的情况下，能够偷窃到的最高金额。
@@ -953,8 +959,7 @@ class Solution:
         return sumList[-1]
 ```
 
-
-问题2：环形房屋
+### 打家劫舍二之环形房屋
 
 你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都围成一圈，这意味着第一个房屋和最后一个房屋是紧挨着的。同时，相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
 
@@ -997,67 +1002,41 @@ class Solution(object):
         return max(dp1[-1],dp2[-2])
 ```
 
-进阶题
+### 打家劫舍三之二叉树房屋
 
 在上次打劫完一条街道之后和一圈房屋后，小偷又发现了一个新的可行窃的地区。这个地区只有一个入口，我们称之为“根”。 除了“根”之外，每栋房子有且只有一个“父“房子与之相连。一番侦察之后，聪明的小偷意识到“这个地方的所有房屋的排列类似于一棵二叉树”。 如果两个直接相连的房子在同一天晚上被打劫，房屋将自动报警。
 
 计算在不触动警报的情况下，小偷一晚能够盗取的最高金额。
 
-示例 1:
+![](../figs/djjs3-1.png)
 
-输入: [3,2,3,null,3,null,1]
-
-     3
-    / \
-   2   3
-    \   \ 
-     3   1
-
-输出: 7 
-解释: 小偷一晚能够盗取的最高金额 = 3 + 3 + 1 = 7.
-示例 2:
-
-输入: [3,4,5,1,3,null,1]
-
-     3
-    / \
-   4   5
-  / \   \ 
- 1   3   1
-
-输出: 9
-解释: 小偷一晚能够盗取的最高金额 = 4 + 5 = 9.
-
-
+![](../figs/djjs3-2.png)
 
 哎，这个小偷太能想了==
 
+这道题采用的是后序遍历，由于还是不能打劫连着的房子，也就是说，父节点和子节点不能同时打劫，于是就产生两种情况：
 
-```r
+- 打劫父节点，放弃打劫左右子节点
 
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+- 不打劫父节点，打劫左右子节点
 
-class Solution:
-    def rob(self, root: TreeNode) -> int:
-        return self.helper(root)[1]
-    
-    # helper函数返回一个节点为根的最大值 = [当前节点不参与计算的最大收益，当前节点的最大收益(参与/不参与)]
-    def helper(self, root):
-        if root is None:
-            return [0, 0]
-        left_amount = self.helper(root.left)
-        right_amount = self.helper(root.right)
-        withoutRoot = left_amount[1] + right_amount[1]
-        withRoot = root.val + left_amount[0] + right_amount[0]
-        return [withoutRoot, max(withRoot, withoutRoot)]
+确定递归函数的参数和返回值：我们这里应该是对某个节点而言的，可以打劫，也可不打劫，自然有两种状态，返回值就应该是这两个结果，这里用dp数组来表示，且长度为2，不妨设dp[0]表示不偷该节点所获得的最大金额，dp[1]表示偷该节点所获得的最大金额。
+确定终止条件：遇到空节点就返回，返回的应该是[0, 0]，很明显，房子都没有，那偷与不偷都是一毛钱都没有。
+确定遍历顺序：前面说了，应该采用后序：
+通过递归左节点，得到左节点偷与不偷获得的钱
+通过递归右节点，得到右节点偷与不偷获得的钱
+4.单层递归的逻辑：
+
+偷当前节点，则左右子节点不能偷，此时能获得的价值val1为当前节点的钱加上左右子节点不偷获得的钱
+不偷当前节点，则左右节点可考虑偷，将左右节点偷与不偷能获得的最大值的和作为当前节点的获得价值val2
+此节点的dp = [val2, val1]
+[参考](https://zhuanlan.zhihu.com/p/404432967)
+
+这个解释好理解些
+
+![](../figs/djjs3-3.png)
 
 
-```
 
 ## 编辑距离
 
@@ -1144,35 +1123,77 @@ class Solution:
 输出：4
 
 
-思路：此题来源是Google的算法面试题，是一个典型的动态规划问题。
+比较难的一个题，可以看下这里的[思路](https://leetcode.cn/problems/super-egg-drop/solution/diu-ji-dan-wen-ti-zhong-zhi-ban-lai-xi-by-fe-lucif/)
 
-首先，根据题设，我们可以知道的是，鸡蛋在某一楼层摔破和没有摔破，可以提供的信息是：没有摔破，表示需要往上层找，直到找到一个摔破的楼层；谁摔破了需要往下层找，知道找到一个没有摔破的楼层。
+可以这样考虑。题目限定了 $\mathrm{n}$ 层楼， $k$ 个鸡蛋。
+如果我们尝试在 $1 \sim n$ 层中的任意一层 $x$ 扔鸡蛋:
+1. 如果鸡蛋没碎，则说明 $1 \sim \mathrm{x}$ 层都不用再考虑了，我们需要用 $k$ 个鸡蛋去考虑剩下的 $n-$ $\mathrm{x}$ 层, 问题就从 $(n, k)$ 转变为了 $(\mathrm{n}-\mathrm{x}, \mathrm{k})$ 。
+2. 如果鸡蛋碎了，则说明 $x+1 \sim n$ 层都不用再考虑了，我们需要去剩下的 $k-1$ 个鸡蛋考 虑剩下的 $x-1$ 层，问题就从 $(n, k)$ 转变为了 $(x-1, k-1)$ 。
+这样一来，我们就可以根据上述关系使用动态规划方法来解决这道题目了。具体步骤如下:
+1. 划分阶段
+按照楼层数量、剩余鸡蛋个数进行阶段划分。
+2. 定义状态
+定义状态 $d p[i][j]$ 表示为：一共有 $i$ 层楼， $j$ 个鸡蛋的条件下，为了找出 $f$ ，最坏情况下 的最少扔鸡蛋次数。
+3. 状态转移方程
+根据之前的描述， $d p[i][j]$ 有两个来源，其状态转移方程为:
+$d p[i][j]=\min _{1 \leq x \leq n}(\max (d p[i-x][j], d p[x-1][j-1]))+1$
+4. 初始条件
+给定鸡蛋 $\mathrm{k}$ 的取值范围为 $[1,100], \mathrm{f}$ 值取值范围为 $[0, \mathrm{n}]$ ，初始化时，可以考虑将所有 值设置为当前拥有的楼层数。
+- 当鸡蛋数为 1 时， $\operatorname{dp}[\mathrm{i}][1]=i$ 。这是如果唯一的蛋碎了，则无法测试了。只能从低到 高，一步步进行测试，最终最少测试数为当前拥有的楼层数 (如果刚开始初始化时已经将所有 值设置为当前拥有的楼层数，其实这一步可省略）。
+- 当楼层为 1 时，在 1 层扔鸡蛋， $d p[1][j]=1$ 。这是因为:
+○ 如果在 1 层扔鸡蛋碎了，则 $\mathrm{f}<1$ 。同时因为 $\mathrm{f}$ 的取值范围为 $[0, \mathrm{n}]$ 。所以能确定 $f=0$ 。
+○如果在 1 层扔鸡蛋没碎，则 $f>=1$ 。同时因为 $\mathrm{f}$ 的取值范围为 $[0, n]$ 。所以能确 定 $\mathrm{f}=0$ 。
+5. 最终结果
+根据我们之前定义的状态， $\operatorname{dp}[\mathrm{i}][j]$ 表示为：一共有 $i$ 层楼， $j$ 个鸡蛋的条件下，为了找出 $\mathrm{f}$ ，最坏情况下的最少扔鸡蛋次数。则最终结果为 $\mathrm{dp}[\mathrm{n}][\mathrm{k}]$ 。
 
-令二维数组dp[K][Step], K表示鸡蛋个数，Step表示第几次摔落。dp[i][j] 表示 i 个鸡蛋经过 j 次摔落最多可以确定多少层楼。
 
-显然 j <= N。求d[i][j]：
+以上就是常规思路
 
-- 当第j次摔落，鸡蛋不破，我们可以继续往上确定 dp[i][j -1] 层
+但是还有一种思路
 
-- 当第j次摔落，鸡蛋破了，我们最多只能确定 dp[i -1][j -1] 层
 
-状态方程 d[i][j] = dp[i-1][j -1] + (dp[i][j -1] + 1) 最后的1表示本层
-[「小布归来了」](https://blog.csdn.net/weixin_42077402/article/details/96475104)
+$d p[k][m]$ 的含义是 $\mathrm{k}$ 个鸡蛋 移动m 次最多能够确定多少楼层
+当在任一楼层仍下鸡蛋的时候，鸡蛋出现要么碎了，要么没碎这两种情况。
+碎了的话就测上面的楼层，上面的楼层数为: $\mathrm{dp}[\mathrm{k}-1][\mathrm{m}-1]$ ，
+没碎就测下面的楼层，下面的楼层数为: $\mathrm{dp}[\mathrm{k}][\mathrm{m}-1]$ ，最后加上扔下鸡蛋的这一楼层。
+所以总的楼层数 $\mathrm{n}=\mathrm{dp}[\mathrm{k}-1][\mathrm{m}-1]+\mathrm{dp}[\mathrm{k}][\mathrm{m}-1]+1$
+递推公式是:
+$$
+d p[k][m]=d p[k-1][m-1]+d p[k][m-1]+1
+$$
+时间复杂度: $O(k n)$ ，有两个嵌套循环，空间复杂度: $O(k n)$.
+参考：[jensen-huang](https://leetcode.cn/problems/super-egg-drop/solution/dong-tai-gui-hua-er-fen-cha-zhao-jie-jue-7zk5/)
 
 
 ```r
-class Solution(object):
-    def superEggDrop(self, K, N):
-        # 构建二维数组dp
-        dp = [[0 for _ in range(N + 1)] for _ in range(K + 1)]
-        for i in range(1, K + 1):
-            for step in range(1, N + 1):
-                dp[i][step] = dp[i - 1][step - 1] + (dp[i][step - 1] + 1)
-                if dp[K][step] >= N:
-                    return step
-        return 0
+class Solution:
+    def superEggDrop(self, k, n):
+
+       # dp(k, n)表示楼层的高度
+       dp = [[0]*(k+1) for _ in range(n+1)]
+       m = 0
+       while dp[m][k] < n:
+           m += 1
+           for i in range(1, k+1):
+               dp[m][i] = dp[m-1][i-1] + 1 + dp[m-1][i]
+       return m
+
 
 ``` 
+
+6行代码：[wyzJack267](https://leetcode.cn/problems/super-egg-drop/solution/6xing-dai-ma-python3-okn-by-jackwu/)
+
+```r
+class Solution(object):
+    def superEggDrop(self, K, N): 
+        f = [[0] * (K + 1) for _ in range(N + 1)]
+        for i in range(1, N + 1): 
+            for j in range(1, K + 1):
+                f[i][j] = f[i - 1][j - 1] + 1 + f[i - 1][j]
+                if f[i][K] >= N:
+                    return i
+
+```
 
 ## 整数拆分
 

@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2021-08-15" />
+<meta name="date" content="2023-06-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -166,7 +166,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">贪心专题</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2021-08-15</em></p>
+<p class="date"><em>2023-06-23</em></p>
 </div>
 <div id="贪心专题" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> 贪心专题</h1>
@@ -280,44 +280,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 1 步，然后跳 3 步到达数组的最
 后一个位置。</p>
 <ul>
-<li>解题思路</li>
+<li>解题思路
+顺藤摸瓜</li>
 </ul>
-<p>cur_max表示跳i步能达到最远的坐标
-next_max表示在cur_max之前的位置跳一步能达到下一个最远的位置
-例如：
-[4,2,7,3,1,1,3,1,1,1]
-第一步从4开始，最远跳到数字1的位置，cur_max = 0+4=4
-那跳两步最远的位置为max(1+2, 2+7, 3+3, 4+1)中的一个，其中的加法操作是i+nums[i]。不难得出next_max=2+7=9
-遍历数组，当i==cur_max，step+1，因为上一次跳跃最远能到cur_max，要超过cur_max必须再跳一次，而再跳一次能达到的最远距离为next_max</p>
-<blockquote>
-<p>所以真正解题的时候，要从覆盖范围出发，不管怎么跳，覆盖范围内一定是可以跳到的，以最小的步数增加覆盖范围，覆盖范围一旦覆盖了终点，得到的就是最小步数！</p>
-</blockquote>
-<p>这里需要统计两个覆盖范围，当前这一步的最大覆盖和下一步最大覆盖。
-如果移动下标达到了当前这一步的最大覆盖最远距离了，还没有到终点的话，那么就必须再走一步来增加覆盖范围，直到覆盖范围覆盖了终点。</p>
-<p>看一个图，图片来源：代码随想录</p>
-<p><img src="../figs/tx_1.png" /></p>
-<blockquote>
-<p>图中覆盖范围的意义在于，只要红色的区域，最多两步一定可以到！（不用管具体怎么跳，反正一定可以跳到）</p>
-</blockquote>
-<p>从图中可以看出来，就是移动下标达到了当前覆盖的最远距离下标时，步数就要加一，来增加覆盖距离。最后的步数就是最少步数。</p>
-<p>这里还是有个特殊情况需要考虑，当移动下标达到了当前覆盖的最远距离下标时</p>
-<p>如果当前覆盖最远距离下标不是是集合终点，步数就加一，还需要继续走。
-如果当前覆盖最远距离下标就是是集合终点，步数不用加一，因为不能再往后走了。</p>
+<p><img src="../figs/tyyx2.png" /></p>
+<p>总结：每次找局部最优，最后达到全局最优</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>class Solution<span class="op">:</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="st">    </span>def <span class="kw">jump</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="st">        </span><span class="cf">if</span> <span class="kw">len</span>(nums) <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="st"> </span>return <span class="dv">0</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>        ans =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a>        curDistance =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>        nextDistance =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(nums))<span class="op">:</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="st">            </span>nextDistance =<span class="st"> </span><span class="kw">max</span>(i <span class="op">+</span><span class="st"> </span>nums[i], nextDistance)</span>
-<span id="cb4-9"><a href="#cb4-9"></a>            <span class="cf">if</span> i <span class="op">==</span><span class="st"> </span>curDistance<span class="op">:</span><span class="st"> </span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="st">                </span><span class="cf">if</span> curDistance <span class="op">!=</span><span class="st"> </span><span class="kw">len</span>(nums) <span class="op">-</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="st">                    </span>ans <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a>                    curDistance =<span class="st"> </span>nextDistance</span>
-<span id="cb4-13"><a href="#cb4-13"></a>                    <span class="cf">if</span> nextDistance <span class="op">&gt;=</span><span class="st"> </span><span class="kw">len</span>(nums) <span class="op">-</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="cf">break</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a>        return ans</span>
-<span id="cb4-15"><a href="#cb4-15"></a></span></code></pre></div>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="st">        </span>n, step, end, maxPosition =<span class="st"> </span><span class="kw">len</span>(nums), <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(n<span class="dv">-1</span>)<span class="op">:</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="st">            </span>maxPosition =<span class="st"> </span><span class="kw">max</span>(maxPosition, nums[i] <span class="op">+</span><span class="st"> </span>i)</span>
+<span id="cb4-6"><a href="#cb4-6"></a>            <span class="cf">if</span> i <span class="op">==</span><span class="st"> </span>end<span class="op">:</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="st">                </span>end =<span class="st"> </span>maxPosition</span>
+<span id="cb4-8"><a href="#cb4-8"></a>                step <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>        return step</span></code></pre></div>
 <p>理解的不是很好，多看几遍</p>
 </div>
 <div id="k次取反后最大化的数组和" class="section level2" number="1.6">

@@ -242,6 +242,20 @@ class Solution:
 输出: 5->4->3->2->1->NULL
 [这个图解挺好的](https://blog.csdn.net/gongliming_/article/details/88712221)
 
+递归法
+
+```r
+def func3(head):
+    if head.next == None:
+        return head
+    new_head = func3(head.next)
+    head.next.next = head
+    head.next = None
+    return new_head
+```
+
+迭代法
+
 ```r
 # Definition for singly-linked list.
 # class ListNode:
@@ -252,7 +266,7 @@ class Solution:
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
         if head == None or head.next==None:  # 若链表为空或者仅一个数就直接返回
-        return head 
+          return head 
         rev,p=None,head
         while p:
           rev,rev.next,p=p,rev,p.next
