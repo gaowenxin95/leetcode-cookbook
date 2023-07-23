@@ -1048,6 +1048,7 @@ class Solution(object):
 
 - [链表](https://gaowenxin95.github.io/leetcode-cookbook/analysis/链表问题.html)
 
+
 ### LRU
 
 ### 复制带随机指针的链表
@@ -1057,4 +1058,473 @@ class Solution(object):
 
 - [二叉树](https://gaowenxin95.github.io/leetcode-cookbook/二叉树专题.html)
 
+## 岛屿的数量
 
+
+## 回溯专题
+
+- [回溯](https://gaowenxin95.github.io/leetcode-cookbook/回溯专题.html)
+
+## 两个正序数组的中位数
+
+给定两个大小分别为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。请你找出并返回这两个正序数组的 中位数 。
+
+算法的时间复杂度应该为 O(log (m+n)) 。
+
+ 
+
+示例 1：
+
+输入：nums1 = [1,3], nums2 = [2]
+输出：2.00000
+解释：合并数组 = [1,2,3] ，中位数 2
+示例 2：
+
+输入：nums1 = [1,2], nums2 = [3,4]
+输出：2.50000
+解释：合并数组 = [1,2,3,4] ，中位数 (2 + 3) / 2 = 2.5
+
+解法一：
+
+思路
+两个列表合并然后从小到大排序
+判断新列表的长度是奇数还是偶数
+求对应的中位数即可[wonderstruck-a](https://leetcode.cn/problems/median-of-two-sorted-arrays/solution/4-xun-zhao-liang-ge-zheng-xu-shu-zu-de-z-nips/)
+
+but 时间复杂度不符合要求
+
+
+```r
+class Solution:
+    def findMedianSortedArrays(self, a: List[int], b: List[int]) -> float:
+        c = a + b
+        c.sort()
+        n = len(c)
+        if n & 1:
+            return float(c[n//2])
+        else:
+            i = (n-1) // 2
+            j = i + 1
+            return (c[i] + c[j]) / 2
+```
+
+方法二：二分查找
+
+```r
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        def getKthElement(k):
+            """
+            - 主要思路：要找到第 k (k>1) 小的元素，那么就取 pivot1 = nums1[k/2-1] 和 pivot2 = nums2[k/2-1] 进行比较
+            - 这里的 "/" 表示整除
+            - nums1 中小于等于 pivot1 的元素有 nums1[0 .. k/2-2] 共计 k/2-1 个
+            - nums2 中小于等于 pivot2 的元素有 nums2[0 .. k/2-2] 共计 k/2-1 个
+            - 取 pivot = min(pivot1, pivot2)，两个数组中小于等于 pivot 的元素共计不会超过 (k/2-1) + (k/2-1) <= k-2 个
+            - 这样 pivot 本身最大也只能是第 k-1 小的元素
+            - 如果 pivot = pivot1，那么 nums1[0 .. k/2-1] 都不可能是第 k 小的元素。把这些元素全部 "删除"，剩下的作为新的 nums1 数组
+            - 如果 pivot = pivot2，那么 nums2[0 .. k/2-1] 都不可能是第 k 小的元素。把这些元素全部 "删除"，剩下的作为新的 nums2 数组
+            - 由于我们 "删除" 了一些元素（这些元素都比第 k 小的元素要小），因此需要修改 k 的值，减去删除的数的个数
+            """
+            
+            index1, index2 = 0, 0
+            while True:
+                # 特殊情况
+                if index1 == m:
+                    return nums2[index2 + k - 1]
+                if index2 == n:
+                    return nums1[index1 + k - 1]
+                if k == 1:
+                    return min(nums1[index1], nums2[index2])
+
+                # 正常情况
+                newIndex1 = min(index1 + k // 2 - 1, m - 1)
+                newIndex2 = min(index2 + k // 2 - 1, n - 1)
+                pivot1, pivot2 = nums1[newIndex1], nums2[newIndex2]
+                if pivot1 <= pivot2:
+                    k -= newIndex1 - index1 + 1
+                    index1 = newIndex1 + 1
+                else:
+                    k -= newIndex2 - index2 + 1
+                    index2 = newIndex2 + 1
+        
+        m, n = len(nums1), len(nums2)
+        totalLength = m + n
+        if totalLength % 2 == 1:
+            return getKthElement((totalLength + 1) // 2)
+        else:
+            return (getKthElement(totalLength // 2) + getKthElement(totalLength // 2 + 1)) / 2
+
+
+```
+
+
+
+
+## 搜索插入位置
+
+给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
+
+请必须使用时间复杂度为 O(log n) 的算法。
+
+示例 1:
+输入: nums = [1,3,5,6], target = 5
+输出: 2
+
+示例 2:
+输入: nums = [1,3,5,6], target = 2
+输出: 1
+
+示例 3:
+输入: nums = [1,3,5,6], target = 7
+输出: 4
+
+```r
+# lower_bound 返回最小的满足 nums[i] >= target 的 i
+# 如果数组为空，或者所有数都 < target，则返回 len(nums)
+# 要求 nums 是非递减的，即 nums[i] <= nums[i + 1]
+
+# 闭区间写法
+def lower_bound(nums: List[int], target: int) -> int:
+    left, right = 0, len(nums) - 1  # 闭区间 [left, right]
+    while left <= right:  # 区间不为空
+        # 循环不变量：
+        # nums[left-1] < target
+        # nums[right+1] >= target
+        mid = (left + right) // 2
+        if nums[mid] < target:
+            left = mid + 1  # 范围缩小到 [mid+1, right]
+        else:
+            right = mid - 1  # 范围缩小到 [left, mid-1]
+    return left  # 或者 right+1
+
+# 左闭右开区间写法
+def lower_bound2(nums: List[int], target: int) -> int:
+    left = 0
+    right = len(nums)  # 左闭右开区间 [left, right)
+    while left < right:  # 区间不为空
+        # 循环不变量：
+        # nums[left-1] < target
+        # nums[right] >= target
+        mid = (left + right) // 2
+        if nums[mid] < target:
+            left = mid + 1  # 范围缩小到 [mid+1, right)
+        else:
+            right = mid  # 范围缩小到 [left, mid)
+    return left  # 或者 right
+
+# 开区间写法
+def lower_bound3(nums: List[int], target: int) -> int:
+    left, right = -1, len(nums)  # 开区间 (left, right)
+    while left + 1 < right:  # 区间不为空
+        mid = (left + right) // 2
+        # 循环不变量：
+        # nums[left] < target
+        # nums[right] >= target
+        if nums[mid] < target:
+            left = mid  # 范围缩小到 (mid, right)
+        else:
+            right = mid  # 范围缩小到 (left, mid)
+    return right  # 或者 left+1
+
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        return lower_bound(nums, target)  # 选择其中一种写法即可
+
+```
+
+## 搜索二维矩阵
+
+给你一个满足下述两条属性的 m x n 整数矩阵：
+
+每行中的整数从左到右按非递减顺序排列。
+每行的第一个整数大于前一行的最后一个整数。
+给你一个整数 target ，如果 target 在矩阵中，返回 true ；否则，返回 false 。[fuxuemingzhu](https://leetcode.cn/problems/search-a-2d-matrix/solution/fu-xue-ming-zhu-liu-chong-fang-fa-bang-n-e20z/)
+
+有6种解题思路
+
+```r
+class Solution(object):
+    def searchMatrix(self, matrix, target):
+        return any(target in row for row in matrix)
+
+```
+
+## 在排序数组种查找元素的第一个位置和最后一个位置
+
+给你一个按照非递减顺序排列的整数数组 nums，和一个目标值 target。请你找出给定目标值在数组中的开始位置和结束位置。
+
+如果数组中不存在目标值 target，返回 [-1, -1]。
+
+你必须设计并实现时间复杂度为 O(log n) 的算法解决此问题。
+
+ 
+
+示例 1：
+
+输入：nums = [5,7,7,8,8,10], target = 8
+输出：[3,4]
+示例 2：
+
+输入：nums = [5,7,7,8,8,10], target = 6
+输出：[-1,-1]
+示例 3：
+
+输入：nums = [], target = 0
+输出：[-1,-1]
+
+```r
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        lis=[]
+        for i in range(len(nums)):
+            if nums[i]==target:
+                lis.append(i)
+        if len(lis)>0:
+            return [lis[0],lis[-1]]
+        else:
+            return [-1,-1]
+
+
+```
+
+##有效括号
+
+
+````r
+
+class Solution:
+    def isValid(self, s: str) -> bool:
+        dic = {'{': '}',  '[': ']', '(': ')', '?': '?'}
+        stack = ['?']
+        for c in s:
+            if c in dic: stack.append(c)
+            elif dic[stack.pop()] != c: return False 
+        return len(stack) == 1
+
+```
+
+## 每日温度
+
+给定一个整数数组 temperatures ，表示每天的温度，返回一个数组 answer ，其中 answer[i] 是指对于第 i 天，下一个更高温度出现在几天后。如果气温在这之后都不会升高，请在该位置用 0 来代替。
+
+ 
+
+示例 1:
+
+输入: temperatures = [73,74,75,71,69,72,76,73]
+输出: [1,1,4,2,1,1,0,0]
+示例 2:
+
+输入: temperatures = [30,40,50,60]
+输出: [1,1,1,0]
+示例 3:
+
+输入: temperatures = [30,60,90]
+输出: [1,1,0]
+
+
+
+解题思路：用栈记录的是list中元素的index，而不是list中元素值本身。后面在操作stack时，操作的都是index，这样就能实现把res中对应位置给替换掉的效果。[hongyang57](https://leetcode.cn/problems/daily-temperatures/solution/python3-zhan-su-du-chao-guo-98-by-hongyang57/)
+
+```r
+class Solution:
+    def dailyTemperatures(self, T: List[int]) -> List[int]:
+        l = len(T)
+        stack = []    #这里定义一个栈就不用说了
+        res = [0] * l   # 这里是最后要返回的result，因为题目中说没有匹配的就返回0，
+                        # 所以这里初始化一个全是0的list，然后把那些有匹配的替换掉即可。
+
+        for idx, t in enumerate(T):  # 下面是关键
+            while stack and t > T[stack[-1]]:  # 当stack为空时，运行stack.append(idx)，则stack=[0]
+                                                # 然后仅当遍历元素 t 小于stack顶端的值时append进去，
+                                                # 这会导致stack中idx代表的元素是单调递减的，
+                                                # 如果此时遍历到一个 t，大于stack顶端的值，那这个t就是离stack
+                                                # 顶端值最近的那个大值。
+                res[stack.pop()] = idx-stack[-1] # 然后pop出来，还是要注意stack.pop出来的是idx，这样res这
+                                                 # 一串0里对应位置的0就会被替换成应有的值。                                        
+                                                # 再进入while循环判断t和stack.pop后的新的顶端值哪个大。
+                                                # 如此反复。
+            stack.append(idx)
+        return res
+
+```
+
+
+## 动态规划专题
+
+- [动态规划问题](https://gaowenxin95.github.io/leetcode-cookbook/动态规划问题.html)
+
+
+## 数组中第k个最大元素
+
+给定整数数组 nums 和整数 k，请返回数组中第 k 个最大的元素。
+
+请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
+
+你必须设计并实现时间复杂度为 O(n) 的算法解决此问题。
+
+ 
+
+示例 1:
+输入: [3,2,1,5,6,4], k = 2
+输出: 5
+
+示例 2:
+输入: [3,2,3,1,2,4,5,5,6], k = 4
+输出: 4
+
+topk问题
+
+首先是暴力解法
+
+```r
+from typing import List
+
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        size = len(nums)
+        nums.sort()
+        return nums[size - k]
+
+```
+
+然后是快排
+
+```r
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        # nums.sort(reverse=True)
+        # return nums[k-1]
+        def quicksort(nums:list)->list:
+            if len(nums) < 2:
+                return nums
+            else:
+                pivot = nums[0]
+                small_list = [i for i in nums[1::] if i<= pivot]
+                big_list = [i for i in nums[1::] if i > pivot]
+                return quicksort(big_list) +[pivot] + quicksort(small_list)
+                # 这里按照降序排列
+        nums = quicksort(nums)
+        return nums[k-1]
+```
+
+
+##前k个高频元素
+
+给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案。
+
+示例 1:
+输入: nums = [1,1,1,2,2,3], k = 2
+输出: [1,2]
+
+示例 2:
+输入: nums = [1], k = 1
+输出: [1]
+
+```r
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        n = len(nums)
+        dic = {}
+        for i in range(n):
+            if nums[i] not in dic:
+                dic[nums[i]] = 1
+            else:
+                dic[nums[i]] += 1
+        
+        res = []
+        while k > 0:
+            tmp = 0
+            for num in dic:
+                if dic[num] > tmp:
+                    tmp = dic[num]
+                    cur = num
+            dic[cur] = -1
+            res.append(cur)
+            k -= 1
+        return res
+
+```
+
+
+##只出现一次的数
+
+给你一个 非空 整数数组 nums ，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
+
+你必须设计并实现线性时间复杂度的算法来解决此问题，且该算法只使用常量额外空间。
+
+
+示例 1 ：
+输入：nums = [2,2,1]
+输出：1
+
+示例 2 ：
+输入：nums = [4,1,2,1,2]
+输出：4
+
+示例 3 ：
+输入：nums = [1]
+输出：1
+
+
+
+```r
+# 一刷
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        return 2*sum(set(nums))-sum(nums)
+
+# 二刷
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        return reduce(lambda x,y: x^y,nums)
+
+```
+
+## 多元素问题
+
+给定一个大小为 n 的数组 nums ，返回其中的多数元素。多数元素是指在数组中出现次数 大于 ⌊ n/2 ⌋ 的元素。
+
+你可以假设数组是非空的，并且给定的数组总是存在多数元素。
+
+ 
+
+示例 1：
+输入：nums = [3,2,3]
+输出：3
+示例 2：
+输入：nums = [2,2,1,1,1,2,2]
+输出：2
+
+解题思路
+
+使用了一种称为"Boyer-Moore投票算法"的方法来解决问题。该算法通过维护一个候选元素和一个计数器来找到出现次数超过一半的元素。算法的基本思想是：
+
+初始化候选元素为None，计数器为0。
+
+遍历数组中的每个元素。
+
+如果计数器为0，则将当前元素设为候选元素。
+
+如果当前元素与候选元素相同，则增加计数器；否则减少计数器。
+遍历完成后，候选元素即为出现次数超过一半的元素。[zr3](https://leetcode.cn/problems/majority-element/solution/da-qia-by-zr3-lly2/)
+
+
+```
+def majorityElement(nums):
+    count = 0
+    candidate = None
+
+    for num in nums:
+        if count == 0:
+            candidate = num
+        count += 1 if num == candidate else -1
+
+    return candidate
+
+# 示例用法
+nums = [2, 2, 1, 1, 1, 2, 2]
+majority = majorityElement(nums)
+print(majority)
+
+```

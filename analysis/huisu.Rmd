@@ -73,6 +73,43 @@ def backtrack(路径, 选择列表):
 
 ## 全排列问题一
 
+给定一个不含重复数字的数组 nums ，返回其 所有可能的全排列 。你可以 按任意顺序 返回答案。
+
+ 
+
+示例 1：
+
+输入：nums = [1,2,3]
+输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+示例 2：
+
+输入：nums = [0,1]
+输出：[[0,1],[1,0]]
+示例 3：
+
+输入：nums = [1]
+输出：[[1]]
+
+
+```r
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        def backtrack(nums, tmp):
+            if not nums:
+                res.append(tmp)
+                return 
+            for i in range(len(nums)):
+                backtrack(nums[:i] + nums[i+1:], tmp + [nums[i]])
+        backtrack(nums, [])
+        return res
+
+```
+
+
+
+## 全排列问题二
+
 - 题目描述
 
 给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。
@@ -107,7 +144,7 @@ class Solution(object):
         track=[] #路径
         def backtrack(track):
             if len(track)==len(nums):# 出口条件
-                res.append(track.copy()) # 
+                res.append(track.copy()) # 把track的副本加入res中，避免后面修改track时产生影响
                 return 
             for i in nums: # 做选择
                 if i not in track:
@@ -125,28 +162,9 @@ class Solution(object):
 
 a=b此时a是拷贝了b的引用
 
-## 全部排列问题二
 
-- 题目描述
 
-给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。
 
- 
-
-示例 1：
-
-输入：nums = [1,1,2]
-输出：
-[[1,1,2],
- [1,2,1],
- [2,1,1]]
-示例 2：
-
-输入：nums = [1,2,3]
-输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
- 
-
-解法略，同上
 
 
 ## 组合总和一
@@ -463,6 +481,46 @@ class Solution:
 
 
 ## 单词搜索
+
+![](../figs/dcss1.png)
+![](../figs/dcss2.png)
+
+比较典型的无重复回溯，但是不好写
+
+```r
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        # dfs，找到与word相匹配的单词
+        m, n = len(board), len(board[0])
+        w = len(word)
+
+        # i, j为当前坐标，k为当前word匹配到的坐标
+        def dfs(i, j, k):
+            # 当索引越界，或当前不匹配，或搜索已访问过的坐标时，进行剪枝
+            if not 0 <= i < m or not 0 <= j < n or board[i][j] != word[k]: return False
+            # 当最后一个字母匹配时，搜索成功
+            if k == w - 1: return True
+            # 将访问过的字符暂时置为空
+            board[i][j] = ''
+            # 有上下左右四个搜索方向，搜索下一个字母
+            res = dfs(i+1, j, k+1) or dfs(i-1, j, k+1) or dfs(i, j-1, k+1) or dfs(i, j+1, k+1)
+            # 将访问过的字符还原
+            board[i][j] = word[k]
+            return res
+        
+        # 共有MN个起点，每个起点除去回头路有三个搜索方向，故时间复杂度为3**k*MN
+        for i in range(m):
+            for j in range(n):
+                if dfs(i, j, 0): return True
+        return False
+
+
+```
+
+[bullimito](https://leetcode.cn/problems/word-search/solution/dfs-by-bullimito-1ate/)
+
+
+
 
 ## 电话号码的字母组合
 

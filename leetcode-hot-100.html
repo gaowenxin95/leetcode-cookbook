@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2023-05-31" />
+<meta name="date" content="2023-07-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -158,6 +158,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.22.2" data-path=""><a href="#复制带随机指针的链表"><i class="fa fa-check"></i><b>1.22.2</b> 复制带随机指针的链表</a></li>
 </ul></li>
 <li class="chapter" data-level="1.23" data-path=""><a href="#二叉树专项"><i class="fa fa-check"></i><b>1.23</b> 二叉树专项</a></li>
+<li class="chapter" data-level="1.24" data-path=""><a href="#岛屿的数量"><i class="fa fa-check"></i><b>1.24</b> 岛屿的数量</a></li>
+<li class="chapter" data-level="1.25" data-path=""><a href="#回溯专题"><i class="fa fa-check"></i><b>1.25</b> 回溯专题</a></li>
+<li class="chapter" data-level="1.26" data-path=""><a href="#两个正序数组的中位数"><i class="fa fa-check"></i><b>1.26</b> 两个正序数组的中位数</a></li>
+<li class="chapter" data-level="1.27" data-path=""><a href="#搜索插入位置"><i class="fa fa-check"></i><b>1.27</b> 搜索插入位置</a></li>
+<li class="chapter" data-level="1.28" data-path=""><a href="#搜索二维矩阵-1"><i class="fa fa-check"></i><b>1.28</b> 搜索二维矩阵</a></li>
+<li class="chapter" data-level="1.29" data-path=""><a href="#在排序数组种查找元素的第一个位置和最后一个位置"><i class="fa fa-check"></i><b>1.29</b> 在排序数组种查找元素的第一个位置和最后一个位置</a></li>
+<li class="chapter" data-level="1.30" data-path=""><a href="#动态规划专题"><i class="fa fa-check"></i><b>1.30</b> 动态规划专题</a></li>
+<li class="chapter" data-level="1.31" data-path=""><a href="#数组中第k个最大元素"><i class="fa fa-check"></i><b>1.31</b> 数组中第k个最大元素</a></li>
+<li class="chapter" data-level="1.32" data-path=""><a href="#多元素问题"><i class="fa fa-check"></i><b>1.32</b> 多元素问题</a></li>
 </ul></li>
 </ul>
 
@@ -179,7 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">leetcode_hot_100</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2023-05-31</em></p>
+<p class="date"><em>2023-07-23</em></p>
 </div>
 <div id="leetcode_hot_100" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> leetcode_hot_100</h1>
@@ -984,6 +993,376 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
 <ul>
 <li><a href="https://gaowenxin95.github.io/leetcode-cookbook/二叉树专题.html">二叉树</a></li>
 </ul>
+</div>
+<div id="岛屿的数量" class="section level2" number="1.24">
+<h2><span class="header-section-number">1.24</span> 岛屿的数量</h2>
+</div>
+<div id="回溯专题" class="section level2" number="1.25">
+<h2><span class="header-section-number">1.25</span> 回溯专题</h2>
+<ul>
+<li><a href="https://gaowenxin95.github.io/leetcode-cookbook/回溯专题.html">回溯</a></li>
+</ul>
+</div>
+<div id="两个正序数组的中位数" class="section level2" number="1.26">
+<h2><span class="header-section-number">1.26</span> 两个正序数组的中位数</h2>
+<p>给定两个大小分别为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。请你找出并返回这两个正序数组的 中位数 。</p>
+<p>算法的时间复杂度应该为 O(log (m+n)) 。</p>
+<p> </p>
+<p>示例 1：</p>
+<p>输入：nums1 = [1,3], nums2 = [2]
+输出：2.00000
+解释：合并数组 = [1,2,3] ，中位数 2
+示例 2：</p>
+<p>输入：nums1 = [1,2], nums2 = [3,4]
+输出：2.50000
+解释：合并数组 = [1,2,3,4] ，中位数 (2 + 3) / 2 = 2.5</p>
+<p>解法一：</p>
+<p>思路
+两个列表合并然后从小到大排序
+判断新列表的长度是奇数还是偶数
+求对应的中位数即可<a href="https://leetcode.cn/problems/median-of-two-sorted-arrays/solution/4-xun-zhao-liang-ge-zheng-xu-shu-zu-de-z-nips/">wonderstruck-a</a></p>
+<p>but 时间复杂度不符合要求</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="st">    </span>def <span class="kw">findMedianSortedArrays</span>(self, a<span class="op">:</span><span class="st"> </span>List[int], b<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>float<span class="op">:</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="st">        </span>c =<span class="st"> </span>a <span class="op">+</span><span class="st"> </span>b</span>
+<span id="cb28-4"><a href="#cb28-4"></a>        <span class="kw">c.sort</span>()</span>
+<span id="cb28-5"><a href="#cb28-5"></a>        n =<span class="st"> </span><span class="kw">len</span>(c)</span>
+<span id="cb28-6"><a href="#cb28-6"></a>        <span class="cf">if</span> n <span class="op">&amp;</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span></span>
+<span id="cb28-7"><a href="#cb28-7"></a><span class="st">            </span>return <span class="kw">float</span>(c[n<span class="op">/</span><span class="er">/</span><span class="dv">2</span>])</span>
+<span id="cb28-8"><a href="#cb28-8"></a>        <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb28-9"><a href="#cb28-9"></a><span class="st">            </span>i =<span class="st"> </span>(n<span class="dv">-1</span>) <span class="op">/</span><span class="er">/</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb28-10"><a href="#cb28-10"></a>            j =<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb28-11"><a href="#cb28-11"></a>            <span class="kw">return</span> (c[i] <span class="op">+</span><span class="st"> </span>c[j]) <span class="op">/</span><span class="st"> </span><span class="dv">2</span></span></code></pre></div>
+<p>方法二：二分查找</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="st">    </span>def <span class="kw">findMedianSortedArrays</span>(self, nums1<span class="op">:</span><span class="st"> </span>List[int], nums2<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>float<span class="op">:</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="st">        </span>def <span class="kw">getKthElement</span>(k)<span class="op">:</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="st">            &quot;&quot;&quot;</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="st">            - 主要思路：要找到第 k (k&gt;1) 小的元素，那么就取 pivot1 = nums1[k/2-1] 和 pivot2 = nums2[k/2-1] 进行比较</span></span>
+<span id="cb29-6"><a href="#cb29-6"></a><span class="st">            - 这里的 &quot;</span><span class="op">/</span><span class="st">&quot; 表示整除</span></span>
+<span id="cb29-7"><a href="#cb29-7"></a><span class="st">            - nums1 中小于等于 pivot1 的元素有 nums1[0 .. k/2-2] 共计 k/2-1 个</span></span>
+<span id="cb29-8"><a href="#cb29-8"></a><span class="st">            - nums2 中小于等于 pivot2 的元素有 nums2[0 .. k/2-2] 共计 k/2-1 个</span></span>
+<span id="cb29-9"><a href="#cb29-9"></a><span class="st">            - 取 pivot = min(pivot1, pivot2)，两个数组中小于等于 pivot 的元素共计不会超过 (k/2-1) + (k/2-1) &lt;= k-2 个</span></span>
+<span id="cb29-10"><a href="#cb29-10"></a><span class="st">            - 这样 pivot 本身最大也只能是第 k-1 小的元素</span></span>
+<span id="cb29-11"><a href="#cb29-11"></a><span class="st">            - 如果 pivot = pivot1，那么 nums1[0 .. k/2-1] 都不可能是第 k 小的元素。把这些元素全部 &quot;</span>删除<span class="st">&quot;，剩下的作为新的 nums1 数组</span></span>
+<span id="cb29-12"><a href="#cb29-12"></a><span class="st">            - 如果 pivot = pivot2，那么 nums2[0 .. k/2-1] 都不可能是第 k 小的元素。把这些元素全部 &quot;</span>删除<span class="st">&quot;，剩下的作为新的 nums2 数组</span></span>
+<span id="cb29-13"><a href="#cb29-13"></a><span class="st">            - 由于我们 &quot;</span>删除<span class="st">&quot; 了一些元素（这些元素都比第 k 小的元素要小），因此需要修改 k 的值，减去删除的数的个数</span></span>
+<span id="cb29-14"><a href="#cb29-14"></a><span class="st">            &quot;&quot;&quot;</span></span>
+<span id="cb29-15"><a href="#cb29-15"></a>            </span>
+<span id="cb29-16"><a href="#cb29-16"></a>            index1, index2 =<span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span></span>
+<span id="cb29-17"><a href="#cb29-17"></a>            <span class="cf">while</span> True<span class="op">:</span></span>
+<span id="cb29-18"><a href="#cb29-18"></a><span class="st">                </span><span class="co"># 特殊情况</span></span>
+<span id="cb29-19"><a href="#cb29-19"></a><span class="st">                </span><span class="cf">if</span> index1 <span class="op">==</span><span class="st"> </span>m<span class="op">:</span></span>
+<span id="cb29-20"><a href="#cb29-20"></a><span class="st">                    </span>return nums2[index2 <span class="op">+</span><span class="st"> </span>k <span class="op">-</span><span class="st"> </span><span class="dv">1</span>]</span>
+<span id="cb29-21"><a href="#cb29-21"></a>                <span class="cf">if</span> index2 <span class="op">==</span><span class="st"> </span>n<span class="op">:</span></span>
+<span id="cb29-22"><a href="#cb29-22"></a><span class="st">                    </span>return nums1[index1 <span class="op">+</span><span class="st"> </span>k <span class="op">-</span><span class="st"> </span><span class="dv">1</span>]</span>
+<span id="cb29-23"><a href="#cb29-23"></a>                <span class="cf">if</span> k <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span></span>
+<span id="cb29-24"><a href="#cb29-24"></a><span class="st">                    </span>return <span class="kw">min</span>(nums1[index1], nums2[index2])</span>
+<span id="cb29-25"><a href="#cb29-25"></a></span>
+<span id="cb29-26"><a href="#cb29-26"></a>                <span class="co"># 正常情况</span></span>
+<span id="cb29-27"><a href="#cb29-27"></a>                newIndex1 =<span class="st"> </span><span class="kw">min</span>(index1 <span class="op">+</span><span class="st"> </span>k <span class="op">/</span><span class="er">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, m <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb29-28"><a href="#cb29-28"></a>                newIndex2 =<span class="st"> </span><span class="kw">min</span>(index2 <span class="op">+</span><span class="st"> </span>k <span class="op">/</span><span class="er">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb29-29"><a href="#cb29-29"></a>                pivot1, pivot2 =<span class="st"> </span>nums1[newIndex1], nums2[newIndex2]</span>
+<span id="cb29-30"><a href="#cb29-30"></a>                <span class="cf">if</span> pivot1 <span class="op">&lt;=</span><span class="st"> </span>pivot2<span class="op">:</span></span>
+<span id="cb29-31"><a href="#cb29-31"></a><span class="st">                    </span>k <span class="op">-</span><span class="er">=</span><span class="st"> </span>newIndex1 <span class="op">-</span><span class="st"> </span>index1 <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb29-32"><a href="#cb29-32"></a>                    index1 =<span class="st"> </span>newIndex1 <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb29-33"><a href="#cb29-33"></a>                <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb29-34"><a href="#cb29-34"></a><span class="st">                    </span>k <span class="op">-</span><span class="er">=</span><span class="st"> </span>newIndex2 <span class="op">-</span><span class="st"> </span>index2 <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb29-35"><a href="#cb29-35"></a>                    index2 =<span class="st"> </span>newIndex2 <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb29-36"><a href="#cb29-36"></a>        </span>
+<span id="cb29-37"><a href="#cb29-37"></a>        m, n =<span class="st"> </span><span class="kw">len</span>(nums1), <span class="kw">len</span>(nums2)</span>
+<span id="cb29-38"><a href="#cb29-38"></a>        totalLength =<span class="st"> </span>m <span class="op">+</span><span class="st"> </span>n</span>
+<span id="cb29-39"><a href="#cb29-39"></a>        <span class="cf">if</span> totalLength % <span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span></span>
+<span id="cb29-40"><a href="#cb29-40"></a><span class="st">            </span>return <span class="kw">getKthElement</span>((totalLength <span class="op">+</span><span class="st"> </span><span class="dv">1</span>) <span class="op">/</span><span class="er">/</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb29-41"><a href="#cb29-41"></a>        <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb29-42"><a href="#cb29-42"></a><span class="st">            </span><span class="kw">return</span> (<span class="kw">getKthElement</span>(totalLength <span class="op">/</span><span class="er">/</span><span class="st"> </span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">getKthElement</span>(totalLength <span class="op">/</span><span class="er">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)) <span class="op">/</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb29-43"><a href="#cb29-43"></a></span></code></pre></div>
+</div>
+<div id="搜索插入位置" class="section level2" number="1.27">
+<h2><span class="header-section-number">1.27</span> 搜索插入位置</h2>
+<p>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
+<p>请必须使用时间复杂度为 O(log n) 的算法。</p>
+<p>示例 1:
+输入: nums = [1,3,5,6], target = 5
+输出: 2</p>
+<p>示例 2:
+输入: nums = [1,3,5,6], target = 2
+输出: 1</p>
+<p>示例 3:
+输入: nums = [1,3,5,6], target = 7
+输出: 4</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># lower_bound 返回最小的满足 nums[i] &gt;= target 的 i</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="co"># 如果数组为空，或者所有数都 &lt; target，则返回 len(nums)</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a><span class="co"># 要求 nums 是非递减的，即 nums[i] &lt;= nums[i + 1]</span></span>
+<span id="cb30-4"><a href="#cb30-4"></a></span>
+<span id="cb30-5"><a href="#cb30-5"></a><span class="co"># 闭区间写法</span></span>
+<span id="cb30-6"><a href="#cb30-6"></a>def <span class="kw">lower_bound</span>(nums<span class="op">:</span><span class="st"> </span>List[int], target<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb30-7"><a href="#cb30-7"></a><span class="st">    </span>left, right =<span class="st"> </span><span class="dv">0</span>, <span class="kw">len</span>(nums) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>  <span class="co"># 闭区间 [left, right]</span></span>
+<span id="cb30-8"><a href="#cb30-8"></a>    <span class="cf">while</span> left <span class="op">&lt;=</span><span class="st"> </span>right<span class="op">:</span><span class="st">  </span><span class="co"># 区间不为空</span></span>
+<span id="cb30-9"><a href="#cb30-9"></a><span class="st">        </span><span class="co"># 循环不变量：</span></span>
+<span id="cb30-10"><a href="#cb30-10"></a><span class="st">        </span><span class="co"># nums[left-1] &lt; target</span></span>
+<span id="cb30-11"><a href="#cb30-11"></a><span class="st">        </span><span class="co"># nums[right+1] &gt;= target</span></span>
+<span id="cb30-12"><a href="#cb30-12"></a><span class="st">        </span>mid =<span class="st"> </span>(left <span class="op">+</span><span class="st"> </span>right) <span class="op">/</span><span class="er">/</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb30-13"><a href="#cb30-13"></a>        <span class="cf">if</span> nums[mid] <span class="op">&lt;</span><span class="st"> </span>target<span class="op">:</span></span>
+<span id="cb30-14"><a href="#cb30-14"></a><span class="st">            </span>left =<span class="st"> </span>mid <span class="op">+</span><span class="st"> </span><span class="dv">1</span>  <span class="co"># 范围缩小到 [mid+1, right]</span></span>
+<span id="cb30-15"><a href="#cb30-15"></a>        <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb30-16"><a href="#cb30-16"></a><span class="st">            </span>right =<span class="st"> </span>mid <span class="op">-</span><span class="st"> </span><span class="dv">1</span>  <span class="co"># 范围缩小到 [left, mid-1]</span></span>
+<span id="cb30-17"><a href="#cb30-17"></a>    return left  <span class="co"># 或者 right+1</span></span>
+<span id="cb30-18"><a href="#cb30-18"></a></span>
+<span id="cb30-19"><a href="#cb30-19"></a><span class="co"># 左闭右开区间写法</span></span>
+<span id="cb30-20"><a href="#cb30-20"></a>def <span class="kw">lower_bound2</span>(nums<span class="op">:</span><span class="st"> </span>List[int], target<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb30-21"><a href="#cb30-21"></a><span class="st">    </span>left =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb30-22"><a href="#cb30-22"></a>    right =<span class="st"> </span><span class="kw">len</span>(nums)  <span class="co"># 左闭右开区间 [left, right)</span></span>
+<span id="cb30-23"><a href="#cb30-23"></a>    <span class="cf">while</span> left <span class="op">&lt;</span><span class="st"> </span>right<span class="op">:</span><span class="st">  </span><span class="co"># 区间不为空</span></span>
+<span id="cb30-24"><a href="#cb30-24"></a><span class="st">        </span><span class="co"># 循环不变量：</span></span>
+<span id="cb30-25"><a href="#cb30-25"></a><span class="st">        </span><span class="co"># nums[left-1] &lt; target</span></span>
+<span id="cb30-26"><a href="#cb30-26"></a><span class="st">        </span><span class="co"># nums[right] &gt;= target</span></span>
+<span id="cb30-27"><a href="#cb30-27"></a><span class="st">        </span>mid =<span class="st"> </span>(left <span class="op">+</span><span class="st"> </span>right) <span class="op">/</span><span class="er">/</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb30-28"><a href="#cb30-28"></a>        <span class="cf">if</span> nums[mid] <span class="op">&lt;</span><span class="st"> </span>target<span class="op">:</span></span>
+<span id="cb30-29"><a href="#cb30-29"></a><span class="st">            </span>left =<span class="st"> </span>mid <span class="op">+</span><span class="st"> </span><span class="dv">1</span>  <span class="co"># 范围缩小到 [mid+1, right)</span></span>
+<span id="cb30-30"><a href="#cb30-30"></a>        <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb30-31"><a href="#cb30-31"></a><span class="st">            </span>right =<span class="st"> </span>mid  <span class="co"># 范围缩小到 [left, mid)</span></span>
+<span id="cb30-32"><a href="#cb30-32"></a>    return left  <span class="co"># 或者 right</span></span>
+<span id="cb30-33"><a href="#cb30-33"></a></span>
+<span id="cb30-34"><a href="#cb30-34"></a><span class="co"># 开区间写法</span></span>
+<span id="cb30-35"><a href="#cb30-35"></a>def <span class="kw">lower_bound3</span>(nums<span class="op">:</span><span class="st"> </span>List[int], target<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb30-36"><a href="#cb30-36"></a><span class="st">    </span>left, right =<span class="st"> </span><span class="dv">-1</span>, <span class="kw">len</span>(nums)  <span class="co"># 开区间 (left, right)</span></span>
+<span id="cb30-37"><a href="#cb30-37"></a>    <span class="cf">while</span> left <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="op">&lt;</span><span class="st"> </span>right<span class="op">:</span><span class="st">  </span><span class="co"># 区间不为空</span></span>
+<span id="cb30-38"><a href="#cb30-38"></a><span class="st">        </span>mid =<span class="st"> </span>(left <span class="op">+</span><span class="st"> </span>right) <span class="op">/</span><span class="er">/</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb30-39"><a href="#cb30-39"></a>        <span class="co"># 循环不变量：</span></span>
+<span id="cb30-40"><a href="#cb30-40"></a>        <span class="co"># nums[left] &lt; target</span></span>
+<span id="cb30-41"><a href="#cb30-41"></a>        <span class="co"># nums[right] &gt;= target</span></span>
+<span id="cb30-42"><a href="#cb30-42"></a>        <span class="cf">if</span> nums[mid] <span class="op">&lt;</span><span class="st"> </span>target<span class="op">:</span></span>
+<span id="cb30-43"><a href="#cb30-43"></a><span class="st">            </span>left =<span class="st"> </span>mid  <span class="co"># 范围缩小到 (mid, right)</span></span>
+<span id="cb30-44"><a href="#cb30-44"></a>        <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb30-45"><a href="#cb30-45"></a><span class="st">            </span>right =<span class="st"> </span>mid  <span class="co"># 范围缩小到 (left, mid)</span></span>
+<span id="cb30-46"><a href="#cb30-46"></a>    return right  <span class="co"># 或者 left+1</span></span>
+<span id="cb30-47"><a href="#cb30-47"></a></span>
+<span id="cb30-48"><a href="#cb30-48"></a>class Solution<span class="op">:</span></span>
+<span id="cb30-49"><a href="#cb30-49"></a><span class="st">    </span>def <span class="kw">searchInsert</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int], target<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb30-50"><a href="#cb30-50"></a><span class="st">        </span>return <span class="kw">lower_bound</span>(nums, target)  <span class="co"># 选择其中一种写法即可</span></span></code></pre></div>
+</div>
+<div id="搜索二维矩阵-1" class="section level2" number="1.28">
+<h2><span class="header-section-number">1.28</span> 搜索二维矩阵</h2>
+<p>给你一个满足下述两条属性的 m x n 整数矩阵：</p>
+<p>每行中的整数从左到右按非递减顺序排列。
+每行的第一个整数大于前一行的最后一个整数。
+给你一个整数 target ，如果 target 在矩阵中，返回 true ；否则，返回 false 。<a href="https://leetcode.cn/problems/search-a-2d-matrix/solution/fu-xue-ming-zhu-liu-chong-fang-fa-bang-n-e20z/">fuxuemingzhu</a></p>
+<p>有6种解题思路</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>class <span class="kw">Solution</span>(object)<span class="op">:</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="st">    </span>def <span class="kw">searchMatrix</span>(self, matrix, target)<span class="op">:</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="st">        </span>return <span class="kw">any</span>(target <span class="cf">in</span> row <span class="cf">for</span> row <span class="cf">in</span> matrix)</span></code></pre></div>
+</div>
+<div id="在排序数组种查找元素的第一个位置和最后一个位置" class="section level2" number="1.29">
+<h2><span class="header-section-number">1.29</span> 在排序数组种查找元素的第一个位置和最后一个位置</h2>
+<p>给你一个按照非递减顺序排列的整数数组 nums，和一个目标值 target。请你找出给定目标值在数组中的开始位置和结束位置。</p>
+<p>如果数组中不存在目标值 target，返回 [-1, -1]。</p>
+<p>你必须设计并实现时间复杂度为 O(log n) 的算法解决此问题。</p>
+<p> </p>
+<p>示例 1：</p>
+<p>输入：nums = [5,7,7,8,8,10], target = 8
+输出：[3,4]
+示例 2：</p>
+<p>输入：nums = [5,7,7,8,8,10], target = 6
+输出：[-1,-1]
+示例 3：</p>
+<p>输入：nums = [], target = 0
+输出：[-1,-1]</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="st">    </span>def <span class="kw">searchRange</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int], target<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>List[int]<span class="op">:</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="st">        </span>lis=[]</span>
+<span id="cb32-4"><a href="#cb32-4"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(<span class="kw">len</span>(nums))<span class="op">:</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a><span class="st">            </span><span class="cf">if</span> nums[i]<span class="op">==</span>target<span class="op">:</span></span>
+<span id="cb32-6"><a href="#cb32-6"></a><span class="st">                </span><span class="kw">lis.append</span>(i)</span>
+<span id="cb32-7"><a href="#cb32-7"></a>        <span class="cf">if</span> <span class="kw">len</span>(lis)<span class="op">&gt;</span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb32-8"><a href="#cb32-8"></a><span class="st">            </span>return [lis[<span class="dv">0</span>],lis[<span class="op">-</span><span class="dv">1</span>]]</span>
+<span id="cb32-9"><a href="#cb32-9"></a>        <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb32-10"><a href="#cb32-10"></a><span class="st">            </span>return [<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb32-11"><a href="#cb32-11"></a></span></code></pre></div>
+<p>##有效括号</p>
+<p>````r</p>
+<p>class Solution:
+def isValid(self, s: str) -&gt; bool:
+dic = {‘{’: ‘}’, ‘[’: ’]’, ‘(’: ‘)’, ‘?’: ‘?’}
+stack = [‘?’]
+for c in s:
+if c in dic: stack.append(c)
+elif dic[stack.pop()] != c: return False
+return len(stack) == 1</p>
+<pre><code>
+## 每日温度
+
+给定一个整数数组 temperatures ，表示每天的温度，返回一个数组 answer ，其中 answer[i] 是指对于第 i 天，下一个更高温度出现在几天后。如果气温在这之后都不会升高，请在该位置用 0 来代替。
+
+ 
+
+示例 1:
+
+输入: temperatures = [73,74,75,71,69,72,76,73]
+输出: [1,1,4,2,1,1,0,0]
+示例 2:
+
+输入: temperatures = [30,40,50,60]
+输出: [1,1,1,0]
+示例 3:
+
+输入: temperatures = [30,60,90]
+输出: [1,1,0]
+
+
+
+解题思路：用栈记录的是list中元素的index，而不是list中元素值本身。后面在操作stack时，操作的都是index，这样就能实现把res中对应位置给替换掉的效果。[hongyang57](https://leetcode.cn/problems/daily-temperatures/solution/python3-zhan-su-du-chao-guo-98-by-hongyang57/)
+
+```r
+class Solution:
+    def dailyTemperatures(self, T: List[int]) -&gt; List[int]:
+        l = len(T)
+        stack = []    #这里定义一个栈就不用说了
+        res = [0] * l   # 这里是最后要返回的result，因为题目中说没有匹配的就返回0，
+                        # 所以这里初始化一个全是0的list，然后把那些有匹配的替换掉即可。
+
+        for idx, t in enumerate(T):  # 下面是关键
+            while stack and t &gt; T[stack[-1]]:  # 当stack为空时，运行stack.append(idx)，则stack=[0]
+                                                # 然后仅当遍历元素 t 小于stack顶端的值时append进去，
+                                                # 这会导致stack中idx代表的元素是单调递减的，
+                                                # 如果此时遍历到一个 t，大于stack顶端的值，那这个t就是离stack
+                                                # 顶端值最近的那个大值。
+                res[stack.pop()] = idx-stack[-1] # 然后pop出来，还是要注意stack.pop出来的是idx，这样res这
+                                                 # 一串0里对应位置的0就会被替换成应有的值。                                        
+                                                # 再进入while循环判断t和stack.pop后的新的顶端值哪个大。
+                                                # 如此反复。
+            stack.append(idx)
+        return res
+</code></pre>
+</div>
+<div id="动态规划专题" class="section level2" number="1.30">
+<h2><span class="header-section-number">1.30</span> 动态规划专题</h2>
+<ul>
+<li><a href="https://gaowenxin95.github.io/leetcode-cookbook/动态规划问题.html">动态规划问题</a></li>
+</ul>
+</div>
+<div id="数组中第k个最大元素" class="section level2" number="1.31">
+<h2><span class="header-section-number">1.31</span> 数组中第k个最大元素</h2>
+<p>给定整数数组 nums 和整数 k，请返回数组中第 k 个最大的元素。</p>
+<p>请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。</p>
+<p>你必须设计并实现时间复杂度为 O(n) 的算法解决此问题。</p>
+<p> </p>
+<p>示例 1:
+输入: [3,2,1,5,6,4], k = 2
+输出: 5</p>
+<p>示例 2:
+输入: [3,2,3,1,2,4,5,5,6], k = 4
+输出: 4</p>
+<p>topk问题</p>
+<p>首先是暴力解法</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>from typing import List</span>
+<span id="cb34-2"><a href="#cb34-2"></a></span>
+<span id="cb34-3"><a href="#cb34-3"></a>class Solution<span class="op">:</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a><span class="st">    </span>def <span class="kw">findKthLargest</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int], k<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="st">        </span>size =<span class="st"> </span><span class="kw">len</span>(nums)</span>
+<span id="cb34-6"><a href="#cb34-6"></a>        <span class="kw">nums.sort</span>()</span>
+<span id="cb34-7"><a href="#cb34-7"></a>        return nums[size <span class="op">-</span><span class="st"> </span>k]</span></code></pre></div>
+<p>然后是快排</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="st">    </span>def <span class="kw">findKthLargest</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int], k<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="st">        </span><span class="co"># nums.sort(reverse=True)</span></span>
+<span id="cb35-4"><a href="#cb35-4"></a><span class="st">        </span><span class="co"># return nums[k-1]</span></span>
+<span id="cb35-5"><a href="#cb35-5"></a><span class="st">        </span>def <span class="kw">quicksort</span>(nums<span class="op">:</span>list)-&gt;list<span class="op">:</span></span>
+<span id="cb35-6"><a href="#cb35-6"></a><span class="st">            </span><span class="cf">if</span> <span class="kw">len</span>(nums) <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span><span class="op">:</span></span>
+<span id="cb35-7"><a href="#cb35-7"></a><span class="st">                </span>return nums</span>
+<span id="cb35-8"><a href="#cb35-8"></a>            <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb35-9"><a href="#cb35-9"></a><span class="st">                </span>pivot =<span class="st"> </span>nums[<span class="dv">0</span>]</span>
+<span id="cb35-10"><a href="#cb35-10"></a>                small_list =<span class="st"> </span>[i <span class="cf">for</span> i <span class="cf">in</span> nums[<span class="dv">1</span><span class="op">::</span>] <span class="cf">if</span> i<span class="op">&lt;=</span><span class="st"> </span>pivot]</span>
+<span id="cb35-11"><a href="#cb35-11"></a>                big_list =<span class="st"> </span>[i <span class="cf">for</span> i <span class="cf">in</span> nums[<span class="dv">1</span><span class="op">::</span>] <span class="cf">if</span> i <span class="op">&gt;</span><span class="st"> </span>pivot]</span>
+<span id="cb35-12"><a href="#cb35-12"></a>                return <span class="kw">quicksort</span>(big_list) <span class="op">+</span>[pivot] <span class="op">+</span><span class="st"> </span><span class="kw">quicksort</span>(small_list)</span>
+<span id="cb35-13"><a href="#cb35-13"></a>                <span class="co"># 这里按照降序排列</span></span>
+<span id="cb35-14"><a href="#cb35-14"></a>        nums =<span class="st"> </span><span class="kw">quicksort</span>(nums)</span>
+<span id="cb35-15"><a href="#cb35-15"></a>        return nums[k<span class="dv">-1</span>]</span></code></pre></div>
+<p>##前k个高频元素</p>
+<p>给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案。</p>
+<p>示例 1:
+输入: nums = [1,1,1,2,2,3], k = 2
+输出: [1,2]</p>
+<p>示例 2:
+输入: nums = [1], k = 1
+输出: [1]</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>class Solution<span class="op">:</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a><span class="st">    </span>def <span class="kw">topKFrequent</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int], k<span class="op">:</span><span class="st"> </span>int) -&gt;<span class="st"> </span>List[int]<span class="op">:</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="st">        </span>n =<span class="st"> </span><span class="kw">len</span>(nums)</span>
+<span id="cb36-4"><a href="#cb36-4"></a>        dic =<span class="st"> </span>{}</span>
+<span id="cb36-5"><a href="#cb36-5"></a>        <span class="cf">for</span> i <span class="cf">in</span> <span class="kw">range</span>(n)<span class="op">:</span></span>
+<span id="cb36-6"><a href="#cb36-6"></a><span class="st">            </span><span class="cf">if</span> nums[i] not <span class="cf">in</span> dic<span class="op">:</span></span>
+<span id="cb36-7"><a href="#cb36-7"></a><span class="st">                </span>dic[nums[i]] =<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb36-8"><a href="#cb36-8"></a>            <span class="cf">else</span><span class="op">:</span></span>
+<span id="cb36-9"><a href="#cb36-9"></a><span class="st">                </span>dic[nums[i]] <span class="op">+</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb36-10"><a href="#cb36-10"></a>        </span>
+<span id="cb36-11"><a href="#cb36-11"></a>        res =<span class="st"> </span>[]</span>
+<span id="cb36-12"><a href="#cb36-12"></a>        <span class="cf">while</span> k <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span></span>
+<span id="cb36-13"><a href="#cb36-13"></a><span class="st">            </span>tmp =<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb36-14"><a href="#cb36-14"></a>            <span class="cf">for</span> num <span class="cf">in</span> dic<span class="op">:</span></span>
+<span id="cb36-15"><a href="#cb36-15"></a><span class="st">                </span><span class="cf">if</span> dic[num] <span class="op">&gt;</span><span class="st"> </span>tmp<span class="op">:</span></span>
+<span id="cb36-16"><a href="#cb36-16"></a><span class="st">                    </span>tmp =<span class="st"> </span>dic[num]</span>
+<span id="cb36-17"><a href="#cb36-17"></a>                    cur =<span class="st"> </span>num</span>
+<span id="cb36-18"><a href="#cb36-18"></a>            dic[cur] =<span class="st"> </span><span class="dv">-1</span></span>
+<span id="cb36-19"><a href="#cb36-19"></a>            <span class="kw">res.append</span>(cur)</span>
+<span id="cb36-20"><a href="#cb36-20"></a>            k <span class="op">-</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb36-21"><a href="#cb36-21"></a>        return res</span></code></pre></div>
+<p>##只出现一次的数</p>
+<p>给你一个 非空 整数数组 nums ，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
+<p>你必须设计并实现线性时间复杂度的算法来解决此问题，且该算法只使用常量额外空间。</p>
+<p>示例 1 ：
+输入：nums = [2,2,1]
+输出：1</p>
+<p>示例 2 ：
+输入：nums = [4,1,2,1,2]
+输出：4</p>
+<p>示例 3 ：
+输入：nums = [1]
+输出：1</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># 一刷</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>class Solution<span class="op">:</span></span>
+<span id="cb37-3"><a href="#cb37-3"></a><span class="st">    </span>def <span class="kw">singleNumber</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb37-4"><a href="#cb37-4"></a><span class="st">        </span>return <span class="dv">2</span><span class="op">*</span><span class="kw">sum</span>(<span class="kw">set</span>(nums))<span class="op">-</span><span class="kw">sum</span>(nums)</span>
+<span id="cb37-5"><a href="#cb37-5"></a></span>
+<span id="cb37-6"><a href="#cb37-6"></a><span class="co"># 二刷</span></span>
+<span id="cb37-7"><a href="#cb37-7"></a>class Solution<span class="op">:</span></span>
+<span id="cb37-8"><a href="#cb37-8"></a><span class="st">    </span>def <span class="kw">singleNumber</span>(self, nums<span class="op">:</span><span class="st"> </span>List[int]) -&gt;<span class="st"> </span>int<span class="op">:</span></span>
+<span id="cb37-9"><a href="#cb37-9"></a><span class="st">        </span>return <span class="kw">reduce</span>(lambda x,y<span class="op">:</span><span class="st"> </span>x<span class="op">^</span>y,nums)</span></code></pre></div>
+</div>
+<div id="多元素问题" class="section level2" number="1.32">
+<h2><span class="header-section-number">1.32</span> 多元素问题</h2>
+<p>给定一个大小为 n 的数组 nums ，返回其中的多数元素。多数元素是指在数组中出现次数 大于 ⌊ n/2 ⌋ 的元素。</p>
+<p>你可以假设数组是非空的，并且给定的数组总是存在多数元素。</p>
+<p> </p>
+<p>示例 1：
+输入：nums = [3,2,3]
+输出：3
+示例 2：
+输入：nums = [2,2,1,1,1,2,2]
+输出：2</p>
+<p>解题思路</p>
+<p>使用了一种称为“Boyer-Moore投票算法”的方法来解决问题。该算法通过维护一个候选元素和一个计数器来找到出现次数超过一半的元素。算法的基本思想是：</p>
+<p>初始化候选元素为None，计数器为0。</p>
+<p>遍历数组中的每个元素。</p>
+<p>如果计数器为0，则将当前元素设为候选元素。</p>
+<p>如果当前元素与候选元素相同，则增加计数器；否则减少计数器。
+遍历完成后，候选元素即为出现次数超过一半的元素。<a href="https://leetcode.cn/problems/majority-element/solution/da-qia-by-zr3-lly2/">zr3</a></p>
+<pre><code>def majorityElement(nums):
+    count = 0
+    candidate = None
+
+    for num in nums:
+        if count == 0:
+            candidate = num
+        count += 1 if num == candidate else -1
+
+    return candidate
+
+# 示例用法
+nums = [2, 2, 1, 1, 1, 2, 2]
+majority = majorityElement(nums)
+print(majority)
+</code></pre>
 </div>
 </div>
             </section>
