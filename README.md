@@ -19,7 +19,7 @@
 
 - [剑指offer68道题解](https://gaowenxin95.github.io/leetcode-cookbook/剑指offer题解.html)
 
-- [hot100](https://gaowenxin95.github.io/leetcode-cookbook/剑指offer题解.html)
+- [hot100](https://gaowenxin95.github.io/leetcode-cookbook/leetcode-hot-100.html)
 
 
 
