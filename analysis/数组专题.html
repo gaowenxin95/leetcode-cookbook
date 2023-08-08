@@ -24,7 +24,7 @@
 <meta name="author" content="高文欣" />
 
 
-<meta name="date" content="2021-08-24" />
+<meta name="date" content="2023-08-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -138,6 +138,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.5" data-path=""><a href="#加一"><i class="fa fa-check"></i><b>1.5</b> 加一</a></li>
 <li class="chapter" data-level="1.6" data-path=""><a href="#两数之和"><i class="fa fa-check"></i><b>1.6</b> 两数之和</a></li>
 <li class="chapter" data-level="1.7" data-path=""><a href="#三数之和"><i class="fa fa-check"></i><b>1.7</b> 三数之和</a></li>
+<li class="chapter" data-level="1.8" data-path=""><a href="#合并两个有序数组"><i class="fa fa-check"></i><b>1.8</b> 合并两个有序数组</a></li>
 </ul></li>
 </ul>
 
@@ -159,7 +160,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">数组专题</h1>
 <p class="author"><em>高文欣</em></p>
-<p class="date"><em>2021-08-24</em></p>
+<p class="date"><em>2023-08-08</em></p>
 </div>
 <div id="数组专题" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> 数组专题</h1>
@@ -360,8 +361,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-27"><a href="#cb7-27"></a><span class="st">                    </span>R=R<span class="dv">-1</span></span>
 <span id="cb7-28"><a href="#cb7-28"></a>                <span class="cf">else</span><span class="op">:</span></span>
 <span id="cb7-29"><a href="#cb7-29"></a><span class="st">                    </span>L=L<span class="op">+</span><span class="dv">1</span></span>
-<span id="cb7-30"><a href="#cb7-30"></a>        return res</span>
-<span id="cb7-31"><a href="#cb7-31"></a></span></code></pre></div>
+<span id="cb7-30"><a href="#cb7-30"></a>        return res</span></code></pre></div>
+</div>
+<div id="合并两个有序数组" class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> 合并两个有序数组</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>def <span class="kw">merge</span>(A,m,B,n)<span class="op">:</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="st">    </span>A[m<span class="op">:</span>m<span class="op">+</span>n] =<span class="st"> </span>B <span class="co"># 直接扩展数组A</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>    <span class="kw">A.sort</span>()</span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="cf">if</span> __name__ <span class="op">==</span><span class="st"> &quot;__main__&quot;</span><span class="op">:</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="st">    </span>A =<span class="st"> </span>[<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>]</span>
+<span id="cb8-7"><a href="#cb8-7"></a>    B =<span class="st"> </span>[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]</span>
+<span id="cb8-8"><a href="#cb8-8"></a>    <span class="kw">merge</span>(A,<span class="dv">3</span>,B,<span class="dv">3</span>)</span>
+<span id="cb8-9"><a href="#cb8-9"></a>    <span class="kw">print</span>(A)</span></code></pre></div>
 </div>
 </div>
             </section>

@@ -249,6 +249,25 @@ class Solution:
                     L=L+1
         return res
 
+```
+
+## 合并两个有序数组
+
+
+```r
+def merge(A,m,B,n):
+    A[m:m+n] = B # 直接扩展数组A
+    A.sort()
+
+if __name__ == "__main__":
+    A = [4,5,6]
+    B = [1,2,3]
+    merge(A,3,B,3)
+    print(A)
 
 ```
+
+
+
+
 
